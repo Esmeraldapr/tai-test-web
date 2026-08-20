@@ -75,12 +75,15 @@ const ORDEN_MATERIAS = [
         <div class="materia-cabecera" data-idx="${idx}">
           <div>
             <h2 style="margin-bottom:2px">📘 ${m}</h2>
-            <div class="meta">${info.total} preguntas</div>
+            <div class="meta"><span class="chevron" id="chevron-${idx}">▾</span>${info.total} preguntas · ${temas.length} tema${temas.length === 1 ? "" : "s"}</div>
           </div>
           <a class="btn btn-primario" href="quiz.html?materia=${encodeURIComponent(m)}&modo=aleatorio&n=20">Practicar 20 al azar</a>
         </div>
         <div class="temas-lista" id="temas-${idx}">
-          ${temas.map(([t, n]) => `<a class="tema-btn" href="quiz.html?materia=${encodeURIComponent(m)}&tema=${encodeURIComponent(t)}&modo=tema">${t} (${n})</a>`).join("")}
+          ${temas.map(([t, n]) => `
+            <a class="tema-btn" href="quiz.html?materia=${encodeURIComponent(m)}&tema=${encodeURIComponent(t)}&modo=tema">
+              <span>${t}</span><span class="tema-btn-n">${n}</span>
+            </a>`).join("")}
         </div>
       </div>`;
   }).join("");
@@ -89,6 +92,7 @@ const ORDEN_MATERIAS = [
     cab.addEventListener("click", (e) => {
       if (e.target.closest("a")) return;
       document.getElementById(`temas-${cab.dataset.idx}`).classList.toggle("abierta");
+      document.getElementById(`chevron-${cab.dataset.idx}`).classList.toggle("abierto");
     });
   });
 })();
