@@ -63,6 +63,7 @@ const NAV_ITEMS = [
   { href: "temas.html", icono: "📘", texto: "Repasar Tema" },
   { href: "practica.html", icono: "⚡", texto: "Practicar" },
   { href: "cuestionarios.html", icono: "📝", texto: "Cuestionarios" },
+  { href: "progreso.html", icono: "📈", texto: "Mi progreso" },
   { href: "fallos.html", icono: "🎯", texto: "Mis fallos" },
   { href: "favoritas.html", icono: "⭐", texto: "Mis favoritas" },
 ];
