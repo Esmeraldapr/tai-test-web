@@ -50,9 +50,17 @@ function mezclar(arr) {
   document.getElementById("titulo-modo").textContent =
     modo === "tema" ? `📘 ${materiaActual} — ${temaActual}` : `⚡ ${materiaActual} — práctica rápida`;
 
-  let consulta = sb.from("preguntas_quiz").select("*").eq("materia", materiaActual);
-  if (modo === "tema" && temaActual) consulta = consulta.eq("tema", temaActual);
-  const { data, error } = await consulta;
+  let data, error;
+  if (modo === "aleatorio") {
+    // Antes se traía TODA la materia (hasta ~2900 preguntas, topado además
+    // en 1000 por Supabase) solo para barajar y quedarse con "n". Esta RPC
+    // elige "n" al azar directamente en el servidor.
+    ({ data, error } = await sb.rpc("preguntas_aleatorias_web", { p_materia: materiaActual, p_n: n }));
+  } else {
+    let consulta = sb.from("preguntas_quiz").select("*").eq("materia", materiaActual);
+    if (temaActual) consulta = consulta.eq("tema", temaActual);
+    ({ data, error } = await consulta);
+  }
   if (error) {
     console.error(error);
     document.getElementById("zona-quiz").innerHTML = `<div class="vacio">No se han podido cargar las preguntas.</div>`;
@@ -60,7 +68,6 @@ function mezclar(arr) {
   }
 
   preguntasSet = mezclar(data || []);
-  if (modo === "aleatorio") preguntasSet = preguntasSet.slice(0, n);
 
   if (!preguntasSet.length) {
     document.getElementById("zona-quiz").innerHTML = `<div class="vacio">No hay preguntas disponibles para esta selección.</div>`;
