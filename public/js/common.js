@@ -53,28 +53,6 @@ async function registrarConexion() {
   if (error) console.error("Error registrando conexión:", error);
 }
 
-/** Huella ligera del navegador: solo para que la tarea programada pueda avisar
- * de trials repetidos sospechosos. No bloquea nada por sí sola, no es un
- * identificador infalible (se pierde borrando datos del navegador). */
-async function registrarHuella() {
-  try {
-    const cruda = [
-      navigator.userAgent,
-      screen.width + "x" + screen.height,
-      Intl.DateTimeFormat().resolvedOptions().timeZone,
-      navigator.language,
-    ].join("|");
-    let huella = 0;
-    for (let i = 0; i < cruda.length; i++) {
-      huella = (huella * 31 + cruda.charCodeAt(i)) >>> 0;
-    }
-    const { error } = await sb.rpc("registrar_huella_web", { p_huella: String(huella) });
-    if (error) console.error("Error registrando huella:", error);
-  } catch (e) {
-    console.error("Error calculando huella:", e);
-  }
-}
-
 async function cerrarSesion() {
   await sb.auth.signOut();
   window.location.href = "login.html";
@@ -85,7 +63,7 @@ function pintarNavbar(activa, usuario) {
   if (!el) return;
   const nombre = (usuario && (usuario.nombre || usuario.email)) || "Estudiante";
   el.innerHTML = `
-    <div class="marca"><span class="emoji">🎓</span> Oposición TAI</div>
+    <div class="marca"><img src="img/logo-buho.png" alt="" class="logo-buho" /> Oposición TAI</div>
     <div class="usuario">
       <span>👋 ${nombre}</span>
       <button id="btn-logout">Salir</button>
