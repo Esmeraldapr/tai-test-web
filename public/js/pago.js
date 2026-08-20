@@ -2,7 +2,7 @@
   const sesion = await exigirSesion();
   if (!sesion) return;
   const usuario = await obtenerUsuarioWeb(sesion);
-  if (usuario) pintarNavbar("", usuario);
+  if (usuario) pintarSidebar("", usuario);
   document.getElementById("precio-mostrado").textContent = `${PRECIO_EUROS}€`;
 
   document.getElementById("btn-pagar").addEventListener("click", async () => {

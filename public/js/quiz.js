@@ -3,6 +3,7 @@
 // Requiere ?materia=X en la URL, además de:
 //   &modo=tema&tema=Y
 //   &modo=aleatorio&n=20
+//   &modo=lista&ids=1,2,3&titulo=Mis+fallos
 // ============================================================
 
 let usuarioActual = null;
@@ -13,6 +14,7 @@ let total = 0;
 let respondida = false;
 let materiaActual = "";
 let temaActual = null;
+let favoritosSet = new Set();
 
 function mezclar(arr) {
   const a = [...arr];
@@ -31,7 +33,7 @@ function mezclar(arr) {
     document.getElementById("zona-quiz").innerHTML = `<div class="vacio">Ha habido un problema cargando tu cuenta.</div>`;
     return;
   }
-  pintarNavbar("", usuarioActual);
+  pintarSidebar("", usuarioActual);
 
   const acceso = calcularAcceso(usuarioActual);
   if (!acceso.acceso) {
@@ -44,14 +46,23 @@ function mezclar(arr) {
   temaActual = params.get("tema") || null;
   const modo = params.get("modo") || "aleatorio";
   const n = parseInt(params.get("n") || "20", 10);
+  const idsParam = params.get("ids");
 
-  if (!materiaActual) { window.location.href = "index.html"; return; }
+  if (modo !== "lista" && !materiaActual) { window.location.href = "index.html"; return; }
 
   document.getElementById("titulo-modo").textContent =
-    modo === "tema" ? `📘 ${materiaActual} — ${temaActual}` : `⚡ ${materiaActual} — práctica rápida`;
+    modo === "tema" ? `📘 ${materiaActual} — ${temaActual}` :
+    modo === "lista" ? `🎯 ${params.get("titulo") || "Preguntas seleccionadas"}` :
+    `⚡ ${materiaActual} — práctica rápida`;
+
+  favoritosSet = await obtenerFavoritosSet();
 
   let data, error;
-  if (modo === "aleatorio") {
+  if (modo === "lista") {
+    const ids = (idsParam || "").split(",").map((x) => parseInt(x, 10)).filter((x) => !isNaN(x));
+    if (!ids.length) { window.location.href = "index.html"; return; }
+    ({ data, error } = await sb.from("preguntas_quiz").select("*").in("id", ids));
+  } else if (modo === "aleatorio") {
     // Antes se traía TODA la materia (hasta ~2900 preguntas, topado además
     // en 1000 por Supabase) solo para barajar y quedarse con "n". Esta RPC
     // elige "n" al azar directamente en el servidor.
@@ -92,6 +103,7 @@ function pintarPregunta() {
       <div class="info-superior">
         <span class="chip oficial">${indice + 1} / ${preguntasSet.length}</span>
         ${p.subtema ? `<span class="chip no-oficial">${p.subtema}</span>` : ""}
+        <button class="btn-favorito" id="btn-favorito" type="button" title="Marcar como favorita" data-activo="${favoritosSet.has(p.id) ? "1" : "0"}">${favoritosSet.has(p.id) ? "⭐" : "☆"}</button>
       </div>
       ${p.imagen_url ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de la pregunta" style="border-radius:12px;margin-bottom:16px;border:1px solid var(--borde)" />` : ""}
       <div class="enunciado parrafo-leible">${p.pregunta}</div>
@@ -115,6 +127,21 @@ function pintarPregunta() {
   document.querySelectorAll(".opcion").forEach((el) => el.addEventListener("click", () => elegirOpcion(el, p)));
   document.getElementById("btn-siguiente").addEventListener("click", siguientePregunta);
   document.getElementById("btn-reportar").addEventListener("click", () => abrirFormularioReporte(p.id));
+  document.getElementById("btn-favorito").addEventListener("click", () => alternarFavorito(p.id));
+}
+
+async function alternarFavorito(preguntaId) {
+  const btn = document.getElementById("btn-favorito");
+  btn.disabled = true;
+  const yaEsFavorita = favoritosSet.has(preguntaId);
+  const ok = yaEsFavorita ? await desmarcarFavorito(preguntaId) : await marcarFavorito(preguntaId);
+  if (ok) {
+    if (yaEsFavorita) favoritosSet.delete(preguntaId);
+    else favoritosSet.add(preguntaId);
+    btn.textContent = favoritosSet.has(preguntaId) ? "⭐" : "☆";
+    btn.dataset.activo = favoritosSet.has(preguntaId) ? "1" : "0";
+  }
+  btn.disabled = false;
 }
 
 async function elegirOpcion(el, pregunta) {
