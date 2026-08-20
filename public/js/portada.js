@@ -22,7 +22,6 @@ const ORDEN_MATERIAS = [
   pintarNavbar("index.html", usuario);
   pintarBannerAcceso(usuario);
   registrarConexion();
-  registrarHuella();
 
   if (!usuario.email_verificado) {
     contenedor.innerHTML = `<div class="vacio"><div class="icono">📧</div>Confirma tu correo (revisa la bandeja de entrada y el spam) para que arranque tu prueba gratuita de ${HORAS_TRIAL} horas.</div>`;
