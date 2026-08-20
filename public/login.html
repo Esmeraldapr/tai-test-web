@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Entrar · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="tarjeta-login">
+    <div class="logo">🎓</div>
+    <h1>Oposición TAI</h1>
+    <p class="subtitulo">Test de preparación</p>
+
+    <div class="tabs-login">
+      <button id="tab-entrar" class="activa">Ya tengo cuenta</button>
+      <button id="tab-crear">Crear cuenta</button>
+    </div>
+
+    <div id="mensaje"></div>
+
+    <form id="form-entrar">
+      <div class="campo">
+        <label>Correo electrónico</label>
+        <input type="email" id="entrar-email" required autocomplete="email" />
+      </div>
+      <div class="campo">
+        <label>Contraseña</label>
+        <div class="campo-password">
+          <input type="password" id="entrar-pass" required autocomplete="current-password" />
+          <button type="button" class="btn-ojo" data-objetivo="entrar-pass">👁️</button>
+        </div>
+      </div>
+      <label class="campo-recordar">
+        <input type="checkbox" id="entrar-recordar" />
+        Recordar mi correo en este dispositivo
+      </label>
+      <button type="submit" class="btn btn-primario btn-bloque">Entrar</button>
+    </form>
+
+    <form id="form-crear" style="display:none">
+      <div class="campo">
+        <label>Nombre</label>
+        <input type="text" id="crear-nombre" required />
+      </div>
+      <div class="campo">
+        <label>Correo electrónico</label>
+        <input type="email" id="crear-email" required autocomplete="email" />
+      </div>
+      <div class="campo">
+        <label>Contraseña (mínimo 6 caracteres)</label>
+        <div class="campo-password">
+          <input type="password" id="crear-pass" required minlength="6" autocomplete="new-password" />
+          <button type="button" class="btn-ojo" data-objetivo="crear-pass">👁️</button>
+        </div>
+      </div>
+      <div class="campo">
+        <label>Repetir contraseña</label>
+        <div class="campo-password">
+          <input type="password" id="crear-pass2" required minlength="6" autocomplete="new-password" />
+          <button type="button" class="btn-ojo" data-objetivo="crear-pass2">👁️</button>
+        </div>
+        <div id="aviso-coincide" class="aviso-coincide"></div>
+      </div>
+      <button type="submit" class="btn btn-primario btn-bloque">Crear mi cuenta</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    const tabEntrar = document.getElementById("tab-entrar");
+    const tabCrear = document.getElementById("tab-crear");
+    const formEntrar = document.getElementById("form-entrar");
+    const formCrear = document.getElementById("form-crear");
+    const mensaje = document.getElementById("mensaje");
+
+    document.querySelectorAll(".btn-ojo").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const input = document.getElementById(btn.dataset.objetivo);
+        const mostrar = input.type === "password";
+        input.type = mostrar ? "text" : "password";
+        btn.textContent = mostrar ? "🙈" : "👁️";
+      });
+    });
+
+    const passCrear = document.getElementById("crear-pass");
+    const passCrear2 = document.getElementById("crear-pass2");
+    const avisoCoincide = document.getElementById("aviso-coincide");
+    function contraseñasCoinciden() {
+      if (!passCrear2.value) { avisoCoincide.textContent = ""; return true; }
+      if (passCrear.value === passCrear2.value) {
+        avisoCoincide.textContent = "✓ Las contraseñas coinciden";
+        avisoCoincide.className = "aviso-coincide ok";
+        return true;
+      }
+      avisoCoincide.textContent = "✗ Las contraseñas no coinciden";
+      avisoCoincide.className = "aviso-coincide mal";
+      return false;
+    }
+    passCrear.addEventListener("input", contraseñasCoinciden);
+    passCrear2.addEventListener("input", contraseñasCoinciden);
+
+    tabEntrar.addEventListener("click", () => {
+      tabEntrar.classList.add("activa"); tabCrear.classList.remove("activa");
+      formEntrar.style.display = "block"; formCrear.style.display = "none";
+      mensaje.innerHTML = "";
+    });
+    tabCrear.addEventListener("click", () => {
+      tabCrear.classList.add("activa"); tabEntrar.classList.remove("activa");
+      formCrear.style.display = "block"; formEntrar.style.display = "none";
+      mensaje.innerHTML = "";
+    });
+
+    function mostrarError(texto) { mensaje.innerHTML = `<div class="mensaje-error">${texto}</div>`; }
+    function mostrarOk(texto) { mensaje.innerHTML = `<div class="mensaje-ok">${texto}</div>`; }
+
+    const campoEmailEntrar = document.getElementById("entrar-email");
+    const campoRecordar = document.getElementById("entrar-recordar");
+    const correoGuardado = localStorage.getItem("tai_correo_recordado");
+    if (correoGuardado) { campoEmailEntrar.value = correoGuardado; campoRecordar.checked = true; }
+
+    (async () => {
+      const sesion = await obtenerSesion();
+      if (sesion) window.location.href = "index.html";
+    })();
+
+    formEntrar.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      mensaje.innerHTML = "";
+      const email = document.getElementById("entrar-email").value.trim();
+      const password = document.getElementById("entrar-pass").value;
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) { mostrarError("No se pudo entrar: " + error.message); return; }
+      if (campoRecordar.checked) localStorage.setItem("tai_correo_recordado", email);
+      else localStorage.removeItem("tai_correo_recordado");
+      await registrarHuella();
+      window.location.href = "index.html";
+    });
+
+    formCrear.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      mensaje.innerHTML = "";
+      const nombre = document.getElementById("crear-nombre").value.trim();
+      const email = document.getElementById("crear-email").value.trim();
+      const password = document.getElementById("crear-pass").value;
+      if (!contraseñasCoinciden()) { mostrarError("Las dos contraseñas no coinciden."); return; }
+      const { data, error } = await sb.auth.signUp({ email, password, options: { data: { nombre } } });
+      if (error) { mostrarError("No se pudo crear la cuenta: " + error.message); return; }
+      if (data.session) {
+        await registrarHuella();
+        window.location.href = "index.html";
+      } else {
+        mostrarOk("Cuenta creada. Revisa tu correo (y la carpeta de spam) para confirmarla — en cuanto lo hagas arranca tu prueba gratuita de 48 horas. Después, inicia sesión aquí.");
+        tabEntrar.click();
+      }
+    });
+  </script>
+</body>
+</html>
