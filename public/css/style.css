@@ -260,6 +260,14 @@ h2{font-size:1.25rem; margin:0 0 14px;}
 .btn-favorito{background:none; border:none; cursor:pointer; font-size:1.3rem; padding:4px; line-height:1; vertical-align:middle;}
 .btn-quitar-favorita{background:none; border:none; cursor:pointer; font-size:.8rem; color:var(--rojo); font-weight:700; white-space:nowrap;}
 
+.calendario-racha{display:flex; gap:6px; flex-wrap:wrap;}
+.dia-racha{
+  width:34px; height:34px; border-radius:10px; background:#f3f1fb; color:var(--texto-suave);
+  display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:700;
+}
+.dia-racha.practicado{background:linear-gradient(135deg,#7c6ff0 0%,#4fa3e3 100%); color:#fff;}
+.dia-racha.hoy{box-shadow:0 0 0 2px var(--morado-osc);}
+
 @media (max-width: 900px){
   .app-layout{flex-direction:column;}
   .sidebar{
