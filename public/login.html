@@ -152,8 +152,11 @@
         await registrarHuella();
         window.location.href = "index.html";
       } else {
-        mostrarOk("Cuenta creada. Revisa tu correo (y la carpeta de spam) para confirmarla — en cuanto lo hagas arranca tu prueba gratuita de 48 horas. Después, inicia sesión aquí.");
+        // Importante: cambiar de pestaña PRIMERO (su propio listener borra
+        // el mensaje) y mostrar el aviso de éxito DESPUÉS, si no el mensaje
+        // se borra solo antes de que la persona llegue a verlo.
         tabEntrar.click();
+        mostrarOk("Cuenta creada. Revisa tu correo (y la carpeta de spam) para confirmarla — en cuanto lo hagas arranca tu prueba gratuita de 48 horas. Después, inicia sesión aquí.");
       }
     });
   </script>
