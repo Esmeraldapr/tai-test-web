@@ -34,7 +34,11 @@ const ORDEN_MATERIAS = [
     return;
   }
 
-  const { data: filas, error } = await sb.from("preguntas_quiz").select("materia, tema, subtema");
+  // Se usa la vista agregada preguntas_resumen (cuenta en el servidor) en vez
+  // de traer cada fila una a una: con 10.000+ preguntas, pedir cada fila
+  // suelta chocaba con el límite de 1000 filas por consulta de Supabase y
+  // solo se veían 2-3 materias a medias.
+  const { data: filas, error } = await sb.from("preguntas_resumen").select("materia, tema, total");
   if (error) {
     console.error(error);
     contenedor.innerHTML = `<div class="vacio">No se ha podido cargar el temario. Recarga la página.</div>`;
@@ -45,8 +49,8 @@ const ORDEN_MATERIAS = [
   for (const f of filas || []) {
     if (!porMateria.has(f.materia)) porMateria.set(f.materia, { total: 0, temas: new Map() });
     const m = porMateria.get(f.materia);
-    m.total++;
-    m.temas.set(f.tema, (m.temas.get(f.tema) || 0) + 1);
+    m.total += f.total;
+    m.temas.set(f.tema, (m.temas.get(f.tema) || 0) + f.total);
   }
 
   const materias = [...porMateria.keys()].sort((a, b) => {
