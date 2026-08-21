@@ -21,7 +21,7 @@ const SECCIONES_TUTORIAL = [
   {
     icono: "📝",
     titulo: "Cuestionarios",
-    texto: "Los exámenes oficiales de convocatorias anteriores, agrupados por año. Perfecto para simular el examen real.",
+    texto: "Cuestionarios con el formato de convocatorias anteriores, agrupados por año, para practicar.",
   },
   {
     icono: "📈",
