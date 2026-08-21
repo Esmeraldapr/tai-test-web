@@ -272,6 +272,19 @@ h2{font-size:1.25rem; margin:0 0 14px;}
 .dia-racha.practicado{background:linear-gradient(135deg,#7c6ff0 0%,#4fa3e3 100%); color:#fff;}
 .dia-racha.hoy{box-shadow:0 0 0 2px var(--morado-osc);}
 
+.tutorial-item{padding:16px 20px;}
+.tutorial-cabecera{display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:14px;}
+.tutorial-icono{font-size:1.2rem; margin-right:6px;}
+.tutorial-cabecera .chevron{
+  display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
+  width:24px; height:24px; border-radius:50%; background:var(--morado-suave);
+  color:var(--morado-osc); font-size:.8rem; font-weight:900;
+  transition:transform .2s, background .2s; transform:rotate(-90deg);
+}
+.tutorial-cabecera .chevron.abierto{transform:rotate(0deg); background:#ddd6fe;}
+.tutorial-cuerpo{display:none; padding-top:12px; font-size:.92rem; line-height:1.6; color:var(--texto-suave);}
+.tutorial-cuerpo.abierta{display:block;}
+
 @media (max-width: 900px){
   .app-layout{flex-direction:column;}
   .sidebar{
