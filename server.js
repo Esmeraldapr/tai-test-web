@@ -16,6 +16,7 @@ const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
 const PAYPAL_API_BASE = process.env.PAYPAL_API_BASE || 'https://api-m.paypal.com';
 const PRECIO_EUROS = process.env.PRECIO_EUROS || '2.50';
 const DIAS_ACCESO_PAGADO = 30;
+const HORAS_TRIAL = 48;
 const WEBAPP_URL = process.env.WEBAPP_URL || '';
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !PAYPAL_CLIENT_ID || !PAYPAL_SECRET) {
@@ -52,6 +53,23 @@ async function requiereSesion(req, res, next) {
   }
   req.userId = data.user.id;
   next();
+}
+
+/** Igual que calcularAcceso() en public/js/common.js, pero en el servidor
+ * (aquí no tenemos acceso al navegador). Se usa para no dejar pagar dos
+ * veces seguidas por error a quien ya tiene un acceso de pago vigente. */
+function tieneAccesoValido(usuario) {
+  const ahora = new Date();
+  if (usuario.fecha_inicio_trial) {
+    const finTrial = new Date(usuario.fecha_inicio_trial);
+    finTrial.setHours(finTrial.getHours() + HORAS_TRIAL);
+    if (ahora < finTrial) return { acceso: true, motivo: 'trial', hasta: finTrial };
+  }
+  if (usuario.fecha_expiracion) {
+    const finPago = new Date(usuario.fecha_expiracion);
+    if (ahora < finPago) return { acceso: true, motivo: 'pago', hasta: finPago };
+  }
+  return { acceso: false };
 }
 
 async function getPaypalAccessToken() {
@@ -140,6 +158,18 @@ function paginaSimple(mensaje) {
 
 app.post('/api/paypal/crear-orden', requiereSesion, async (req, res) => {
   try {
+    // No dejamos pagar dos veces seguidas por error: si ya tiene un acceso
+    // de pago vigente (no un trial, un pago ya activo), avisamos y no
+    // creamos la orden. Si está en trial sí puede pagar (es su primer pago).
+    const { data: usuario, error: errorUsuario } = await supabase
+      .from('usuarios_web').select('fecha_inicio_trial, fecha_expiracion').eq('auth_user_id', req.userId).maybeSingle();
+    if (!errorUsuario && usuario) {
+      const acceso = tieneAccesoValido(usuario);
+      if (acceso.acceso && acceso.motivo === 'pago') {
+        return res.status(400).json({ error: 'Ya tienes un acceso de pago activo, no hace falta que pagues de nuevo.' });
+      }
+    }
+
     const orden = await crearOrdenPaypal(req.userId);
     if (!orden.approveUrl) return res.status(500).json({ error: 'PayPal no ha devuelto un link de pago válido.' });
     res.json(orden);
