@@ -285,6 +285,57 @@ h2{font-size:1.25rem; margin:0 0 14px;}
 .tutorial-cuerpo{display:none; padding-top:12px; font-size:.92rem; line-height:1.6; color:var(--texto-suave);}
 .tutorial-cuerpo.abierta{display:block;}
 
+/* ---------------- Teoría / Constitución ---------------- */
+.constitucion-doc{max-width:840px;}
+
+.const-preambulo{
+  background:var(--tarjeta); border-radius:var(--radio); box-shadow:var(--sombra);
+  border:1px solid var(--borde); padding:20px 24px; margin-bottom:28px;
+}
+.const-preambulo h2{margin-top:0; display:flex; align-items:center; gap:10px; font-size:1.15rem;}
+.const-preambulo p{white-space:pre-line; line-height:1.7; color:var(--texto);}
+
+.const-titulo{margin:36px 0 18px; padding-top:6px;}
+.const-titulo:first-of-type{margin-top:0;}
+.const-titulo-header{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  border-bottom:3px solid var(--morado); padding-bottom:10px; margin-bottom:14px;
+}
+.const-titulo-num{font-size:1.4rem; font-weight:900; color:var(--morado-osc);}
+.const-titulo-nombre{font-size:1.15rem; font-weight:800; color:var(--morado-osc);}
+
+.const-capitulo{margin:24px 0 14px;}
+.const-capitulo-header{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px;}
+.const-capitulo-num{font-size:1.1rem; font-weight:800; color:var(--azul);}
+.const-capitulo-nombre{font-size:1.02rem; font-weight:700; color:var(--azul);}
+
+.const-seccion{margin:18px 0 10px;}
+.const-seccion-header{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px;}
+.const-seccion-num{font-size:.96rem; font-weight:800; color:var(--cian);}
+.const-seccion-nombre{font-size:.9rem; font-weight:700; color:#0891b2;}
+
+.const-articulo{margin:0 0 14px; line-height:1.65; font-size:.93rem; color:var(--texto);}
+.const-articulo strong{font-weight:800;}
+.const-articulo .art-texto{white-space:pre-line;}
+
+.btn-altavoz{
+  background:none; border:1px solid var(--borde); border-radius:999px; padding:3px 11px;
+  font-size:.85rem; cursor:pointer; flex-shrink:0; line-height:1.5;
+}
+.btn-altavoz:hover{border-color:var(--morado); background:#efecfd;}
+.btn-altavoz.leyendo{background:var(--morado-suave); border-color:var(--morado);}
+
+.chip.entra{background:var(--verde-suave); color:#15803d;}
+.chip.no-entra{background:#f3f4f6; color:var(--texto-suave);}
+
+.const-disposiciones{margin-top:44px; border-top:3px solid var(--borde); padding-top:22px;}
+.const-disp-bloque{margin-bottom:26px;}
+.const-disp-tipo{
+  font-size:1.08rem; font-weight:800; color:var(--morado-osc);
+  margin:0 0 10px; display:flex; align-items:center; gap:10px;
+}
+.const-disp-item{margin:0 0 12px; line-height:1.6; font-size:.9rem; color:var(--texto); white-space:pre-line;}
+
 @media (max-width: 900px){
   .app-layout{flex-direction:column;}
   .sidebar{
