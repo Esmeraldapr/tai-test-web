@@ -3,7 +3,6 @@
 // Requiere ?materia=X en la URL, además de:
 //   &modo=tema&tema=Y
 //   &modo=aleatorio&n=20
-//   &modo=lista&ids=1,2,3&titulo=Mis+fallos
 // ============================================================
 
 let usuarioActual = null;
@@ -11,10 +10,14 @@ let preguntasSet = [];
 let indice = 0;
 let aciertos = 0;
 let total = 0;
-let respondida = false;
+let respondida = false; // true = esta pregunta ya está resuelta EN ESTA VISITA (opciones bloqueadas)
+let puedeAvanzar = false; // true = el botón "Siguiente" está habilitado (contestada o saltada)
 let materiaActual = "";
 let temaActual = null;
 let favoritosSet = new Set();
+let preguntasSaltadas = [];
+// historial[i] = null (aún no llegada) | {estado:"contestada", opcionElegida, resultado} | {estado:"saltada"}
+let historial = [];
 
 function mezclar(arr) {
   const a = [...arr];
@@ -79,6 +82,7 @@ function mezclar(arr) {
   }
 
   preguntasSet = mezclar(data || []);
+  historial = new Array(preguntasSet.length).fill(null);
 
   if (!preguntasSet.length) {
     document.getElementById("zona-quiz").innerHTML = `<div class="vacio">No hay preguntas disponibles para esta selección.</div>`;
@@ -90,12 +94,42 @@ function mezclar(arr) {
 
 function pintarPregunta() {
   detenerLectura();
-  respondida = false;
   const p = preguntasSet[indice];
+  const previo = historial[indice];
+  // Al volver a una pregunta ya contestada se muestra en modo solo-lectura
+  // (con la corrección ya pintada); si se había saltado, se puede responder
+  // ahora mismo o volver a pasar.
+  respondida = !!(previo && previo.estado === "contestada");
+  puedeAvanzar = !!previo;
+
   const pct = Math.round((indice / preguntasSet.length) * 100);
   const letras = ["a", "b", "c", "d"];
   const opciones = [p.opcion_a, p.opcion_b, p.opcion_c, p.opcion_d];
   const esUltima = indice + 1 >= preguntasSet.length;
+
+  const opcionesHtml = opciones.map((op, i) => {
+    const letra = letras[i];
+    let clases = "opcion";
+    if (respondida) {
+      clases += " deshabilitada";
+      if (letra === previo.resultado.respuesta_correcta) clases += " correcta";
+      else if (letra === previo.opcionElegida) clases += " incorrecta";
+    }
+    return `
+      <div class="${clases}" data-opcion="${letra}">
+        <span class="letra">${letra.toUpperCase()}</span>
+        <span>${op}</span>
+      </div>`;
+  }).join("");
+
+  const explicacionHtml = respondida
+    ? `<div class="explicacion-caja ${previo.resultado.es_correcta ? "bien" : "mal"}">
+        <strong>${previo.resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
+        <span class="parrafo-leible">${previo.resultado.explicacion || ""}</span>
+      </div>`
+    : previo && previo.estado === "saltada"
+    ? `<div class="explicacion-caja">⏭️ Ya habías pasado esta pregunta. Puedes responderla ahora o volver a pasar.</div>`
+    : "";
 
   document.getElementById("zona-quiz").innerHTML = `
     <div class="quiz-barra"><div style="width:${pct}%"></div></div>
@@ -103,31 +137,68 @@ function pintarPregunta() {
       <div class="info-superior">
         <span class="chip oficial">${indice + 1} / ${preguntasSet.length}</span>
         ${p.subtema ? `<span class="chip no-oficial">${p.subtema}</span>` : ""}
+        <button class="btn-favorito" id="btn-leer" type="button" title="Escuchar la pregunta y las respuestas">🔊</button>
         <button class="btn-favorito" id="btn-favorito" type="button" title="Marcar como favorita" data-activo="${favoritosSet.has(p.id) ? "1" : "0"}">${favoritosSet.has(p.id) ? "⭐" : "☆"}</button>
       </div>
       ${p.imagen_url ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de la pregunta" style="border-radius:12px;margin-bottom:16px;border:1px solid var(--borde)" />` : ""}
       <div class="enunciado parrafo-leible">${p.pregunta}</div>
-      <div class="opciones" id="opciones">
-        ${opciones.map((op, i) => `
-          <div class="opcion" data-opcion="${letras[i]}">
-            <span class="letra">${letras[i].toUpperCase()}</span>
-            <span>${op}</span>
-          </div>`).join("")}
-      </div>
-      <div id="zona-explicacion"></div>
+      <div class="opciones" id="opciones">${opcionesHtml}</div>
+      <div id="zona-explicacion">${explicacionHtml}</div>
       <button class="btn-reportar" id="btn-reportar" type="button">🚩 Reportar esta pregunta</button>
       <div id="caja-reportar"></div>
     </div>
     <div class="acciones-quiz">
       <a href="index.html" class="btn btn-secundario">← Salir</a>
-      <button id="btn-siguiente" class="btn btn-primario" disabled>${esUltima ? "Ver resultado →" : "Siguiente →"}</button>
+      <div style="display:flex; gap:10px; flex-wrap:wrap">
+        <button id="btn-anterior" class="btn btn-secundario" type="button" ${indice === 0 ? "disabled" : ""}>← Anterior</button>
+        <button id="btn-pasar" class="btn btn-secundario" type="button" ${respondida ? "disabled" : ""}>Pasar sin responder →</button>
+        <button id="btn-siguiente" class="btn btn-primario" ${puedeAvanzar ? "" : "disabled"}>${esUltima ? "Ver resultado →" : "Siguiente →"}</button>
+      </div>
     </div>
   `;
 
   document.querySelectorAll(".opcion").forEach((el) => el.addEventListener("click", () => elegirOpcion(el, p)));
   document.getElementById("btn-siguiente").addEventListener("click", siguientePregunta);
+  document.getElementById("btn-anterior").addEventListener("click", anteriorPregunta);
+  document.getElementById("btn-pasar").addEventListener("click", () => saltarPregunta(p));
   document.getElementById("btn-reportar").addEventListener("click", () => abrirFormularioReporte(p.id));
   document.getElementById("btn-favorito").addEventListener("click", () => alternarFavorito(p.id));
+  document.getElementById("btn-leer").addEventListener("click", () => leerPreguntaCompleta(p, opciones, letras));
+}
+
+function anteriorPregunta() {
+  if (indice === 0) return;
+  indice--;
+  pintarPregunta();
+}
+
+/** Lee en voz alta el enunciado y las 4 opciones seguidas — pensado para
+ * usuarios con dislexia que prefieren escuchar la pregunta completa. */
+function leerPreguntaCompleta(pregunta, opciones, letras) {
+  const btn = document.getElementById("btn-leer");
+  const partes = [pregunta.pregunta];
+  opciones.forEach((op, i) => partes.push(`Opción ${letras[i].toUpperCase()}: ${op}`));
+  leerTexto(partes.join(". "), btn);
+}
+
+// "Pasar" no cuenta como fallo: no llama a comprobar_respuesta_web (así no se
+// guarda ninguna fila en respuestas_web), y no toca aciertos/total — una
+// pregunta no respondida no debe penalizar igual que una fallada. Es idempotente:
+// volver a pasar una pregunta ya marcada como saltada no la añade dos veces.
+function saltarPregunta(pregunta) {
+  if (respondida) return;
+  if (!historial[indice]) {
+    historial[indice] = { estado: "saltada" };
+    preguntasSaltadas.push(pregunta.id);
+  }
+  respondida = true;
+  puedeAvanzar = true;
+
+  document.querySelectorAll(".opcion").forEach((o) => o.classList.add("deshabilitada"));
+  document.getElementById("btn-pasar").disabled = true;
+  document.getElementById("zona-explicacion").innerHTML = `
+    <div class="explicacion-caja">⏭️ Pregunta saltada, no cuenta como fallo. Podrás repasarla luego.</div>`;
+  document.getElementById("btn-siguiente").removeAttribute("disabled");
 }
 
 async function alternarFavorito(preguntaId) {
@@ -146,8 +217,9 @@ async function alternarFavorito(preguntaId) {
 
 async function elegirOpcion(el, pregunta) {
   if (respondida) return;
+  const previoAlEntrar = historial[indice]; // por si esta pregunta ya estaba marcada como "saltada"
   respondida = true;
-  total++;
+  puedeAvanzar = true;
 
   const { data, error } = await sb.rpc("comprobar_respuesta_web", {
     p_pregunta_id: pregunta.id,
@@ -156,18 +228,31 @@ async function elegirOpcion(el, pregunta) {
 
   if (error || !data || !data.length) {
     console.error(error);
-    document.getElementById("zona-explicacion").innerHTML = `<div class="explicacion-caja mal">No se ha podido comprobar la respuesta. Inténtalo de nuevo.</div>`;
+    document.getElementById("zona-explicacion").innerHTML = `<div class="explicacion-caja mal">No se ha podido comprobar la respuesta. Vuelve a intentarlo.</div>`;
+    // Se deshace el bloqueo para que la persona pueda volver a pulsar una opción.
+    respondida = false;
+    puedeAvanzar = !!previoAlEntrar;
+    document.getElementById("btn-siguiente").toggleAttribute("disabled", !puedeAvanzar);
     return;
   }
 
   const resultado = data[0];
+  total++;
   if (resultado.es_correcta) aciertos++;
+
+  // Si se responde ahora una pregunta que antes se había pasado, deja de contar como saltada.
+  if (previoAlEntrar && previoAlEntrar.estado === "saltada") {
+    const pos = preguntasSaltadas.indexOf(pregunta.id);
+    if (pos !== -1) preguntasSaltadas.splice(pos, 1);
+  }
+  historial[indice] = { estado: "contestada", opcionElegida: el.dataset.opcion, resultado };
 
   document.querySelectorAll(".opcion").forEach((o) => {
     o.classList.add("deshabilitada");
     if (o.dataset.opcion === resultado.respuesta_correcta) o.classList.add("correcta");
     else if (o === el) o.classList.add("incorrecta");
   });
+  document.getElementById("btn-pasar").disabled = true;
 
   document.getElementById("zona-explicacion").innerHTML = `
     <div class="explicacion-caja ${resultado.es_correcta ? "bien" : "mal"}">
@@ -211,27 +296,32 @@ async function enviarReporte(preguntaId) {
 }
 
 function siguientePregunta() {
-  if (!respondida) return;
+  if (!puedeAvanzar) return;
   indice++;
   if (indice >= preguntasSet.length) pintarResultado();
   else pintarPregunta();
 }
 
 async function pintarResultado() {
-  const pct = Math.round((aciertos / total) * 100);
+  const pct = total ? Math.round((aciertos / total) * 100) : 0;
+  const nSaltadas = preguntasSaltadas.length;
   document.getElementById("zona-quiz").innerHTML = `
     <div class="quiz-barra"><div style="width:100%"></div></div>
     <div class="pregunta-caja resultado-final">
       <div class="porcentaje">${pct}%</div>
       <p style="font-size:1.1rem;font-weight:700;margin:8px 0 4px">${aciertos} de ${total} correctas</p>
+      ${nSaltadas ? `<p class="meta">⏭️ ${nSaltadas} pregunta${nSaltadas === 1 ? "" : "s"} saltada${nSaltadas === 1 ? "" : "s"} sin responder (no cuenta${nSaltadas === 1 ? "" : "n"} como fallo).</p>` : ""}
       <p class="subtitulo">${pct >= 80 ? "¡Excelente trabajo! 🎉" : pct >= 50 ? "Vas por buen camino, sigue practicando 💪" : "Repasa este tema con calma, tú puedes 🙂"}</p>
       <div style="display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap">
         <a href="index.html" class="btn btn-secundario">Volver</a>
         <a href="quiz.html?${new URLSearchParams(window.location.search).toString()}" class="btn btn-primario">Otra práctica</a>
+        ${nSaltadas ? `<a href="quiz.html?modo=lista&ids=${preguntasSaltadas.join(",")}&titulo=${encodeURIComponent("Preguntas saltadas")}" class="btn btn-primario">Repasar las saltadas →</a>` : ""}
       </div>
     </div>
   `;
 
-  const { error } = await sb.from("resultados_web").insert({ materia: materiaActual, tema: temaActual, aciertos, total });
-  if (error) console.error("Error guardando resultado:", error);
+  if (total > 0) {
+    const { error } = await sb.from("resultados_web").insert({ materia: materiaActual, tema: temaActual, aciertos, total });
+    if (error) console.error("Error guardando resultado:", error);
+  }
 }
