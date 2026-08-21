@@ -36,17 +36,23 @@ async function obtenerUsuarioWeb(sesion, reintentos = 5) {
   return null;
 }
 
-/** Calcula si el acceso (trial o pago) está vigente, igual que la base de datos. */
+/** Calcula si el acceso (trial o pago) está vigente, igual que la base de datos.
+ * IMPORTANTE: se comprueba primero el PAGO y luego el trial (no al revés). Si
+ * se comprobara el trial primero, alguien que paga mientras su trial de 48h
+ * todavía no ha terminado seguiría viendo motivo "trial" en vez de "pago", y
+ * el aviso de "ya tienes acceso, no pagues otra vez" (pago.html) nunca
+ * saltaría — permitiendo un pago duplicado real. Con el pago comprobado
+ * primero, en cuanto hay un pago vigente manda sobre el trial. */
 function calcularAcceso(usuario) {
   const ahora = new Date();
+  if (usuario.fecha_expiracion) {
+    const finPago = new Date(usuario.fecha_expiracion);
+    if (ahora < finPago) return { acceso: true, motivo: "pago", hasta: finPago };
+  }
   if (usuario.fecha_inicio_trial) {
     const finTrial = new Date(usuario.fecha_inicio_trial);
     finTrial.setHours(finTrial.getHours() + HORAS_TRIAL);
     if (ahora < finTrial) return { acceso: true, motivo: "trial", hasta: finTrial };
-  }
-  if (usuario.fecha_expiracion) {
-    const finPago = new Date(usuario.fecha_expiracion);
-    if (ahora < finPago) return { acceso: true, motivo: "pago", hasta: finPago };
   }
   return { acceso: false };
 }
