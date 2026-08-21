@@ -129,17 +129,19 @@ h2{font-size:1.25rem; margin:0 0 14px;}
 .materia-cabecera .meta{display:flex; align-items:center; gap:6px;}
 .materia-cabecera .chevron{
   display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;
-  width:24px; height:24px; border-radius:50%; background:var(--morado-suave);
-  color:var(--morado-osc); font-size:.8rem; font-weight:900;
-  transition:transform .2s, background .2s; transform:rotate(-90deg);
+  width:28px; height:28px; border-radius:50%; background:#ddd6fe;
+  color:var(--morado-osc); font-size:.85rem; font-weight:900;
+  box-shadow:0 2px 6px -1px rgba(124,58,237,.35);
+  transition:transform .2s, background .2s, box-shadow .2s; transform:rotate(-90deg);
 }
-.materia-cabecera .chevron.abierto{transform:rotate(0deg); background:#ddd6fe;}
+.materia-cabecera:hover .chevron{background:#c4b5fd; box-shadow:0 3px 9px -1px rgba(124,58,237,.5);}
+.materia-cabecera .chevron.abierto{transform:rotate(0deg); background:var(--morado); color:#fff; box-shadow:0 3px 9px -1px rgba(124,58,237,.55);}
 .temas-lista{display:none; flex-direction:column; gap:8px; padding:14px 0 0;}
 .temas-lista.abierta{display:flex;}
 .tema-btn{
   display:flex; align-items:center; justify-content:space-between; gap:10px;
   width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--borde);
-  background:#f7f6fd; cursor:pointer; font-size:.88rem; font-weight:600; color:var(--texto);
+  background:#f7f6fd; cursor:pointer; font-size:.88rem; font-weight:700; color:var(--morado-osc);
   transition:.15s;
 }
 .tema-btn:hover{border-color:var(--morado); background:#efecfd;}
