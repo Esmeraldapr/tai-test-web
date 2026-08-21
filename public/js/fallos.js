@@ -1,1 +1,81 @@
-Ly8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Ci8vIEzDs2dpY2EgZGUgIk1pcyBmYWxsb3MiIChmYWxsb3MuaHRtbCkKLy8gPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CgooYXN5bmMgZnVuY3Rpb24gaW5pY2lhcigpIHsKICBjb25zdCBzZXNpb24gPSBhd2FpdCBleGlnaXJTZXNpb24oKTsKICBpZiAoIXNlc2lvbikgcmV0dXJuOwogIGNvbnN0IHVzdWFyaW8gPSBhd2FpdCBvYnRlbmVyVXN1YXJpb1dlYihzZXNpb24pOwogIGNvbnN0IHpvbmEgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgiem9uYS1mYWxsb3MiKTsKICBpZiAoIXVzdWFyaW8pIHsKICAgIHpvbmEuaW5uZXJIVE1MID0gYDxkaXYgY2xhc3M9InZhY2lvIj5IYSBoYWJpZG8gdW4gcHJvYmxlbWEgY2FyZ2FuZG8gdHUgY3VlbnRhLjwvZGl2PmA7CiAgICByZXR1cm47CiAgfQogIHBpbnRhclNpZGViYXIoImZhbGxvcy5odG1sIiwgdXN1YXJpbyk7CiAgcGludGFyQmFubmVyQWNjZXNvKHVzdWFyaW8pOwoKICBpZiAoIXVzdWFyaW8uZW1haWxfdmVyaWZpY2FkbykgewogICAgem9uYS5pbm5lckhUTUwgPSBgPGRpdiBjbGFzcz0idmFjaW8iPjxkaXYgY2xhc3M9Imljb25vIj7wn5OnPC9kaXY+Q29uZmlybWEgdHUgY29ycmVvIHBhcmEgdmVyIHR1cyBmYWxsb3MuPC9kaXY+YDsKICAgIHJldHVybjsKICB9CgogIGNvbnN0IGFjY2VzbyA9IGNhbGN1bGFyQWNjZXNvKHVzdWFyaW8pOwogIGlmICghYWNjZXNvLmFjY2VzbykgewogICAgem9uYS5pbm5lckhUTUwgPSBgPGRpdiBjbGFzcz0idmFjaW8iPlR1IGFjY2VzbyBoYSBjYWR1Y2Fkby4gPGEgaHJlZj0icGFnby5odG1sIj5Db25zaWd1ZSAke0RJQVNfQUNDRVNPX1BBR0FET30gZMOtYXMgcG9yICR7UFJFQ0lPX0VVUk9TfeKCrDwvYT48L2Rpdj5gOwogICAgcmV0dXJuOwogIH0KCiAgYXN5bmMgZnVuY3Rpb24gY2FyZ2FyWVBpbnRhcigpIHsKICAgIHpvbmEuaW5uZXJIVE1MID0gYDxkaXYgY2xhc3M9InNwaW5uZXIiPjwvZGl2PmA7CiAgICBjb25zdCB7IGRhdGE6IGZpbGFzLCBlcnJvciB9ID0gYXdhaXQgc2IuZnJvbSgibWlzX2ZhbGxvc193ZWIiKS5zZWxlY3QoImlkLCBtYXRlcmlhLCB0ZW1hLCBwcmVndW50YSIpLm9yZGVyKCJpZCIpOwogICAgaWYgKGVycm9yKSB7CiAgICAgIGNvbnNvbGUuZXJyb3IoZXJyb3IpOwogICAgICB6b25hLmlubmVySFRNTCA9IGA8ZGl2IGNsYXNzPSJ2YWNpbyI+Tm8gc2UgaGFuIHBvZGlkbyBjYXJnYXIgdHVzIGZhbGxvcy48L2Rpdj5gOwogICAgICByZXR1cm47CiAgICB9CiAgICBpZiAoIWZpbGFzIHx8ICFmaWxhcy5sZW5ndGgpIHsKICAgICAgem9uYS5pbm5lckhUTUwgPSBgPGRpdiBjbGFzcz0idmFjaW8iPjxkaXYgY2xhc3M9Imljb25vIj7wn46JPC9kaXY+VG9kYXbDrWEgbm8gdGllbmVzIGZhbGxvcyBndWFyZGFkb3MuIMKhU2lndWUgYXPDrSE8L2Rpdj5gOwogICAgICByZXR1cm47CiAgICB9CgogICAgY29uc3QgaWRzID0gZmlsYXMubWFwKChmKSA9PiBmLmlkKS5qb2luKCIsIik7CiAgICB6b25hLmlubmVySFRNTCA9IGAKICAgICAgPGRpdiBjbGFzcz0iYWNjaW9uZXMtZmFsbG9zIj4KICAgICAgICA8YSBjbGFzcz0iYnRuIGJ0bi1wcmltYXJpbyIgaHJlZj0icXVpei5odG1sP21vZG89bGlzdGEmaWRzPSR7ZW5jb2RlVVJJQ29tcG9uZW50KGlkcyl9JnRpdHVsbz0ke2VuY29kZVVSSUNvbXBvbmVudCgiTWlzIGZhbGxvcyIpfSI+UHJhY3RpY2FyIG1pcyAke2ZpbGFzLmxlbmd0aH0gZmFsbG9zIOKGkjwvYT4KICAgICAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLXNlY3VuZGFyaW8iIGlkPSJidG4tZWxpbWluYXItdG9kb3MiPvCfl5HvuI8gRWxpbWluYXIgdG9kb3M8L2J1dHRvbj4KICAgICAgPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9Imxpc3RhLXByZWd1bnRhcy1taW5pIj4KICAgICAgICAke2ZpbGFzLm1hcCgoZikgPT4gYAogICAgICAgICAgPGRpdiBjbGFzcz0icHJlZ3VudGEtbWluaSIgZGF0YS1pZD0iJHtmLmlkfSI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9InByZWd1bnRhLW1pbmktY3VlcnBvIj4KICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJwcmVndW50YS1taW5pLXRleHRvIj4ke2YucHJlZ3VudGF9PC9kaXY+CiAgICAgICAgICAgICAgPGRpdiBjbGFzcz0icHJlZ3VudGEtbWluaS1tZXRhIj48c3BhbiBjbGFzcz0iY2hpcCBvZmljaWFsIj4ke2YubWF0ZXJpYX08L3NwYW4+PHNwYW4gY2xhc3M9ImNoaXAgbm8tb2ZpY2lhbCI+JHtmLnRlbWF9PC9zcGFuPjwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuLXF1aXRhci1mYWxsbyIgZGF0YS1pZD0iJHtmLmlkfSIgdGl0bGU9IlF1aXRhciBkZSBtaXMgZmFsbG9zIj7inJU8L2J1dHRvbj4KICAgICAgICAgIDwvZGl2PmApLmpvaW4oIiIpfQogICAgICA8L2Rpdj4KICAgIGA7CgogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoImJ0bi1lbGltaW5hci10b2RvcyIpLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwgYXN5bmMgKCkgPT4gewogICAgICBpZiAoIWNvbmZpcm0oIsK/RWxpbWluYXIgVE9ET1MgdHVzIGZhbGxvcyBkZSBlc3RhIGxpc3RhPyBObyBhZmVjdGEgYSB0dSAlIGRlIGFjaWVydG9zLCBzb2xvIHZhY8OtYSBlc3RlIHJlcGFzby4iKSkgcmV0dXJuOwogICAgICBjb25zdCB7IGVycm9yIH0gPSBhd2FpdCBzYi5ycGMoImRlc2NhcnRhcl90b2Rvc19taXNfZmFsbG9zX3dlYiIpOwogICAgICBpZiAoZXJyb3IpIHsgY29uc29sZS5lcnJvcihlcnJvcik7IGFsZXJ0KCJObyBzZSBoYSBwb2RpZG8gdmFjaWFyIGxhIGxpc3RhLiBJbnTDqW50YWxvIGRlIG51ZXZvLiIpOyByZXR1cm47IH0KICAgICAgY2FyZ2FyWVBpbnRhcigpOwogICAgfSk7CgogICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgiLmJ0bi1xdWl0YXItZmFsbG8iKS5mb3JFYWNoKChidG4pID0+IHsKICAgICAgYnRuLmFkZEV2ZW50TGlzdGVuZXIoImNsaWNrIiwgYXN5bmMgKCkgPT4gewogICAgICAgIGNvbnN0IHByZWd1bnRhSWQgPSBOdW1iZXIoYnRuLmRhdGFzZXQuaWQpOwogICAgICAgIGJ0bi5kaXNhYmxlZCA9IHRydWU7CiAgICAgICAgY29uc3QgeyBlcnJvciB9ID0gYXdhaXQgc2IuZnJvbSgiZmFsbG9zX2Rlc2NhcnRhZG9zX3dlYiIpLnVwc2VydCgKICAgICAgICAgIHsgcHJlZ3VudGFfaWQ6IHByZWd1bnRhSWQgfSwKICAgICAgICAgIHsgb25Db25mbGljdDogImF1dGhfdXNlcl9pZCxwcmVndW50YV9pZCIgfQogICAgICAgICk7CiAgICAgICAgaWYgKGVycm9yKSB7IGNvbnNvbGUuZXJyb3IoZXJyb3IpOyBhbGVydCgiTm8gc2UgaGEgcG9kaWRvIHF1aXRhciBlc3RhIHByZWd1bnRhLiIpOyBidG4uZGlzYWJsZWQgPSBmYWxzZTsgcmV0dXJuOyB9CiAgICAgICAgY2FyZ2FyWVBpbnRhcigpOwogICAgICB9KTsKICAgIH0pOwogIH0KCiAgY2FyZ2FyWVBpbnRhcigpOwp9KSgpOwo=
+// ============================================================
+// Lógica de "Mis fallos" (fallos.html)
+// ============================================================
+
+(async function iniciar() {
+  const sesion = await exigirSesion();
+  if (!sesion) return;
+  const usuario = await obtenerUsuarioWeb(sesion);
+  const zona = document.getElementById("zona-fallos");
+  if (!usuario) {
+    zona.innerHTML = `<div class="vacio">Ha habido un problema cargando tu cuenta.</div>`;
+    return;
+  }
+  pintarSidebar("fallos.html", usuario);
+  pintarBannerAcceso(usuario);
+
+  if (!usuario.email_verificado) {
+    zona.innerHTML = `<div class="vacio"><div class="icono">📧</div>Confirma tu correo para ver tus fallos.</div>`;
+    return;
+  }
+
+  const acceso = calcularAcceso(usuario);
+  if (!acceso.acceso) {
+    zona.innerHTML = `<div class="vacio">Tu acceso ha caducado. <a href="pago.html">Consigue ${DIAS_ACCESO_PAGADO} días por ${PRECIO_EUROS}€</a></div>`;
+    return;
+  }
+
+  async function cargarYPintar() {
+    zona.innerHTML = `<div class="spinner"></div>`;
+    const { data: filas, error } = await sb.from("mis_fallos_web").select("id, materia, tema, pregunta").order("id");
+    if (error) {
+      console.error(error);
+      zona.innerHTML = `<div class="vacio">No se han podido cargar tus fallos.</div>`;
+      return;
+    }
+    if (!filas || !filas.length) {
+      zona.innerHTML = `<div class="vacio"><div class="icono">🎉</div>Todavía no tienes fallos guardados. ¡Sigue así!</div>`;
+      return;
+    }
+
+    const ids = filas.map((f) => f.id).join(",");
+    zona.innerHTML = `
+      <div class="acciones-fallos">
+        <a class="btn btn-primario" href="quiz.html?modo=lista&ids=${encodeURIComponent(ids)}&titulo=${encodeURIComponent("Mis fallos")}">Practicar mis ${filas.length} fallos →</a>
+        <button class="btn btn-secundario" id="btn-eliminar-todos">🗑️ Eliminar todos</button>
+      </div>
+      <div class="lista-preguntas-mini">
+        ${filas.map((f) => `
+          <div class="pregunta-mini" data-id="${f.id}">
+            <div class="pregunta-mini-cuerpo">
+              <div class="pregunta-mini-texto">${f.pregunta}</div>
+              <div class="pregunta-mini-meta"><span class="chip oficial">${f.materia}</span><span class="chip no-oficial">${f.tema}</span></div>
+            </div>
+            <button class="btn-quitar-fallo" data-id="${f.id}" title="Quitar de mis fallos">✕</button>
+          </div>`).join("")}
+      </div>
+    `;
+
+    document.getElementById("btn-eliminar-todos").addEventListener("click", async () => {
+      if (!confirm("¿Eliminar TODOS tus fallos de esta lista? No afecta a tu % de aciertos, solo vacía este repaso.")) return;
+      const { error } = await sb.rpc("descartar_todos_mis_fallos_web");
+      if (error) { console.error(error); alert("No se ha podido vaciar la lista. Inténtalo de nuevo."); return; }
+      cargarYPintar();
+    });
+
+    document.querySelectorAll(".btn-quitar-fallo").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const preguntaId = Number(btn.dataset.id);
+        btn.disabled = true;
+        const { error } = await sb.from("fallos_descartados_web").upsert(
+          { pregunta_id: preguntaId },
+          { onConflict: "auth_user_id,pregunta_id" }
+        );
+        if (error) { console.error(error); alert("No se ha podido quitar esta pregunta."); btn.disabled = false; return; }
+        cargarYPintar();
+      });
+    });
+  }
+
+  cargarYPintar();
+})();
