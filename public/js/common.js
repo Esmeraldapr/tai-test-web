@@ -84,6 +84,7 @@ function pintarSidebar(activa, usuario) {
     </nav>
     <div class="sidebar-usuario">
       <span>👋 ${nombre}</span>
+      <div id="sidebar-acceso" class="sidebar-acceso"></div>
       <button id="btn-logout">Salir</button>
     </div>
   `;
@@ -91,30 +92,33 @@ function pintarSidebar(activa, usuario) {
   if (btn) btn.addEventListener("click", cerrarSesion);
 }
 
-/** Pinta el banner de trial/pago en el elemento con id="banner-acceso". */
+/** Pinta el aviso de trial/pago, discreto, dentro de la barra lateral
+ * (id="sidebar-acceso" — ver pintarSidebar). Antes era un banner grande a todo
+ * lo ancho justo debajo del título de cada página; a petición de la usuaria
+ * ahora es una línea pequeña junto a su nombre, no lo primero que se ve. */
 function pintarBannerAcceso(usuario) {
-  const el = document.getElementById("banner-acceso");
+  const el = document.getElementById("sidebar-acceso");
   if (!el) return;
   if (!usuario.email_verificado) {
-    el.className = "banner-acceso trial";
-    el.innerHTML = `📧 Confirma tu correo para que arranque tu prueba gratuita de ${HORAS_TRIAL}h.`;
+    el.className = "sidebar-acceso";
+    el.innerHTML = `📧 Confirma tu correo para empezar tu prueba de ${HORAS_TRIAL}h`;
     return;
   }
   const acceso = calcularAcceso(usuario);
   if (!acceso.acceso) {
-    el.className = "banner-acceso caducado";
-    el.innerHTML = `❌ Tu acceso ha caducado. <a href="pago.html">Consigue ${DIAS_ACCESO_PAGADO} días por ${PRECIO_EUROS}€ →</a>`;
+    el.className = "sidebar-acceso caducado";
+    el.innerHTML = `❌ Acceso caducado · <a href="pago.html">${DIAS_ACCESO_PAGADO} días por ${PRECIO_EUROS}€ →</a>`;
     return;
   }
   const msRestantes = acceso.hasta.getTime() - Date.now();
   const horas = msRestantes / (1000 * 60 * 60);
-  const texto = horas <= 24 ? `${Math.max(1, Math.round(horas))} horas` : `${Math.ceil(horas / 24)} días`;
+  const texto = horas <= 24 ? `${Math.max(1, Math.round(horas))}h` : `${Math.ceil(horas / 24)} días`;
   if (acceso.motivo === "trial") {
-    el.className = "banner-acceso trial";
-    el.innerHTML = `🎁 Prueba gratuita: te quedan <strong>${texto}</strong>. <a href="pago.html">Consigue ${DIAS_ACCESO_PAGADO} días por ${PRECIO_EUROS}€ →</a>`;
+    el.className = "sidebar-acceso";
+    el.innerHTML = `🎁 Prueba: ${texto} · <a href="pago.html">Ampliar →</a>`;
   } else {
-    el.className = "banner-acceso pago";
-    el.innerHTML = `✅ Acceso activo. Te quedan <strong>${texto}</strong>.`;
+    el.className = "sidebar-acceso";
+    el.innerHTML = `✅ Acceso activo (${texto})`;
   }
 }
 
