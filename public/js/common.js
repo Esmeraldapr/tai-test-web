@@ -19,17 +19,20 @@ async function exigirSesion() {
 
 /** Trae la fila de usuarios_web del usuario logueado. La crea automáticamente
  * un trigger en Supabase al darse de alta, así que normalmente ya existe;
- * reintenta un par de veces por si acaba de registrarse hace un instante. */
-async function obtenerUsuarioWeb(sesion, reintentos = 3) {
+ * reintenta varias veces tanto si aún no existe (acaba de registrarse) como
+ * si hay un error puntual de red/servidor (antes un solo fallo transitorio
+ * hacía que se rindiera sin reintentar, y eso rompía la carga de la cuenta
+ * de gente con la fila ya creada desde hace tiempo). */
+async function obtenerUsuarioWeb(sesion, reintentos = 5) {
+  let ultimoError = null;
   for (let i = 0; i < reintentos; i++) {
     const { data, error } = await sb.from("usuarios_web").select("*").eq("auth_user_id", sesion.user.id).maybeSingle();
-    if (error) {
-      console.error("Error consultando usuarios_web:", error);
-      return null;
-    }
     if (data) return data;
-    await new Promise((r) => setTimeout(r, 400));
+    ultimoError = error;
+    if (error) console.error(`Error consultando usuarios_web (intento ${i + 1}/${reintentos}):`, error);
+    await new Promise((r) => setTimeout(r, 500 + i * 250));
   }
+  if (ultimoError) console.error("obtenerUsuarioWeb: se agotaron los reintentos con error:", ultimoError);
   return null;
 }
 
