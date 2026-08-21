@@ -57,17 +57,23 @@ async function requiereSesion(req, res, next) {
 
 /** Igual que calcularAcceso() en public/js/common.js, pero en el servidor
  * (aquí no tenemos acceso al navegador). Se usa para no dejar pagar dos
- * veces seguidas por error a quien ya tiene un acceso de pago vigente. */
+ * veces seguidas por error a quien ya tiene un acceso de pago vigente.
+ * IMPORTANTE: se comprueba primero el PAGO y luego el trial (no al revés).
+ * Si se comprobara el trial primero, alguien que paga mientras su trial de
+ * 48h todavía no ha terminado seguiría teniendo motivo "trial" en vez de
+ * "pago", y este guardarraíl nunca bloquearía una orden duplicada — dejando
+ * pagar dos veces de verdad. Con el pago comprobado primero, en cuanto hay
+ * un pago vigente manda sobre el trial. */
 function tieneAccesoValido(usuario) {
   const ahora = new Date();
+  if (usuario.fecha_expiracion) {
+    const finPago = new Date(usuario.fecha_expiracion);
+    if (ahora < finPago) return { acceso: true, motivo: 'pago', hasta: finPago };
+  }
   if (usuario.fecha_inicio_trial) {
     const finTrial = new Date(usuario.fecha_inicio_trial);
     finTrial.setHours(finTrial.getHours() + HORAS_TRIAL);
     if (ahora < finTrial) return { acceso: true, motivo: 'trial', hasta: finTrial };
-  }
-  if (usuario.fecha_expiracion) {
-    const finPago = new Date(usuario.fecha_expiracion);
-    if (ahora < finPago) return { acceso: true, motivo: 'pago', hasta: finPago };
   }
   return { acceso: false };
 }
