@@ -133,12 +133,20 @@ function leerTexto(texto, boton) {
   if (!sintesisVoz) return;
   const eraElMismo = boton && boton.dataset.leyendo === "1";
   detenerLectura();
-  if (eraElMismo) return;
+  if (eraElMismo) return; // pulsar el mismo botón mientras lee = parar
   const limpio = String(texto || "").replace(/\s+/g, " ").trim();
   if (!limpio) return;
   const utterancia = new SpeechSynthesisUtterance(limpio);
   utterancia.lang = "es-ES";
   utterancia.rate = 0.95;
+  if (boton) {
+    boton.dataset.iconoReposo = boton.dataset.iconoReposo || boton.textContent;
+    boton.textContent = "⏹️";
+    boton.dataset.leyendo = "1";
+    botonVozActivo = boton;
+  }
+  utterancia.onend = () => { if (botonVozActivo === boton) detenerLectura(); };
+  utterancia.onerror = () => { if (botonVozActivo === boton) detenerLectura(); };
   sintesisVoz.speak(utterancia);
 }
 function abrirLightbox(src, alt) {
