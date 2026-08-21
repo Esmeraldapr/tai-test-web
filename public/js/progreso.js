@@ -2,6 +2,13 @@
 // Lógica de "Mi progreso" (progreso.html)
 // ============================================================
 
+function claveDiaLocal(fecha) {
+  const y = fecha.getFullYear();
+  const m = String(fecha.getMonth() + 1).padStart(2, "0");
+  const d = String(fecha.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
 (async function iniciar() {
   const sesion = await exigirSesion();
   if (!sesion) return;
@@ -34,7 +41,11 @@
   }
 
   // --- Racha de días practicados ---
-  const diasPracticados = new Set(filas.map((f) => new Date(f.created_at).toISOString().slice(0, 10)));
+  // Los días se calculan en el huso horario LOCAL del navegador (no UTC), para que
+  // "hoy" y el calendario coincidan con el día real del usuario. Antes se usaba
+  // toISOString() (siempre UTC), lo que en España (UTC+1/+2) hacía que un test
+  // completado "hoy" no contara para la racha hasta el día siguiente.
+  const diasPracticados = new Set(filas.map((f) => claveDiaLocal(new Date(f.created_at))));
   const HOY = new Date();
   HOY.setHours(0, 0, 0, 0);
 
@@ -44,7 +55,7 @@
     while (i < 1000) {
       const d = new Date(HOY);
       d.setDate(d.getDate() - i);
-      const clave = d.toISOString().slice(0, 10);
+      const clave = claveDiaLocal(d);
       if (diasPracticados.has(clave)) {
         racha++;
         i++;
@@ -62,7 +73,7 @@
   for (let i = DIAS_CALENDARIO - 1; i >= 0; i--) {
     const d = new Date(HOY);
     d.setDate(d.getDate() - i);
-    const clave = d.toISOString().slice(0, 10);
+    const clave = claveDiaLocal(d);
     const practicado = diasPracticados.has(clave);
     const esHoy = i === 0;
     const etiqueta = d.toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "short" });
@@ -72,7 +83,7 @@
   // --- Evolución del % de aciertos (últimos 30 días con datos) ---
   const porDia = new Map();
   for (const f of filas) {
-    const clave = new Date(f.created_at).toISOString().slice(0, 10);
+    const clave = claveDiaLocal(new Date(f.created_at));
     if (!porDia.has(clave)) porDia.set(clave, { aciertos: 0, total: 0 });
     const d = porDia.get(clave);
     d.aciertos += f.aciertos;
