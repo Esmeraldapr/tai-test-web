@@ -5,6 +5,21 @@
   if (usuario) pintarSidebar("", usuario);
   document.getElementById("precio-mostrado").textContent = `${PRECIO_EUROS}€`;
 
+  // Si ya tiene un acceso de pago vigente (no un trial), no le dejamos pagar
+  // otra vez por error: escondemos el botón y mostramos un aviso claro.
+  if (usuario) {
+    const acceso = calcularAcceso(usuario);
+    if (acceso.acceso && acceso.motivo === "pago") {
+      const cuando = acceso.hasta.toLocaleDateString("es-ES");
+      document.getElementById("precio-mostrado").style.display = "none";
+      document.getElementById("btn-pagar").style.display = "none";
+      const aviso = document.getElementById("aviso-ya-activo");
+      aviso.style.display = "block";
+      aviso.innerHTML = `✅ Ya tienes acceso activo hasta el <strong>${cuando}</strong>. No hace falta que pagues otra vez.`;
+      return;
+    }
+  }
+
   document.getElementById("btn-pagar").addEventListener("click", async () => {
     const estado = document.getElementById("estado-pago");
     estado.textContent = "Conectando con PayPal...";
