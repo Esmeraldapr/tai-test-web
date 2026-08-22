@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /test-gratis-tai.html
+Disallow: /js/
+Disallow: /css/
+Disallow: /data/
+
+Sitemap: https://tai-test-web.onrender.com/sitemap.xml
