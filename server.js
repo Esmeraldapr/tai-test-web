@@ -42,6 +42,27 @@ app.use(express.json());
 app.get('/health', (req, res) => res.send('OK'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Imagen para las vistas previas al compartir el enlace (og:image / twitter:image).
+// La leemos del propio favicon incrustado en public/index.html en vez de guardarla
+// como archivo binario en el repo: los archivos binarios subidos vía MCP de GitHub
+// se corrompen (bug conocido, ver decisiones-y-hallazgos.md). Mismo motivo por el
+// que LOGO_BUHO en public/js/config.js también va en base64 dentro de un archivo de texto.
+let OG_BUHO_BASE64 = null;
+try {
+  const indexHtml = require('fs').readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+  const match = indexHtml.match(/data:image\/jpeg;base64,([A-Za-z0-9+/=]+)/);
+  if (match) OG_BUHO_BASE64 = match[1];
+} catch (e) {
+  console.error('No se pudo leer el favicon para servir /img/og-buho.jpg:', e);
+}
+
+app.get('/img/og-buho.jpg', (req, res) => {
+  if (!OG_BUHO_BASE64) return res.status(404).send('Imagen no disponible');
+  res.set('Content-Type', 'image/jpeg');
+  res.set('Cache-Control', 'public, max-age=86400');
+  res.send(Buffer.from(OG_BUHO_BASE64, 'base64'));
+});
+
 async function requiereSesion(req, res, next) {
   const cabecera = req.headers['authorization'] || '';
   const token = cabecera.startsWith('Bearer ') ? cabecera.slice(7) : null;
