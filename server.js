@@ -8,6 +8,7 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -18,6 +19,8 @@ const PRECIO_EUROS = process.env.PRECIO_EUROS || '2.50';
 const DIAS_ACCESO_PAGADO = 30;
 const HORAS_TRIAL = 48;
 const WEBAPP_URL = process.env.WEBAPP_URL || '';
+const EMAIL_USER = process.env.EMAIL_USER || '';
+const EMAIL_APP_PASSWORD = process.env.EMAIL_APP_PASSWORD || '';
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !PAYPAL_CLIENT_ID || !PAYPAL_SECRET) {
   console.error('Faltan variables de entorno: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, PAYPAL_CLIENT_ID, PAYPAL_SECRET');
@@ -35,6 +38,60 @@ process.on('unhandledRejection', (err) => {
 // porque ignora RLS. Hace falta para verificar el JWT del usuario y para
 // activar el acceso pagado tras confirmar un cobro real.
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+// Envío de correo (agradecimiento a quien reporta una incidencia, avisándole
+// si se ha corregido su reporte o no). Usa una cuenta de Gmail normal con
+// "contraseña de aplicación" (no la contraseña de la cuenta) vía SMTP.
+// Si faltan las variables de entorno, el envío se salta sin tumbar el
+// servidor (igual que con OG_BUHO_BASE64 más abajo).
+let transporterCorreo = null;
+if (EMAIL_USER && EMAIL_APP_PASSWORD) {
+  transporterCorreo = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user: EMAIL_USER, pass: EMAIL_APP_PASSWORD },
+  });
+} else {
+  console.error('EMAIL_USER / EMAIL_APP_PASSWORD no configurados: no se podrán enviar correos de incidencias.');
+}
+
+/** Manda el correo de vuelta a quien reportó una incidencia.
+ * corregido: true si se ha aplicado un cambio en la pregunta, false si se ha
+ * revisado y no hacía falta cambiar nada.
+ * NOTA: esta función todavía no se llama desde ningún sitio — falta decidir
+ * con la usuaria si la revisión que decide "corregido: true/false" es
+ * automática o pasa antes por su aprobación. Cuando se decida, se engancha
+ * aquí, tras marcar la incidencia como revisada en incidencias_web. */
+async function enviarCorreoIncidencia(destinatario, { mensajeOriginal, corregido, notas }) {
+  if (!transporterCorreo) {
+    console.error('No se ha enviado el correo de incidencia: falta configurar EMAIL_USER/EMAIL_APP_PASSWORD.');
+    return false;
+  }
+  const asunto = corregido
+    ? '✅ Hemos corregido la pregunta que reportaste — Oposición TAI'
+    : 'Hemos revisado tu reporte — Oposición TAI';
+  const cuerpo = `
+    <p>¡Hola!</p>
+    <p>Gracias por avisarnos de un posible fallo en una pregunta de la web de Oposición TAI. Tu colaboración nos ayuda a mantener el contenido lo más correcto posible para todas las personas que se preparan la oposición.</p>
+    <p><strong>Lo que reportaste:</strong><br/>${mensajeOriginal || '(sin mensaje adicional)'}</p>
+    <p>${corregido
+      ? 'Hemos revisado la pregunta y <strong>hemos aplicado una corrección</strong>.'
+      : 'Hemos revisado la pregunta y, tras comprobarlo, <strong>no hemos encontrado ningún error que corregir</strong>.'}</p>
+    ${notas ? `<p>${notas}</p>` : ''}
+    <p>¡Gracias de nuevo por tu ayuda!<br/>Oposición TAI</p>
+  `;
+  try {
+    await transporterCorreo.sendMail({
+      from: `"Oposición TAI" <${EMAIL_USER}>`,
+      to: destinatario,
+      subject: asunto,
+      html: cuerpo,
+    });
+    return true;
+  } catch (e) {
+    console.error('Error enviando correo de incidencia:', e);
+    return false;
+  }
+}
 
 const app = express();
 app.use(express.json());
