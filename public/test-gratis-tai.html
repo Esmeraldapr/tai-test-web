@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/jpeg" href="img/logo-buho.jpg" />
+
+<title>Test gratis Oposición TAI 2026 · 3 preguntas de muestra (Redes, BBDD, POO)</title>
+<meta name="description" content="Prueba gratis, sin registro, 3 preguntas reales del temario de la Oposición TAI (Técnico Auxiliar de Informática, AGE): redes, bases de datos y programación. Corrección y explicación al instante." />
+<link rel="canonical" href="https://tai-test-web.onrender.com/test-gratis-tai.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Test gratis Oposición TAI · 3 preguntas de muestra" />
+<meta property="og:description" content="Preguntas reales del temario de la Oposición TAI (AGE) para practicar gratis, sin registro. Redes, bases de datos y programación." />
+<meta property="og:url" content="https://tai-test-web.onrender.com/test-gratis-tai.html" />
+<meta property="og:image" content="https://tai-test-web.onrender.com/img/logo-buho.jpg" />
+<meta name="twitter:card" content="summary" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "Test gratis Oposición TAI — preguntas de muestra",
+  "description": "Preguntas de muestra reales del temario de la Oposición TAI (Técnico Auxiliar de Informática, AGE): redes, bases de datos y programación.",
+  "url": "https://tai-test-web.onrender.com/test-gratis-tai.html",
+  "educationalLevel": "Oposición administración pública",
+  "about": [
+    { "@type": "Thing", "name": "Redes de ordenadores" },
+    { "@type": "Thing", "name": "Bases de datos" },
+    { "@type": "Thing", "name": "Programación orientada a objetos" }
+  ],
+  "hasPart": [
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el objetivo principal de la arquitectura de una red doméstica (LAN)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Conectar los principales dispositivos de la casa a Internet y permitir que se comuniquen entre sí. El objetivo de la LAN doméstica es conectar los dispositivos de la casa a Internet y permitir que se comuniquen entre sí."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "La \"dirección\" de un cliente (calle, ciudad, C.P.), que se divide en subpartes con sentido propio, es un ejemplo de atributo:",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Compuesto. Un atributo compuesto se divide en subpartes con sentido propio; la dirección se compone de calle, ciudad y código postal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es el concepto fundamental de la POO que consiste en ignorar los detalles no relevantes para centrarse en las características esenciales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Abstracción. La abstracción permite gestionar la complejidad ocultando los detalles de implementación y mostrando solo la funcionalidad necesaria."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .cebo-header{max-width:760px; margin:0 auto; padding:30px 20px 6px; text-align:center;}
+  .cebo-header img.logo-buho{width:56px; height:56px; margin:0 auto 10px;}
+  .cebo-header h1{font-size:1.55rem; margin:0 0 8px;}
+  .cebo-header .subtitulo{max-width:560px; margin:0 auto 4px;}
+  .cebo-gratis-chip{display:inline-block; background:var(--verde-suave); color:var(--verde); font-weight:700; font-size:.8rem; padding:5px 14px; border-radius:999px; margin-bottom:14px;}
+  .cebo-contenedor{max-width:760px; margin:0 auto; padding:10px 20px 60px;}
+  .cebo-tema-chip{display:inline-block; background:var(--morado-suave); color:var(--morado-osc); font-weight:700; font-size:.74rem; padding:3px 11px; border-radius:999px; margin-bottom:10px;}
+  .cebo-cta{background:var(--tarjeta); border-radius:var(--radio); box-shadow:var(--sombra); border:1px solid var(--borde); padding:30px 26px; text-align:center; margin-top:10px;}
+  .cebo-cta h2{margin:0 0 10px;}
+  .cebo-cta p{color:var(--texto-suave); margin:0 0 20px; line-height:1.6;}
+  .cebo-cta .btn{padding:14px 30px; font-size:1rem;}
+  .cebo-footer-link{display:block; text-align:center; margin-top:22px; font-size:.85rem; color:var(--texto-suave);}
+  .cebo-footer-link a{color:var(--morado); font-weight:700; text-decoration:underline;}
+</style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="marca">
+      <img src="img/logo-buho.jpg" alt="Oposición TAI" class="logo-buho" width="32" height="32" />
+      Oposición TAI
+    </div>
+    <div class="usuario">
+      <a href="login.html"><button>Iniciar sesión</button></a>
+    </div>
+  </div>
+
+  <div class="cebo-header">
+    <span class="cebo-gratis-chip">✅ Gratis · sin registro</span>
+    <h1>Test gratis de la Oposición TAI</h1>
+    <p class="subtitulo">3 preguntas reales del temario de Técnico Auxiliar de Informática (AGE): redes, bases de datos y programación. Responde y mira al momento si aciertas y por qué.</p>
+  </div>
+
+  <div class="cebo-contenedor" id="cebo-preguntas"></div>
+
+  <script>
+    // Preguntas fijas, elegidas a mano del banco real de preguntas — NO se
+    // consulta Supabase desde esta página pública, para no exponer el resto
+    // del banco de preguntas (10.600+) a nadie que no haya pagado.
+    const PREGUNTAS_MUESTRA = [
+      {
+        tema: "Redes · Fundamentos",
+        pregunta: "¿Cuál es el objetivo principal de la arquitectura de una red doméstica (LAN)?",
+        opciones: {
+          a: "Interconectar sistemas autónomos a escala global",
+          b: "Conectar los principales dispositivos de la casa a Internet y permitir que se comuniquen entre sí",
+          c: "Sustituir el papel de los ISP",
+          d: "Gestionar el peering entre operadoras",
+        },
+        correcta: "b",
+        explicacion: "El objetivo de la LAN doméstica es conectar los dispositivos de la casa a Internet y permitir que se comuniquen entre sí.",
+      },
+      {
+        tema: "Bases de datos · Modelo conceptual",
+        pregunta: "La “dirección” de un cliente (calle, ciudad, C.P.), que se divide en subpartes con sentido propio, es un ejemplo de atributo:",
+        opciones: {
+          a: "Simple",
+          b: "Derivado",
+          c: "Multivalor",
+          d: "Compuesto",
+        },
+        correcta: "d",
+        explicacion: "Un atributo compuesto se divide en subpartes con sentido propio; la dirección se compone de calle, ciudad y código postal.",
+      },
+      {
+        tema: "Programación · POO",
+        pregunta: "¿Cuál es el concepto fundamental de la POO que consiste en ignorar los detalles no relevantes para centrarse en las características esenciales?",
+        opciones: {
+          a: "Encapsulamiento",
+          b: "Abstracción",
+          c: "Polimorfismo",
+          d: "Herencia",
+        },
+        correcta: "b",
+        explicacion: "La abstracción permite gestionar la complejidad ocultando los detalles de implementación y mostrando solo la funcionalidad necesaria.",
+      },
+    ];
+
+    const contenedor = document.getElementById("cebo-preguntas");
+
+    PREGUNTAS_MUESTRA.forEach((p, indice) => {
+      const caja = document.createElement("div");
+      caja.className = "pregunta-caja";
+      caja.innerHTML = `
+        <span class="cebo-tema-chip">${p.tema}</span>
+        <div class="enunciado">${indice + 1}. ${p.pregunta}</div>
+        <div class="opciones"></div>
+      `;
+      const opcionesDiv = caja.querySelector(".opciones");
+
+      Object.entries(p.opciones).forEach(([letra, texto]) => {
+        const btn = document.createElement("div");
+        btn.className = "opcion";
+        btn.innerHTML = `<span class="letra">${letra.toUpperCase()}</span><span>${texto}</span>`;
+        btn.addEventListener("click", () => {
+          if (caja.dataset.respondida) return;
+          caja.dataset.respondida = "1";
+          const todas = opcionesDiv.querySelectorAll(".opcion");
+          todas.forEach((o) => o.classList.add("deshabilitada"));
+          if (letra === p.correcta) {
+            btn.classList.add("correcta");
+          } else {
+            btn.classList.add("incorrecta");
+            const buena = [...todas].find((o) => o.querySelector(".letra").textContent.toLowerCase() === p.correcta);
+            if (buena) buena.classList.add("correcta");
+          }
+          const explicacionDiv = document.createElement("div");
+          explicacionDiv.className = "explicacion-caja " + (letra === p.correcta ? "bien" : "mal");
+          explicacionDiv.innerHTML = `${letra === p.correcta ? "✅ ¡Correcto!" : "❌ Incorrecto."} ${p.explicacion}`;
+          caja.appendChild(explicacionDiv);
+        });
+        opcionesDiv.appendChild(btn);
+      });
+
+      contenedor.appendChild(caja);
+    });
+
+    const cta = document.createElement("div");
+    cta.className = "cebo-cta";
+    cta.innerHTML = `
+      <h2>¿Quieres seguir practicando?</h2>
+      <p>Regístrate y prueba <strong>GRATIS 48 horas</strong> todo el temario completo: los 4 bloques oficiales y los 5 temarios de fundamentos, más de 10.600 preguntas. Después, acceso por 2,50€/30 días.</p>
+      <a class="btn btn-primario" href="login.html">Crear mi cuenta gratis →</a>
+      <span class="cebo-footer-link">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></span>
+    `;
+    contenedor.appendChild(cta);
+  </script>
+</body>
+</html>
