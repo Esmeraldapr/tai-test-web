@@ -101,23 +101,45 @@ async function enviarCorreo(destinatario, asunto, html, tokenBaja) {
  * NOTA: esta función todavía no se llama desde ningún sitio — falta decidir
  * con la usuaria si la revisión que decide "corregido: true/false" es
  * automática o pasa antes por su aprobación. */
-async function enviarCorreoIncidencia(destinatario, { mensajeOriginal, corregido, notas }) {
-  const asunto = corregido
-    ? '✅ Hemos corregido la pregunta que reportaste — Oposición TAI'
-    : 'Hemos revisado tu reporte — Oposición TAI';
-  const cuerpo = `
-    <p>¡Hola!</p>
-    <p>Gracias por avisarnos de un posible fallo en una pregunta de la web de Oposición TAI. Tu colaboración nos ayuda a mantener el contenido lo más correcto posible para todas las personas que se preparan la oposición.</p>
-    <p><strong>Lo que reportaste:</strong><br/>${mensajeOriginal || '(sin mensaje adicional)'}</p>
-    <p>${corregido
-      ? 'Hemos revisado la pregunta y <strong>hemos aplicado una corrección</strong>.'
-      : 'Hemos revisado la pregunta y, tras comprobarlo, <strong>no hemos encontrado ningún error que corregir</strong>.'}</p>
-    ${notas ? `<p>${notas}</p>` : ''}
-    <p>¡Gracias de nuevo por tu ayuda!<br/>Oposición TAI</p>
-  `;
-  return enviarCorreo(destinatario, asunto, cuerpo);
+async function enviarCorreo(destinatario, asunto, html, tokenBaja) {
+  if (!RESEND_API_KEY) {
+    console.error('No se ha enviado el correo: falta configurar RESEND_API_KEY.');
+    return false;
+  }
+  // Se envia por la API de Resend (HTTPS) y no por SMTP porque Render bloquea
+  // los puertos de correo (comprobado: timeout tanto en el 587 como en el 465).
+  const cuerpo = {
+    from: REMITENTE,
+    to: [destinatario],
+    subject: asunto,
+    html,
+  };
+  if (tokenBaja) {
+    cuerpo.headers = {
+      'List-Unsubscribe': `<${urlBajaDe(tokenBaja)}>`,
+      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+    };
+  }
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cuerpo),
+    });
+    if (!res.ok) {
+      const detalle = await res.text();
+      console.error('Resend ha rechazado el correo a', destinatario, ':', res.status, detalle);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error('Error enviando correo a', destinatario, ':', e.message);
+    return false;
+  }
 }
-
 // ============================================================
 // Secuencia de correos durante la prueba gratuita
 // ============================================================
