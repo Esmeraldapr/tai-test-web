@@ -10,7 +10,8 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Deben coincidir con lo que usa el backend (server.js) al cobrar de verdad.
 const PRECIO_EUROS = "2.50";
 const DIAS_ACCESO_PAGADO = 30;
-const HORAS_TRIAL = 48;
+const DIAS_TRIAL = 14;
+const HORAS_TRIAL = DIAS_TRIAL * 24;
 
 
 // Logo del buho en base64 (el MCP de GitHub corrompe binarios subidos asi,

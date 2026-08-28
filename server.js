@@ -17,7 +17,8 @@ const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
 const PAYPAL_API_BASE = process.env.PAYPAL_API_BASE || 'https://api-m.paypal.com';
 const PRECIO_EUROS = process.env.PRECIO_EUROS || '2.50';
 const DIAS_ACCESO_PAGADO = 30;
-const HORAS_TRIAL = 48;
+const DIAS_TRIAL = 14;
+const HORAS_TRIAL = DIAS_TRIAL * 24;
 const WEBAPP_URL = process.env.WEBAPP_URL || '';
 const EMAIL_USER = process.env.EMAIL_USER || '';
 const EMAIL_APP_PASSWORD = process.env.EMAIL_APP_PASSWORD || '';
@@ -137,8 +138,8 @@ async function requiereSesion(req, res, next) {
  * (aquí no tenemos acceso al navegador). Se usa para no dejar pagar dos
  * veces seguidas por error a quien ya tiene un acceso de pago vigente.
  * IMPORTANTE: se comprueba primero el PAGO y luego el trial (no al revés).
- * Si se comprobara el trial primero, alguien que paga mientras su trial de
- * 48h todavía no ha terminado seguiría teniendo motivo "trial" en vez de
+ * Si se comprobara el trial primero, alguien que paga mientras su trial
+ * todavía no ha terminado seguiría teniendo motivo "trial" en vez de
  * "pago", y este guardarraíl nunca bloquearía una orden duplicada — dejando
  * pagar dos veces de verdad. Con el pago comprobado primero, en cuanto hay
  * un pago vigente manda sobre el trial. */
