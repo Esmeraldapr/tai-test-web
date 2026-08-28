@@ -49,8 +49,12 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 let transporterCorreo = null;
 if (EMAIL_USER && EMAIL_APP_PASSWORD) {
   transporterCorreo = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: { user: EMAIL_USER, pass: EMAIL_APP_PASSWORD },
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
   });
 } else {
   console.error('EMAIL_USER / EMAIL_APP_PASSWORD no configurados: no se podran enviar correos.');
