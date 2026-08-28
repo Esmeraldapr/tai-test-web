@@ -132,33 +132,19 @@ function envoltorio(contenido, tokenBaja) {
 /** Cada plantilla recibe la fila del usuario y devuelve { asunto, html }. */
 const PLANTILLAS_TRIAL = {
   bienvenida: (u) => ({
-    asunto: 'Ya tienes tus 14 días. Empieza por aquí.',
+    asunto: 'Ya tienes tus 14 días',
     html: envoltorio(`
       <p>¡Hola!</p>
       <p>Tu cuenta ya está activa. Tienes <strong>14 días completos y gratis</strong>, sin tarjeta y sin nada que cancelar después.</p>
-      <p>Si solo vas a hacer una cosa hoy, que sea esta: <strong>haz un test de 20 preguntas del Bloque 2</strong>. No para sacar buena nota, sino para ver por dónde andas. Casi todo el mundo se lleva una sorpresa, y esa sorpresa es justo lo que necesitas para organizar el estudio.</p>
-      ${boton('Hacer mi primer test', 'index.html')}
-      <p>Tres cosas que conviene saber desde el principio:</p>
+      <p>Entra cuando quieras y empieza por donde te venga mejor.</p>
+      ${boton('Entrar en la web', 'index.html')}
+      <p>Dos cosas que conviene saber:</p>
       <ul>
-        <li><strong>Los cuestionarios penalizan como el examen real</strong> (−1/3 por error). Es incómodo al principio, pero es la única forma de aprender cuándo dejar una pregunta en blanco.</li>
-        <li><strong>Tus estadísticas se llenan solas.</strong> A partir del tercer o cuarto test empiezan a decirte cosas útiles.</li>
-        <li><strong>Si ves una pregunta mal, repórtala.</strong> Hay un botón para eso en cada pregunta.</li>
+        <li>Todo lo que falles se guarda en <strong>"Mis fallos"</strong>, para que puedas volver sobre ello. Es la sección que más rinde: una pregunta que fallas y no repasas, la vuelves a fallar en el examen.</li>
+        <li>Si ves una pregunta mal, <strong>repórtala</strong> con el botón que hay en la propia pregunta.</li>
       </ul>
       <p>Cualquier duda, responde a este correo y te leo.</p>
       <p>Mucho ánimo,<br/>Oposición TAI</p>`, u.token_baja),
-  }),
-
-  dia1: (u) => ({
-    asunto: 'El error más caro del TAI (y no es de temario)',
-    html: envoltorio(`
-      <p>¡Hola!</p>
-      <p>Un apunte rápido de tu primer día.</p>
-      <p>El fallo que más puntos cuesta en el TAI no es no sabérselo: es <strong>contestar por intuición preguntas que no dominas</strong>. Con penalización de −1/3, tres dudas falladas se comen una pregunta que sí sabías.</p>
-      <p>La regla que funciona: si no puedes descartar al menos dos opciones, déjala en blanco. Si puedes descartar dos, arriesga.</p>
-      <p>Esto solo se entrena haciendo cuestionarios con penalización, no tests sueltos.</p>
-      ${boton('Hacer un cuestionario', 'cuestionarios.html')}
-      <p>Te quedan 13 días de prueba.</p>
-      <p>Oposición TAI</p>`, u.token_baja),
   }),
 
   dia7: (u) => ({
@@ -166,14 +152,14 @@ const PLANTILLAS_TRIAL = {
     html: envoltorio(`
       <p>¡Hola!</p>
       <p>Estás en el día 7 de tus 14. Buen momento para mirar atrás un segundo.</p>
-      ${boton('Ver mis estadísticas', 'progreso.html')}
-      <p>Ahí tienes tus aciertos por bloque y los temas donde más fallas. Si has hecho unos cuantos tests, el patrón ya se ve: casi siempre hay dos o tres temas concretos que arrastran la media, y no suelen ser los que uno cree.</p>
-      <p><strong>Lo que yo haría esta semana:</strong> coger los dos temas peores y hacer solo tests de esos. Es aburrido, pero es donde está la mejora rápida.</p>
+      ${boton('Ver mi progreso', 'progreso.html')}
+      <p>Ahí tienes tres números: los días seguidos que llevas practicando, cuántos tests has completado y tu porcentaje de acierto. El de la racha es el que más engaña: la constancia rinde más que las sesiones maratonianas de domingo.</p>
+      <p>Si el porcentaje te parece bajo, es normal al principio y no significa nada todavía. Lo que importa es si sube.</p>
       <p>Y si esta semana has estudiado poco, tampoco pasa nada: te quedan 7 días y siguen siendo gratis.</p>
       <p>Oposición TAI</p>`, u.token_baja),
   }),
 
-  dia12: (u) => {
+  final: (u) => {
     const fin = new Date(u.fecha_inicio_trial);
     fin.setDate(fin.getDate() + DIAS_TRIAL);
     const cuando = fin.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
@@ -181,11 +167,11 @@ const PLANTILLAS_TRIAL = {
       asunto: `Tu prueba acaba el ${cuando}`,
       html: envoltorio(`
         <p>¡Hola!</p>
-        <p>Tu prueba gratuita termina el <strong>${cuando}</strong>. Te aviso con antelación para que no te pille de sorpresa.</p>
-        <p>Como no pedimos tarjeta, <strong>no se te va a cobrar nada de forma automática</strong>. El acceso simplemente queda en pausa hasta que decidas. Tu historial y tus estadísticas se quedan guardados.</p>
-        <p>Si quieres seguir, son <strong>${PRECIO_EUROS}€ cada ${DIAS_ACCESO_PAGADO} días</strong>. Sin permanencia. Menos de lo que cuesta un café a la semana, y es lo que sostiene el mantenimiento de las preguntas y la actualización cuando cambia una ley.</p>
+        <p>Tu prueba gratuita termina el <strong>${cuando}</strong>. Te aviso para que no te pille de sorpresa.</p>
+        <p>Como no pedimos tarjeta, <strong>no se te va a cobrar nada de forma automática</strong>. El acceso simplemente queda en pausa hasta que decidas. Tu historial, tus fallos y tus favoritas se quedan guardados.</p>
+        <p>Si quieres seguir, son <strong>${PRECIO_EUROS}€ cada ${DIAS_ACCESO_PAGADO} días</strong>, sin permanencia. Es lo que sostiene el mantenimiento de las preguntas y la actualización cuando cambia una ley.</p>
         ${boton(`Continuar por ${PRECIO_EUROS}€`, 'pago.html')}
-        <p>Y si no es tu momento, de verdad que no pasa nada. Gracias por probarlo. Si vuelves más adelante, tu cuenta te espera tal como la dejaste.</p>
+        <p>Y si no es tu momento, de verdad que no pasa nada. Gracias por probarlo.</p>
         <p>Si decides quedarte o marcharte, me ayudarías mucho contándome en dos líneas qué te ha faltado. Responde a este correo y ya está.</p>
         <p>Mucha suerte con la oposición,<br/>Oposición TAI</p>`, u.token_baja),
     };
@@ -193,11 +179,11 @@ const PLANTILLAS_TRIAL = {
 };
 
 // Días de prueba cumplidos a partir de los cuales toca cada correo.
+// Solo tres en catorce días, a propósito: más cansa y la gente se da de baja.
 const HITOS_TRIAL = [
   { tipo: 'bienvenida', dia: 0 },
-  { tipo: 'dia1', dia: 1 },
   { tipo: 'dia7', dia: 7 },
-  { tipo: 'dia12', dia: 12 },
+  { tipo: 'final', dia: 14 },
 ];
 
 /** Envía como mucho UN correo por persona y ejecución: el hito más avanzado
@@ -234,7 +220,7 @@ async function procesarCorreosTrial(soloEmail) {
     resumen.revisados++;
 
     const dias = (ahora - new Date(u.fecha_inicio_trial).getTime()) / (1000 * 60 * 60 * 24);
-    if (dias > DIAS_TRIAL) continue; // prueba terminada, ya no se le escribe
+    if (dias > DIAS_TRIAL + 1) continue; // margen de un día para que quepa el correo final
 
     const pendientes = HITOS_TRIAL
       .filter((h) => dias >= h.dia && !enviadosSet.has(`${u.auth_user_id}|${h.tipo}`));
