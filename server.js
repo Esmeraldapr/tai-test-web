@@ -66,36 +66,6 @@ function urlBajaDe(tokenBaja) {
   return `${WEBAPP_URL}/baja?t=${tokenBaja}`;
 }
 
-/** Envío genérico. Devuelve true/false en vez de lanzar, para que un fallo con
- * una persona no corte el envío al resto de la lista.
- * Si se pasa tokenBaja, se añade la cabecera List-Unsubscribe: es la que hace
- * que Gmail enseñe su propio botón de "Cancelar suscripción" arriba del correo,
- * y ayuda bastante a que estos envíos no acaben en spam. */
-async function enviarCorreo(destinatario, asunto, html, tokenBaja) {
-  if (!transporterCorreo) {
-    console.error('No se ha enviado el correo: falta configurar EMAIL_USER/EMAIL_APP_PASSWORD.');
-    return false;
-  }
-  const opciones = {
-    from: `"Oposición TAI" <${EMAIL_USER}>`,
-    to: destinatario,
-    subject: asunto,
-    html,
-  };
-  if (tokenBaja) {
-    opciones.headers = {
-      'List-Unsubscribe': `<${urlBajaDe(tokenBaja)}>, <mailto:${EMAIL_USER}?subject=baja>`,
-      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
-    };
-  }
-  try {
-    await transporterCorreo.sendMail(opciones);
-    return true;
-  } catch (e) {
-    console.error('Error enviando correo a', destinatario, ':', e.message);
-    return false;
-  }
-}
 
 /** Manda el correo de vuelta a quien reportó una incidencia.
  * NOTA: esta función todavía no se llama desde ningún sitio — falta decidir
