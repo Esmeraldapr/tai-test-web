@@ -23,6 +23,8 @@ const WEBAPP_URL = process.env.WEBAPP_URL || 'https://tai-test-web.onrender.com'
 const EMAIL_USER = process.env.EMAIL_USER || '';
 const EMAIL_APP_PASSWORD = process.env.EMAIL_APP_PASSWORD || '';
 const CRON_SECRET = process.env.CRON_SECRET || '';
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+const REMITENTE = process.env.REMITENTE || 'Oposición TAI <hola@tai-test.es>';
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !PAYPAL_CLIENT_ID || !PAYPAL_SECRET) {
   console.error('Faltan variables de entorno: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, PAYPAL_CLIENT_ID, PAYPAL_SECRET');
