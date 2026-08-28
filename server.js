@@ -110,7 +110,7 @@ const PLANTILLAS_TRIAL = {
     asunto: 'Ya tienes tus 14 días',
     html: envoltorio(`
       <p>¡Hola!</p>
-      <p>Tu cuenta ya está activa. Tienes <strong>14 días completos y gratis</strong>, sin tarjeta y sin nada que cancelar después.</p>
+      <p>Tu cuenta ya está activa. Tienes <strong>14 días completos y gratis</strong>.</p>
       <p>Entra cuando quieras y empieza por donde te venga mejor.</p>
       ${boton('Entrar en la web', 'index.html')}
       <p>Dos cosas que conviene saber:</p>
@@ -143,7 +143,7 @@ const PLANTILLAS_TRIAL = {
       html: envoltorio(`
         <p>¡Hola!</p>
         <p>Tu prueba gratuita termina el <strong>${cuando}</strong>. Te aviso para que no te pille de sorpresa.</p>
-        <p>Como no pedimos tarjeta, <strong>no se te va a cobrar nada de forma automática</strong>. El acceso simplemente queda en pausa hasta que decidas. Tu historial, tus fallos y tus favoritas se quedan guardados.</p>
+        <p><strong>No se te va a cobrar nada de forma automática</strong>. El acceso simplemente queda en pausa hasta que decidas. Tu historial, tus fallos y tus favoritas se quedan guardados.</p>
         <p>Si quieres seguir, son <strong>${PRECIO_EUROS}€ cada ${DIAS_ACCESO_PAGADO} días</strong>, sin permanencia. Es lo que sostiene el mantenimiento de las preguntas y la actualización cuando cambia una ley.</p>
         ${boton(`Continuar por ${PRECIO_EUROS}€`, 'pago.html')}
         <p>Y si no es tu momento, de verdad que no pasa nada. Gracias por probarlo.</p>
