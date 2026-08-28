@@ -44,11 +44,10 @@ function urlBajaDe(tokenBaja) {
   return `${WEBAPP_URL}/baja?t=${tokenBaja}`;
 }
 
-
-/** Manda el correo de vuelta a quien reportó una incidencia.
- * NOTA: esta función todavía no se llama desde ningún sitio — falta decidir
- * con la usuaria si la revisión que decide "corregido: true/false" es
- * automática o pasa antes por su aprobación. */
+/** Envío genérico de correo por la API de Resend.
+ * Devuelve true/false en vez de lanzar, para que un fallo con una persona no
+ * corte el envío al resto de la lista. Si se pasa tokenBaja, se añade la
+ * cabecera List-Unsubscribe (el botón de "Cancelar suscripción" del correo). */
 async function enviarCorreo(destinatario, asunto, html, tokenBaja) {
   if (!RESEND_API_KEY) {
     console.error('No se ha enviado el correo: falta configurar RESEND_API_KEY.');
