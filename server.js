@@ -275,6 +275,7 @@ app.post('/api/tareas/correos-trial', async (req, res) => {
   procesarCorreosTrial(solo)
     .then((r) => console.log('Secuencia de correos de la prueba:', JSON.stringify(r)))
     .catch((e) => console.error('Error en la secuencia de correos:', e));
+  });
 
 // ---------------- Baja de los correos ----------------
 // Dos pasos a propósito: el enlace del correo solo enseña una página de
