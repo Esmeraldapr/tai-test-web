@@ -56,20 +56,34 @@ if (EMAIL_USER && EMAIL_APP_PASSWORD) {
   console.error('EMAIL_USER / EMAIL_APP_PASSWORD no configurados: no se podran enviar correos.');
 }
 
+function urlBajaDe(tokenBaja) {
+  return `${WEBAPP_URL}/baja?t=${tokenBaja}`;
+}
+
 /** Envío genérico. Devuelve true/false en vez de lanzar, para que un fallo con
- * una persona no corte el envío al resto de la lista. */
-async function enviarCorreo(destinatario, asunto, html) {
+ * una persona no corte el envío al resto de la lista.
+ * Si se pasa tokenBaja, se añade la cabecera List-Unsubscribe: es la que hace
+ * que Gmail enseñe su propio botón de "Cancelar suscripción" arriba del correo,
+ * y ayuda bastante a que estos envíos no acaben en spam. */
+async function enviarCorreo(destinatario, asunto, html, tokenBaja) {
   if (!transporterCorreo) {
     console.error('No se ha enviado el correo: falta configurar EMAIL_USER/EMAIL_APP_PASSWORD.');
     return false;
   }
+  const opciones = {
+    from: `"Oposición TAI" <${EMAIL_USER}>`,
+    to: destinatario,
+    subject: asunto,
+    html,
+  };
+  if (tokenBaja) {
+    opciones.headers = {
+      'List-Unsubscribe': `<${urlBajaDe(tokenBaja)}>, <mailto:${EMAIL_USER}?subject=baja>`,
+      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+    };
+  }
   try {
-    await transporterCorreo.sendMail({
-      from: `"Oposición TAI" <${EMAIL_USER}>`,
-      to: destinatario,
-      subject: asunto,
-      html,
-    });
+    await transporterCorreo.sendMail(opciones);
     return true;
   } catch (e) {
     console.error('Error enviando correo a', destinatario, ':', e.message);
@@ -106,23 +120,23 @@ function boton(texto, ruta) {
   return `<p style="margin:22px 0"><a href="${WEBAPP_URL}/${ruta}" style="background:#7c3aed;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block">${texto}</a></p>`;
 }
 
-function pie() {
-  return `<hr style="border:none;border-top:1px solid #e5e7eb;margin:26px 0" />
-    <p style="color:#6b7280;font-size:13px">Te escribimos porque tienes una cuenta en la web de Oposición TAI. Si prefieres no recibir estos avisos, responde a este correo y dejamos de enviártelos.</p>`;
+function envoltorio(contenido, tokenBaja) {
+  return `<div style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#1f2937;max-width:560px">
+    ${contenido}
+    <hr style="border:none;border-top:1px solid #e5e7eb;margin:26px 0" />
+    <p style="color:#6b7280;font-size:13px">Te escribimos porque tienes una cuenta en la web de Oposición TAI.<br/>
+    <a href="${urlBajaDe(tokenBaja)}" style="color:#6b7280">Darme de baja de estos correos</a></p>
+  </div>`;
 }
 
-function envoltorio(contenido) {
-  return `<div style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#1f2937;max-width:560px">${contenido}${pie()}</div>`;
-}
-
-/** Cada plantilla recibe el usuario y devuelve { asunto, html }. */
+/** Cada plantilla recibe la fila del usuario y devuelve { asunto, html }. */
 const PLANTILLAS_TRIAL = {
-  bienvenida: () => ({
+  bienvenida: (u) => ({
     asunto: 'Ya tienes tus 14 días. Empieza por aquí.',
     html: envoltorio(`
       <p>¡Hola!</p>
       <p>Tu cuenta ya está activa. Tienes <strong>14 días completos y gratis</strong>, sin tarjeta y sin nada que cancelar después.</p>
-      <p>Si solo vas a hacer una cosa hoy, que sea esta: <strong>haz un test de 20 preguntas del Bloque 1</strong>. No para sacar buena nota, sino para ver por dónde andas. Casi todo el mundo se lleva una sorpresa, y esa sorpresa es justo lo que necesitas para organizar el estudio.</p>
+      <p>Si solo vas a hacer una cosa hoy, que sea esta: <strong>haz un test de 20 preguntas del Bloque 2</strong>. No para sacar buena nota, sino para ver por dónde andas. Casi todo el mundo se lleva una sorpresa, y esa sorpresa es justo lo que necesitas para organizar el estudio.</p>
       ${boton('Hacer mi primer test', 'index.html')}
       <p>Tres cosas que conviene saber desde el principio:</p>
       <ul>
@@ -131,10 +145,10 @@ const PLANTILLAS_TRIAL = {
         <li><strong>Si ves una pregunta mal, repórtala.</strong> Hay un botón para eso en cada pregunta.</li>
       </ul>
       <p>Cualquier duda, responde a este correo y te leo.</p>
-      <p>Mucho ánimo,<br/>Oposición TAI</p>`),
+      <p>Mucho ánimo,<br/>Oposición TAI</p>`, u.token_baja),
   }),
 
-  dia1: () => ({
+  dia1: (u) => ({
     asunto: 'El error más caro del TAI (y no es de temario)',
     html: envoltorio(`
       <p>¡Hola!</p>
@@ -144,10 +158,10 @@ const PLANTILLAS_TRIAL = {
       <p>Esto solo se entrena haciendo cuestionarios con penalización, no tests sueltos.</p>
       ${boton('Hacer un cuestionario', 'cuestionarios.html')}
       <p>Te quedan 13 días de prueba.</p>
-      <p>Oposición TAI</p>`),
+      <p>Oposición TAI</p>`, u.token_baja),
   }),
 
-  dia7: () => ({
+  dia7: (u) => ({
     asunto: 'Vas por la mitad de la prueba',
     html: envoltorio(`
       <p>¡Hola!</p>
@@ -156,11 +170,11 @@ const PLANTILLAS_TRIAL = {
       <p>Ahí tienes tus aciertos por bloque y los temas donde más fallas. Si has hecho unos cuantos tests, el patrón ya se ve: casi siempre hay dos o tres temas concretos que arrastran la media, y no suelen ser los que uno cree.</p>
       <p><strong>Lo que yo haría esta semana:</strong> coger los dos temas peores y hacer solo tests de esos. Es aburrido, pero es donde está la mejora rápida.</p>
       <p>Y si esta semana has estudiado poco, tampoco pasa nada: te quedan 7 días y siguen siendo gratis.</p>
-      <p>Oposición TAI</p>`),
+      <p>Oposición TAI</p>`, u.token_baja),
   }),
 
-  dia12: (usuario) => {
-    const fin = new Date(usuario.fecha_inicio_trial);
+  dia12: (u) => {
+    const fin = new Date(u.fecha_inicio_trial);
     fin.setDate(fin.getDate() + DIAS_TRIAL);
     const cuando = fin.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
     return {
@@ -173,7 +187,7 @@ const PLANTILLAS_TRIAL = {
         ${boton(`Continuar por ${PRECIO_EUROS}€`, 'pago.html')}
         <p>Y si no es tu momento, de verdad que no pasa nada. Gracias por probarlo. Si vuelves más adelante, tu cuenta te espera tal como la dejaste.</p>
         <p>Si decides quedarte o marcharte, me ayudarías mucho contándome en dos líneas qué te ha faltado. Responde a este correo y ya está.</p>
-        <p>Mucha suerte con la oposición,<br/>Oposición TAI</p>`),
+        <p>Mucha suerte con la oposición,<br/>Oposición TAI</p>`, u.token_baja),
     };
   },
 };
@@ -189,13 +203,15 @@ const HITOS_TRIAL = [
 /** Envía como mucho UN correo por persona y ejecución: el hito más avanzado
  * que le toque. Los hitos anteriores que se hubiera saltado se marcan como
  * enviados sin mandarlos, para que no le lleguen cuatro correos de golpe a
- * quien lleve ya doce días registrado. */
-async function procesarCorreosTrial() {
-  const resumen = { revisados: 0, enviados: 0, marcados: 0, fallidos: 0 };
+ * quien lleve ya doce días registrado.
+ * Si se pasa soloEmail, solo se escribe a esa dirección: sirve para probar
+ * la secuencia sin molestar a nadie más. */
+async function procesarCorreosTrial(soloEmail) {
+  const resumen = { revisados: 0, enviados: 0, marcados: 0, fallidos: 0, destinatarios: [] };
 
   const { data: usuarios, error } = await supabase
     .from('usuarios_web')
-    .select('auth_user_id, email, fecha_inicio_trial, fecha_expiracion, email_verificado');
+    .select('auth_user_id, email, fecha_inicio_trial, fecha_expiracion, email_verificado, baja_correos, token_baja');
   if (error) {
     console.error('Error leyendo usuarios_web:', error);
     return { error: 'No se ha podido leer la lista de usuarios.' };
@@ -209,9 +225,10 @@ async function procesarCorreosTrial() {
   const ahora = Date.now();
 
   for (const u of usuarios || []) {
-    // Fuera: sin correo, sin confirmar, sin trial arrancado, o ya pagando
-    // (a quien ha pagado no se le manda la secuencia de la prueba).
-    if (!u.email || !u.email_verificado || !u.fecha_inicio_trial) continue;
+    if (soloEmail && u.email !== soloEmail) continue;
+    // Fuera: sin correo, dado de baja, sin confirmar, sin trial arrancado, o
+    // ya pagando (a quien ha pagado no se le manda la secuencia de la prueba).
+    if (!u.email || u.baja_correos || !u.email_verificado || !u.fecha_inicio_trial) continue;
     if (u.fecha_expiracion && new Date(u.fecha_expiracion).getTime() > ahora) continue;
 
     resumen.revisados++;
@@ -233,11 +250,12 @@ async function procesarCorreosTrial() {
     }
 
     const { asunto, html } = PLANTILLAS_TRIAL[aEnviar.tipo](u);
-    const ok = await enviarCorreo(u.email, asunto, html);
+    const ok = await enviarCorreo(u.email, asunto, html, u.token_baja);
     if (ok) {
       await supabase.from('correos_enviados_web')
         .insert({ auth_user_id: u.auth_user_id, tipo: aEnviar.tipo });
       resumen.enviados++;
+      resumen.destinatarios.push(`${u.email} (${aEnviar.tipo})`);
     } else {
       resumen.fallidos++;
     }
@@ -248,12 +266,14 @@ async function procesarCorreosTrial() {
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/health', (req, res) => res.send('OK'));
 
-/** Lo llama una tarea programada de Supabase (pg_cron + pg_net) una vez al día.
+/** Lo llama una tarea diaria de Supabase (pg_cron + pg_net).
  * La clave va en una cabecera y no en la URL, para que no acabe escrita en los
- * registros del servidor ni en el historial de nadie. */
+ * registros del servidor. Admitiendo {"solo":"correo@ejemplo.com"} en el cuerpo
+ * se puede hacer una pasada de prueba a una sola dirección. */
 app.post('/api/tareas/correos-trial', async (req, res) => {
   if (!CRON_SECRET) {
     return res.status(503).json({ error: 'CRON_SECRET no configurado en el servidor.' });
@@ -262,9 +282,50 @@ app.post('/api/tareas/correos-trial', async (req, res) => {
     console.error('Intento de llamada a /api/tareas/correos-trial con clave incorrecta.');
     return res.status(401).json({ error: 'No autorizado.' });
   }
-  const resumen = await procesarCorreosTrial();
+  const solo = req.body && req.body.solo ? String(req.body.solo).trim() : null;
+  const resumen = await procesarCorreosTrial(solo);
   console.log('Secuencia de correos de la prueba:', JSON.stringify(resumen));
   res.json(resumen);
+});
+
+// ---------------- Baja de los correos ----------------
+// Dos pasos a propósito: el enlace del correo solo enseña una página de
+// confirmación, y la baja se aplica al pulsar el botón. Si se diera de baja
+// con solo abrir el enlace, los antivirus y escaneadores de correo que
+// visitan los enlaces automáticamente darían de baja a gente sin querer.
+app.get('/baja', async (req, res) => {
+  const token = req.query.t;
+  if (!token) return res.send(paginaSimple('Falta el código del enlace.'));
+
+  const { data: usuario } = await supabase
+    .from('usuarios_web').select('email, baja_correos').eq('token_baja', token).maybeSingle();
+
+  if (!usuario) return res.send(paginaSimple('Este enlace no es válido.'));
+  if (usuario.baja_correos) {
+    return res.send(paginaSimple('Ya estabas dado de baja. No te enviaremos más correos.'));
+  }
+
+  res.send(paginaSimple(`
+    <p>¿Quieres dejar de recibir los correos de Oposición TAI?</p>
+    <p style="font-size:0.9rem;color:#6b7280">Tu cuenta y tu acceso a la web no se tocan, solo dejamos de escribirte.</p>
+    <form method="POST" action="/baja">
+      <input type="hidden" name="t" value="${token}" />
+      <button type="submit" style="background:#7c3aed;color:#fff;border:none;padding:12px 22px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer">Sí, darme de baja</button>
+    </form>`));
+});
+
+app.post('/baja', async (req, res) => {
+  const token = req.body && req.body.t;
+  if (!token) return res.send(paginaSimple('Falta el código del enlace.'));
+
+  const { data, error } = await supabase
+    .from('usuarios_web').update({ baja_correos: true }).eq('token_baja', token).select('email');
+
+  if (error || !data || !data.length) {
+    console.error('Error dando de baja:', error);
+    return res.send(paginaSimple('No se ha podido completar la baja. Escríbenos y lo hacemos a mano.'));
+  }
+  res.send(paginaSimple('✅ Hecho. No volveremos a escribirte. Tu cuenta sigue igual.'));
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -404,7 +465,7 @@ async function activarAccesoPagado(userId) {
 
 function paginaSimple(mensaje) {
   return `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Oposición TAI</title>
-  <style>body{font-family:sans-serif;background:#f4f7f6;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;padding:20px;text-align:center;}
+  <style>body{font-family:sans-serif;background:#f4f7f6;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:20px;text-align:center;}
   .caja{background:white;padding:30px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);max-width:420px;font-size:1.05rem;color:#2c3e50;}
   a{color:#7c3aed;font-weight:700;}</style>
   </head><body><div class="caja">${mensaje}<br/><br/><a href="/index.html">Volver a la web</a></div></body></html>`;
