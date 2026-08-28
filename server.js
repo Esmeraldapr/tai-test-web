@@ -268,11 +268,13 @@ app.post('/api/tareas/correos-trial', async (req, res) => {
     console.error('Intento de llamada a /api/tareas/correos-trial con clave incorrecta.');
     return res.status(401).json({ error: 'No autorizado.' });
   }
-  const solo = req.body && req.body.solo ? String(req.body.solo).trim() : null;
-  const resumen = await procesarCorreosTrial(solo);
-  console.log('Secuencia de correos de la prueba:', JSON.stringify(resumen));
-  res.json(resumen);
-});
+    const solo = req.body && req.body.solo ? String(req.body.solo).trim() : null;
+  // Contestamos ya y enviamos por detrás: con 18 personas el envío tarda más
+  // de un minuto y la llamada daría timeout antes de terminar.
+  res.json({ aceptado: true });
+  procesarCorreosTrial(solo)
+    .then((r) => console.log('Secuencia de correos de la prueba:', JSON.stringify(r)))
+    .catch((e) => console.error('Error en la secuencia de correos:', e));
 
 // ---------------- Baja de los correos ----------------
 // Dos pasos a propósito: el enlace del correo solo enseña una página de
