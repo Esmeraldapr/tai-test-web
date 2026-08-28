@@ -43,25 +43,6 @@ process.on('unhandledRejection', (err) => {
 // activar el acceso pagado tras confirmar un cobro real.
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-// Envío de correo desde la cuenta propia oposiciontaitest@gmail.com, con una
-// "contraseña de aplicación" de Google (no la contraseña de la cuenta) vía SMTP.
-// La misma cuenta está configurada como SMTP en Supabase para los correos de
-// recuperación de contraseña. Si faltan las variables de entorno, el envío se
-// salta sin tumbar el servidor.
-let transporterCorreo = null;
-if (EMAIL_USER && EMAIL_APP_PASSWORD) {
-  transporterCorreo = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: { user: EMAIL_USER, pass: EMAIL_APP_PASSWORD },
-    connectionTimeout: 15000,
-    greetingTimeout: 15000,
-  });
-} else {
-  console.error('EMAIL_USER / EMAIL_APP_PASSWORD no configurados: no se podran enviar correos.');
-}
-
 function urlBajaDe(tokenBaja) {
   return `${WEBAPP_URL}/baja?t=${tokenBaja}`;
 }
