@@ -278,7 +278,7 @@ app.post('/api/tareas/correos-trial', async (req, res) => {
   const resumen = await procesarCorreosTrial(solo);
   console.log('Secuencia de correos de la prueba:', JSON.stringify(resumen));
   res.json(resumen);
-
+});
 // ---------------- Baja de los correos ----------------
 // Dos pasos a propósito: el enlace del correo solo enseña una página de
 // confirmación, y la baja se aplica al pulsar el botón. Si se diera de baja
