@@ -24,7 +24,7 @@ const ORDEN_MATERIAS = [
   registrarConexion();
 
   if (!usuario.email_verificado) {
-    contenedor.innerHTML = `<div class="vacio"><div class="icono">📧</div>Confirma tu correo (revisa la bandeja de entrada y el spam) para que arranque tu prueba gratuita de ${HORAS_TRIAL} horas.</div>`;
+    contenedor.innerHTML = `<div class="vacio"><div class="icono">📧</div>Confirma tu correo (revisa la bandeja de entrada y el spam) para que arranque tu prueba gratuita de ${DIAS_TRIAL} días.</div>`;
     return;
   }
 
