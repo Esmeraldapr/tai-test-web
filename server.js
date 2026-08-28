@@ -8,7 +8,6 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
-const nodemailer = require('nodemailer');
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -20,8 +19,6 @@ const DIAS_ACCESO_PAGADO = 30;
 const DIAS_TRIAL = 14;
 const HORAS_TRIAL = DIAS_TRIAL * 24;
 const WEBAPP_URL = process.env.WEBAPP_URL || 'https://tai-test-web.onrender.com';
-const EMAIL_USER = process.env.EMAIL_USER || '';
-const EMAIL_APP_PASSWORD = process.env.EMAIL_APP_PASSWORD || '';
 const CRON_SECRET = process.env.CRON_SECRET || '';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const REMITENTE = process.env.REMITENTE || 'Oposición TAI <hola@tai-test.es>';
