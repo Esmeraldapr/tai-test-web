@@ -303,14 +303,25 @@ function siguientePregunta() {
 }
 
 async function pintarResultado() {
-  const pct = total ? Math.round((aciertos / total) * 100) : 0;
+   const pct = total ? Math.round((aciertos / total) * 100) : 0;
   const nSaltadas = preguntasSaltadas.length;
+  // Nota con la penalización real del examen: cada 3 fallos anulan un acierto.
+  // Se calcula sobre TODAS las preguntas del test (incluidas las que se dejan
+  // en blanco), que es como se corrige de verdad.
+  const nFallos = total - aciertos;
+  const totalExamen = total + nSaltadas;
+  const puntos = aciertos - nFallos / 3;
+  const nota = totalExamen ? Math.max(0, (puntos / totalExamen) * 10) : 0;
   document.getElementById("zona-quiz").innerHTML = `
     <div class="quiz-barra"><div style="width:100%"></div></div>
     <div class="pregunta-caja resultado-final">
       <div class="porcentaje">${pct}%</div>
       <p style="font-size:1.1rem;font-weight:700;margin:8px 0 4px">${aciertos} de ${total} correctas</p>
-      ${nSaltadas ? `<p class="meta">⏭️ ${nSaltadas} pregunta${nSaltadas === 1 ? "" : "s"} saltada${nSaltadas === 1 ? "" : "s"} sin responder (no cuenta${nSaltadas === 1 ? "" : "n"} como fallo).</p>` : ""}
+          <p class="meta" style="margin:10px 0">✅ ${aciertos} acertada${aciertos === 1 ? "" : "s"} · ❌ ${nFallos} fallada${nFallos === 1 ? "" : "s"} · ⏭️ ${nSaltadas} en blanco</p>
+      <div style="background:#f4f7f6;border-radius:10px;padding:12px;margin:12px 0">
+        <p style="margin:0;font-size:1.05rem"><strong>Nota con penalización: ${nota.toFixed(2)} / 10</strong></p>
+        <p style="margin:4px 0 0;font-size:0.85rem;color:#6b7280">En el examen real cada 3 fallos anulan un acierto. Las preguntas en blanco no restan.</p>
+      </div>
       <p class="subtitulo">${pct >= 80 ? "¡Excelente trabajo! 🎉" : pct >= 50 ? "Vas por buen camino, sigue practicando 💪" : "Repasa este tema con calma, tú puedes 🙂"}</p>
       <div style="display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap">
         <a href="index.html" class="btn btn-secundario">Volver</a>
