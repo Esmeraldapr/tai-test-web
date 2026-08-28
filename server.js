@@ -19,9 +19,10 @@ const PRECIO_EUROS = process.env.PRECIO_EUROS || '2.50';
 const DIAS_ACCESO_PAGADO = 30;
 const DIAS_TRIAL = 14;
 const HORAS_TRIAL = DIAS_TRIAL * 24;
-const WEBAPP_URL = process.env.WEBAPP_URL || '';
+const WEBAPP_URL = process.env.WEBAPP_URL || 'https://tai-test-web.onrender.com';
 const EMAIL_USER = process.env.EMAIL_USER || '';
 const EMAIL_APP_PASSWORD = process.env.EMAIL_APP_PASSWORD || '';
+const CRON_SECRET = process.env.CRON_SECRET || '';
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !PAYPAL_CLIENT_ID || !PAYPAL_SECRET) {
   console.error('Faltan variables de entorno: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, PAYPAL_CLIENT_ID, PAYPAL_SECRET');
@@ -40,11 +41,11 @@ process.on('unhandledRejection', (err) => {
 // activar el acceso pagado tras confirmar un cobro real.
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-// Envío de correo (agradecimiento a quien reporta una incidencia, avisándole
-// si se ha corregido su reporte o no). Usa una cuenta de Gmail normal con
-// "contraseña de aplicación" (no la contraseña de la cuenta) vía SMTP.
-// Si faltan las variables de entorno, el envío se salta sin tumbar el
-// servidor (igual que con OG_BUHO_BASE64 más abajo).
+// Envío de correo desde la cuenta propia oposiciontaitest@gmail.com, con una
+// "contraseña de aplicación" de Google (no la contraseña de la cuenta) vía SMTP.
+// La misma cuenta está configurada como SMTP en Supabase para los correos de
+// recuperación de contraseña. Si faltan las variables de entorno, el envío se
+// salta sin tumbar el servidor.
 let transporterCorreo = null;
 if (EMAIL_USER && EMAIL_APP_PASSWORD) {
   transporterCorreo = nodemailer.createTransport({
@@ -52,21 +53,35 @@ if (EMAIL_USER && EMAIL_APP_PASSWORD) {
     auth: { user: EMAIL_USER, pass: EMAIL_APP_PASSWORD },
   });
 } else {
-  console.error('EMAIL_USER / EMAIL_APP_PASSWORD no configurados: no se podrán enviar correos de incidencias.');
+  console.error('EMAIL_USER / EMAIL_APP_PASSWORD no configurados: no se podran enviar correos.');
+}
+
+/** Envío genérico. Devuelve true/false en vez de lanzar, para que un fallo con
+ * una persona no corte el envío al resto de la lista. */
+async function enviarCorreo(destinatario, asunto, html) {
+  if (!transporterCorreo) {
+    console.error('No se ha enviado el correo: falta configurar EMAIL_USER/EMAIL_APP_PASSWORD.');
+    return false;
+  }
+  try {
+    await transporterCorreo.sendMail({
+      from: `"Oposición TAI" <${EMAIL_USER}>`,
+      to: destinatario,
+      subject: asunto,
+      html,
+    });
+    return true;
+  } catch (e) {
+    console.error('Error enviando correo a', destinatario, ':', e.message);
+    return false;
+  }
 }
 
 /** Manda el correo de vuelta a quien reportó una incidencia.
- * corregido: true si se ha aplicado un cambio en la pregunta, false si se ha
- * revisado y no hacía falta cambiar nada.
  * NOTA: esta función todavía no se llama desde ningún sitio — falta decidir
  * con la usuaria si la revisión que decide "corregido: true/false" es
- * automática o pasa antes por su aprobación. Cuando se decida, se engancha
- * aquí, tras marcar la incidencia como revisada en incidencias_web. */
+ * automática o pasa antes por su aprobación. */
 async function enviarCorreoIncidencia(destinatario, { mensajeOriginal, corregido, notas }) {
-  if (!transporterCorreo) {
-    console.error('No se ha enviado el correo de incidencia: falta configurar EMAIL_USER/EMAIL_APP_PASSWORD.');
-    return false;
-  }
   const asunto = corregido
     ? '✅ Hemos corregido la pregunta que reportaste — Oposición TAI'
     : 'Hemos revisado tu reporte — Oposición TAI';
@@ -80,24 +95,178 @@ async function enviarCorreoIncidencia(destinatario, { mensajeOriginal, corregido
     ${notas ? `<p>${notas}</p>` : ''}
     <p>¡Gracias de nuevo por tu ayuda!<br/>Oposición TAI</p>
   `;
-  try {
-    await transporterCorreo.sendMail({
-      from: `"Oposición TAI" <${EMAIL_USER}>`,
-      to: destinatario,
-      subject: asunto,
-      html: cuerpo,
-    });
-    return true;
-  } catch (e) {
-    console.error('Error enviando correo de incidencia:', e);
-    return false;
+  return enviarCorreo(destinatario, asunto, cuerpo);
+}
+
+// ============================================================
+// Secuencia de correos durante la prueba gratuita
+// ============================================================
+
+function boton(texto, ruta) {
+  return `<p style="margin:22px 0"><a href="${WEBAPP_URL}/${ruta}" style="background:#7c3aed;color:#fff;padding:12px 22px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block">${texto}</a></p>`;
+}
+
+function pie() {
+  return `<hr style="border:none;border-top:1px solid #e5e7eb;margin:26px 0" />
+    <p style="color:#6b7280;font-size:13px">Te escribimos porque tienes una cuenta en la web de Oposición TAI. Si prefieres no recibir estos avisos, responde a este correo y dejamos de enviártelos.</p>`;
+}
+
+function envoltorio(contenido) {
+  return `<div style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#1f2937;max-width:560px">${contenido}${pie()}</div>`;
+}
+
+/** Cada plantilla recibe el usuario y devuelve { asunto, html }. */
+const PLANTILLAS_TRIAL = {
+  bienvenida: () => ({
+    asunto: 'Ya tienes tus 14 días. Empieza por aquí.',
+    html: envoltorio(`
+      <p>¡Hola!</p>
+      <p>Tu cuenta ya está activa. Tienes <strong>14 días completos y gratis</strong>, sin tarjeta y sin nada que cancelar después.</p>
+      <p>Si solo vas a hacer una cosa hoy, que sea esta: <strong>haz un test de 20 preguntas del Bloque 1</strong>. No para sacar buena nota, sino para ver por dónde andas. Casi todo el mundo se lleva una sorpresa, y esa sorpresa es justo lo que necesitas para organizar el estudio.</p>
+      ${boton('Hacer mi primer test', 'index.html')}
+      <p>Tres cosas que conviene saber desde el principio:</p>
+      <ul>
+        <li><strong>Los cuestionarios penalizan como el examen real</strong> (−1/3 por error). Es incómodo al principio, pero es la única forma de aprender cuándo dejar una pregunta en blanco.</li>
+        <li><strong>Tus estadísticas se llenan solas.</strong> A partir del tercer o cuarto test empiezan a decirte cosas útiles.</li>
+        <li><strong>Si ves una pregunta mal, repórtala.</strong> Hay un botón para eso en cada pregunta.</li>
+      </ul>
+      <p>Cualquier duda, responde a este correo y te leo.</p>
+      <p>Mucho ánimo,<br/>Oposición TAI</p>`),
+  }),
+
+  dia1: () => ({
+    asunto: 'El error más caro del TAI (y no es de temario)',
+    html: envoltorio(`
+      <p>¡Hola!</p>
+      <p>Un apunte rápido de tu primer día.</p>
+      <p>El fallo que más puntos cuesta en el TAI no es no sabérselo: es <strong>contestar por intuición preguntas que no dominas</strong>. Con penalización de −1/3, tres dudas falladas se comen una pregunta que sí sabías.</p>
+      <p>La regla que funciona: si no puedes descartar al menos dos opciones, déjala en blanco. Si puedes descartar dos, arriesga.</p>
+      <p>Esto solo se entrena haciendo cuestionarios con penalización, no tests sueltos.</p>
+      ${boton('Hacer un cuestionario', 'cuestionarios.html')}
+      <p>Te quedan 13 días de prueba.</p>
+      <p>Oposición TAI</p>`),
+  }),
+
+  dia7: () => ({
+    asunto: 'Vas por la mitad de la prueba',
+    html: envoltorio(`
+      <p>¡Hola!</p>
+      <p>Estás en el día 7 de tus 14. Buen momento para mirar atrás un segundo.</p>
+      ${boton('Ver mis estadísticas', 'progreso.html')}
+      <p>Ahí tienes tus aciertos por bloque y los temas donde más fallas. Si has hecho unos cuantos tests, el patrón ya se ve: casi siempre hay dos o tres temas concretos que arrastran la media, y no suelen ser los que uno cree.</p>
+      <p><strong>Lo que yo haría esta semana:</strong> coger los dos temas peores y hacer solo tests de esos. Es aburrido, pero es donde está la mejora rápida.</p>
+      <p>Y si esta semana has estudiado poco, tampoco pasa nada: te quedan 7 días y siguen siendo gratis.</p>
+      <p>Oposición TAI</p>`),
+  }),
+
+  dia12: (usuario) => {
+    const fin = new Date(usuario.fecha_inicio_trial);
+    fin.setDate(fin.getDate() + DIAS_TRIAL);
+    const cuando = fin.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+    return {
+      asunto: `Tu prueba acaba el ${cuando}`,
+      html: envoltorio(`
+        <p>¡Hola!</p>
+        <p>Tu prueba gratuita termina el <strong>${cuando}</strong>. Te aviso con antelación para que no te pille de sorpresa.</p>
+        <p>Como no pedimos tarjeta, <strong>no se te va a cobrar nada de forma automática</strong>. El acceso simplemente queda en pausa hasta que decidas. Tu historial y tus estadísticas se quedan guardados.</p>
+        <p>Si quieres seguir, son <strong>${PRECIO_EUROS}€ cada ${DIAS_ACCESO_PAGADO} días</strong>. Sin permanencia. Menos de lo que cuesta un café a la semana, y es lo que sostiene el mantenimiento de las preguntas y la actualización cuando cambia una ley.</p>
+        ${boton(`Continuar por ${PRECIO_EUROS}€`, 'pago.html')}
+        <p>Y si no es tu momento, de verdad que no pasa nada. Gracias por probarlo. Si vuelves más adelante, tu cuenta te espera tal como la dejaste.</p>
+        <p>Si decides quedarte o marcharte, me ayudarías mucho contándome en dos líneas qué te ha faltado. Responde a este correo y ya está.</p>
+        <p>Mucha suerte con la oposición,<br/>Oposición TAI</p>`),
+    };
+  },
+};
+
+// Días de prueba cumplidos a partir de los cuales toca cada correo.
+const HITOS_TRIAL = [
+  { tipo: 'bienvenida', dia: 0 },
+  { tipo: 'dia1', dia: 1 },
+  { tipo: 'dia7', dia: 7 },
+  { tipo: 'dia12', dia: 12 },
+];
+
+/** Envía como mucho UN correo por persona y ejecución: el hito más avanzado
+ * que le toque. Los hitos anteriores que se hubiera saltado se marcan como
+ * enviados sin mandarlos, para que no le lleguen cuatro correos de golpe a
+ * quien lleve ya doce días registrado. */
+async function procesarCorreosTrial() {
+  const resumen = { revisados: 0, enviados: 0, marcados: 0, fallidos: 0 };
+
+  const { data: usuarios, error } = await supabase
+    .from('usuarios_web')
+    .select('auth_user_id, email, fecha_inicio_trial, fecha_expiracion, email_verificado');
+  if (error) {
+    console.error('Error leyendo usuarios_web:', error);
+    return { error: 'No se ha podido leer la lista de usuarios.' };
   }
+
+  const { data: yaEnviados } = await supabase
+    .from('correos_enviados_web')
+    .select('auth_user_id, tipo');
+  const enviadosSet = new Set((yaEnviados || []).map((c) => `${c.auth_user_id}|${c.tipo}`));
+
+  const ahora = Date.now();
+
+  for (const u of usuarios || []) {
+    // Fuera: sin correo, sin confirmar, sin trial arrancado, o ya pagando
+    // (a quien ha pagado no se le manda la secuencia de la prueba).
+    if (!u.email || !u.email_verificado || !u.fecha_inicio_trial) continue;
+    if (u.fecha_expiracion && new Date(u.fecha_expiracion).getTime() > ahora) continue;
+
+    resumen.revisados++;
+
+    const dias = (ahora - new Date(u.fecha_inicio_trial).getTime()) / (1000 * 60 * 60 * 24);
+    if (dias > DIAS_TRIAL) continue; // prueba terminada, ya no se le escribe
+
+    const pendientes = HITOS_TRIAL
+      .filter((h) => dias >= h.dia && !enviadosSet.has(`${u.auth_user_id}|${h.tipo}`));
+    if (!pendientes.length) continue;
+
+    const aEnviar = pendientes[pendientes.length - 1]; // el más avanzado
+    const saltados = pendientes.slice(0, -1);
+
+    for (const s of saltados) {
+      await supabase.from('correos_enviados_web')
+        .insert({ auth_user_id: u.auth_user_id, tipo: s.tipo });
+      resumen.marcados++;
+    }
+
+    const { asunto, html } = PLANTILLAS_TRIAL[aEnviar.tipo](u);
+    const ok = await enviarCorreo(u.email, asunto, html);
+    if (ok) {
+      await supabase.from('correos_enviados_web')
+        .insert({ auth_user_id: u.auth_user_id, tipo: aEnviar.tipo });
+      resumen.enviados++;
+    } else {
+      resumen.fallidos++;
+    }
+  }
+
+  return resumen;
 }
 
 const app = express();
 app.use(express.json());
 
 app.get('/health', (req, res) => res.send('OK'));
+
+/** Lo llama una tarea programada de Supabase (pg_cron + pg_net) una vez al día.
+ * La clave va en una cabecera y no en la URL, para que no acabe escrita en los
+ * registros del servidor ni en el historial de nadie. */
+app.post('/api/tareas/correos-trial', async (req, res) => {
+  if (!CRON_SECRET) {
+    return res.status(503).json({ error: 'CRON_SECRET no configurado en el servidor.' });
+  }
+  if (req.headers['x-cron-secret'] !== CRON_SECRET) {
+    console.error('Intento de llamada a /api/tareas/correos-trial con clave incorrecta.');
+    return res.status(401).json({ error: 'No autorizado.' });
+  }
+  const resumen = await procesarCorreosTrial();
+  console.log('Secuencia de correos de la prueba:', JSON.stringify(resumen));
+  res.json(resumen);
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Imagen para las vistas previas al compartir el enlace (og:image / twitter:image).
