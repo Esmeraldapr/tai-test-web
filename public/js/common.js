@@ -38,7 +38,7 @@ async function obtenerUsuarioWeb(sesion, reintentos = 5) {
 
 /** Calcula si el acceso (trial o pago) está vigente, igual que la base de datos.
  * IMPORTANTE: se comprueba primero el PAGO y luego el trial (no al revés). Si
- * se comprobara el trial primero, alguien que paga mientras su trial de 48h
+ * se comprobara el trial primero, alguien que paga mientras su trial gratuito
  * todavía no ha terminado seguiría viendo motivo "trial" en vez de "pago", y
  * el aviso de "ya tienes acceso, no pagues otra vez" (pago.html) nunca
  * saltaría — permitiendo un pago duplicado real. Con el pago comprobado
@@ -66,6 +66,21 @@ async function cerrarSesion() {
   await sb.auth.signOut();
   window.location.href = "login.html";
 }
+
+/** Enlace de "¿Has olvidado tu contraseña?" en la pantalla de entrar.
+ * Se pinta desde aquí y no dentro de login.html porque common.js ya se carga
+ * en esa página, y así el enlace vive en un único sitio. Solo aparece si
+ * existe el formulario de entrar, es decir, solo en login.html. */
+document.addEventListener("DOMContentLoaded", () => {
+  const formEntrar = document.getElementById("form-entrar");
+  if (!formEntrar || document.getElementById("enlace-olvide")) return;
+  const parrafo = document.createElement("p");
+  parrafo.style.textAlign = "center";
+  parrafo.style.marginTop = "14px";
+  parrafo.style.fontSize = "0.9rem";
+  parrafo.innerHTML = `<a id="enlace-olvide" href="recuperar.html">¿Has olvidado tu contraseña?</a>`;
+  formEntrar.appendChild(parrafo);
+});
 
 const NAV_ITEMS = [
   { href: "index.html", icono: "🏠", texto: "Dashboard" },
@@ -112,7 +127,7 @@ function pintarBannerAcceso(usuario) {
   if (!el) return;
   if (!usuario.email_verificado) {
     el.className = "sidebar-acceso";
-    el.innerHTML = `📧 Confirma tu correo para empezar tu prueba de ${HORAS_TRIAL}h`;
+    el.innerHTML = `📧 Confirma tu correo para empezar tu prueba de ${DIAS_TRIAL} días`;
     return;
   }
   const acceso = calcularAcceso(usuario);

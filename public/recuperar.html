@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recuperar contraseña · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="tarjeta-login">
+    <div class="logo"><img id="logo-buho" alt="Oposición TAI" class="logo-buho" /></div>
+    <h1>Oposición TAI</h1>
+    <p class="subtitulo" id="subtitulo">Recuperar contraseña</p>
+
+    <div id="mensaje"></div>
+
+    <!-- Paso 1: la persona no viene de un enlace de recuperación, así que le
+         pedimos el correo y le mandamos el mensaje. -->
+    <form id="form-pedir" style="display:none">
+      <p class="subtitulo">Escribe tu correo y te enviamos un enlace para crear una contraseña nueva.</p>
+      <div class="campo">
+        <label>Correo electrónico</label>
+        <input type="email" id="pedir-email" required autocomplete="email" />
+      </div>
+      <button type="submit" class="btn btn-primario btn-bloque" id="btn-pedir">Enviarme el enlace</button>
+      <p style="text-align:center;margin-top:14px"><a href="login.html">Volver a entrar</a></p>
+    </form>
+
+    <!-- Paso 2: viene del enlace del correo (o ya tiene sesión abierta), así
+         que aquí sí puede escribir la contraseña nueva. -->
+    <form id="form-nueva" style="display:none">
+      <p class="subtitulo">Escribe tu contraseña nueva.</p>
+      <div class="campo">
+        <label>Contraseña nueva</label>
+        <div class="campo-pass">
+          <input type="password" id="nueva-pass" required minlength="6" autocomplete="new-password" />
+          <button type="button" class="btn-ojo" data-objetivo="nueva-pass">👁️</button>
+        </div>
+      </div>
+      <div class="campo">
+        <label>Repítela</label>
+        <div class="campo-pass">
+          <input type="password" id="nueva-pass2" required minlength="6" autocomplete="new-password" />
+          <button type="button" class="btn-ojo" data-objetivo="nueva-pass2">👁️</button>
+        </div>
+      </div>
+      <div id="aviso-coincide" class="aviso-coincide"></div>
+      <button type="submit" class="btn btn-primario btn-bloque" id="btn-guardar">Guardar contraseña</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script>
+    // El logo y el favicon se ponen desde JS para no repetir el base64 del
+    // búho en otro archivo más: ya vive una sola vez en config.js (LOGO_BUHO).
+    document.getElementById("logo-buho").src = LOGO_BUHO;
+    const favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.type = "image/jpeg";
+    favicon.href = LOGO_BUHO;
+    document.head.appendChild(favicon);
+
+    const mensaje = document.getElementById("mensaje");
+    const formPedir = document.getElementById("form-pedir");
+    const formNueva = document.getElementById("form-nueva");
+    const subtitulo = document.getElementById("subtitulo");
+
+    function mostrarError(texto) { mensaje.innerHTML = `<div class="mensaje-error">${texto}</div>`; }
+    function mostrarOk(texto) { mensaje.innerHTML = `<div class="mensaje-ok">${texto}</div>`; }
+    function limpiarMensaje() { mensaje.innerHTML = ""; }
+
+    // Botón del ojo para ver la contraseña, igual que en login.html
+    document.addEventListener("click", (e) => {
+      const ojo = e.target.closest(".btn-ojo");
+      if (!ojo) return;
+      const campo = document.getElementById(ojo.dataset.objetivo);
+      if (!campo) return;
+      campo.type = campo.type === "password" ? "text" : "password";
+    });
+
+    /** Decide qué formulario se enseña.
+     * Se llega aquí de dos maneras: pinchando "he olvidado mi contraseña"
+     * desde el login (no hay sesión, hay que pedir el correo), o desde el
+     * enlace que llega por correo (Supabase deja una sesión temporal de
+     * recuperación, y entonces ya se puede escribir la contraseña nueva). */
+    async function decidirModo() {
+      const params = new URLSearchParams(window.location.search);
+      const codigo = params.get("code");
+      const errorEnlace = params.get("error_description") ||
+        new URLSearchParams(window.location.hash.replace(/^#/, "")).get("error_description");
+
+      if (errorEnlace) {
+        // Enlace caducado o ya usado: Supabase lo devuelve en la propia URL.
+        formPedir.style.display = "block";
+        mostrarError("Ese enlace ya no vale (los enlaces caducan al cabo de un rato o si ya se han usado). Pide uno nuevo aquí abajo.");
+        return;
+      }
+
+      // Flujo PKCE: Supabase manda ?code= y hay que canjearlo por la sesión.
+      if (codigo) {
+        const { error } = await sb.auth.exchangeCodeForSession(codigo);
+        if (error) {
+          formPedir.style.display = "block";
+          mostrarError("Ese enlace ya no vale. Pide uno nuevo aquí abajo.");
+          return;
+        }
+      }
+
+      const { data } = await sb.auth.getSession();
+      if (data && data.session) {
+        subtitulo.textContent = "Elige una contraseña nueva";
+        formNueva.style.display = "block";
+      } else {
+        formPedir.style.display = "block";
+      }
+    }
+
+    // Por si la sesión de recuperación llega después de la comprobación de
+    // arriba (el token viaja en el # y supabase-js lo procesa de forma asíncrona).
+    sb.auth.onAuthStateChange((evento) => {
+      if (evento === "PASSWORD_RECOVERY" || evento === "SIGNED_IN") {
+        formPedir.style.display = "none";
+        subtitulo.textContent = "Elige una contraseña nueva";
+        formNueva.style.display = "block";
+      }
+    });
+
+    formPedir.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      limpiarMensaje();
+      const email = document.getElementById("pedir-email").value.trim();
+      const boton = document.getElementById("btn-pedir");
+      boton.disabled = true;
+      boton.textContent = "Enviando...";
+
+      const { error } = await sb.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + "/recuperar.html",
+      });
+
+      boton.disabled = false;
+      boton.textContent = "Enviarme el enlace";
+
+      if (error) {
+        mostrarError("No se ha podido enviar: " + error.message);
+        return;
+      }
+      // A propósito no decimos si el correo existe o no, para no revelar
+      // quién tiene cuenta en la web a quien vaya probando direcciones.
+      formPedir.style.display = "none";
+      mostrarOk("Si ese correo tiene cuenta, te acaba de llegar un mensaje con el enlace. Revisa también la carpeta de spam. El enlace caduca en una hora.");
+    });
+
+    const pass1 = document.getElementById("nueva-pass");
+    const pass2 = document.getElementById("nueva-pass2");
+    const avisoCoincide = document.getElementById("aviso-coincide");
+
+    function comprobarCoinciden() {
+      if (!pass2.value) { avisoCoincide.textContent = ""; return false; }
+      const iguales = pass1.value === pass2.value;
+      avisoCoincide.textContent = iguales ? "✓ Coinciden" : "✗ No coinciden";
+      avisoCoincide.style.color = iguales ? "#16a34a" : "#dc2626";
+      return iguales;
+    }
+    pass1.addEventListener("input", comprobarCoinciden);
+    pass2.addEventListener("input", comprobarCoinciden);
+
+    formNueva.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      limpiarMensaje();
+      if (pass1.value !== pass2.value) { mostrarError("Las dos contraseñas no coinciden."); return; }
+      if (pass1.value.length < 6) { mostrarError("La contraseña tiene que tener al menos 6 caracteres."); return; }
+
+      const boton = document.getElementById("btn-guardar");
+      boton.disabled = true;
+      boton.textContent = "Guardando...";
+
+      const { error } = await sb.auth.updateUser({ password: pass1.value });
+
+      boton.disabled = false;
+      boton.textContent = "Guardar contraseña";
+
+      if (error) {
+        mostrarError("No se ha podido guardar: " + error.message);
+        return;
+      }
+      formNueva.style.display = "none";
+      mostrarOk("✅ Contraseña cambiada. Te llevamos a la web...");
+      setTimeout(() => { window.location.href = "index.html"; }, 2000);
+    });
+
+    decidirModo();
+  </script>
+</body>
+</html>
