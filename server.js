@@ -192,7 +192,7 @@ const HITOS_TRIAL = [
  * quien lleve ya doce días registrado.
  * Si se pasa soloEmail, solo se escribe a esa dirección: sirve para probar
  * la secuencia sin molestar a nadie más. */
-async function procesarCorreosTrial(soloEmail) {
+async function procesarCorreosTrial(soloEmail, maximo = 5) {
   const resumen = { revisados: 0, enviados: 0, marcados: 0, fallidos: 0, destinatarios: [] };
 
   const { data: usuarios, error } = await supabase
@@ -210,7 +210,8 @@ async function procesarCorreosTrial(soloEmail) {
 
   const ahora = Date.now();
 
-  for (const u of usuarios || []) {
+    for (const u of usuarios || []) {
+    if (resumen.enviados >= maximo) { resumen.quedan_para_la_proxima = true; break; }
     if (soloEmail && u.email !== soloEmail) continue;
     // Fuera: sin correo, dado de baja, sin confirmar, sin trial arrancado, o
     // ya pagando (a quien ha pagado no se le manda la secuencia de la prueba).
@@ -271,11 +272,12 @@ app.post('/api/tareas/correos-trial', async (req, res) => {
     const solo = req.body && req.body.solo ? String(req.body.solo).trim() : null;
   // Contestamos ya y enviamos por detrás: con 18 personas el envío tarda más
   // de un minuto y la llamada daría timeout antes de terminar.
-  res.json({ aceptado: true });
-  procesarCorreosTrial(solo)
-    .then((r) => console.log('Secuencia de correos de la prueba:', JSON.stringify(r)))
-    .catch((e) => console.error('Error en la secuencia de correos:', e));
-  });
+  // Esperamos a terminar antes de contestar: en el plan gratuito de Render el
+  // proceso se suspende en cuanto la peticion termina, asi que lo que se deje
+  // "para despues" no llega a ejecutarse. Por eso van tandas cortas.
+  const resumen = await procesarCorreosTrial(solo);
+  console.log('Secuencia de correos de la prueba:', JSON.stringify(resumen));
+  res.json(resumen);
 
 // ---------------- Baja de los correos ----------------
 // Dos pasos a propósito: el enlace del correo solo enseña una página de
