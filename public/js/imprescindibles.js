@@ -59,6 +59,7 @@ function pintarFichas(filas) {
               ${f.puerto ? `<span class="imp-puerto">Puerto ${esc(f.puerto)}</span>` : ""}
               <button class="imp-voz" type="button" data-id="${f.id}" title="Escuchar" aria-label="Escuchar la ficha de ${esc(f.termino)}">🔊</button>
             </div>
+            ${f.siglas ? `<div class="imp-siglas">${esc(f.siglas)}</div>` : ""}
             <p class="imp-definicion">${esc(f.definicion)}</p>
             ${f.nota ? `<p class="imp-nota">${esc(f.nota)}</p>` : ""}
           </article>`).join("")}
@@ -69,7 +70,9 @@ function pintarFichas(filas) {
     btn.addEventListener("click", () => {
       const ficha = TODAS.find((f) => String(f.id) === btn.dataset.id);
       if (!ficha) return;
-      const partes = [ficha.termino, ficha.definicion];
+      const partes = [ficha.termino];
+      if (ficha.siglas) partes.push(ficha.siglas);
+      partes.push(ficha.definicion);
       if (ficha.puerto) partes.push(`Puerto ${ficha.puerto}`);
       if (ficha.nota) partes.push(ficha.nota);
       leerTexto(partes.join(". "), btn);
@@ -83,7 +86,7 @@ function aplicarFiltros() {
   const filtradas = TODAS.filter((f) => {
     if (bloque && f.materia !== bloque) return false;
     if (!texto) return true;
-    return [f.termino, f.definicion, f.nota, f.puerto, f.tema]
+    return [f.termino, f.siglas, f.definicion, f.nota, f.puerto, f.tema]
       .some((v) => v && String(v).toLowerCase().includes(texto));
   });
   pintarFichas(filtradas);
@@ -93,7 +96,7 @@ async function cargarImprescindibles() {
   const zona = document.getElementById("zona-imprescindibles");
   const { data, error } = await sb
     .from("imprescindibles_web")
-    .select("id, materia, tema, termino, definicion, nota, puerto")
+    .select("id, materia, tema, termino, siglas, definicion, nota, puerto")
     .eq("activa", true)
     .order("materia")
     .order("tema")
