@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Los imprescindibles · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  /* Estilos propios de esta página. Se usan colores translúcidos a propósito
+     para que funcionen igual sobre fondo claro u oscuro sin tocar style.css. */
+  .imp-filtros { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; }
+  .imp-filtros input, .imp-filtros select {
+    padding: 10px 12px; border-radius: 10px; font-size: 0.95rem;
+    border: 1px solid rgba(128,128,128,0.35); background: rgba(128,128,128,0.06);
+    color: inherit; font-family: inherit;
+  }
+  .imp-filtros input { flex: 1 1 240px; }
+  .imp-contador { font-size: 0.85rem; opacity: 0.7; margin-bottom: 16px; }
+  .imp-tema { margin-top: 26px; }
+  .imp-tema h2 {
+    font-size: 1.05rem; margin: 0 0 4px; padding-bottom: 6px;
+    border-bottom: 1px solid rgba(128,128,128,0.25);
+  }
+  .imp-tema .imp-bloque { font-size: 0.78rem; opacity: 0.65; margin-bottom: 12px; }
+  .imp-fichas { display: grid; gap: 12px; }
+  .imp-ficha {
+    border: 1px solid rgba(128,128,128,0.28); border-radius: 12px;
+    padding: 14px 16px; background: rgba(128,128,128,0.05);
+  }
+  .imp-cabecera { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .imp-termino { font-weight: 700; font-size: 1.05rem; }
+  .imp-puerto {
+    font-size: 0.8rem; padding: 2px 9px; border-radius: 999px;
+    border: 1px solid rgba(128,128,128,0.4); opacity: 0.9; white-space: nowrap;
+  }
+  .imp-voz {
+    margin-left: auto; background: none; border: none; cursor: pointer;
+    font-size: 1.15rem; line-height: 1; padding: 4px; border-radius: 8px;
+  }
+  .imp-voz:hover { background: rgba(128,128,128,0.18); }
+  .imp-definicion { margin: 8px 0 0; line-height: 1.5; }
+  .imp-nota {
+    margin: 10px 0 0; font-size: 0.9rem; line-height: 1.45; opacity: 0.85;
+    border-left: 3px solid rgba(128,128,128,0.35); padding-left: 10px;
+  }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor">
+        <h1>💡 Los imprescindibles</h1>
+        <p class="subtitulo">Los conceptos que más se repiten en el examen, explicados en una o dos frases. Para repasar rápido antes de un test.</p>
+        <div id="banner-acceso"></div>
+        <div class="imp-filtros">
+          <input type="search" id="imp-buscar" placeholder="Buscar concepto, definición o puerto…" autocomplete="off" />
+          <select id="imp-bloque"><option value="">Todos los bloques</option></select>
+        </div>
+        <div class="imp-contador" id="imp-contador"></div>
+        <div id="zona-imprescindibles"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/imprescindibles.js"></script>
+</body>
+</html>
