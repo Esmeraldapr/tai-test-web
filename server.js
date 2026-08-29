@@ -231,7 +231,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/health', (req, res) => res.send('OK'));
-
+// Quien entre por la direccion vieja de Render acaba en el dominio propio.
+// El 301 le dice a Google que es una mudanza definitiva, para que traslade
+// el posicionamiento en vez de tratarlas como dos webs distintas compitiendo.
+app.use((req, res, next) => {
+  const host = req.headers.host || '';
+  if (host.endsWith('.onrender.com')) {
+    return res.redirect(301, `https://tai-test.es${req.originalUrl}`);
+  }
+  next();
+});
 /** Lo llama una tarea diaria de Supabase (pg_cron + pg_net).
  * La clave va en una cabecera y no en la URL, para que no acabe escrita en los
  * registros del servidor. Admitiendo {"solo":"correo@ejemplo.com"} en el cuerpo
