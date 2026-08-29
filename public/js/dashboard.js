@@ -2,6 +2,28 @@
 // Lógica del Dashboard (index.html)
 // ============================================================
 
+/** Añade la tarjeta de "Los imprescindibles" a la rejilla de acciones.
+ * Se pinta desde aquí y no dentro de index.html por el mismo motivo que el
+ * enlace de recuperar contraseña vive en common.js: index.html lleva el logo
+ * en base64 y subirlo entero para añadir seis líneas sale carísimo. Si algún
+ * día se edita index.html a mano, hay que quitar esta función o saldrá la
+ * tarjeta dos veces. */
+function anadirTarjetaImprescindibles() {
+  const rejilla = document.querySelector(".acciones-grid");
+  if (!rejilla || rejilla.querySelector('a[href="imprescindibles.html"]')) return;
+  const tarjeta = document.createElement("a");
+  tarjeta.className = "accion-card";
+  tarjeta.href = "imprescindibles.html";
+  tarjeta.innerHTML = `
+    <div class="accion-icono">💡</div>
+    <h3>Los imprescindibles</h3>
+    <p>Los conceptos que más se repiten en el examen, en fichas rápidas.</p>
+    <span class="accion-flecha">Ver →</span>`;
+  const tutorial = rejilla.querySelector('a[href="tutorial.html"]');
+  if (tutorial && tutorial.nextSibling) rejilla.insertBefore(tarjeta, tutorial.nextSibling);
+  else rejilla.appendChild(tarjeta);
+}
+
 (async function iniciar() {
   const sesion = await exigirSesion();
   if (!sesion) return;
@@ -16,6 +38,7 @@
   pintarSidebar("index.html", usuario);
   pintarBannerAcceso(usuario);
   registrarConexion();
+  anadirTarjetaImprescindibles();
 
   const acceso = calcularAcceso(usuario);
   let textoAcceso = "Caducado";
