@@ -86,6 +86,7 @@ const NAV_ITEMS = [
   { href: "index.html", icono: "🏠", texto: "Dashboard" },
   { href: "tutorial.html", icono: "❔", texto: "Tutorial" },
   { href: "teoria.html", icono: "📖", texto: "Teoría" },
+  { href: "imprescindibles.html", icono: "💡", texto: "Los imprescindibles" },
   { href: "temas.html", icono: "📘", texto: "Repasar Tema" },
   { href: "practica.html", icono: "⚡", texto: "Practicar" },
   { href: "cuestionarios.html", icono: "📝", texto: "Cuestionarios" },
