@@ -11,7 +11,17 @@ const SECCIONES_TUTORIAL = [
   {
     icono: "📘",
     titulo: "Repasar Tema",
-    texto: "Aquí están los 4 bloques del temario oficial y los 5 fundamentos. Pulsa sobre una materia para desplegar sus temas: cada uno te lleva a un test solo de ese tema. También puedes pulsar «Practicar 20 al azar» para un repaso mezclado de toda la materia.",
+    texto: "Aquí están los 4 bloques del temario oficial y los 5 fundamentos. Pulsa «Ver temas» para desplegar los temas de esa materia: cada uno te lleva a un test solo de ese tema. También puedes pulsar «Practicar 20 al azar» para un repaso mezclado de toda la materia.",
+  },
+  {
+    icono: "💡",
+    titulo: "Los imprescindibles",
+    texto: "Fichas breves con los conceptos que más se repiten en el examen: qué es cada cosa, de qué son las siglas y el puerto cuando lo tiene. Están organizadas por bloque y tema, y muchas llevan una nota con el matiz que suele preguntarse o con la diferencia que más se confunde. Úsalas para repasar rápido antes de un test o cuando falle un concepto suelto.",
+  },
+  {
+    icono: "🔎",
+    titulo: "Buscar dentro de Los imprescindibles",
+    texto: "El buscador de arriba mira en todo: el término, las siglas, la definición, la nota y el puerto. Puedes escribir «spanning tree» y te saltará STP, o poner «443» y te saldrá HTTPS. Con el desplegable de al lado te quedas solo con un bloque.",
   },
   {
     icono: "⚡",
@@ -42,6 +52,11 @@ const SECCIONES_TUTORIAL = [
     icono: "🔊",
     titulo: "Escuchar las preguntas",
     texto: "Durante un test, el icono de altavoz 🔊 junto a cada pregunta la lee en voz alta (enunciado y las 4 opciones). Vuelve a pulsarlo para que pare. Pensado para quien le cueste leer en pantalla, como personas con dislexia.",
+  },
+  {
+    icono: "🎧",
+    titulo: "Escuchar Los imprescindibles seguidas",
+    texto: "En Los imprescindibles no hace falta ir dando al altavoz ficha por ficha. Con «Escuchar todo» se leen seguidas todas las que haya en pantalla, y si antes filtras por un bloque, se lee ese bloque entero. Cada tema tiene además su propio botón para escuchar solo ese. La ficha que suena en cada momento se queda resaltada y la página va bajando sola, así que puedes ponerte los cascos y dejarlo correr. Para parar, el mismo botón.",
   },
   {
     icono: "⏭️",
