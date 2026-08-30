@@ -244,3 +244,21 @@ async function desmarcarFavorito(preguntaId) {
   console.log("%cSi has abierto la consola, esto también va contigo: mucho ánimo con la oposición.", estiloTexto);
   console.log("%c¿Has visto algo raro? Cuéntamelo desde Tutorial → Sugerencias.", estiloTexto);
 })();
+// Enlace de salto: primer elemento al pulsar Tab, lleva directo al contenido
+// sin tener que recorrer todo el menú lateral en cada página.
+(function enlaceSaltar() {
+  const destino = document.querySelector(".main-contenido") || document.querySelector(".contenedor");
+  if (!destino) return;
+  if (!destino.id) destino.id = "contenido-principal";
+  destino.setAttribute("tabindex", "-1");
+  const enlace = document.createElement("a");
+  enlace.className = "saltar-contenido";
+  enlace.href = `#${destino.id}`;
+  enlace.textContent = "Saltar al contenido";
+  enlace.addEventListener("click", (e) => {
+    e.preventDefault();
+    destino.focus();
+    destino.scrollIntoView({ block: "start" });
+  });
+  document.body.prepend(enlace);
+})();
