@@ -116,10 +116,10 @@ function pintarPregunta() {
       else if (letra === previo.opcionElegida) clases += " incorrecta";
     }
     return `
-      <div class="${clases}" data-opcion="${letra}">
+      <button type="button" class="${clases}" data-opcion="${letra}" ${respondida ? "disabled" : ""}>
         <span class="letra">${letra.toUpperCase()}</span>
         <span>${op}</span>
-      </div>`;
+            </button>`;
   }).join("");
 
   const explicacionHtml = respondida
