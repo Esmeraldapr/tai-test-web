@@ -75,8 +75,7 @@ const ORDEN_MATERIAS = [
         <div class="materia-cabecera" data-idx="${idx}">
           <div>
             <h2 style="margin-bottom:2px">📘 ${m}</h2>
-            <div class="meta"><span class="chevron" id="chevron-${idx}">▾</span>${info.total} preguntas · ${temas.length} tema${temas.length === 1 ? "" : "s"}</div>
-          </div>
+               <div class="meta"><button class="btn-ver-temas" type="button" id="chevron-${idx}">Ver temas ▾</button>${info.total} preguntas · ${temas.length} tema${temas.length === 1 ? "" : "s"}</div>
           <a class="btn btn-primario" href="quiz.html?materia=${encodeURIComponent(m)}&modo=aleatorio&n=20">Practicar 20 al azar</a>
         </div>
         <div class="temas-lista" id="temas-${idx}">
@@ -92,7 +91,7 @@ const ORDEN_MATERIAS = [
     cab.addEventListener("click", (e) => {
       if (e.target.closest("a")) return;
       document.getElementById(`temas-${cab.dataset.idx}`).classList.toggle("abierta");
-      document.getElementById(`chevron-${cab.dataset.idx}`).classList.toggle("abierto");
+      const btnVer = document.getElementById(`chevron-${cab.dataset.idx}`);       btnVer.classList.toggle("abierto");       btnVer.textContent = btnVer.classList.contains("abierto") ? "Ocultar temas ▴" : "Ver temas ▾";
     });
   });
 })();
