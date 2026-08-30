@@ -76,6 +76,7 @@ const ORDEN_MATERIAS = [
           <div>
             <h2 style="margin-bottom:2px">📘 ${m}</h2>
                <div class="meta"><button class="btn-ver-temas" type="button" id="chevron-${idx}">Ver temas ▾</button>${info.total} preguntas · ${temas.length} tema${temas.length === 1 ? "" : "s"}</div>
+                         </div>
           <a class="btn btn-primario" href="quiz.html?materia=${encodeURIComponent(m)}&modo=aleatorio&n=20">Practicar 20 al azar</a>
         </div>
         <div class="temas-lista" id="temas-${idx}">
