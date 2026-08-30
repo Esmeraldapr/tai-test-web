@@ -93,7 +93,7 @@ function siguienteEnCola() {
   actualizarBotonesLector();
   const u = new SpeechSynthesisUtterance(textoDeFicha(ficha));
   u.lang = "es-ES";
-  u.rate = 0.95;
+  u.rate = typeof VELOCIDAD_VOZ !== "undefined" ? VELOCIDAD_VOZ : 0.95;
   u.onend = () => { lector.indice += 1; siguienteEnCola(); };
   u.onerror = () => { lector.indice += 1; siguienteEnCola(); };
   window.speechSynthesis.speak(u);
