@@ -63,6 +63,16 @@ const SECCIONES_TUTORIAL = [
     titulo: "Pasar una pregunta / Volver atrás",
     texto: "Si una pregunta no la sabes, «Pasar sin responder» te deja seguir sin que cuente como fallo, y al terminar el test puedes repasar las que pasaste. «← Anterior» te permite volver a ver la pregunta de antes.",
   },
+    {
+    icono: "♿",
+    titulo: "Accesibilidad: usar la web sin ratón",
+    texto: "La web entera se puede manejar con el teclado. Pulsa el tabulador una vez y aparece arriba el botón «Saltar al contenido», que te lleva directo a lo importante sin recorrer el menú. Dentro del menú lateral te mueves con las flechas arriba y abajo, saltas al contenido con la flecha derecha y vuelves con la izquierda; Inicio y Fin llevan a la primera y a la última opción. En los test, las respuestas se eligen con Intro o con la barra espaciadora. Además, allí donde estés siempre se ve un recuadro morado que indica dónde tienes el foco.",
+  },
+  {
+    icono: "🐢",
+    titulo: "Velocidad de la lectura en voz alta",
+    texto: "En la barra lateral, debajo de tu nombre, hay un selector de velocidad que va de muy lenta a máxima. Se aplica a todo lo que se lee en la web: preguntas, fichas y el propio tutorial. Tu elección se guarda en el navegador, así que la próxima vez que entres seguirá como la dejaste. Si tienes activada la opción de reducir animaciones en tu sistema, la web también la respeta.",
+  },
   {
     icono: "🚩",
     titulo: "Reportar un error",
