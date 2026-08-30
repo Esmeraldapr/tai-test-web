@@ -136,6 +136,19 @@ h2{font-size:1.25rem; margin:0 0 14px;}
 }
 .materia-cabecera:hover .chevron{background:#c4b5fd; box-shadow:0 3px 9px -1px rgba(124,58,237,.5);}
 .materia-cabecera .chevron.abierto{transform:rotate(0deg); background:var(--morado); color:#fff; box-shadow:0 3px 9px -1px rgba(124,58,237,.55);}
+.materia-cabecera .btn-ver-temas{
+  display:inline-flex; align-items:center; gap:5px; flex-shrink:0;
+  padding:6px 14px; margin-right:10px; border:none; border-radius:999px;
+  background:linear-gradient(135deg,var(--morado) 0%,var(--azul) 100%);
+  color:#fff; font-family:inherit; font-size:.78rem; font-weight:700;
+  cursor:pointer; white-space:nowrap;
+  box-shadow:0 2px 8px -2px rgba(124,58,237,.55);
+  transition:filter .2s, box-shadow .2s;
+}
+.materia-cabecera .btn-ver-temas:hover{filter:brightness(1.08); box-shadow:0 4px 12px -2px rgba(124,58,237,.65);}
+@media (max-width:600px){
+  .materia-cabecera .btn-ver-temas{font-size:.72rem; padding:5px 11px; margin-right:7px;}
+}
 .temas-lista{display:none; flex-direction:column; gap:8px; padding:14px 0 0;}
 .temas-lista.abierta{display:flex;}
 .tema-btn{
