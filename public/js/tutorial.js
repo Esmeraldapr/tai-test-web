@@ -91,7 +91,10 @@ const SECCIONES_TUTORIAL = [
     <div class="panel tutorial-item">
       <div class="tutorial-cabecera" data-idx="${idx}">
         <div><span class="tutorial-icono">${s.icono}</span> <strong>${s.titulo}</strong></div>
-        <span class="chevron" id="chevron-tutorial-${idx}">▾</span>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <button class="tut-voz" type="button" data-idx="${idx}" title="Escuchar esta sección" aria-label="Escuchar la sección ${s.titulo}">🔊</button>
+          <span class="chevron" id="chevron-tutorial-${idx}">▾</span>
+        </div>
       </div>
       <div class="tutorial-cuerpo" id="cuerpo-tutorial-${idx}">${s.texto}</div>
     </div>`
@@ -106,9 +109,25 @@ const SECCIONES_TUTORIAL = [
     </div>`;
 
   document.querySelectorAll(".tutorial-cabecera").forEach((cab) => {
-    cab.addEventListener("click", () => {
+    cab.addEventListener("click", (e) => {
+      if (e.target.closest(".tut-voz")) return; // el altavoz no despliega
       document.getElementById(`cuerpo-tutorial-${cab.dataset.idx}`).classList.toggle("abierta");
       document.getElementById(`chevron-tutorial-${cab.dataset.idx}`).classList.toggle("abierto");
+    });
+  });
+
+  // Altavoz de cada sección: abre el cuerpo si estaba cerrado y lo lee entero.
+  document.querySelectorAll(".tut-voz").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const idx = Number(btn.dataset.idx);
+      const s = SECCIONES_TUTORIAL[idx];
+      const cuerpo = document.getElementById(`cuerpo-tutorial-${idx}`);
+      const chevron = document.getElementById(`chevron-tutorial-${idx}`);
+      if (btn.dataset.leyendo !== "1" && !cuerpo.classList.contains("abierta")) {
+        cuerpo.classList.add("abierta");
+        chevron.classList.add("abierto");
+      }
+      leerTexto(`${s.titulo}. ${s.texto}`, btn);
     });
   });
 
