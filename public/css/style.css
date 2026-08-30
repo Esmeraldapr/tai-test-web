@@ -381,7 +381,7 @@ h2{font-size:1.25rem; margin:0 0 14px;}
 }
 .pagina-login .tarjeta-login{
   margin:0; width:100%;
-  background:rgba(255,255,255,.96);
+  background:linear-gradient(160deg, #fbfaff 0%, #f2eefc 55%, #ecebfb 100%);
   box-shadow:0 24px 60px -18px rgba(0,0,0,.6);
   border-color:rgba(255,255,255,.35);
 }
