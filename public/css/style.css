@@ -450,3 +450,12 @@ input:focus-visible,
 
 /* Sección del tutorial que se está leyendo en voz alta. */
 .tutorial-item.sonando{outline:2px solid var(--morado); outline-offset:3px;}
+
+/* Barra de "Escuchar todo": redondeada y separada de lo que viene debajo. */
+.imp-lector{
+  border-radius:999px !important;
+  margin-bottom:22px !important;
+  padding:10px 16px !important;
+  gap:14px !important;
+}
+.imp-btn-lector{border-radius:999px !important;}
