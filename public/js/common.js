@@ -293,3 +293,6 @@ async function desmarcarFavorito(preguntaId) {
     lista[destino].focus();
   });
 })();
+
+
+
