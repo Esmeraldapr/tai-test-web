@@ -392,3 +392,41 @@ h2{font-size:1.25rem; margin:0 0 14px;}
   .pagina-login{background-position:26% center;}
   .pagina-login .tarjeta-login{padding:26px 20px;}
 }
+/* ---- Accesibilidad ---- */
+
+/* Las opciones del test ahora son <button>: hay que devolverles el aspecto
+   que tenían como <div> (fuente heredada, ancho completo, texto a la izquierda). */
+.opcion{
+  width:100%; text-align:left; font-family:inherit; color:inherit;
+  appearance:none; -webkit-appearance:none;
+}
+.opcion[disabled]{cursor:default; opacity:1;}
+
+/* Foco visible en todo lo que se puede enfocar con el tabulador. */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible{
+  outline:3px solid var(--morado);
+  outline-offset:2px;
+  border-radius:6px;
+}
+
+/* Igualar el altavoz del tutorial al redondo del resto de la web. */
+.tut-voz{
+  background:none; border:1px solid var(--borde); border-radius:999px;
+  padding:3px 11px; font-size:.85rem; cursor:pointer; flex-shrink:0; line-height:1.5;
+}
+.tut-voz:hover{border-color:var(--morado); background:#efecfd;}
+
+/* Respetar a quien pide menos animación en su sistema. */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
