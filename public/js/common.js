@@ -311,3 +311,38 @@ document.addEventListener("keydown", (e) => {
   e.preventDefault();
   lista[destino].focus();
 });
+
+
+// ---------------- Velocidad de la lectura en voz alta ----------------
+// Se guarda en el navegador y vale para toda la web. Si el navegador no deja
+// guardar (modo privado, permisos), sigue funcionando pero sin recordarla.
+let VELOCIDAD_VOZ = 0.95;
+try {
+  const guardada = parseFloat(localStorage.getItem("tai_velocidad_voz"));
+  if (guardada >= 0.25 && guardada <= 2) VELOCIDAD_VOZ = guardada;
+} catch (e) { /* sin almacenamiento disponible */ }
+
+function ponerSelectorVelocidad() {
+  const zona = document.querySelector(".sidebar-usuario");
+  if (!zona || document.getElementById("selector-velocidad")) return;
+  const caja = document.createElement("div");
+  caja.className = "caja-velocidad";
+  caja.innerHTML = `
+    <label for="selector-velocidad">🔊 Velocidad de lectura</label>
+    <select id="selector-velocidad">
+      <option value="0.5">Muy lenta (0,5×)</option>
+      <option value="0.75">Lenta (0,75×)</option>
+      <option value="0.95">Normal</option>
+      <option value="1.25">Rápida (1,25×)</option>
+      <option value="1.5">Muy rápida (1,5×)</option>
+      <option value="2">Máxima (2×)</option>
+    </select>`;
+  zona.insertBefore(caja, zona.querySelector("#btn-logout"));
+  const select = caja.querySelector("select");
+  select.value = String(VELOCIDAD_VOZ);
+  select.addEventListener("change", () => {
+    VELOCIDAD_VOZ = parseFloat(select.value);
+    try { localStorage.setItem("tai_velocidad_voz", String(VELOCIDAD_VOZ)); } catch (e) {}
+    detenerLectura();
+  });
+}
