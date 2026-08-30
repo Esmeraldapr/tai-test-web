@@ -430,3 +430,11 @@ input:focus-visible,
     scroll-behavior:auto !important;
   }
 }
+/* Enlace de salto: oculto hasta que se le da el foco con el tabulador. */
+.saltar-contenido{
+  position:absolute; left:-9999px; top:0; z-index:9999;
+  background:var(--morado); color:#fff; font-weight:700; text-decoration:none;
+  padding:11px 18px; border-radius:0 0 12px 0;
+}
+.saltar-contenido:focus{left:0;}
+.main-contenido:focus{outline:none;}
