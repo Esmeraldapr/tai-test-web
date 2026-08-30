@@ -275,31 +275,24 @@ document.addEventListener("keydown", (e) => {
     zona.querySelectorAll('a, button:not([disabled]), input, select, textarea')
   ).filter((el) => el.offsetParent !== null);
 
-  // Saltar de una columna a otra
+  
+    // Saltar de una columna a otra, buscando lo que esté a la misma altura
+  const masCercanoEnVertical = (candidatos, referencia) => {
+    if (!candidatos.length) return null;
+    const y = referencia.getBoundingClientRect().top;
+    return candidatos.reduce((mejor, el) =>
+      Math.abs(el.getBoundingClientRect().top - y) < Math.abs(mejor.getBoundingClientRect().top - y) ? el : mejor
+    );
+  };
   if (enMenu && e.key === "ArrowRight") {
     const contenido = document.querySelector(".main-contenido");
-    const destino = contenido && focoDentro(contenido)[0];
+    const destino = contenido && masCercanoEnVertical(focoDentro(contenido), document.activeElement);
     if (destino) { e.preventDefault(); destino.focus(); }
     return;
   }
   if (enContenido && e.key === "ArrowLeft") {
     const menu = document.querySelector(".sidebar-nav");
-    const activo = menu && (menu.querySelector("a.activo") || menu.querySelector("a"));
-    if (activo) { e.preventDefault(); activo.focus(); }
+    const destino = menu && masCercanoEnVertical(Array.from(menu.querySelectorAll("a")), document.activeElement);
+    if (destino) { e.preventDefault(); destino.focus(); }
     return;
   }
-
-  // Moverse dentro del menú con arriba y abajo
-  if (!enMenu) return;
-  const lista = Array.from(enMenu.querySelectorAll("a"));
-  const actual = lista.indexOf(document.activeElement);
-  if (actual === -1) return;
-  let destino;
-  if (e.key === "ArrowDown") destino = (actual + 1) % lista.length;
-  else if (e.key === "ArrowUp") destino = (actual - 1 + lista.length) % lista.length;
-  else if (e.key === "Home") destino = 0;
-  else if (e.key === "End") destino = lista.length - 1;
-  else return;
-  e.preventDefault();
-  lista[destino].focus();
-});
