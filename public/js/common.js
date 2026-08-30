@@ -117,6 +117,7 @@ function pintarSidebar(activa, usuario) {
   `;
   const btn = document.getElementById("btn-logout");
   if (btn) btn.addEventListener("click", cerrarSesion);
+    ponerSelectorVelocidad();
 }
 
 /** Pinta el aviso de trial/pago, discreto, dentro de la barra lateral
