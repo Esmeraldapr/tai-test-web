@@ -262,22 +262,44 @@ async function desmarcarFavorito(preguntaId) {
   });
   document.body.prepend(enlace);
 })();
-// Navegación del menú lateral con las flechas del teclado.
-// Se escucha en todo el documento porque el menú se pinta después de cargar.
+// Navegación con flechas: arriba y abajo se mueven dentro de la columna,
+// derecha salta del menú al contenido y izquierda vuelve al menú.
 document.addEventListener("keydown", (e) => {
-  if (!["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", "Home", "End"].includes(e.key)) return;
-  const nav = e.target.closest && e.target.closest(".sidebar-nav");
-  if (!nav) return;
-  const lista = Array.from(nav.querySelectorAll("a"));
+  const teclas = ["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"];
+  if (!teclas.includes(e.key)) return;
+  const enMenu = e.target.closest && e.target.closest(".sidebar-nav");
+  const enContenido = e.target.closest && e.target.closest(".main-contenido");
+  if (!enMenu && !enContenido) return;
+
+  const focoDentro = (zona) => Array.from(
+    zona.querySelectorAll('a, button:not([disabled]), input, select, textarea')
+  ).filter((el) => el.offsetParent !== null);
+
+  // Saltar de una columna a otra
+  if (enMenu && e.key === "ArrowRight") {
+    const contenido = document.querySelector(".main-contenido");
+    const destino = contenido && focoDentro(contenido)[0];
+    if (destino) { e.preventDefault(); destino.focus(); }
+    return;
+  }
+  if (enContenido && e.key === "ArrowLeft") {
+    const menu = document.querySelector(".sidebar-nav");
+    const activo = menu && (menu.querySelector("a.activo") || menu.querySelector("a"));
+    if (activo) { e.preventDefault(); activo.focus(); }
+    return;
+  }
+
+  // Moverse dentro del menú con arriba y abajo
+  if (!enMenu) return;
+  const lista = Array.from(enMenu.querySelectorAll("a"));
   const actual = lista.indexOf(document.activeElement);
   if (actual === -1) return;
   let destino;
-  if (e.key === "ArrowDown" || e.key === "ArrowRight") destino = (actual + 1) % lista.length;
-  else if (e.key === "ArrowUp" || e.key === "ArrowLeft") destino = (actual - 1 + lista.length) % lista.length;
+  if (e.key === "ArrowDown") destino = (actual + 1) % lista.length;
+  else if (e.key === "ArrowUp") destino = (actual - 1 + lista.length) % lista.length;
   else if (e.key === "Home") destino = 0;
-  else destino = lista.length - 1;
+  else if (e.key === "End") destino = lista.length - 1;
+  else return;
   e.preventDefault();
-  lista.forEach((a) => { a.tabIndex = -1; });
-  lista[destino].tabIndex = 0;
   lista[destino].focus();
 });
