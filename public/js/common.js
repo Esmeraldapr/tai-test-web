@@ -236,3 +236,11 @@ async function desmarcarFavorito(preguntaId) {
   const { error } = await sb.from("favoritos_web").delete().eq("pregunta_id", preguntaId);
   return !error;
 }
+// Guiño para quien abra la consola.
+(function holaMundo() {
+  const estiloTitulo = "font-size:15px; font-weight:700; color:#7c3aed;";
+  const estiloTexto = "font-size:12px; color:#555;";
+  console.log("%c👋 Hola, mundo.", estiloTitulo);
+  console.log("%cSi has abierto la consola, esto también va contigo: mucho ánimo con la oposición.", estiloTexto);
+  console.log("%c¿Has visto algo raro? Cuéntamelo desde Tutorial → Sugerencias.", estiloTexto);
+})();
