@@ -438,3 +438,12 @@ input:focus-visible,
 }
 .saltar-contenido:focus{left:0;}
 .main-contenido:focus{outline:none;}
+
+/* Selector de velocidad de lectura, en la barra lateral. */
+.caja-velocidad{display:flex; flex-direction:column; gap:5px; margin:10px 0;}
+.caja-velocidad label{font-size:.75rem; opacity:.85;}
+.caja-velocidad select{
+  width:100%; padding:6px 8px; border-radius:8px; font-family:inherit; font-size:.8rem;
+  border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.12); color:inherit;
+}
+.caja-velocidad select option{color:#222;}
