@@ -63,7 +63,7 @@ const SECCIONES_TUTORIAL = [
     titulo: "Pasar una pregunta / Volver atrás",
     texto: "Si una pregunta no la sabes, «Pasar sin responder» te deja seguir sin que cuente como fallo, y al terminar el test puedes repasar las que pasaste. «← Anterior» te permite volver a ver la pregunta de antes.",
   },
-    {
+  {
     icono: "♿",
     titulo: "Accesibilidad: usar la web sin ratón",
     texto: "La web entera se puede manejar con el teclado. Pulsa el tabulador una vez y aparece arriba el botón «Saltar al contenido», que te lleva directo a lo importante sin recorrer el menú. Dentro del menú lateral te mueves con las flechas arriba y abajo, saltas al contenido con la flecha derecha y vuelves con la izquierda; Inicio y Fin llevan a la primera y a la última opción. En los test, las respuestas se eligen con Intro o con la barra espaciadora. Además, allí donde estés siempre se ve un recuadro morado que indica dónde tienes el foco.",
@@ -80,6 +80,55 @@ const SECCIONES_TUTORIAL = [
   },
 ];
 
+// --- Lectura continua del tutorial entero --------------------------------
+// Reproductor propio, igual que en Los imprescindibles: leerTexto() de
+// common.js solo lee un texto y corta lo anterior al empezar.
+const lectorTut = { indice: 0, activo: false };
+
+function actualizarBotonTutorial() {
+  const btn = document.getElementById("tut-btn-todo");
+  const prog = document.getElementById("tut-progreso");
+  if (btn) btn.textContent = lectorTut.activo ? "⏹️ Parar" : "🔊 Escuchar el tutorial entero";
+  if (prog) {
+    prog.textContent = lectorTut.activo
+      ? `Sección ${lectorTut.indice + 1} de ${SECCIONES_TUTORIAL.length}`
+      : "";
+  }
+}
+
+function pararTutorial() {
+  lectorTut.activo = false;
+  lectorTut.indice = 0;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  document.querySelectorAll(".tutorial-item.sonando").forEach((el) => el.classList.remove("sonando"));
+  actualizarBotonTutorial();
+}
+
+function siguienteSeccion() {
+  if (!lectorTut.activo) return;
+  if (lectorTut.indice >= SECCIONES_TUTORIAL.length) {
+    pararTutorial();
+    return;
+  }
+  const idx = lectorTut.indice;
+  const s = SECCIONES_TUTORIAL[idx];
+  document.querySelectorAll(".tutorial-item.sonando").forEach((el) => el.classList.remove("sonando"));
+  const item = document.querySelector(`.tutorial-item[data-item="${idx}"]`);
+  if (item) {
+    item.classList.add("sonando");
+    item.scrollIntoView({ behavior: "smooth", block: "center" });
+    document.getElementById(`cuerpo-tutorial-${idx}`).classList.add("abierta");
+    document.getElementById(`chevron-tutorial-${idx}`).classList.add("abierto");
+  }
+  actualizarBotonTutorial();
+  const u = new SpeechSynthesisUtterance(`${s.titulo}. ${s.texto}`);
+  u.lang = "es-ES";
+  u.rate = typeof VELOCIDAD_VOZ !== "undefined" ? VELOCIDAD_VOZ : 0.95;
+  u.onend = () => { lectorTut.indice += 1; siguienteSeccion(); };
+  u.onerror = () => { lectorTut.indice += 1; siguienteSeccion(); };
+  window.speechSynthesis.speak(u);
+}
+
 (async function iniciar() {
   const sesion = await exigirSesion();
   if (!sesion) return;
@@ -95,10 +144,18 @@ const SECCIONES_TUTORIAL = [
   pintarBannerAcceso(usuario);
   registrarConexion();
 
+  const barra = `
+    <div class="imp-lector">
+      <button class="imp-btn-lector" id="tut-btn-todo" type="button">🔊 Escuchar el tutorial entero</button>
+      <span class="imp-progreso" id="tut-progreso"></span>
+      <span class="imp-progreso">Lee seguidas todas las secciones, de arriba abajo.</span>
+    </div>`;
+
   contenedor.innerHTML =
+    barra +
     SECCIONES_TUTORIAL.map(
       (s, idx) => `
-    <div class="panel tutorial-item">
+    <div class="panel tutorial-item" data-item="${idx}">
       <div class="tutorial-cabecera" data-idx="${idx}">
         <div><span class="tutorial-icono">${s.icono}</span> <strong>${s.titulo}</strong></div>
         <div style="display:flex; align-items:center; gap:10px;">
@@ -129,6 +186,7 @@ const SECCIONES_TUTORIAL = [
   // Altavoz de cada sección: abre el cuerpo si estaba cerrado y lo lee entero.
   document.querySelectorAll(".tut-voz").forEach((btn) => {
     btn.addEventListener("click", () => {
+      if (lectorTut.activo) pararTutorial();
       const idx = Number(btn.dataset.idx);
       const s = SECCIONES_TUTORIAL[idx];
       const cuerpo = document.getElementById(`cuerpo-tutorial-${idx}`);
@@ -141,6 +199,17 @@ const SECCIONES_TUTORIAL = [
     });
   });
 
+  document.getElementById("tut-btn-todo").addEventListener("click", () => {
+    if (lectorTut.activo) { pararTutorial(); return; }
+    if (!window.speechSynthesis) { alert("Tu navegador no admite la lectura en voz alta."); return; }
+    if (typeof detenerLectura === "function") detenerLectura();
+    window.speechSynthesis.cancel();
+    lectorTut.indice = 0;
+    lectorTut.activo = true;
+    siguienteSeccion();
+  });
+
+  window.addEventListener("beforeunload", pararTutorial);
   document.getElementById("btn-enviar-sugerencia").addEventListener("click", enviarSugerencia);
 })();
 
