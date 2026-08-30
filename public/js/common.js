@@ -296,3 +296,18 @@ document.addEventListener("keydown", (e) => {
     if (destino) { e.preventDefault(); destino.focus(); }
     return;
   }
+
+                           // Moverse dentro del menú con arriba y abajo
+  if (!enMenu) return;
+  const lista = Array.from(enMenu.querySelectorAll("a"));
+  const actual = lista.indexOf(document.activeElement);
+  if (actual === -1) return;
+  let destino;
+  if (e.key === "ArrowDown") destino = (actual + 1) % lista.length;
+  else if (e.key === "ArrowUp") destino = (actual - 1 + lista.length) % lista.length;
+  else if (e.key === "Home") destino = 0;
+  else if (e.key === "End") destino = lista.length - 1;
+  else return;
+  e.preventDefault();
+  lista[destino].focus();
+});
