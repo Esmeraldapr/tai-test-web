@@ -263,36 +263,21 @@ async function desmarcarFavorito(preguntaId) {
   document.body.prepend(enlace);
 })();
 // Navegación del menú lateral con las flechas del teclado.
-// El tabulador entra y sale del menú de una vez; dentro, las flechas mueven.
-(function flechasEnMenu() {
-  const nav = document.querySelector(".sidebar-nav");
+// Se escucha en todo el documento porque el menú se pinta después de cargar.
+document.addEventListener("keydown", (e) => {
+  if (!["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", "Home", "End"].includes(e.key)) return;
+  const nav = e.target.closest && e.target.closest(".sidebar-nav");
   if (!nav) return;
-  const enlaces = () => Array.from(nav.querySelectorAll("a"));
-
-  function ordenarTabulacion() {
-    const lista = enlaces();
-    if (!lista.length) return;
-    const activo = lista.find((a) => a.classList.contains("activo")) || lista[0];
-    lista.forEach((a) => { a.tabIndex = a === activo ? 0 : -1; });
-  }
-  ordenarTabulacion();
-
-  nav.addEventListener("keydown", (e) => {
-    const lista = enlaces();
-    const actual = lista.indexOf(document.activeElement);
-    if (actual === -1) return;
-    let destino = null;
-    if (["ArrowDown", "ArrowRight"].includes(e.key)) destino = (actual + 1) % lista.length;
-    else if (["ArrowUp", "ArrowLeft"].includes(e.key)) destino = (actual - 1 + lista.length) % lista.length;
-    else if (e.key === "Home") destino = 0;
-    else if (e.key === "End") destino = lista.length - 1;
-    if (destino === null) return;
-    e.preventDefault();
-    lista.forEach((a) => { a.tabIndex = -1; });
-    lista[destino].tabIndex = 0;
-    lista[destino].focus();
-  });
-})();
-
-
-
+  const lista = Array.from(nav.querySelectorAll("a"));
+  const actual = lista.indexOf(document.activeElement);
+  if (actual === -1) return;
+  let destino;
+  if (e.key === "ArrowDown" || e.key === "ArrowRight") destino = (actual + 1) % lista.length;
+  else if (e.key === "ArrowUp" || e.key === "ArrowLeft") destino = (actual - 1 + lista.length) % lista.length;
+  else if (e.key === "Home") destino = 0;
+  else destino = lista.length - 1;
+  e.preventDefault();
+  lista.forEach((a) => { a.tabIndex = -1; });
+  lista[destino].tabIndex = 0;
+  lista[destino].focus();
+});
