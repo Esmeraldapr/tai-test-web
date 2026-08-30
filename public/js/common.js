@@ -169,7 +169,7 @@ function leerTexto(texto, boton) {
   if (!limpio) return;
   const utterancia = new SpeechSynthesisUtterance(limpio);
   utterancia.lang = "es-ES";
-  utterancia.rate = 0.95;
+   utterancia.rate = VELOCIDAD_VOZ;
   if (boton) {
     boton.dataset.iconoReposo = boton.dataset.iconoReposo || boton.textContent;
     boton.textContent = "⏹️";
