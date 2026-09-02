@@ -459,3 +459,37 @@ input:focus-visible,
   gap:14px !important;
 }
 .imp-btn-lector{border-radius:999px !important;}
+
+/* ---- Barra superior en móvil: dos filas y siempre a la vista ---- */
+@media (max-width:900px){
+  .sidebar{
+    flex-wrap:wrap !important;
+    overflow-x:visible !important;
+    padding:10px 12px !important;
+    gap:8px !important;
+    position:sticky !important; top:0; z-index:50;
+  }
+  .sidebar-marca{order:1; font-size:.95rem; gap:8px;}
+  .sidebar-marca img.logo-buho{width:26px; height:26px;}
+
+  /* Zona de usuario arriba a la derecha, sin desplazarse */
+  .sidebar-usuario{order:2; margin-left:auto !important; gap:8px; font-size:.8rem;}
+  .sidebar-usuario span{max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+  /* Selector de velocidad compacto y siempre visible */
+  .caja-velocidad{flex-direction:row !important; align-items:center; gap:6px; margin:0 !important;}
+  .caja-velocidad label{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%);
+  }
+  .caja-velocidad select{width:auto; max-width:128px; padding:5px 6px; font-size:.75rem;}
+
+  /* Los iconos del menú, en su propia fila y con más superficie para el dedo */
+  .sidebar-nav{
+    order:3; flex:1 0 100%; overflow-x:auto; gap:6px;
+    padding-bottom:2px; -webkit-overflow-scrolling:touch;
+  }
+  .sidebar-nav::-webkit-scrollbar{height:3px;}
+  .sidebar-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25); border-radius:3px;}
+  .nav-link{padding:9px 13px; border-radius:10px;}
+  .nav-icono{font-size:1.15rem;}
+}
