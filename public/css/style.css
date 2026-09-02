@@ -460,36 +460,54 @@ input:focus-visible,
 }
 .imp-btn-lector{border-radius:999px !important;}
 
-/* ---- Barra superior en móvil: dos filas y siempre a la vista ---- */
+
+/* ---- Barra superior en móvil: fina arriba, sesión abajo ---- */
 @media (max-width:900px){
   .sidebar{
     flex-wrap:wrap !important;
     overflow-x:visible !important;
-    padding:10px 12px !important;
-    gap:8px !important;
+    padding:8px 10px !important;
+    gap:6px !important;
     position:sticky !important; top:0; z-index:50;
   }
-  .sidebar-marca{order:1; font-size:.95rem; gap:8px;}
-  .sidebar-marca img.logo-buho{width:26px; height:26px;}
+  .sidebar-marca{order:1; font-size:.9rem; gap:7px;}
+  .sidebar-marca img.logo-buho{width:24px; height:24px;}
 
-  /* Zona de usuario arriba a la derecha, sin desplazarse */
-  .sidebar-usuario{order:2; margin-left:auto !important; gap:8px; font-size:.8rem;}
-  .sidebar-usuario span{max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-
-  /* Selector de velocidad compacto y siempre visible */
-  .caja-velocidad{flex-direction:row !important; align-items:center; gap:6px; margin:0 !important;}
+  /* Altavoz con su flechita, arriba a la derecha */
+  .caja-velocidad{
+    order:2; margin:0 0 0 auto !important;
+    flex-direction:row !important; align-items:center; gap:0;
+  }
   .caja-velocidad label{
     position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%);
   }
-  .caja-velocidad select{width:auto; max-width:128px; padding:5px 6px; font-size:.75rem;}
+  .caja-velocidad select{
+    width:auto; padding:4px 20px 4px 8px; font-size:.9rem; line-height:1;
+    background:rgba(255,255,255,.12) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' fill='none' stroke='white' stroke-width='2'/></svg>") no-repeat right 5px center;
+    background-size:9px; appearance:none; -webkit-appearance:none;
+  }
 
-  /* Los iconos del menú, en su propia fila y con más superficie para el dedo */
+  /* El menú, en su propia fila */
   .sidebar-nav{
-    order:3; flex:1 0 100%; overflow-x:auto; gap:6px;
+    order:3; flex:1 0 100%; overflow-x:auto; gap:5px;
     padding-bottom:2px; -webkit-overflow-scrolling:touch;
   }
   .sidebar-nav::-webkit-scrollbar{height:3px;}
   .sidebar-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25); border-radius:3px;}
-  .nav-link{padding:9px 13px; border-radius:10px;}
-  .nav-icono{font-size:1.15rem;}
+  .nav-link{padding:8px 12px; border-radius:10px;}
+  .nav-icono{font-size:1.1rem;}
+
+  /* Correo, acceso y salir: al final de la página, no arriba */
+  .sidebar-usuario{
+    order:4; flex:1 0 100%; margin:0 !important;
+    flex-direction:row !important; align-items:center; justify-content:space-between;
+    gap:10px; font-size:.75rem;
+    position:fixed; left:0; right:0; bottom:0; z-index:49;
+    padding:7px 12px !important;
+    background:#241f47; border-top:1px solid rgba(255,255,255,.12);
+  }
+  .sidebar-usuario span{max-width:60%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .sidebar-acceso{font-size:.7rem;}
+  .contenedor{padding-bottom:70px !important;}
 }
+
