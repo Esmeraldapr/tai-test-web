@@ -81,7 +81,7 @@ function mezclar(arr) {
     return;
   }
 
-    preguntasSet = mezclar(data || []);
+      preguntasSet = mezclar(data || []);
   if (modo === "tema" && n > 0) preguntasSet = preguntasSet.slice(0, n);
   historial = new Array(preguntasSet.length).fill(null);
 
