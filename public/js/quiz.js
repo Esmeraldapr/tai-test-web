@@ -196,7 +196,7 @@ function saltarPregunta(pregunta) {
 
   
  document.getElementById("btn-siguiente").click();
-
+  }
 async function alternarFavorito(preguntaId) {
   const btn = document.getElementById("btn-favorito");
   btn.disabled = true;
