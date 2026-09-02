@@ -125,6 +125,7 @@ function ponerSelectorNumero() {
     </select>`;
   const destino = cont.querySelector(".subtitulo") || cont.querySelector("h1");
   destino.insertAdjacentElement("afterend", caja);
+  document.getElementById("sel-n-tema").value = nPreguntas();
   document.getElementById("sel-n-tema").addEventListener("change", (e) => {
     window.location.search = `?n=${e.target.value}`;
   });
