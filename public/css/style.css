@@ -511,3 +511,12 @@ input:focus-visible,
   .contenedor{padding-bottom:70px !important;}
 }
 
+/* Selector de preguntas por tema, en Repasar Tema. */
+.caja-n-tema{
+  display:flex; align-items:center; gap:9px; margin:0 0 18px;
+  font-size:.85rem; color:var(--texto-suave);
+}
+.caja-n-tema select{
+  padding:6px 10px; border-radius:9px; border:1.5px solid var(--borde);
+  font-family:inherit; font-size:.85rem; background:#fff; cursor:pointer;
+}
