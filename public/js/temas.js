@@ -109,7 +109,7 @@ function nPreguntas() {
   return new URLSearchParams(window.location.search).get("n") || "20";
 }
 
-function ponerSelectorNumero(repintar) {
+function ponerSelectorNumero() {
   const cont = document.querySelector(".contenedor");
   if (!cont || document.getElementById("sel-n-tema")) return;
   const caja = document.createElement("div");
@@ -118,7 +118,7 @@ function ponerSelectorNumero(repintar) {
     <label for="sel-n-tema">Preguntas por tema:</label>
     <select id="sel-n-tema">
       <option value="10">10</option>
-      <option value="20" selected>20</option>
+            <option value="20">20</option>
       <option value="30">30</option>
       <option value="50">50</option>
       <option value="0">Todas</option>
