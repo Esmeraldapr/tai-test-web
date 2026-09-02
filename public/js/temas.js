@@ -81,7 +81,7 @@ const ORDEN_MATERIAS = [
         </div>
         <div class="temas-lista" id="temas-${idx}">
           ${temas.map(([t, n]) => `
-            <a class="tema-btn" href="quiz.html?materia=${encodeURIComponent(m)}&tema=${encodeURIComponent(t)}&modo=tema">
+                      <a class="tema-btn" href="quiz.html?materia=${encodeURIComponent(m)}&tema=${encodeURIComponent(t)}&modo=tema&n=${nPreguntas()}">
               <span>${t}</span><span class="tema-btn-n">${n}</span>
             </a>`).join("")}
         </div>
