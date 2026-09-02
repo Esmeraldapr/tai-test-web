@@ -194,12 +194,8 @@ function saltarPregunta(pregunta) {
   respondida = true;
   puedeAvanzar = true;
 
-  document.querySelectorAll(".opcion").forEach((o) => o.classList.add("deshabilitada"));
-  document.getElementById("btn-pasar").disabled = true;
-  document.getElementById("zona-explicacion").innerHTML = `
-    <div class="explicacion-caja">⏭️ Pregunta saltada, no cuenta como fallo. Podrás repasarla luego.</div>`;
-  document.getElementById("btn-siguiente").removeAttribute("disabled");
-}
+  
+ document.getElementById("btn-siguiente").click();
 
 async function alternarFavorito(preguntaId) {
   const btn = document.getElementById("btn-favorito");
