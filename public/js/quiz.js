@@ -83,6 +83,7 @@ function mezclar(arr) {
 
       preguntasSet = mezclar(data || []);
   if (modo === "tema" && n > 0) preguntasSet = preguntasSet.slice(0, n);
+    preguntasSet.forEach((q) => { q.orden = mezclar(["a", "b", "c", "d"]); });
   historial = new Array(preguntasSet.length).fill(null);
 
   if (!preguntasSet.length) {
@@ -104,8 +105,8 @@ function pintarPregunta() {
   puedeAvanzar = !!previo;
 
   const pct = Math.round((indice / preguntasSet.length) * 100);
-  const letras = ["a", "b", "c", "d"];
-  const opciones = [p.opcion_a, p.opcion_b, p.opcion_c, p.opcion_d];
+    const letras = p.orden || ["a", "b", "c", "d"];
+   const opciones = letras.map((L) => p["opcion_" + L]);
   const esUltima = indice + 1 >= preguntasSet.length;
 
   const opcionesHtml = opciones.map((op, i) => {
@@ -118,7 +119,7 @@ function pintarPregunta() {
     }
     return `
       <button type="button" class="${clases}" data-opcion="${letra}" ${respondida ? "disabled" : ""}>
-        <span class="letra">${letra.toUpperCase()}</span>
+                  <span class="letra">${"ABCD"[i]}</span>
         <span>${op}</span>
             </button>`;
   }).join("");
@@ -164,7 +165,7 @@ function pintarPregunta() {
   document.getElementById("btn-pasar").addEventListener("click", () => saltarPregunta(p));
   document.getElementById("btn-reportar").addEventListener("click", () => abrirFormularioReporte(p.id));
   document.getElementById("btn-favorito").addEventListener("click", () => alternarFavorito(p.id));
-  document.getElementById("btn-leer").addEventListener("click", () => leerPreguntaCompleta(p, opciones, letras));
+   document.getElementById("btn-leer").addEventListener("click", () => leerPreguntaCompleta(p, opciones, ["a", "b", "c", "d"]));
 }
 
 function anteriorPregunta() {
