@@ -147,7 +147,7 @@ function claveDiaLocal(fecha) {
 
     <div class="panel">
       <h2>Por bloque / fundamento</h2>
-      <canvas id="grafica-bloques" height="${Math.max(90, materiasOrdenadas.length * 34)}"></canvas>
+      <canvas id="grafica-bloques" height="${Math.max(90, materiasOrdenadas.length * 30)}"></canvas>
     </div>
   `;
 
@@ -181,8 +181,8 @@ function claveDiaLocal(fecha) {
         {
           label: "% aciertos",
           data: materiasOrdenadas.map((m) => m.pct),
-          backgroundColor: "#7c6ff0",
-          borderRadius: 8,
+          backgroundColor: ["#7c3aed", "#4fa3e3", "#f59e0b", "#10b981", "#ef4444", "#8b5cf6", "#06b6d4", "#ec4899", "#84cc16"],
+               borderRadius: 6, barThickness: 15, maxBarThickness: 18,
         },
       ],
     },
