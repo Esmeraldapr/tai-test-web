@@ -70,10 +70,8 @@ function mezclar(arr) {
     // en 1000 por Supabase) solo para barajar y quedarse con "n". Esta RPC
     // elige "n" al azar directamente en el servidor.
     ({ data, error } = await sb.rpc("preguntas_aleatorias_web", { p_materia: materiaActual, p_n: n }));
-  } else {
-    let consulta = sb.from("preguntas_quiz").select("*").eq("materia", materiaActual);
-    if (temaActual) consulta = consulta.eq("tema", temaActual);
-    ({ data, error } = await consulta);
+    } else {
+    ({ data, error } = await sb.rpc("preguntas_tema_web", { p_materia: materiaActual, p_tema: temaActual, p_n: n }));
   }
   if (error) {
     console.error(error);
