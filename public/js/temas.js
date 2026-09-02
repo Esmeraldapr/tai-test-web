@@ -96,3 +96,31 @@ const ORDEN_MATERIAS = [
     });
   });
 })();
+
+
+
+// Selector de cuántas preguntas por tema. Se coloca sobre la lista de materias
+// y al cambiarlo se repinta todo para que los enlaces lleven el número nuevo.
+function nPreguntas() {
+  const sel = document.getElementById("sel-n-tema");
+  return sel ? sel.value : "20";
+}
+
+function ponerSelectorNumero(repintar) {
+  const cont = document.querySelector(".contenedor");
+  if (!cont || document.getElementById("sel-n-tema")) return;
+  const caja = document.createElement("div");
+  caja.className = "caja-n-tema";
+  caja.innerHTML = `
+    <label for="sel-n-tema">Preguntas por tema:</label>
+    <select id="sel-n-tema">
+      <option value="10">10</option>
+      <option value="20" selected>20</option>
+      <option value="30">30</option>
+      <option value="50">50</option>
+      <option value="0">Todas</option>
+    </select>`;
+  const destino = cont.querySelector(".subtitulo") || cont.querySelector("h1");
+  destino.insertAdjacentElement("afterend", caja);
+  document.getElementById("sel-n-tema").addEventListener("change", repintar);
+}
