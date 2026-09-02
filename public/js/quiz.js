@@ -195,7 +195,7 @@ function saltarPregunta(pregunta) {
   puedeAvanzar = true;
 
   
- document.getElementById("btn-siguiente").click();
+   siguientePregunta();
   }
 async function alternarFavorito(preguntaId) {
   const btn = document.getElementById("btn-favorito");
