@@ -95,15 +95,18 @@ const ORDEN_MATERIAS = [
       const btnVer = document.getElementById(`chevron-${cab.dataset.idx}`);       btnVer.classList.toggle("abierto");       btnVer.textContent = btnVer.classList.contains("abierto") ? "Ocultar temas ▴" : "Ver temas ▾";
     });
   });
+
+  ponerSelectorNumero();
 })();
+
+
 
 
 
 // Selector de cuántas preguntas por tema. Se coloca sobre la lista de materias
 // y al cambiarlo se repinta todo para que los enlaces lleven el número nuevo.
 function nPreguntas() {
-  const sel = document.getElementById("sel-n-tema");
-  return sel ? sel.value : "20";
+  return new URLSearchParams(window.location.search).get("n") || "20";
 }
 
 function ponerSelectorNumero(repintar) {
@@ -122,5 +125,7 @@ function ponerSelectorNumero(repintar) {
     </select>`;
   const destino = cont.querySelector(".subtitulo") || cont.querySelector("h1");
   destino.insertAdjacentElement("afterend", caja);
-  document.getElementById("sel-n-tema").addEventListener("change", repintar);
+  document.getElementById("sel-n-tema").addEventListener("change", (e) => {
+    window.location.search = `?n=${e.target.value}`;
+  });
 }
