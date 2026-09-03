@@ -333,7 +333,10 @@ async function pintarResultado() {
     // vacía y en Progreso salían como una barra sin nombre. Ahora se guarda el
     // título del repaso, que ya viene en la dirección.
     const tituloRepaso = new URLSearchParams(window.location.search).get("titulo");
-    const materiaGuardada = materiaActual || tituloRepaso || "Repaso";
+    // En mayúsculas solo al guardar, para que en la gráfica de Progreso quede
+    // igual que FUNDAMENTOS 1: INFORMÁTICA y no se mezclen estilos. El título
+    // que se ve en pantalla durante el test sigue escrito normal.
+    const materiaGuardada = materiaActual || (tituloRepaso || "Repaso").toUpperCase();
     const { error } = await sb.from("resultados_web").insert({ materia: materiaGuardada, tema: temaActual, aciertos, total });
     if (error) console.error("Error guardando resultado:", error);
   }
