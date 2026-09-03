@@ -50,6 +50,12 @@
         <p>Texto consolidado del BOE. Solo entran principios, derechos, obligaciones y derechos digitales; el resto va marcado como que no entra.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+            <a class="accion-card" href="ens-311-2022.html">
+        <div class="accion-icono">🛡️</div>
+        <h3>ENS, Esquema Nacional de Seguridad</h3>
+        <p>RD 311/2022. Los 41 artículos y los cuatro anexos, con la tabla de las 72 medidas de seguridad y el glosario buscables.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
