@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ENS, RD 311/2022 · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .ley-fuente { font-size: 0.82rem; opacity: 0.7; margin: 0 0 18px; }
+  .art-epigrafe { font-style: italic; opacity: 0.85; }
+  .articulo-preguntado {
+    border-left: 3px solid rgba(217,119,6,.75); padding-left: 12px;
+    background: rgba(217,119,6,.06); border-radius: 0 8px 8px 0;
+  }
+  .chip.examen { background: rgba(217,119,6,.15); color: #b45309; border: 1px solid rgba(217,119,6,.35); }
+  .aviso-examen { margin: 8px 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .aviso-examen-detalle { font-size: .8rem; opacity: .75; }
+
+  .anexos-titulo { margin: 34px 0 14px; }
+  .anexo { border: 1px solid var(--borde); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
+  .anexo > summary {
+    cursor: pointer; padding: 14px 16px; font-weight: 700; display: flex;
+    align-items: center; gap: 10px; background: rgba(124,111,240,.07);
+  }
+  .anexo > summary:hover { background: rgba(124,111,240,.13); }
+  .anexo[open] > summary { border-bottom: 1px solid var(--borde); }
+  .anexo-cuerpo { padding: 16px; }
+
+  .buscador-medidas { display: flex; align-items: center; gap: 12px; margin: 14px 0; flex-wrap: wrap; }
+  .buscador-medidas input {
+    flex: 1 1 240px; padding: 10px 14px; border-radius: 12px;
+    border: 1px solid var(--borde); font-size: .92rem;
+  }
+
+  .tabla-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tabla-medidas { border-collapse: collapse; width: 100%; font-size: .82rem; min-width: 620px; }
+  .tabla-medidas th, .tabla-medidas td { border: 1px solid #cbd5e1; padding: 6px 9px; text-align: center; }
+  .tabla-medidas thead th { background: #eef2ff; font-weight: 700; }
+  .tabla-medidas .celda-medida { text-align: left; }
+  .tabla-medidas .celda-medida code { font-size: .78rem; opacity: .8; margin-right: 5px; }
+  .fila-familia td { background: #e5e7eb; text-align: left; }
+  /* Mismos colores que la tabla del BOE */
+  .nivel-basica { background: #92d050; }
+  .nivel-media  { background: #ffff66; }
+  .nivel-alta   { background: #ffa64d; }
+  .nivel-na     { background: #fff; opacity: .6; }
+  .dim {
+    display: inline-block; min-width: 17px; margin: 0 1px; padding: 1px 4px;
+    border-radius: 5px; background: rgba(124,111,240,.16); font-weight: 700;
+    text-decoration: none; cursor: help;
+  }
+  .ambito-cat { font-size: .78rem; opacity: .8; }
+
+  .glosario { margin: 0; }
+  .glosario-item { padding: 10px 0; border-bottom: 1px solid var(--borde); }
+  .glosario dt { font-weight: 700; margin-bottom: 4px; }
+  .glosario dd { margin: 0; opacity: .9; }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor constitucion-doc ley-doc">
+        <h1>🛡️ ENS, Esquema Nacional de Seguridad</h1>
+        <p class="subtitulo">
+          Real Decreto 311/2022. Texto consolidado del BOE. Entra entero en el tema 8.
+          Arriba tienes los 7 capítulos con sus 41 artículos; abajo, los cuatro anexos plegados,
+          que se abren solo si los necesitas. El <strong>anexo II</strong> es la tabla de las 72 medidas
+          de seguridad, con los mismos colores del BOE y un buscador. Lo marcado con
+          <span class="chip examen">📌</span> ya ha caído en exámenes oficiales, y ojo: la mitad de
+          esas preguntas salieron de los anexos, no del articulado.
+        </p>
+        <div id="banner-acceso"></div>
+        <div id="ley"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/ens-311-2022.js"></script>
+</body>
+</html>
