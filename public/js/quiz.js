@@ -328,7 +328,13 @@ async function pintarResultado() {
   `;
 
   if (total > 0) {
-    const { error } = await sb.from("resultados_web").insert({ materia: materiaActual, tema: temaActual, aciertos, total });
+    // Los modos "lista" (Mis fallos, Mis favoritas, Preguntas saltadas) no tienen
+    // una materia única, porque mezclan bloques. Antes se guardaban con la materia
+    // vacía y en Progreso salían como una barra sin nombre. Ahora se guarda el
+    // título del repaso, que ya viene en la dirección.
+    const tituloRepaso = new URLSearchParams(window.location.search).get("titulo");
+    const materiaGuardada = materiaActual || tituloRepaso || "Repaso";
+    const { error } = await sb.from("resultados_web").insert({ materia: materiaGuardada, tema: temaActual, aciertos, total });
     if (error) console.error("Error guardando resultado:", error);
   }
 }
