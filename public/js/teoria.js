@@ -44,6 +44,12 @@
         <p>Texto consolidado del BOE. Entra entera en la convocatoria actual, y va marcado qué artículos han caído ya en exámenes oficiales.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+          <a class="accion-card" href="ley3-2018.html">
+        <div class="accion-icono">🔐</div>
+        <h3>LO 3/2018, protección de datos</h3>
+        <p>Texto consolidado del BOE. Solo entran principios, derechos, obligaciones y derechos digitales; el resto va marcado como que no entra.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
