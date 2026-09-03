@@ -37,6 +37,12 @@
         <h3>Constitución Española</h3>
         <p>Texto íntegro de 1978, con indicación de qué títulos entran en la convocatoria actual y lectura en voz alta por título, capítulo y sección.</p>
         <span class="accion-flecha">Leer →</span>
+          </a>
+      <a class="accion-card" href="ley19-2013.html">
+        <div class="accion-icono">🔍</div>
+        <h3>Ley 19/2013, de transparencia</h3>
+        <p>Texto consolidado del BOE. Entra entera en la convocatoria actual, y va marcado qué artículos han caído ya en exámenes oficiales.</p>
+        <span class="accion-flecha">Leer →</span>
       </a>
     </div>
   `;
