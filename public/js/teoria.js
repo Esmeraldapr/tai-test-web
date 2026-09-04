@@ -62,6 +62,12 @@
         <p>RD 4/2010. Los 29 artículos y el glosario, con la lista de Normas Técnicas destacada por ser lo que más cae.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+            <a class="accion-card" href="rd1112-2018.html">
+        <div class="accion-icono">♿</div>
+        <h3>RD 1112/2018, accesibilidad web</h3>
+        <p>Los 20 artículos del decreto que exige que las webs públicas sean accesibles. Es la norma que no ha faltado en ningún examen desde 2019.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
