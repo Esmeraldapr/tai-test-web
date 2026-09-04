@@ -522,8 +522,11 @@ input:focus-visible,
 }
 
 /* ---- Teoría: texto justificado en las cinco normas ---- */
-.constitucion-doc .art-texto,
+/* Va sobre los contenedores de bloque, no sobre .art-texto: ese es un <span>,
+   y text-align no tiene ningun efecto sobre elementos en linea. */
+.constitucion-doc .const-articulo,
 .constitucion-doc .const-disp-item,
+.constitucion-doc .anexo-cuerpo p,
 .constitucion-doc .glosario dd{
   text-align:justify;
   text-justify:inter-word;
