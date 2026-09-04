@@ -520,3 +520,12 @@ input:focus-visible,
   padding:6px 10px; border-radius:9px; border:1.5px solid var(--borde);
   font-family:inherit; font-size:.85rem; background:#fff; cursor:pointer;
 }
+
+/* ---- Teoría: texto justificado en las cinco normas ---- */
+.constitucion-doc .art-texto,
+.constitucion-doc .const-disp-item,
+.constitucion-doc .glosario dd{
+  text-align:justify;
+  text-justify:inter-word;
+  hyphens:auto;
+}
