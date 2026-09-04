@@ -237,6 +237,15 @@ function htmlAnexo(a) {
         ${htmlChipsExamen(caidas, "Ha caído en examen")}
         ${(a.parrafos || []).map((p) => `<p class="art-texto">${escaparHtml(p)}</p>`).join("")}
         ${a.medidas && a.medidas.length ? htmlTablaMedidas(a.medidas) : ""}
+        ${a.imagen ? `<figure class="mapa-wcag">
+          <a href="${escaparHtml(a.imagen.url_ancha || a.imagen.url)}" target="_blank" rel="noopener">
+            <picture>
+              ${a.imagen.url_ancha ? `<source media="(min-width: 800px)" srcset="${escaparHtml(a.imagen.url_ancha)}" />` : ""}
+              <img class="ampliable" src="${escaparHtml(a.imagen.url)}" alt="${escaparHtml(a.imagen.alt)}" loading="lazy" />
+            </picture>
+          </a>
+          <figcaption>${escaparHtml(a.imagen.pie)}</figcaption>
+        </figure>` : ""}
         ${a.terminos && a.terminos.length ? htmlGlosario(a.terminos) : ""}
       </div>
     </details>`;
