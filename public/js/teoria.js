@@ -56,6 +56,12 @@
         <p>RD 311/2022. Los 41 artículos y los cuatro anexos, con la tabla de las 72 medidas de seguridad y el glosario buscables.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+            <a class="accion-card" href="eni-4-2010.html">
+        <div class="accion-icono">🔗</div>
+        <h3>ENI, Esquema Nacional de Interoperabilidad</h3>
+        <p>RD 4/2010. Los 29 artículos y el glosario, con la lista de Normas Técnicas destacada por ser lo que más cae.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
