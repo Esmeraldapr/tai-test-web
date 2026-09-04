@@ -34,7 +34,18 @@ const NORMA_EN_EXAMEN = [
   { anio: "2022", sobre: "qué norma define los requisitos de accesibilidad" },
 ];
 
-const ANEXOS_EN_EXAMEN = {};
+// El apartado de WCAG no es del BOE, lo hemos escrito nosotras, pero es lo que
+// más cae de este tema: cinco preguntas en cinco exámenes, más que el propio
+// decreto, que lleva cuatro.
+const ANEXOS_EN_EXAMEN = {
+  "wcag": [
+    { anio: "2018", sobre: "qué NO es una pauta del principio Perceptible" },
+    { anio: "2019", sobre: "qué busca la pauta Distinguible" },
+    { anio: "2022", sobre: "qué es WCAG" },
+    { anio: "2025/2026", sobre: "usar etiquetas semánticas de HTML5" },
+    { anio: "2025/2026", sobre: "el atributo aria-expanded en un menú desplegable" },
+  ],
+};
 
 const DIMENSIONES = {
   C: "Confidencialidad", I: "Integridad", D: "Disponibilidad",
