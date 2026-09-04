@@ -147,5 +147,92 @@
   "FELIPE R. La Vicepresidenta del Gobierno y Ministra de la Presidencia, Relaciones con las Cortes e Igualdad, CARMEN CALVO POYATO",
   "Este documento es de carácter informativo y no tiene valor jurídico."
  ],
- "anexos": []
+ "anexos": [
+  {
+   "id": "wcag",
+   "titulo": "WCAG: las pautas a las que remite este decreto (apartado nuestro, no del BOE)",
+   "parrafos": [
+    "Este apartado no forma parte del Real Decreto ni del BOE. Está aquí porque el artículo 6 deja el hilo colgando: dice que se presume que cumples si sigues la norma técnica, pero no explica cuál es ni qué pide. Esa cadena es la siguiente: el Real Decreto 1112/2018 traspone la Directiva europea 2016/2102; esa directiva remite a la norma técnica EN 301 549; y esa norma remite a las WCAG 2.1 en su nivel AA. Ese es el listón que tiene que cumplir por ley una web pública española.",
+    "Las WCAG las publica el W3C, el consorcio que define los estándares de la web, a través de su grupo de accesibilidad, la WAI. De ese grupo cuelgan varias normas y conviene no confundirlas, porque el examen ha preguntado por ellas: las WCAG se dirigen a quien crea el contenido; las ATAG, a las herramientas con las que se crea, como un gestor de contenidos; las UAAG, a los navegadores y lectores; y ARIA, a las aplicaciones con contenido dinámico. Hay dos más de apoyo: ACT, que fija reglas para evaluar la conformidad, y EARL, un formato para expresar los resultados de las evaluaciones automáticas.",
+    "Cuidado con las versiones, que es donde más fácil se cae. La versión vigente en el W3C es la WCAG 2.2, recomendación oficial desde el 5 de octubre de 2023 y republicada con correcciones en diciembre de 2024. Pero la que exige la ley sigue siendo la 2.1, porque es a la que remite la EN 301 549 en su versión armonizada. Así que ambas afirmaciones son ciertas a la vez: la vigente es la 2.2 y la obligatoria es la 2.1. Una pregunta de 'señale la incorrecta' puede jugar justo con eso.",
+    "Qué cambia entre una y otra: la 2.2 añade nueve criterios nuevos, dos de nivel A, cuatro de AA y tres de AAA, y deja obsoleto uno, el 4.1.1 de análisis sintáctico, porque los navegadores de hoy ya corrigen solos los errores de HTML. Los cuatro principios y las trece pautas no cambian. La 2.0 tenía doce pautas; la 2.1 añadió una, la de modalidades de entrada, y diecisiete criterios.",
+    "La estructura es siempre la misma y va de lo general a lo concreto: cuatro principios, trece pautas repartidas entre ellos, y dentro de cada pauta los criterios de conformidad, que son los que de verdad se comprueban. Los principios se recuerdan por sus iniciales en inglés, POUR: Perceivable, Operable, Understandable y Robust.",
+    "Los tres niveles funcionan como una escalera, no como tres caminos. El nivel A es el mínimo. Para el AA hay que cumplir además todos los de A. Y para el AAA, todos los anteriores. La ley europea exige el AA; el propio W3C reconoce que el AAA no es alcanzable para todo tipo de contenido, y por eso ninguna norma lo impone.",
+    "ARIA merece mención aparte porque cayó en el examen de 2026. Sirve para dar significado a componentes que el navegador no entiende por sí solo, como un menú desplegable hecho a mano. Se apoya en tres cosas: roles, que dicen qué es un elemento, por ejemplo role igual a navigation; estados, que dicen cómo está ahora mismo, como aria-expanded valiendo verdadero o falso cuando un menú se abre o se cierra; y propiedades, que aportan datos fijos, como aria-labelledby. Y una regla práctica que también se preguntó: si existe una etiqueta de HTML que ya significa lo que necesitas, como main, nav o header, úsala antes que inventar un div con roles.",
+    "Para evaluar hay herramientas conocidas que aparecen en los temarios: WAVE, TAW, AChecker y el validador del propio W3C entre las automáticas; JAWS, NVDA, Orca, VoiceOver y TalkBack como lectores de pantalla. Ninguna herramienta automática certifica por sí sola el cumplimiento: siempre hace falta revisión manual.",
+    "Los mapas visuales de las WCAG 2.1 y 2.2 publicados por Intopia están disponibles en intopia.digital bajo licencia Creative Commons Attribution-ShareAlike 4.0 International. Son carteles pensados para imprimir en grande."
+   ],
+   "medidas": [],
+   "terminos": [
+    {
+     "termino": "1. Perceptible (principio)",
+     "definicion": "La información y los componentes de la interfaz tienen que poder percibirse. Si alguien no puede usar un sentido, debe haber una alternativa por otro. Agrupa cuatro pautas."
+    },
+    {
+     "termino": "1.1 Alternativas de texto",
+     "definicion": "Todo lo que no es texto (imágenes, iconos, gráficos) necesita una alternativa escrita que cumpla su misma función. Un solo criterio, el 1.1.1, de nivel A."
+    },
+    {
+     "termino": "1.2 Medios dependientes del tiempo",
+     "definicion": "Audio y vídeo: subtítulos, audiodescripción, lengua de signos y alternativas. Distingue entre pregrabado y en directo, y ahí es donde cambian los niveles."
+    },
+    {
+     "termino": "1.3 Adaptable",
+     "definicion": "El contenido debe poder presentarse de otras formas sin perder información ni estructura. Incluye que la estructura esté marcada en el código, la secuencia de lectura y la orientación de pantalla."
+    },
+    {
+     "termino": "1.4 Distinguible",
+     "definicion": "Que se pueda separar el contenido del fondo: contraste suficiente, poder ampliar el texto, no depender solo del color, controlar el audio. Es la pauta con más criterios y la que más ha caído en examen."
+    },
+    {
+     "termino": "2. Operable (principio)",
+     "definicion": "Los componentes y la navegación tienen que poder manejarse, y no solo con ratón. Agrupa cinco pautas."
+    },
+    {
+     "termino": "2.1 Accesible por teclado",
+     "definicion": "Todo se tiene que poder hacer con teclado, y sin quedarse atrapado en ningún sitio. Incluye los atajos de una sola tecla, que deben poder desactivarse."
+    },
+    {
+     "termino": "2.2 Tiempo suficiente",
+     "definicion": "Si hay un límite de tiempo, debe poder ajustarse, ampliarse o desactivarse. Incluye poder pausar o detener lo que se mueve solo."
+    },
+    {
+     "termino": "2.3 Convulsiones y reacciones físicas",
+     "definicion": "Nada debe destellar más de tres veces por segundo. Es la pauta más corta y la más tajante: busca evitar crisis epilépticas."
+    },
+    {
+     "termino": "2.4 Navegable",
+     "definicion": "Ayudar a orientarse y a encontrar el contenido: títulos de página, encabezados, orden del foco, foco visible, saltar bloques repetidos."
+    },
+    {
+     "termino": "2.5 Modalidades de entrada",
+     "definicion": "Es la pauta nueva de la 2.1. Cubre gestos, puntero, movimiento del dispositivo y tamaño de los objetivos táctiles."
+    },
+    {
+     "termino": "3. Comprensible (principio)",
+     "definicion": "La información y el manejo de la interfaz tienen que entenderse. Agrupa tres pautas."
+    },
+    {
+     "termino": "3.1 Legible",
+     "definicion": "El idioma de la página tiene que estar declarado en el código, y también el de los fragmentos en otra lengua. Incluye abreviaturas, palabras raras y nivel de lectura."
+    },
+    {
+     "termino": "3.2 Previsible",
+     "definicion": "Que nada cambie de forma inesperada: al poner el foco en un campo, al escribir en él, o al navegar entre páginas. La navegación y los nombres deben ser coherentes en todo el sitio."
+    },
+    {
+     "termino": "3.3 Asistencia a la entrada de datos",
+     "definicion": "Ayudar a evitar y corregir errores en los formularios: identificar el error, poner etiquetas e instrucciones, sugerir la corrección y prevenir errores en trámites legales, económicos o con datos."
+    },
+    {
+     "termino": "4. Robusto (principio)",
+     "definicion": "El contenido debe poder interpretarse de forma fiable por navegadores y por tecnologías de apoyo, presentes y futuras. Es el principio con una sola pauta."
+    },
+    {
+     "termino": "4.1 Compatible",
+     "definicion": "Que el código sea correcto y que cada componente comunique su nombre, su función y su estado. Aquí estaba el criterio 4.1.1, retirado en la 2.2."
+    }
+   ]
+  }
+ ]
 }
