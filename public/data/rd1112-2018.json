@@ -232,7 +232,13 @@
      "termino": "4.1 Compatible",
      "definicion": "Que el código sea correcto y que cada componente comunique su nombre, su función y su estado. Aquí estaba el criterio 4.1.1, retirado en la 2.2."
     }
-   ]
+   ],
+   "imagen": {
+    "url": "https://gwzzsvehzllizxdxdzhv.supabase.co/storage/v1/object/public/Imagenes/teoria/wcag-2-2-mapa-es.png",
+    "url_ancha": "https://gwzzsvehzllizxdxdzhv.supabase.co/storage/v1/object/public/Imagenes/teoria/wcag-2-2-mapa-es-horizontal.png",
+    "alt": "Mapa visual de las WCAG 2.2: los cuatro principios, sus trece pautas y todos los criterios de conformidad con su nivel A, AA o AAA.",
+    "pie": "Mapa de las WCAG 2.2 de Intopia (intopia.digital), basado en la documentación del W3C disponible en w3.org/TR/WCAG22. Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional. Pulsa sobre el mapa para abrirlo a tamaño real. Ojo: este es el de la versión 2.2, la vigente en el W3C; la que exige la ley española sigue siendo la 2.1."
+   }
   }
  ]
 }
