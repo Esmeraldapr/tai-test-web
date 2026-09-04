@@ -3,7 +3,7 @@
 // ============================================================
 
 const ORDEN_MATERIAS = [
-  "BLOQUE 1: Derecho", "BLOQUE 2: Tecnología", "BLOQUE 3: Desarrollo", "BLOQUE 4: Sistemas y Comunicaciones",
+  "BLOQUE 1: DERECHO", "BLOQUE 2: TECNOLOGÍA", "BLOQUE 3: DESARROLLO", "BLOQUE 4: SISTEMAS Y COMUNICACIONES",
   "FUNDAMENTOS 1: INFORMÁTICA", "FUNDAMENTOS 2: PROGRAMACIÓN", "FUNDAMENTOS 3: REDES",
   "FUNDAMENTOS 4: BASES DE DATOS", "FUNDAMENTOS 5: SSOO", "EXÁMENES",
 ];
