@@ -254,14 +254,45 @@ app.post('/api/tareas/correos-trial', async (req, res) => {
     return res.status(401).json({ error: 'No autorizado.' });
   }
     const solo = req.body && req.body.solo ? String(req.body.solo).trim() : null;
-  // Contestamos ya y enviamos por detrás: con 18 personas el envío tarda más
-  // de un minuto y la llamada daría timeout antes de terminar.
   // Esperamos a terminar antes de contestar: en el plan gratuito de Render el
   // proceso se suspende en cuanto la peticion termina, asi que lo que se deje
   // "para despues" no llega a ejecutarse. Por eso van tandas cortas.
   const resumen = await procesarCorreosTrial(solo);
   console.log('Secuencia de correos de la prueba:', JSON.stringify(resumen));
   res.json(resumen);
+});
+
+// ---------------- Aviso de vigilancia ----------------
+// La llama la tarea "vigilancia-correos" de Supabase cuando detecta que la
+// secuencia de correos de la prueba no ha respondido bien.
+// Existe por lo ocurrido entre el 30/08 y el 03/09: la tarea llamaba a la
+// dirección vieja, la redirección 301 convertía el POST en GET y el servidor
+// devolvía 404 cada mañana. pg_cron lo daba por "succeeded" porque solo mira
+// si la orden SQL se ejecutó, no si la llamada llegó a su destino. Estuvo cinco
+// días rota sin que saltara ninguna alarma.
+// El destinatario va en la variable EMAIL_AVISOS de Render, no escrito aquí,
+// porque este repositorio es público.
+app.post('/api/tareas/aviso', async (req, res) => {
+  if (!CRON_SECRET) {
+    return res.status(503).json({ error: 'CRON_SECRET no configurado en el servidor.' });
+  }
+  if (req.headers['x-cron-secret'] !== CRON_SECRET) {
+    console.error('Intento de llamada a /api/tareas/aviso con clave incorrecta.');
+    return res.status(401).json({ error: 'No autorizado.' });
+  }
+  const destino = process.env.EMAIL_AVISOS;
+  if (!destino) {
+    console.error('No se ha enviado el aviso: falta configurar EMAIL_AVISOS en Render.');
+    return res.status(503).json({ error: 'EMAIL_AVISOS no configurado en el servidor.' });
+  }
+  const asunto = String((req.body && req.body.asunto) || 'Aviso de la web').slice(0, 140);
+  const texto = String((req.body && req.body.texto) || '').slice(0, 2000);
+  const seguro = texto
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\n/g, '<br/>');
+  const enviado = await enviarCorreo(destino, asunto, '<p>' + seguro + '</p>');
+  console.log('Aviso de vigilancia enviado:', enviado, '|', asunto);
+  res.json({ enviado });
 });
 // ---------------- Baja de los correos ----------------
 // Dos pasos a propósito: el enlace del correo solo enseña una página de
