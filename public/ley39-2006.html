@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ley 39/2006, dependencia · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  /* Estilos propios de esta página, para no tocar style.css. Colores
+     translúcidos a propósito, para que funcionen sobre fondo claro y oscuro. */
+  .ley-fuente { font-size: 0.82rem; opacity: 0.7; margin: 0 0 18px; }
+  .art-epigrafe { font-style: italic; opacity: 0.85; }
+  .articulo-preguntado {
+    border-left: 3px solid rgba(217, 119, 6, 0.75);
+    padding-left: 12px;
+    background: rgba(217, 119, 6, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+  .chip.examen {
+    background: rgba(217, 119, 6, 0.15);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+  .aviso-examen { margin: 8px 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .aviso-examen-detalle { font-size: 0.8rem; opacity: 0.75; }
+  .aviso-fuerte {
+    background: rgba(217,119,6,.08); border: 1px solid rgba(217,119,6,.25);
+    border-radius: 12px; padding: 12px 14px; font-size: .88rem; margin: 10px 0 16px;
+  }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor constitucion-doc ley-doc">
+        <h1>🧓 Ley 39/2006, dependencia</h1>
+        <p class="subtitulo">
+          Promoción de la Autonomía Personal y Atención a las personas en situación de
+          dependencia. Texto consolidado del BOE, 48 artículos en cuatro títulos. Pulsa
+          <strong>🔊</strong> para escuchar por título, capítulo o sección. Lo marcado con
+          <span class="chip examen">📌</span> ya ha caído en exámenes oficiales: dos
+          artículos, los dos del mismo capítulo (la valoración de la dependencia).
+        </p>
+        <p class="aviso-fuerte">
+          <strong>Dos avisos:</strong> la convocatoria no nombra esta ley. Su tema 5 pide
+          «discapacidad y dependencia: régimen jurídico», y esta es la norma española que
+          regula la dependencia, así que damos por que entra entera; es criterio nuestro, no
+          cita del BOE. Y ese tema 5 lo forman <strong>cinco leyes</strong>: igualdad
+          (LO 3/2007, ya montada), violencia de género, LGTBI, discapacidad y esta,
+          dependencia.
+        </p>
+        <div id="banner-acceso"></div>
+        <div id="ley"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/ley39-2006.js"></script>
+</body>
+</html>
