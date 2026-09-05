@@ -74,6 +74,12 @@
         <p>Los 78 artículos de la ley de igualdad de mujeres y hombres. Primera de las cinco leyes del tema 5, y la que más cae de ese tema.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="ley39-2006.html">
+        <div class="accion-icono">🧓</div>
+        <h3>Ley 39/2006, dependencia</h3>
+        <p>Los 48 artículos de la ley de la dependencia. Segunda de las cinco leyes del tema 5, con los dos artículos sobre grados de dependencia que ya han caído en examen.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
