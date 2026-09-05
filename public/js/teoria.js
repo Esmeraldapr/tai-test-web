@@ -68,6 +68,12 @@
         <p>Los 20 artículos del decreto que exige que las webs públicas sean accesibles. Es la norma que no ha faltado en ningún examen desde 2019.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+            <a class="accion-card" href="lo3-2007.html">
+        <div class="accion-icono">⚖️</div>
+        <h3>LO 3/2007, igualdad efectiva</h3>
+        <p>Los 78 artículos de la ley de igualdad de mujeres y hombres. Primera de las cinco leyes del tema 5, y la que más cae de ese tema.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
