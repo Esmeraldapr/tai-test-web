@@ -1,0 +1,610 @@
+{
+ "norma": "Ley Orgánica 3/2007, de 22 de marzo, para la igualdad efectiva de mujeres y hombres",
+ "referencia": "BOE-A-2007-6115",
+ "fuente": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-6115",
+ "actualizacion": "Texto consolidado del BOE, actualizado a 2 de agosto de 2024.",
+ "titulos": [
+  {
+   "id": "tit-preliminar",
+   "numero": "Título preliminar",
+   "nombre": "Objeto y ámbito de la Ley",
+   "articulos": [
+    {
+     "numero": "1",
+     "epigrafe": "Objeto de la Ley",
+     "texto": "1. Las mujeres y los hombres son iguales en dignidad humana, e iguales en derechos y deberes. Esta Ley tiene por objeto hacer efectivo el derecho de igualdad de trato y de oportunidades entre mujeres y hombres, en particular mediante la eliminación de la discriminación de la mujer, sea cual fuere su circunstancia o condición, en cualesquiera de los ámbitos de la vida y, singularmente, en las esferas política, civil, laboral, económica, social y cultural para, en el desarrollo de los artículos 9.2 y 14 de la Constitución, alcanzar una sociedad más democrática, más justa y más solidaria.\n\n2. A estos efectos, la Ley establece principios de actuación de los Poderes Públicos, regula derechos y deberes de las personas físicas y jurídicas, tanto públicas como privadas, y prevé medidas destinadas a eliminar y corregir en los sectores público y privado, toda forma de discriminación por razón de sexo."
+    },
+    {
+     "numero": "2",
+     "epigrafe": "Ámbito de aplicación",
+     "texto": "1. Todas las personas gozarán de los derechos derivados del principio de igualdad de trato y de la prohibición de discriminación por razón de sexo.\n\n2. Las obligaciones establecidas en esta Ley serán de aplicación a toda persona, física o jurídica, que se encuentre o actúe en territorio español, cualquiera que fuese su nacionalidad, domicilio o residencia."
+    }
+   ],
+   "capitulos": []
+  },
+  {
+   "id": "tit-i",
+   "numero": "Título I",
+   "nombre": "El principio de igualdad y la tutela contra la discriminación",
+   "articulos": [
+    {
+     "numero": "3",
+     "epigrafe": "El principio de igualdad de trato entre mujeres y hombres",
+     "texto": "El principio de igualdad de trato entre mujeres y hombres supone la ausencia de toda discriminación, directa o indirecta, por razón de sexo, y, especialmente, las derivadas de la maternidad, la asunción de obligaciones familiares y el estado civil."
+    },
+    {
+     "numero": "4",
+     "epigrafe": "Integración del principio de igualdad en la interpretación y aplicación de las",
+     "texto": "normas. La igualdad de trato y de oportunidades entre mujeres y hombres es un principio informador del ordenamiento jurídico y, como tal, se integrará y observará en la interpretación y aplicación de las normas jurídicas."
+    },
+    {
+     "numero": "5",
+     "epigrafe": "Igualdad de trato y de oportunidades en el acceso al empleo, en la formación y",
+     "texto": "en la promoción profesionales, y en las condiciones de trabajo. El principio de igualdad de trato y de oportunidades entre mujeres y hombres, aplicable en el ámbito del empleo privado y en el del empleo público, se garantizará, en los términos previstos en la normativa aplicable, en el acceso al empleo, incluso al trabajo por cuenta propia, en la formación profesional, en la promoción profesional, en las condiciones de trabajo, incluidas las retributivas y las de despido, y en la afiliación y participación en las organizaciones sindicales y empresariales, o en cualquier organización cuyos miembros ejerzan una profesión concreta, incluidas las prestaciones concedidas por las mismas. No constituirá discriminación en el acceso al empleo, incluida la formación necesaria, una diferencia de trato basada en una característica relacionada con el sexo cuando, debido a la naturaleza de las actividades profesionales concretas o al contexto en el que se lleven a cabo, dicha característica constituya un requisito profesional esencial y determinante, siempre y cuando el objetivo sea legítimo y el requisito proporcionado."
+    },
+    {
+     "numero": "6",
+     "epigrafe": "Discriminación directa e indirecta",
+     "texto": "1. Se considera discriminación directa por razón de sexo la situación en que se encuentra una persona que sea, haya sido o pudiera ser tratada, en atención a su sexo, de manera menos favorable que otra en situación comparable.\n\n2. Se considera discriminación indirecta por razón de sexo la situación en que una disposición, criterio o práctica aparentemente neutros pone a personas de un sexo en desventaja particular con respecto a personas del otro, salvo que dicha disposición, criterio o práctica puedan justificarse objetivamente en atención a una finalidad legítima y que los medios para alcanzar dicha finalidad sean necesarios y adecuados.\n\n3. En cualquier caso, se considera discriminatoria toda orden de discriminar, directa o indirectamente, por razón de sexo."
+    },
+    {
+     "numero": "7",
+     "epigrafe": "Acoso sexual y acoso por razón de sexo",
+     "texto": "1. Sin perjuicio de lo establecido en el Código Penal, a los efectos de esta Ley constituye acoso sexual cualquier comportamiento, verbal o físico, de naturaleza sexual que tenga el propósito o produzca el efecto de atentar contra la dignidad de una persona, en particular cuando se crea un entorno intimidatorio, degradante u ofensivo.\n\n2. Constituye acoso por razón de sexo cualquier comportamiento realizado en función del sexo de una persona, con el propósito o el efecto de atentar contra su dignidad y de crear un entorno intimidatorio, degradante u ofensivo.\n\n3. Se considerarán en todo caso discriminatorios el acoso sexual y el acoso por razón de sexo.\n\n4. El condicionamiento de un derecho o de una expectativa de derecho a la aceptación de una situación constitutiva de acoso sexual o de acoso por razón de sexo se considerará también acto de discriminación por razón de sexo."
+    },
+    {
+     "numero": "8",
+     "epigrafe": "Discriminación por embarazo o maternidad",
+     "texto": "Constituye discriminación directa por razón de sexo todo trato desfavorable a las mujeres relacionado con el embarazo o la maternidad."
+    },
+    {
+     "numero": "9",
+     "epigrafe": "Indemnidad frente a represalias",
+     "texto": "También se considerará discriminación por razón de sexo cualquier trato adverso o efecto negativo que se produzca en una persona como consecuencia de la presentación por su parte de queja, reclamación, denuncia, demanda o recurso, de cualquier tipo, destinados a impedir su discriminación y a exigir el cumplimiento efectivo del principio de igualdad de trato entre mujeres y hombres."
+    },
+    {
+     "numero": "10",
+     "epigrafe": "Consecuencias jurídicas de las conductas discriminatorias",
+     "texto": "Los actos y las cláusulas de los negocios jurídicos que constituyan o causen discriminación por razón de sexo se considerarán nulos y sin efecto, y darán lugar a responsabilidad a través de un sistema de reparaciones o indemnizaciones que sean reales, efectivas y proporcionadas al perjuicio sufrido, así como, en su caso, a través de un sistema eficaz y disuasorio de sanciones que prevenga la realización de conductas discriminatorias."
+    },
+    {
+     "numero": "11",
+     "epigrafe": "Acciones positivas",
+     "texto": "1. Con el fin de hacer efectivo el derecho constitucional de la igualdad, los Poderes Públicos adoptarán medidas específicas en favor de las mujeres para corregir situaciones patentes de desigualdad de hecho respecto de los hombres. Tales medidas, que serán aplicables en tanto subsistan dichas situaciones, habrán de ser razonables y proporcionadas en relación con el objetivo perseguido en cada caso.\n\n2. También las personas físicas y jurídicas privadas podrán adoptar este tipo de medidas en los términos establecidos en la presente Ley."
+    },
+    {
+     "numero": "12",
+     "epigrafe": "Tutela judicial efectiva",
+     "texto": "1. Cualquier persona podrá recabar de los tribunales la tutela del derecho a la igualdad entre mujeres y hombres, de acuerdo con lo establecido en el artículo 53.2 de la Constitución, incluso tras la terminación de la relación en la que supuestamente se ha producido la discriminación.\n\n2. La capacidad y legitimación para intervenir en los procesos civiles, sociales y contencioso-administrativos que versen sobre la defensa de este derecho corresponden a las personas físicas y jurídicas con interés legítimo, determinadas en las Leyes reguladoras de estos procesos.\n\n3. La persona acosada será la única legitimada en los litigios sobre acoso sexual y acoso por razón de sexo."
+    },
+    {
+     "numero": "13",
+     "epigrafe": "Prueba",
+     "texto": "1. De acuerdo con las Leyes procesales, en aquellos procedimientos en los que las alegaciones de la parte actora se fundamenten en actuaciones discriminatorias, por razón de sexo, corresponderá a la persona demandada probar la ausencia de discriminación en las medidas adoptadas y su proporcionalidad. A los efectos de lo dispuesto en el párrafo anterior, el órgano judicial, a instancia de parte, podrá recabar, si lo estimase útil y pertinente, informe o dictamen de los organismos públicos competentes.\n\n2. Lo establecido en el apartado anterior no será de aplicación a los procesos penales."
+    }
+   ],
+   "capitulos": []
+  },
+  {
+   "id": "tit-ii",
+   "numero": "Título II",
+   "nombre": "Políticas públicas para la igualdad",
+   "articulos": [],
+   "capitulos": [
+    {
+     "numero": "Capítulo I",
+     "nombre": "Principios generales",
+     "articulos": [
+      {
+       "numero": "14",
+       "epigrafe": "Criterios generales de actuación de los Poderes Públicos",
+       "texto": "A los fines de esta Ley, serán criterios generales de actuación de los Poderes Públicos:\n\n1. El compromiso con la efectividad del derecho constitucional de igualdad entre mujeres y hombres.\n\n2. La integración del principio de igualdad de trato y de oportunidades en el conjunto de las políticas económica, laboral, social, cultural y artística, con el fin de evitar la segregación laboral y eliminar las diferencias retributivas, así como potenciar el crecimiento del empresariado femenino en todos los ámbitos que abarque el conjunto de políticas y el valor del trabajo de las mujeres, incluido el doméstico.\n\n3. La colaboración y cooperación entre las distintas Administraciones públicas en la aplicación del principio de igualdad de trato y de oportunidades.\n\n4. La participación equilibrada de mujeres y hombres en las candidaturas electorales y en la toma de decisiones.\n\n5. La adopción de las medidas necesarias para la erradicación de la violencia de género, la violencia familiar y todas las formas de acoso sexual y acoso por razón de sexo.\n\n6. La consideración de las singulares dificultades en que se encuentran las mujeres de colectivos de especial vulnerabilidad como son las que pertenecen a minorías, las mujeres migrantes, las niñas, las mujeres con discapacidad, las mujeres mayores, las mujeres viudas y las mujeres víctimas de violencia de género, para las cuales los poderes públicos podrán adoptar, igualmente, medidas de acción positiva.\n\n7. La protección de la maternidad, con especial atención a la asunción por la sociedad de los efectos derivados del embarazo, parto y lactancia.\n\n8. El establecimiento de medidas que aseguren la conciliación del trabajo y de la vida personal y familiar de las mujeres y los hombres, así como el fomento de la corresponsabilidad en las labores domésticas y en la atención a la familia.\n\n9. El fomento de instrumentos de colaboración entre las distintas Administraciones públicas y los agentes sociales, las asociaciones de mujeres y otras entidades privadas.\n\n10. El fomento de la efectividad del principio de igualdad entre mujeres y hombres en las relaciones entre particulares.\n\n11. La implantación de un lenguaje no sexista en el ámbito administrativo y su fomento en la totalidad de las relaciones sociales, culturales y artísticas.\n\n12. Todos los puntos considerados en este artículo se promoverán e integrarán de igual manera en la política española de cooperación internacional para el desarrollo."
+      },
+      {
+       "numero": "15",
+       "epigrafe": "Transversalidad del principio de igualdad de trato entre mujeres y hombres",
+       "texto": "El principio de igualdad de trato y oportunidades entre mujeres y hombres informará, con carácter transversal, la actuación de todos los Poderes Públicos. Las Administraciones públicas lo integrarán, de forma activa, en la adopción y ejecución de sus disposiciones normativas, en la definición y presupuestación de políticas públicas en todos los ámbitos y en el desarrollo del conjunto de todas sus actividades."
+      },
+      {
+       "numero": "16",
+       "epigrafe": "Nombramientos realizados por los Poderes Públicos",
+       "texto": "Los Poderes Públicos procurarán atender al principio de presencia equilibrada de mujeres y hombres en los nombramientos y designaciones de los cargos de responsabilidad que les correspondan."
+      },
+      {
+       "numero": "17",
+       "epigrafe": "Plan Estratégico de Igualdad de Oportunidades",
+       "texto": "El Gobierno, en las materias que sean de la competencia del Estado, aprobará periódicamente un Plan Estratégico de Igualdad de Oportunidades, que incluirá medidas para alcanzar el objetivo de igualdad entre mujeres y hombres y eliminar la discriminación por razón de sexo."
+      },
+      {
+       "numero": "18",
+       "epigrafe": "Informe periódico",
+       "texto": "En los términos que reglamentariamente se determinen, el Gobierno elaborará un informe periódico sobre el conjunto de sus actuaciones en relación con la efectividad del principio de igualdad entre mujeres y hombres. De este informe se dará cuenta a las Cortes Generales."
+      },
+      {
+       "numero": "19",
+       "epigrafe": "Informes de impacto de género",
+       "texto": "Los proyectos de disposiciones de carácter general y los planes de especial relevancia económica, social, cultural y artística que se sometan a la aprobación del Consejo de Ministros deberán incorporar un informe sobre su impacto por razón de género."
+      },
+      {
+       "numero": "20",
+       "epigrafe": "Adecuación de las estadísticas y estudios",
+       "texto": "Al objeto de hacer efectivas las disposiciones contenidas en esta Ley y que se garantice la integración de modo efectivo de la perspectiva de género en su actividad ordinaria, los poderes públicos, en la elaboración de sus estudios y estadísticas, deberán:\n\na) Incluir sistemáticamente la variable de sexo en las estadísticas, encuestas y recogida de datos que lleven a cabo.\n\nb) Establecer e incluir en las operaciones estadísticas nuevos indicadores que posibiliten un mejor conocimiento de las diferencias en los valores, roles, situaciones, condiciones, aspiraciones y necesidades de mujeres y hombres, su manifestación e interacción en la realidad que se vaya a analizar.\n\nc) Diseñar e introducir los indicadores y mecanismos necesarios que permitan el conocimiento de la incidencia de otras variables cuya concurrencia resulta generadora de situaciones de discriminación múltiple en los diferentes ámbitos de intervención.\n\nd) Realizar muestras lo suficientemente amplias como para que las diversas variables incluidas puedan ser explotadas y analizadas en función de la variable de sexo.\n\ne) Explotar los datos de que disponen de modo que se puedan conocer las diferentes situaciones, condiciones, aspiraciones y necesidades de mujeres y hombres en los diferentes ámbitos de intervención.\n\nf) Revisar y, en su caso, adecuar las definiciones estadísticas existentes con objeto de contribuir al reconocimiento y valoración del trabajo de las mujeres y evitar la estereotipación negativa de determinados colectivos de mujeres. Sólo excepcionalmente, y mediante informe motivado y aprobado por el órgano competente, podrá justificarse el incumplimiento de alguna de las obligaciones anteriormente especificadas."
+      },
+      {
+       "numero": "21",
+       "epigrafe": "Colaboración entre las Administraciones públicas",
+       "texto": "1. La Administración General del Estado y las Administraciones de las Comunidades Autónomas cooperarán para integrar el derecho de igualdad entre mujeres y hombres en el ejercicio de sus respectivas competencias y, en especial, en sus actuaciones de planificación. En el seno de la Conferencia Sectorial de la Mujer podrán adoptarse planes y programas conjuntos de actuación con esta finalidad.\n\n2. Las Entidades Locales integrarán el derecho de igualdad en el ejercicio de sus competencias y colaborarán, a tal efecto, con el resto de las Administraciones públicas."
+      },
+      {
+       "numero": "22",
+       "epigrafe": "Acciones de planificación equitativa de los tiempos",
+       "texto": "Con el fin de avanzar hacia un reparto equitativo de los tiempos entre mujeres y hombres, las corporaciones locales podrán establecer Planes Municipales de organización\n\ndel tiempo de la ciudad. Sin perjuicio de las competencias de las Comunidades Autónomas, el Estado podrá prestar asistencia técnica para la elaboración de estos planes."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo II",
+     "nombre": "Acción administrativa para la igualdad",
+     "articulos": [
+      {
+       "numero": "23",
+       "epigrafe": "La educación para la igualdad de mujeres y hombres",
+       "texto": "El sistema educativo incluirá entre sus fines la educación en el respeto de los derechos y libertades fundamentales y en la igualdad de derechos y oportunidades entre mujeres y hombres. Asimismo, el sistema educativo incluirá, dentro de sus principios de calidad, la eliminación de los obstáculos que dificultan la igualdad efectiva entre mujeres y hombres y el fomento de la igualdad plena entre unas y otros."
+      },
+      {
+       "numero": "24",
+       "epigrafe": "Integración del principio de igualdad en la política de educación",
+       "texto": "1. Las Administraciones educativas garantizarán un igual derecho a la educación de mujeres y hombres a través de la integración activa, en los objetivos y en las actuaciones educativas, del principio de igualdad de trato, evitando que, por comportamientos sexistas o por los estereotipos sociales asociados, se produzcan desigualdades entre mujeres y hombres.\n\n2. Las Administraciones educativas, en el ámbito de sus respectivas competencias, desarrollarán, con tal finalidad, las siguientes actuaciones:\n\na) La atención especial en los currículos y en todas las etapas educativas al principio de igualdad entre mujeres y hombres.\n\nb) La eliminación y el rechazo de los comportamientos y contenidos sexistas y estereotipos que supongan discriminación entre mujeres y hombres, con especial consideración a ello en los libros de texto y materiales educativos.\n\nc) La integración del estudio y aplicación del principio de igualdad en los cursos y programas para la formación inicial y permanente del profesorado.\n\nd) La promoción de la presencia equilibrada de mujeres y hombres en los órganos de control y de gobierno de los centros docentes.\n\ne) La cooperación con el resto de las Administraciones educativas para el desarrollo de proyectos y programas dirigidos a fomentar el conocimiento y la difusión, entre las personas de la comunidad educativa, de los principios de coeducación y de igualdad efectiva entre mujeres y hombres.\n\nf) El establecimiento de medidas educativas destinadas al reconocimiento y enseñanza del papel de las mujeres en la Historia."
+      },
+      {
+       "numero": "25",
+       "epigrafe": "La igualdad en el ámbito de la educación superior",
+       "texto": "1. En el ámbito de la educación superior, las Administraciones públicas en el ejercicio de sus respectivas competencias fomentarán la enseñanza y la investigación sobre el significado y alcance de la igualdad entre mujeres y hombres.\n\n2. En particular, y con tal finalidad, las Administraciones públicas promoverán:\n\na) La inclusión, en los planes de estudio en que proceda, de enseñanzas en materia de igualdad entre mujeres y hombres.\n\nb) La creación de postgrados específicos.\n\nc) La realización de estudios e investigaciones especializadas en la materia."
+      },
+      {
+       "numero": "26",
+       "epigrafe": "La igualdad en el ámbito de la creación y producción artística e intelectual",
+       "texto": "1. Las autoridades públicas, en el ámbito de sus competencias, velarán por hacer efectivo el principio de igualdad de trato y de oportunidades entre mujeres y hombres en todo lo concerniente a la creación y producción artística e intelectual y a la difusión de la misma.\n\n 2. Los distintos organismos, agencias, entes y demás estructuras de las administraciones públicas que de modo directo o indirecto configuren el sistema de gestión cultural, desarrollarán las siguientes actuaciones:\n\na) Adoptar iniciativas destinadas a favorecer la promoción específica de las mujeres en la cultura y a combatir su discriminación estructural y/o difusa.\n\nb) Políticas activas de ayuda a la creación y producción artística e intelectual de autoría femenina, traducidas en incentivos de naturaleza económica, con el objeto de crear las condiciones para que se produzca una efectiva igualdad de oportunidades.\n\nc) Promover la presencia equilibrada de mujeres y hombres en la oferta artística y cultural pública.\n\nd) Que se respete y se garantice la representación equilibrada en los distintos órganos consultivos, científicos y de decisión existentes en el organigrama artístico y cultural.\n\ne) Adoptar medidas de acción positiva a la creación y producción artística e intelectual de las mujeres, propiciando el intercambio cultural, intelectual y artístico, tanto nacional como internacional, y la suscripción de convenios con los organismos competentes.\n\nf) En general y al amparo del artículo 11 de la presente Ley, todas las acciones positivas necesarias para corregir las situaciones de desigualdad en la producción y creación intelectual artística y cultural de las mujeres."
+      },
+      {
+       "numero": "27",
+       "epigrafe": "Integración del principio de igualdad en la política de salud",
+       "texto": "1. Las políticas, estrategias y programas de salud integrarán, en su formulación, desarrollo y evaluación, las distintas necesidades de mujeres y hombres y las medidas necesarias para abordarlas adecuadamente.\n\n2. Las Administraciones públicas garantizarán un igual derecho a la salud de las mujeres y hombres, a través de la integración activa, en los objetivos y en las actuaciones de la política de salud, del principio de igualdad de trato, evitando que por sus diferencias biológicas o por los estereotipos sociales asociados, se produzcan discriminaciones entre unas y otros.\n\n3. Las Administraciones públicas, a través de sus Servicios de Salud y de los órganos competentes en cada caso, desarrollarán, de acuerdo con el principio de igualdad de oportunidades, las siguientes actuaciones:\n\na) La adopción sistemática, dentro de las acciones de educación sanitaria, de iniciativas destinadas a favorecer la promoción específica de la salud de las mujeres, así como a prevenir su discriminación.\n\nb) El fomento de la investigación científica que atienda las diferencias entre mujeres y hombres en relación con la protección de su salud, especialmente en lo referido a la accesibilidad y el esfuerzo diagnóstico y terapéutico, tanto en sus aspectos de ensayos clínicos como asistenciales.\n\nc) La consideración, dentro de la protección, promoción y mejora de la salud laboral, del acoso sexual y el acoso por razón de sexo.\n\nd) La integración del principio de igualdad en la formación del personal al servicio de las organizaciones sanitarias, garantizando en especial su capacidad para detectar y atender las situaciones de violencia de género.\n\ne) La presencia equilibrada de mujeres y hombres en los puestos directivos y de responsabilidad profesional del conjunto del Sistema Nacional de Salud.\n\nf) La obtención y el tratamiento desagregados por sexo, siempre que sea posible, de los datos contenidos en registros, encuestas, estadísticas u otros sistemas de información médica y sanitaria."
+      },
+      {
+       "numero": "28",
+       "epigrafe": "Sociedad de la Información",
+       "texto": "1. Todos los programas públicos de desarrollo de la Sociedad de la Información incorporarán la efectiva consideración del principio de igualdad de oportunidades entre mujeres y hombres en su diseño y ejecución.\n\n2. El Gobierno promoverá la plena incorporación de las mujeres en la Sociedad de la Información mediante el desarrollo de programas específicos, en especial, en materia de\n\nacceso y formación en tecnologías de la información y de las comunicaciones, contemplando las de colectivos de riesgo de exclusión y del ámbito rural.\n\n3. El Gobierno promoverá los contenidos creados por mujeres en el ámbito de la Sociedad de la Información.\n\n4. En los proyectos del ámbito de las tecnologías de la información y la comunicación sufragados total o parcialmente con dinero público, se garantizará que su lenguaje y contenidos sean no sexistas."
+      },
+      {
+       "numero": "29",
+       "epigrafe": "Deportes",
+       "texto": "1. Todos los programas públicos de desarrollo del deporte incorporarán la efectiva consideración del principio de igualdad real y efectiva entre mujeres y hombres en su diseño y ejecución.\n\n2. El Gobierno promoverá el deporte femenino y favorecerá la efectiva apertura de las disciplinas deportivas a las mujeres, mediante el desarrollo de programas específicos en todas las etapas de la vida y en todos los niveles, incluidos los de responsabilidad y decisión."
+      },
+      {
+       "numero": "30",
+       "epigrafe": "Desarrollo rural",
+       "texto": "1. A fin de hacer efectiva la igualdad entre mujeres y hombres en el sector agrario, el Ministerio de Agricultura, Pesca y Alimentación y el Ministerio de Trabajo y Asuntos Sociales desarrollarán la figura jurídica de la titularidad compartida, para que se reconozcan plenamente los derechos de las mujeres en el sector agrario, la correspondiente protección de la Seguridad Social, así como el reconocimiento de su trabajo.\n\n2. En las actuaciones encaminadas al desarrollo del medio rural, se incluirán acciones dirigidas a mejorar el nivel educativo y de formación de las mujeres, y especialmente las que favorezcan su incorporación al mercado de trabajo y a los órganos de dirección de empresas y asociaciones.\n\n3. Las Administraciones públicas promoverán nuevas actividades laborales que favorezcan el trabajo de las mujeres en el mundo rural.\n\n4. Las Administraciones públicas promoverán el desarrollo de una red de servicios sociales para atender a menores, mayores y dependientes como medida de conciliación de la vida laboral, familiar y personal de hombres y mujeres en mundo rural.\n\n5. Los poderes públicos fomentarán la igualdad de oportunidades en el acceso a las tecnologías de la información y la comunicación mediante el uso de políticas y actividades dirigidas a la mujer rural, y la aplicación de soluciones alternativas tecnológicas allá donde la extensión de estas tecnologías no sea posible."
+      },
+      {
+       "numero": "31",
+       "epigrafe": "Políticas urbanas, de ordenación territorial y vivienda",
+       "texto": "1. Las políticas y planes de las Administraciones públicas en materia de acceso a la vivienda incluirán medidas destinadas a hacer efectivo el principio de igualdad entre mujeres y hombres. Del mismo modo, las políticas urbanas y de ordenación del territorio tomarán en consideración las necesidades de los distintos grupos sociales y de los diversos tipos de estructuras familiares, y favorecerán el acceso en condiciones de igualdad a los distintos servicios e infraestructuras urbanas.\n\n2. El Gobierno, en el ámbito de sus competencias, fomentará el acceso a la vivienda de las mujeres en situación de necesidad o en riesgo de exclusión, y de las que hayan sido víctimas de la violencia de género, en especial cuando, en ambos casos, tengan hijos menores exclusivamente a su cargo.\n\n3. Las Administraciones públicas tendrán en cuenta en el diseño de la ciudad, en las políticas urbanas, en la definición y ejecución del planeamiento urbanístico, la perspectiva de género, utilizando para ello, especialmente, mecanismos e instrumentos que fomenten y favorezcan la participación ciudadana y la transparencia."
+      },
+      {
+       "numero": "32",
+       "epigrafe": "Política española de cooperación para el desarrollo",
+       "texto": "1. Todas las políticas, planes, documentos de planificación estratégica, tanto sectorial como geográfica, y herramientas de programación operativa de la cooperación española\n\npara el desarrollo, incluirán el principio de igualdad entre mujeres y hombres como un elemento sustancial en su agenda de prioridades, y recibirán un tratamiento de prioridad transversal y específica en sus contenidos, contemplando medidas concretas para el seguimiento y la evaluación de logros para la igualdad efectiva en la cooperación española al desarrollo.\n\n2. Además, se elaborará una Estrategia Sectorial de Igualdad entre mujeres y hombres para la cooperación española, que se actualizará periódicamente a partir de los logros y lecciones aprendidas en los procesos anteriores.\n\n3. La Administración española planteará un proceso progresivo, a medio plazo, de integración efectiva del principio de igualdad y del enfoque de género en desarrollo (GED), en todos los niveles de su gestión, que haga posible y efectiva la aplicación de la Estrategia Sectorial de Igualdad entre mujeres y hombres, que contemple actuaciones específicas para alcanzar la transversalidad en las actuaciones de la cooperación española, y la promoción de medidas de acción positiva que favorezcan cambios significativos en la implantación del principio de igualdad, tanto dentro de la Administración como en el mandato de desarrollo de la propia cooperación española."
+      },
+      {
+       "numero": "33",
+       "epigrafe": "Contratos de las Administraciones públicas",
+       "texto": "Las Administraciones públicas, en el ámbito de sus respectivas competencias, a través de sus órganos de contratación y, en relación con la ejecución de los contratos que celebren, podrán establecer condiciones especiales con el fin de promover la igualdad entre mujeres y hombres en el mercado de trabajo, de acuerdo con lo establecido en la legislación de contratos del sector público."
+      },
+      {
+       "numero": "34",
+       "epigrafe": "Contratos de la Administración General del Estado",
+       "texto": "1. Anualmente, el Consejo de Ministros, a la vista de la evolución e impacto de las políticas de igualdad en el mercado laboral, determinará los contratos de la Administración General del Estado y de sus organismos públicos que obligatoriamente deberán incluir entre sus condiciones de ejecución medidas tendentes a promover la igualdad efectiva entre mujeres y hombres en el mercado de trabajo, conforme a lo previsto en la legislación de contratos del sector público. En el Acuerdo a que se refiere el párrafo anterior podrán establecerse, en su caso, las características de las condiciones que deban incluirse en los pliegos atendiendo a la naturaleza de los contratos y al sector de actividad donde se generen las prestaciones.\n\n2. Los órganos de contratación podrán establecer en los pliegos de cláusulas administrativas particulares la preferencia en la adjudicación de los contratos de las proposiciones presentadas por aquellas empresas que, en el momento de acreditar su solvencia técnica o profesional, cumplan con las directrices del apartado anterior, siempre que estas proposiciones igualen en sus términos a las más ventajosas desde el punto de vista de los criterios objetivos que sirvan de base a la adjudicación y respetando, en todo caso, la prelación establecida en el apartado primero de la disposición adicional octava del Texto Refundido de la Ley de Contratos de las Administraciones Públicas, aprobado por Real Decreto Legislativo 2/2000, de 16 de junio."
+      },
+      {
+       "numero": "35",
+       "epigrafe": "Subvenciones públicas",
+       "texto": "Las Administraciones públicas, en los planes estratégicos de subvenciones que adopten en el ejercicio de sus competencias, determinarán los ámbitos en que, por razón de la existencia de una situación de desigualdad de oportunidades entre mujeres y hombres, las bases reguladoras de las correspondientes subvenciones puedan incluir la valoración de actuaciones de efectiva consecución de la igualdad por parte de las entidades solicitantes. A estos efectos podrán valorarse, entre otras, las medidas de conciliación de la vida personal, laboral y familiar, de responsabilidad social de la empresa, o la obtención del distintivo empresarial en materia de igualdad regulado en el Capítulo IV del Título IV de la presente Ley."
+      }
+     ],
+     "secciones": []
+    }
+   ]
+  },
+  {
+   "id": "tit-iii",
+   "numero": "Título III",
+   "nombre": "Igualdad y medios de comunicación",
+   "articulos": [
+    {
+     "numero": "36",
+     "epigrafe": "La igualdad en los medios de comunicación social de titularidad pública",
+     "texto": "Los medios de comunicación social de titularidad pública velarán por la transmisión de una imagen igualitaria, plural y no estereotipada de mujeres y hombres en la sociedad, y promoverán el conocimiento y la difusión del principio de igualdad entre mujeres y hombres."
+    },
+    {
+     "numero": "37",
+     "epigrafe": "Corporación RTVE",
+     "texto": "1. La Corporación RTVE, en el ejercicio de su función de servicio público, perseguirá en su programación los siguientes objetivos:\n\na) Reflejar adecuadamente la presencia de las mujeres en los diversos ámbitos de la vida social.\n\nb) Utilizar el lenguaje en forma no sexista.\n\nc) Adoptar, mediante la autorregulación, códigos de conducta tendentes a transmitir el contenido del principio de igualdad.\n\nd) Colaborar con las campañas institucionales dirigidas a fomentar la igualdad entre mujeres y hombres y a erradicar la violencia contra las mujeres.\n\n2. La Corporación RTVE promoverá la incorporación de las mujeres a puestos de responsabilidad directiva y profesional. Asimismo, fomentará la relación con asociaciones y grupos de mujeres para identificar sus necesidades e intereses en el ámbito de la comunicación."
+    },
+    {
+     "numero": "38",
+     "epigrafe": "Agencia EFE",
+     "texto": "1. En el ejercicio de sus actividades, la Agencia EFE velará por el respeto del principio de igualdad entre mujeres y hombres y, en especial, por la utilización no sexista del lenguaje, y perseguirá en su actuación los siguientes objetivos:\n\na) Reflejar adecuadamente la presencia de la mujer en los diversos ámbitos de la vida social.\n\nb) Utilizar el lenguaje en forma no sexista.\n\nc) Adoptar, mediante la autorregulación, códigos de conducta tendentes a transmitir el contenido del principio de igualdad.\n\nd) Colaborar con las campañas institucionales dirigidas a fomentar la igualdad entre mujeres y hombres y a erradicar la violencia contra las mujeres.\n\n2. La Agencia EFE promoverá la incorporación de las mujeres a puestos de responsabilidad directiva y profesional. Asimismo, fomentará la relación con asociaciones y grupos de mujeres para identificar sus necesidades e intereses en el ámbito de la comunicación."
+    },
+    {
+     "numero": "39",
+     "epigrafe": "La igualdad en los medios de comunicación social de titularidad privada",
+     "texto": "1. Todos los medios de comunicación respetarán la igualdad entre mujeres y hombres, evitando cualquier forma de discriminación.\n\n2. Las Administraciones públicas promoverán la adopción por parte de los medios de comunicación de acuerdos de autorregulación que contribuyan al cumplimiento de la legislación en materia de igualdad entre mujeres y hombres, incluyendo las actividades de venta y publicidad que en aquellos se desarrollen."
+    },
+    {
+     "numero": "40",
+     "epigrafe": "Autoridad audiovisual",
+     "texto": "Las Autoridades a las que corresponda velar por que los medios audiovisuales cumplan sus obligaciones adoptarán las medidas que procedan, de acuerdo con su regulación, para asegurar un tratamiento de las mujeres conforme con los principios y valores constitucionales."
+    },
+    {
+     "numero": "41",
+     "epigrafe": "Igualdad y publicidad",
+     "texto": "La publicidad que comporte una conducta discriminatoria de acuerdo con esta Ley se considerará publicidad ilícita, de conformidad con lo previsto en la legislación general de publicidad y de publicidad y comunicación institucional."
+    }
+   ],
+   "capitulos": []
+  },
+  {
+   "id": "tit-iv",
+   "numero": "Título IV",
+   "nombre": "El derecho al trabajo en igualdad de oportunidades",
+   "articulos": [],
+   "capitulos": [
+    {
+     "numero": "Capítulo I",
+     "nombre": "Igualdad de trato y de oportunidades en el ámbito laboral",
+     "articulos": [
+      {
+       "numero": "42",
+       "epigrafe": "Programas de mejora de la empleabilidad de las mujeres",
+       "texto": "1. Las políticas de empleo tendrán como uno de sus objetivos prioritarios aumentar la participación de las mujeres en el mercado de trabajo y avanzar en la igualdad efectiva entre mujeres y hombres. Para ello, se mejorará la empleabilidad y la permanencia en el empleo de las mujeres, potenciando su nivel formativo y su adaptabilidad a los requerimientos del mercado de trabajo.\n\n2. Los Programas de inserción laboral activa comprenderán todos los niveles educativos y edad de las mujeres, incluyendo los de Formación Profesional, Escuelas Taller y Casas de Oficios, dirigidos a personas en desempleo, se podrán destinar prioritariamente a colectivos específicos de mujeres o contemplar una determinada proporción de mujeres."
+      },
+      {
+       "numero": "43",
+       "epigrafe": "Promoción de la igualdad en la negociación colectiva",
+       "texto": "De acuerdo con lo establecido legalmente, mediante la negociación colectiva se podrán establecer medidas de acción positiva para favorecer el acceso de las mujeres al empleo y la aplicación efectiva del principio de igualdad de trato y no discriminación en las condiciones de trabajo entre mujeres y hombres."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo II",
+     "nombre": "Igualdad y conciliación",
+     "articulos": [
+      {
+       "numero": "44",
+       "epigrafe": "Los derechos de conciliación de la vida personal, familiar y laboral",
+       "texto": "1. Los derechos de conciliación de la vida personal, familiar y laboral se reconocerán a los trabajadores y las trabajadoras en forma que fomenten la asunción equilibrada de las responsabilidades familiares, evitando toda discriminación basada en su ejercicio.\n\n2. El permiso y la prestación por maternidad se concederán en los términos previstos en la normativa laboral y de Seguridad Social.\n\n3. Para contribuir a un reparto más equilibrado de las responsabilidades familiares, se reconoce a los padres el derecho a un permiso y una prestación por paternidad, en los términos previstos en la normativa laboral y de Seguridad Social."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo III",
+     "nombre": "Los planes de igualdad de las empresas y otras medidas de promoción de la",
+     "articulos": [
+      {
+       "numero": "45",
+       "epigrafe": "Elaboración y aplicación de los planes de igualdad",
+       "texto": "1. Las empresas están obligadas a respetar la igualdad de trato y de oportunidades en el ámbito laboral y, con esta finalidad, deberán adoptar medidas dirigidas a evitar cualquier tipo de discriminación laboral entre mujeres y hombres, medidas que deberán negociar, y en su caso acordar, con los representantes legales de los trabajadores en la forma que se determine en la legislación laboral.\n\n 2. En el caso de las empresas de cincuenta o más trabajadores, las medidas de igualdad a que se refiere el apartado anterior deberán dirigirse a la elaboración y aplicación de un plan de igualdad, con el alcance y contenido establecidos en este capítulo, que deberá ser asimismo objeto de negociación en la forma que se determine en la legislación laboral.\n\n3. Sin perjuicio de lo dispuesto en el apartado anterior, las empresas deberán elaborar y aplicar un plan de igualdad cuando así se establezca en el convenio colectivo que sea aplicable, en los términos previstos en el mismo.\n\n4. Las empresas también elaborarán y aplicarán un plan de igualdad, previa negociación o consulta, en su caso, con la representación legal de los trabajadores y trabajadoras, cuando la autoridad laboral hubiera acordado en un procedimiento sancionador la sustitución de las sanciones accesorias por la elaboración y aplicación de dicho plan, en los términos que se fijen en el indicado acuerdo.\n\n5. La elaboración e implantación de planes de igualdad será voluntaria para las demás empresas, previa consulta a la representación legal de los trabajadores y trabajadoras."
+      },
+      {
+       "numero": "46",
+       "epigrafe": "Concepto y contenido de los planes de igualdad de las empresas",
+       "texto": "1. Los planes de igualdad de las empresas son un conjunto ordenado de medidas, adoptadas después de realizar un diagnóstico de situación, tendentes a alcanzar en la empresa la igualdad de trato y de oportunidades entre mujeres y hombres y a eliminar la discriminación por razón de sexo. Los planes de igualdad fijarán los concretos objetivos de igualdad a alcanzar, las estrategias y prácticas a adoptar para su consecución, así como el establecimiento de sistemas eficaces de seguimiento y evaluación de los objetivos fijados.\n\n2. Los planes de igualdad contendrán un conjunto ordenado de medidas evaluables dirigidas a remover los obstáculos que impiden o dificultan la igualdad efectiva de mujeres y hombres. Con carácter previo se elaborará un diagnóstico negociado, en su caso, con la representación legal de las personas trabajadoras, que contendrá al menos las siguientes materias:\n\na) Proceso de selección y contratación.\n\nb) Clasificación profesional.\n\nc) Formación.\n\nd) Promoción profesional.\n\ne) Condiciones de trabajo, incluida la auditoría salarial entre mujeres y hombres.\n\nf) Ejercicio corresponsable de los derechos de la vida personal, familiar y laboral.\n\ng) Infrarrepresentación femenina.\n\nh) Retribuciones.\n\ni) Prevención del acoso sexual y por razón de sexo. La elaboración del diagnóstico se realizará en el seno de la Comisión Negociadora del Plan de Igualdad, para lo cual, la dirección de la empresa facilitará todos los datos e información necesaria para elaborar el mismo en relación con las materias enumeradas en este apartado, así como los datos del Registro regulados en el artículo 28, apartado 2 del Estatuto de los Trabajadores.\n\n3. Los planes de igualdad incluirán la totalidad de una empresa, sin perjuicio del establecimiento de acciones especiales adecuadas respecto a determinados centros de trabajo.\n\n4. Se crea un Registro de Planes de Igualdad de las Empresas, como parte de los Registros de convenios y acuerdos colectivos de trabajo dependientes de la Dirección General de Trabajo del Ministerio de Trabajo, Migraciones y Seguridad Social y de las Autoridades Laborales de las Comunidades Autónomas.\n\n5. Las empresas están obligadas a inscribir sus planes de igualdad en el citado registro.\n\n6. Reglamentariamente se desarrollará el diagnóstico, los contenidos, las materias, las auditorías salariales, los sistemas de seguimiento y evaluación de los planes de igualdad; así como el Registro de Planes de Igualdad, en lo relativo a su constitución, características y condiciones para la inscripción y acceso."
+      },
+      {
+       "numero": "47",
+       "epigrafe": "Transparencia en la implantación del plan de igualdad",
+       "texto": "Se garantiza el acceso de la representación legal de los trabajadores y trabajadoras o, en su defecto, de los propios trabajadores y trabajadoras, a la información sobre el contenido de los Planes de igualdad y la consecución de sus objetivos. Lo previsto en el párrafo anterior se entenderá sin perjuicio del seguimiento de la evolución de los acuerdos sobre planes de igualdad por parte de las comisiones paritarias de los convenios colectivos a las que éstos atribuyan estas competencias."
+      },
+      {
+       "numero": "48",
+       "epigrafe": "Medidas específicas para prevenir la comisión de delitos y otras conductas",
+       "texto": "contra la libertad sexual y la integridad moral en el trabajo.\n\n1. Las empresas deberán promover condiciones de trabajo que eviten la comisión de delitos y otras conductas contra la libertad sexual y la integridad moral en el trabajo, incidiendo especialmente en el acoso sexual y el acoso por razón de sexo, incluidos los cometidos en el ámbito digital. Con esta finalidad se podrán establecer medidas que deberán negociarse con los representantes de los trabajadores, tales como la elaboración y difusión de códigos de buenas prácticas, la realización de campañas informativas o acciones de formación.\n\n2. Los representantes de los trabajadores deberán contribuir a prevenir la comisión de delitos y otras conductas contra la libertad sexual y la integridad moral en el trabajo, con especial atención al acoso sexual y el acoso por razón de sexo, incluidos los cometidos en el ámbito digital, mediante la sensibilización de los trabajadores y trabajadoras frente al mismo y la información a la dirección de la empresa de las conductas o comportamientos de que tuvieran conocimiento y que pudieran propiciarlo."
+      },
+      {
+       "numero": "49",
+       "epigrafe": "Apoyo para la implantación voluntaria de planes de igualdad",
+       "texto": "Para impulsar la adopción voluntaria de planes de igualdad, el Gobierno establecerá medidas de fomento, especialmente dirigidas a las pequeñas y las medianas empresas, que incluirán el apoyo técnico necesario."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo IV",
+     "nombre": "Distintivo empresarial en materia de igualdad",
+     "articulos": [
+      {
+       "numero": "50",
+       "epigrafe": "Distintivo para las empresas en materia de igualdad",
+       "texto": "1. El Ministerio de Trabajo y Asuntos Sociales creará un distintivo para reconocer a aquellas empresas que destaquen por la aplicación de políticas de igualdad de trato y de oportunidades con sus trabajadores y trabajadoras, que podrá ser utilizado en el tráfico comercial de la empresa y con fines publicitarios.\n\n2. Con el fin de obtener este distintivo, cualquier empresa, sea de capital público o privado, podrá presentar al Ministerio de Trabajo y Asuntos Sociales un balance sobre los parámetros de igualdad implantados respecto de las relaciones de trabajo y la publicidad de los productos y servicios prestados.\n\n3. Reglamentariamente, se determinarán la denominación de este distintivo, el procedimiento y las condiciones para su concesión, las facultades derivadas de su obtención y las condiciones de difusión institucional de las empresas que lo obtengan y de las políticas de igualdad aplicadas por ellas.\n\n4. Para la concesión de este distintivo se tendrán en cuenta, entre otros criterios, la presencia equilibrada de mujeres y hombres en los órganos de dirección y en los distintos grupos y categorías profesionales de la empresa, la adopción de planes de igualdad u otras medidas innovadoras de fomento de la igualdad, así como la publicidad no sexista de los productos o servicios de la empresa.\n\n5. El Ministerio de Trabajo y Asuntos Sociales controlará que las empresas que obtengan el distintivo mantengan permanentemente la aplicación de políticas de igualdad de trato y de oportunidades con sus trabajadores y trabajadoras y, en caso de incumplirlas, les retirará el distintivo."
+      }
+     ],
+     "secciones": []
+    }
+   ]
+  },
+  {
+   "id": "tit-v",
+   "numero": "Título V",
+   "nombre": "El principio de igualdad en el empleo público",
+   "articulos": [],
+   "capitulos": [
+    {
+     "numero": "Capítulo I",
+     "nombre": "Criterios de actuación de las Administraciones públicas",
+     "articulos": [
+      {
+       "numero": "51",
+       "epigrafe": "Criterios de actuación de las Administraciones públicas",
+       "texto": "Las Administraciones públicas, en el ámbito de sus respectivas competencias y en aplicación del principio de igualdad entre mujeres y hombres, deberán:\n\na) Remover los obstáculos que impliquen la pervivencia de cualquier tipo de discriminación con el fin de ofrecer condiciones de igualdad efectiva entre mujeres y hombres en el acceso al empleo público y en el desarrollo de la carrera profesional.\n\nb) Facilitar la conciliación de la vida personal, familiar y laboral, sin menoscabo de la promoción profesional.\n\nc) Fomentar la formación en igualdad, tanto en el acceso al empleo público como a lo largo de la carrera profesional.\n\nd) Promover la presencia equilibrada de mujeres y hombres en los órganos de selección y valoración.\n\ne) Establecer medidas efectivas de protección frente al acoso sexual y al acoso por razón de sexo.\n\nf) Establecer medidas efectivas para eliminar cualquier discriminación retributiva, directa o indirecta, por razón de sexo.\n\ng) Evaluar periódicamente la efectividad del principio de igualdad en sus respectivos ámbitos de actuación."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo II",
+     "nombre": "El principio de presencia equilibrada en la Administración General del Estado y",
+     "articulos": [
+      {
+       "numero": "52",
+       "epigrafe": "Titulares de órganos directivos",
+       "texto": "El Gobierno atenderá al principio de presencia equilibrada de mujeres y hombres en el nombramiento de las personas titulares de los órganos directivos de la Administración General del Estado y de los organismos públicos vinculados o dependientes de ella, considerados en su conjunto, cuya designación le corresponda."
+      },
+      {
+       "numero": "53",
+       "epigrafe": "Órganos de selección y Comisiones de valoración",
+       "texto": "Todos los tribunales y órganos de selección del personal de la Administración General del Estado y de los organismos públicos vinculados o dependientes de ella responderán al principio de presencia equilibrada de mujeres y hombres, salvo por razones fundadas y objetivas, debidamente motivadas. Asimismo, la representación de la Administración General del Estado y de los organismos públicos vinculados o dependientes de ella en las comisiones de valoración de méritos para la provisión de puestos de trabajo se ajustará al principio de composición equilibrada de ambos sexos."
+      },
+      {
+       "numero": "54",
+       "epigrafe": "Designación de representantes de la Administración General del Estado",
+       "texto": "La Administración General del Estado y los organismos públicos vinculados o dependientes de ella designarán a sus representantes en órganos colegiados, comités de personas expertas o comités consultivos, nacionales o internacionales, de acuerdo con el principio de presencia equilibrada de mujeres y hombres, salvo por razones fundadas y objetivas, debidamente motivadas. Asimismo, la Administración General del Estado y los organismos públicos vinculados o dependientes de ella observarán el principio de presencia equilibrada en los nombramientos\n\nque le corresponda efectuar en los consejos de administración de las empresas en cuyo capital participe."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo III",
+     "nombre": "Medidas de Igualdad en el empleo para la Administración General del Estado y",
+     "articulos": [
+      {
+       "numero": "55",
+       "epigrafe": "Informe de impacto de género en las pruebas de acceso al empleo público",
+       "texto": "La aprobación de convocatorias de pruebas selectivas para el acceso al empleo público deberá acompañarse de un informe de impacto de género, salvo en casos de urgencia y siempre sin perjuicio de la prohibición de discriminación por razón de sexo."
+      },
+      {
+       "numero": "56",
+       "epigrafe": "Permisos y beneficios de protección a la maternidad y la conciliación de la vida",
+       "texto": "personal, familiar y laboral. Sin perjuicio de las mejoras que pudieran derivarse de acuerdos suscritos entre la Administración General del Estado o los organismos públicos vinculados o dependientes de ella con los representantes del personal al servicio de la Administración Pública, la normativa aplicable a los mismos establecerá un régimen de excedencias, reducciones de jornada, permisos u otros beneficios con el fin de proteger la maternidad y facilitar la conciliación de la vida personal, familiar y laboral. Con la misma finalidad se reconocerá un permiso de paternidad, en los términos que disponga dicha normativa."
+      },
+      {
+       "numero": "57",
+       "epigrafe": "Conciliación y provisión de puestos de trabajo",
+       "texto": "En las bases de los concursos para la provisión de puestos de trabajo se computará, a los efectos de valoración del trabajo desarrollado y de los correspondientes méritos, el tiempo que las personas candidatas hayan permanecido en las situaciones a que se refiere el artículo anterior."
+      },
+      {
+       "numero": "58",
+       "epigrafe": "Licencia por riesgo durante el embarazo y lactancia",
+       "texto": "Cuando las condiciones del puesto de trabajo de una funcionaria incluida en el ámbito de aplicación del mutualismo administrativo pudieran influir negativamente en la salud de la mujer, del hijo e hija, podrá concederse licencia por riesgo durante el embarazo, en los mismos términos y condiciones previstas en la normativa aplicable. En estos casos, se garantizará la plenitud de los derechos económicos de la funcionaria durante toda la duración de la licencia, de acuerdo con lo establecido en la legislación específica. Lo dispuesto en el párrafo anterior será también de aplicación durante el período de lactancia natural."
+      },
+      {
+       "numero": "59",
+       "epigrafe": "Vacaciones",
+       "texto": "Sin perjuicio de las mejoras que pudieran derivarse de acuerdos suscritos entre la Administración General del Estado o los organismos públicos vinculados o dependientes de ella con la representación de los empleados y empleadas al servicio de la Administración Pública, cuando el periodo de vacaciones coincida con una incapacidad temporal derivada del embarazo, parto o lactancia natural, o con el permiso de maternidad, o con su ampliación por lactancia, la empleada pública tendrá derecho a disfrutar las vacaciones en fecha distinta, aunque haya terminado el año natural al que correspondan. Gozarán de este mismo derecho quienes estén disfrutando de permiso de paternidad."
+      },
+      {
+       "numero": "60",
+       "epigrafe": "Acciones positivas en las actividades de formación",
+       "texto": "1. Con el objeto de actualizar los conocimientos de los empleados y empleadas públicas, se otorgará preferencia, durante un año, en la adjudicación de plazas para participar en los cursos de formación a quienes se hayan incorporado al servicio activo procedentes del permiso de maternidad o paternidad, o hayan reingresado desde la situación de excedencia\n\npor razones de guarda legal y atención a personas mayores dependientes o personas con discapacidad.\n\n2. Con el fin de facilitar la promoción profesional de las empleadas públicas y su acceso a puestos directivos en la Administración General del Estado y en los organismos públicos vinculados o dependientes de ella, en las convocatorias de los correspondientes cursos de formación se reservará al menos un 40% de las plazas para su adjudicación a aquéllas que reúnan los requisitos establecidos."
+      },
+      {
+       "numero": "61",
+       "epigrafe": "Formación para la igualdad",
+       "texto": "1. Todas las pruebas de acceso al empleo público de la Administración General del Estado y de los organismos públicos vinculados o dependientes de ella contemplarán el estudio y la aplicación del principio de igualdad entre mujeres y hombres en los diversos ámbitos de la función pública.\n\n2. La Administración General del Estado y los organismos públicos vinculados o dependientes de ella impartirán cursos de formación sobre la igualdad de trato y oportunidades entre mujeres y hombres y sobre prevención de la violencia de género, que se dirigirán a todo su personal."
+      },
+      {
+       "numero": "62",
+       "epigrafe": "Protocolo de actuación frente al acoso sexual y al acoso por razón de sexo",
+       "texto": "Para la prevención del acoso sexual y del acoso por razón de sexo, las Administraciones públicas negociarán con la representación legal de las trabajadoras y trabajadores, un protocolo de actuación que comprenderá, al menos, los siguientes principios:\n\na) El compromiso de la Administración General del Estado y de los organismos públicos vinculados o dependientes de ella de prevenir y no tolerar el acoso sexual y el acoso por razón de sexo.\n\nb) La instrucción a todo el personal de su deber de respetar la dignidad de las personas y su derecho a la intimidad, así como la igualdad de trato entre mujeres y hombres.\n\nc) El tratamiento reservado de las denuncias de hechos que pudieran ser constitutivos de acoso sexual o de acoso por razón de sexo, sin perjuicio de lo establecido en la normativa de régimen disciplinario.\n\nd) La identificación de las personas responsables de atender a quienes formulen una queja o denuncia."
+      },
+      {
+       "numero": "63",
+       "epigrafe": "Evaluación sobre la igualdad en el empleo público",
+       "texto": "Todos los Departamentos Ministeriales y Organismos Públicos remitirán, al menos anualmente, a los Ministerios de Trabajo y Asuntos Sociales y de Administraciones Públicas, información relativa a la aplicación efectiva en cada uno de ellos del principio de igualdad entre mujeres y hombres, con especificación, mediante la desagregación por sexo de los datos, de la distribución de su plantilla, grupo de titulación, nivel de complemento de destino y retribuciones promediadas de su personal."
+      },
+      {
+       "numero": "64",
+       "epigrafe": "Plan de Igualdad en la Administración General del Estado y en los organismos",
+       "texto": "públicos vinculados o dependientes de ella. El Gobierno aprobará, al inicio de cada legislatura, un Plan para la Igualdad entre mujeres y hombres en la Administración General del Estado y en los organismos públicos vinculados o dependientes de ella. El Plan establecerá los objetivos a alcanzar en materia de promoción de la igualdad de trato y oportunidades en el empleo público, así como las estrategias o medidas a adoptar para su consecución. El Plan será objeto de negociación, y en su caso acuerdo, con la representación legal de los empleados públicos en la forma que se determine en la legislación sobre negociación colectiva en la Administración Pública y su cumplimiento será evaluado anualmente por el Consejo de Ministros."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo IV",
+     "nombre": "Fuerzas Armadas",
+     "articulos": [
+      {
+       "numero": "65",
+       "epigrafe": "Respeto del principio de igualdad",
+       "texto": "Las normas sobre personal de las Fuerzas Armadas procurarán la efectividad del principio de igualdad entre mujeres y hombres, en especial en lo que se refiere al régimen de acceso, formación, ascensos, destinos y situaciones administrativas."
+      },
+      {
+       "numero": "66",
+       "epigrafe": "Aplicación en las Fuerzas Armadas de las normas referidas al personal de las",
+       "texto": "administraciones públicas. Las normas referidas al personal al servicio de las administraciones públicas en materia de igualdad, protección integral contra la violencia de género y la violencia sexual, y la conciliación de la vida personal, familiar y profesional serán de aplicación en las Fuerzas Armadas, con las adaptaciones que resulten necesarias y en los términos establecidos en su normativa específica."
+      }
+     ],
+     "secciones": []
+    },
+    {
+     "numero": "Capítulo V",
+     "nombre": "Fuerzas y Cuerpos de Seguridad del Estado",
+     "articulos": [
+      {
+       "numero": "67",
+       "epigrafe": "Respeto del principio de igualdad",
+       "texto": "Las normas reguladoras de las Fuerzas y Cuerpos de Seguridad del Estado promoverán la igualdad efectiva entre mujeres y hombres, impidiendo cualquier situación de discriminación profesional, especialmente, en el sistema de acceso, formación, ascensos, destinos y situaciones administrativas."
+      },
+      {
+       "numero": "68",
+       "epigrafe": "Aplicación de las normas referidas al personal de las administraciones públicas",
+       "texto": "en las Fuerzas y Cuerpos de Seguridad. Las normas referidas al personal al servicio de las administraciones públicas en materia de igualdad, prevención de la violencia de género y la violencia sexual, y la conciliación de la vida personal, familiar y profesional serán de aplicación en las Fuerzas y Cuerpos de Seguridad, adaptándose, en su caso, a las peculiaridades de las funciones que tienen encomendadas, en los términos establecidos por su normativa específica."
+      }
+     ],
+     "secciones": []
+    }
+   ]
+  },
+  {
+   "id": "tit-vi",
+   "numero": "Título VI",
+   "nombre": "Igualdad de trato en el acceso a bienes y servicios y su suministro",
+   "articulos": [
+    {
+     "numero": "69",
+     "epigrafe": "Igualdad de trato en el acceso a bienes y servicios",
+     "texto": "1. Todas las personas físicas o jurídicas que, en el sector público o en el privado, suministren bienes o servicios disponibles para el público, ofrecidos fuera del ámbito de la vida privada y familiar, estarán obligadas, en sus actividades y en las transacciones consiguientes, al cumplimiento del principio de igualdad de trato entre mujeres y hombres, evitando discriminaciones, directas o indirectas, por razón de sexo.\n\n2. Lo previsto en el apartado anterior no afecta a la libertad de contratación, incluida la libertad de la persona de elegir a la otra parte contratante, siempre y cuando dicha elección no venga determinada por su sexo.\n\n3. No obstante lo dispuesto en los apartados anteriores, serán admisibles las diferencias de trato en el acceso a bienes y servicios cuando estén justificadas por un propósito legítimo y los medios para lograrlo sean adecuados y necesarios."
+    },
+    {
+     "numero": "70",
+     "epigrafe": "Protección en situación de embarazo",
+     "texto": "En el acceso a bienes y servicios, ningún contratante podrá indagar sobre la situación de embarazo de una mujer demandante de los mismos, salvo por razones de protección de su salud."
+    },
+    {
+     "numero": "71",
+     "epigrafe": "Factores actuariales",
+     "texto": "1. Se prohíbe la celebración de contratos de seguros o de servicios financieros afines en los que, al considerar el sexo como factor de cálculo de primas y prestaciones, se generen diferencias en las primas y prestaciones de las personas aseguradas.\n\n2. Los costes relacionados con el embarazo y el parto no justificarán diferencias en las primas y prestaciones de las personas consideradas individualmente, sin que puedan autorizarse diferencias al respecto."
+    },
+    {
+     "numero": "72",
+     "epigrafe": "Consecuencias del incumplimiento de las prohibiciones",
+     "texto": "1. Sin perjuicio de otras acciones y derechos contemplados en la legislación civil y mercantil, la persona que, en el ámbito de aplicación del artículo 69, sufra una conducta discriminatoria, tendrá derecho a indemnización por los daños y perjuicios sufridos.\n\n2. En el ámbito de los contratos de seguros o de servicios financieros afines, y sin perjuicio de lo previsto en el artículo 10 de esta Ley, el incumplimiento de la prohibición contenida en el artículo 71 otorgará al contratante perjudicado el derecho a reclamar la asimilación de sus primas y prestaciones a las del sexo más beneficiado, manteniéndose en los restantes extremos la validez y eficacia del contrato."
+    }
+   ],
+   "capitulos": []
+  },
+  {
+   "id": "tit-vii",
+   "numero": "Título VII",
+   "nombre": "La igualdad en la responsabilidad social de las empresas",
+   "articulos": [
+    {
+     "numero": "73",
+     "epigrafe": "Acciones de responsabilidad social de las empresas en materia de igualdad",
+     "texto": "Las empresas podrán asumir la realización voluntaria de acciones de responsabilidad social, consistentes en medidas económicas, comerciales, laborales, asistenciales o de otra naturaleza, destinadas a promover condiciones de igualdad entre las mujeres y los hombres en el seno de la empresa o en su entorno social. La realización de estas acciones podrá ser concertada con la representación de los trabajadores y las trabajadoras, las organizaciones de consumidores y consumidoras y usuarios y usuarias, las asociaciones cuyo fin primordial sea la defensa de la igualdad de trato entre mujeres y hombres y los Organismos de Igualdad. Se informará a los representantes de los trabajadores de las acciones que no se concierten con los mismos. A las decisiones empresariales y acuerdos colectivos relativos a medidas laborales les será de aplicación la normativa laboral."
+    },
+    {
+     "numero": "74",
+     "epigrafe": "Publicidad de las acciones de responsabilidad social en materia de igualdad",
+     "texto": "Las empresas podrán hacer uso publicitario de sus acciones de responsabilidad en materia de igualdad, de acuerdo con las condiciones establecidas en la legislación general de publicidad. El Instituto de la Mujer, u órganos equivalentes de las Comunidades Autónomas, estarán legitimados para ejercer la acción de cesación cuando consideren que pudiera haberse incurrido en supuestos de publicidad engañosa."
+    },
+    {
+     "numero": "75",
+     "epigrafe": "Participación de las mujeres en los Consejos de administración de las",
+     "texto": "sociedades mercantiles. Las sociedades obligadas a presentar cuenta de pérdidas y ganancias no abreviada procurarán incluir en su Consejo de administración un número de mujeres que permita alcanzar una presencia equilibrada de mujeres y hombres en un plazo de ocho años a partir de la entrada en vigor de esta Ley. Lo previsto en el párrafo anterior se tendrá en cuenta para los nombramientos que se realicen a medida que venza el mandato de los consejeros designados antes de la entrada en vigor de esta Ley."
+    }
+   ],
+   "capitulos": []
+  },
+  {
+   "id": "tit-viii",
+   "numero": "Título VIII",
+   "nombre": "Disposiciones organizativas",
+   "articulos": [
+    {
+     "numero": "76",
+     "epigrafe": "Comisión Interministerial de Igualdad entre mujeres y hombres",
+     "texto": "La Comisión Interministerial de Igualdad entre mujeres y hombres es el órgano colegiado responsable de la coordinación de las políticas y medidas adoptadas por los departamentos ministeriales con la finalidad de garantizar el derecho a la igualdad entre mujeres y hombres y promover su efectividad. Su composición y funcionamiento se determinarán reglamentariamente."
+    },
+    {
+     "numero": "77",
+     "epigrafe": "Las Unidades de Igualdad",
+     "texto": "En todos los Ministerios se encomendará a uno de sus órganos directivos el desarrollo de las funciones relacionadas con el principio de igualdad entre mujeres y hombres en el ámbito de las materias de su competencia y, en particular, las siguientes:\n\na) Recabar la información estadística elaborada por los órganos del Ministerio y asesorar a los mismos en relación con su elaboración.\n\nb) Elaborar estudios con la finalidad de promover la igualdad entre mujeres y hombres en las áreas de actividad del Departamento.\n\nc) Asesorar a los órganos competentes del Departamento en la elaboración del informe sobre impacto por razón de género.\n\nd) Fomentar el conocimiento por el personal del Departamento del alcance y significado del principio de igualdad mediante la formulación de propuestas de acciones formativas.\n\ne) Velar por el cumplimiento de esta Ley y por la aplicación efectiva del principio de igualdad."
+    },
+    {
+     "numero": "78",
+     "epigrafe": "Consejo de Participación de la Mujer",
+     "texto": "1. Se crea el Consejo de Participación de la Mujer, como órgano colegiado de consulta y asesoramiento, con el fin esencial de servir de cauce para la participación de las mujeres en la consecución efectiva del principio de igualdad de trato y de oportunidades entre mujeres y hombres, y la lucha contra la discriminación por razón de sexo.\n\n2. Reglamentariamente, se establecerán su régimen de funcionamiento, competencias y composición, garantizándose, en todo caso, la participación del conjunto de las Administraciones públicas y de las asociaciones y organizaciones de mujeres de ámbito estatal."
+    }
+   ],
+   "capitulos": []
+  }
+ ],
+ "disposiciones": [
+  {
+   "tipo": "Disposiciones",
+   "items": [
+    {
+     "numero": "",
+     "texto": "Disposición adicional primera. Presencia o composición equilibrada. A los efectos de esta Ley, se entenderá por composición equilibrada la presencia de mujeres y hombres de forma que, en el conjunto a que se refiera, las personas de cada sexo no superen el sesenta por ciento ni sean menos del cuarenta por ciento."
+    },
+    {
+     "numero": "",
+     "texto": "Disposición adicional segunda. Modificación de la Ley Orgánica de Régimen Electoral General. Se modifica la Ley Orgánica 5/1985, de 19 de junio, del Régimen Electoral General, en los siguientes términos: Uno. Se añade un nuevo artículo 44 bis, redactado en los siguientes términos:"
+    },
+    {
+     "numero": "",
+     "texto": "«Artículo 44 bis.\n\n1. Las candidaturas que se presenten para las elecciones de diputados al Congreso, municipales y de miembros de los consejos insulares y de los cabildos insulares canarios en los términos previstos en esta Ley, diputados al Parlamento Europeo y miembros de las Asambleas Legislativas de las Comunidades Autónomas deberán tener una composición equilibrada de mujeres y hombres, de forma que en el conjunto de la lista los candidatos de cada uno de los sexos supongan como mínimo el cuarenta por ciento. Cuando el número de puestos a cubrir sea inferior a"
+    },
+    {
+     "numero": "",
+     "texto": "cinco, la proporción de mujeres y hombres será lo más cercana posible al equilibrio numérico. En las elecciones de miembros de las Asambleas Legislativas de las Comunidades Autónomas, las leyes reguladoras de sus respectivos regímenes electorales podrán establecer medidas que favorezcan una mayor presencia de mujeres en las candidaturas que se presenten a las Elecciones de las citadas Asambleas Legislativas.\n\n2. También se mantendrá la proporción mínima del cuarenta por ciento en cada tramo de cinco puestos. Cuando el último tramo de la lista no alcance los cinco puestos, la referida proporción de mujeres y hombres en ese tramo será lo más cercana posible al equilibrio numérico, aunque deberá mantenerse en cualquier caso la proporción exigible respecto del conjunto de la lista.\n\n3. A las listas de suplentes se aplicarán las reglas contenidas en los anteriores apartados.\n\n4. Cuando las candidaturas para el Senado se agrupen en listas, de acuerdo con lo dispuesto en el artículo 171 de esta Ley, tales listas deberán tener igualmente una composición equilibrada de mujeres y hombres, de forma que la proporción de unas y otros sea lo más cercana posible al equilibrio numérico.» Dos. Se añade un nuevo párrafo al apartado 2 del artículo 187, redactado en los siguientes términos: «Lo previsto en el artículo 44 bis de esta ley no será exigible en las candidaturas que se presenten en los municipios con un número de residentes igual o inferior a 3.000 habitantes.» Tres. Se añade un nuevo párrafo al apartado 3 del artículo 201, redactado en los siguientes términos: «Lo previsto en el artículo 44 bis de esta ley no será exigible en las candidaturas que se presenten en las islas con un número de residentes igual o inferior a 5.000 habitantes.» Cuatro. Se modifica el apartado 2 de la disposición adicional primera, que queda redactado en los siguientes términos: «2. En aplicación de las competencias que la Constitución reserva al Estado se aplican también a las elecciones a Asambleas Legislativas de Comunidades Autónomas convocadas por éstas, los siguientes artículos del título primero de esta Ley Orgánica: 1 al 42; 44; 44 bis; 45; 46.1, 2, 4, 5, 6 y 8; 47.4; 49; 51.2 y 3; 52; 53; 54; 58; 59; 60; 61; 62; 63; 65; 66; 68; 69; 70.1 y 3; 72; 73; 74; 75; 85; 86.1; 90; 91; 92; 93; 94; 95.3; 96; 103.2; 108.2 y 8; 109 a 119; 125 a 130; 131.2; 132; 135 a 152.» Cinco. Se añade una nueva disposición transitoria séptima, redactada en los siguientes términos: «En las convocatorias a elecciones municipales que se produzcan antes de 2011, lo previsto en el artículo 44 bis solo será exigible en los municipios con un número de residentes superior a 5.000 habitantes, aplicándose a partir del 1 de enero de ese año la cifra de habitantes prevista en el segundo párrafo del apartado 2 del artículo 187 de la presente Ley.»"
+    },
+    {
+     "numero": "",
+     "texto": "Disposición adicional tercera. Modificaciones de la Ley Orgánica del Poder Judicial. Se modifica la Ley Orgánica 6/1985, de 1 de julio, del Poder Judicial, en los siguientes términos: Uno. Se añade un último inciso en el apartado 1 del artículo 109, que queda en los siguientes términos: «1. El Consejo General del Poder Judicial elevará anualmente a las Cortes Generales una Memoria sobre el estado, funcionamiento y actividades del propio Consejo y de los Juzgados y Tribunales de Justicia. Asimismo, incluirá las necesidades que, a su juicio, existan en materia de personal, instalaciones y de recursos, en general, para el correcto desempeño de las funciones que la"
+    },
+    {
+     "numero": "",
+     "texto": "Constitución y las leyes asignan al Poder Judicial. Incluirá también un capítulo sobre el impacto de género en el ámbito judicial.» Dos. Se añade un nuevo párrafo, intercalado entre el primero y el segundo, al apartado 3 del artículo 110, con la siguiente redacción: «En todo caso, se elaborará un informe previo de impacto de género.» Tres. Se añade, en el artículo 122.1, después de «Comisión de Calificación», la expresión «Comisión de Igualdad». Cuatro. Se añade un artículo 136 bis que integrará la nueva Sección 7.ª del Capítulo IV, Título II, Libro II, rubricada como «De la Comisión de Igualdad», con la siguiente redacción:"
+    },
+    {
+     "numero": "",
+     "texto": "«Artículo 136 bis.\n\n1. El Pleno del Consejo General del Poder Judicial elegirá anualmente, de entre sus Vocales, por mayoría de tres quintos y atendiendo al principio de presencia equilibrada entre mujeres y hombres, a los componentes de la Comisión de Igualdad, que estará integrada por cinco miembros.\n\n2. La Comisión de Igualdad deberá actuar con la asistencia de todos sus componentes y bajo la presidencia del miembro de la misma que sea elegido por mayoría. En caso de transitoria imposibilidad o ausencia justificada de alguno de los miembros, se procederá a su sustitución por otro Vocal del Consejo, preferentemente del mismo sexo, que será designado por la Comisión Permanente.\n\n3. Corresponderá a la Comisión de Igualdad asesorar al Pleno sobre las medidas necesarias o convenientes para integrar activamente el principio de igualdad entre mujeres y hombres en el ejercicio de las atribuciones del Consejo General del Poder Judicial y, en particular, le corresponderá elaborar los informes previos sobre impacto de género de los reglamentos y mejorar los parámetros de igualdad en la Carrera Judicial.» Cinco. Se modifica el artículo 310, que tendrá la siguiente redacción: «Todas las pruebas selectivas para el ingreso y la promoción en las Carreras Judicial y Fiscal contemplarán el estudio del principio de igualdad entre mujeres y hombres, incluyendo las medidas contra la violencia de género, y su aplicación con carácter transversal en el ámbito de la función jurisdiccional.» Seis. Se modifica el primer párrafo del apartado e) del artículo 356, que queda redactado como sigue: «e) También tendrán derecho a un período de excedencia, de duración no superior a tres años, para atender al cuidado de un familiar que se encuentre a su cargo, hasta el segundo grado inclusive de consanguinidad o afinidad que, por razones de edad, accidente o enfermedad, no pueda valerse por sí mismo y no desempeñe actividad retribuida.» Siete. Se añade una nueva letra e) en el artículo 348, en los siguientes términos: «e) Excedencia por razón de violencia sobre la mujer.» Ocho. Se modifica el artículo 357, que pasa a tener la siguiente redacción:"
+    },
+    {
+     "numero": "",
+     "texto": "«Artículo 357. Cuando un magistrado del Tribunal Supremo solicitara la excedencia voluntaria y le fuere concedida, perderá su condición de tal, salvo en el supuesto previsto en las letras d) y e) del artículo anterior y en el artículo 360 bis. En los demás casos quedará integrado en situación de excedencia voluntaria, dentro de la categoría de Magistrado.» Nueve. Se modifica el artículo 358.2 en los siguientes términos: «2. Se exceptúan de lo previsto en el apartado anterior las excedencias voluntarias para el cuidado de hijos y para atender al cuidado de un familiar a que se refieren los apartados d) y e) del artículo 356, en las que el periodo de permanencia en dichas situaciones será computable a efectos de trienios y derechos pasivos. Durante los dos primeros años se tendrá derecho a la reserva de la plaza en la que"
+    },
+    {
+     "numero": "",
+     "texto": "se ejerciesen sus funciones y al cómputo de la antigüedad. Transcurrido este periodo, dicha reserva lo será a un puesto en la misma provincia y de igual categoría, debiendo solicitar, en el mes anterior a la finalización del periodo máximo de permanencia en la misma, el reingreso al servicio activo; de no hacerlo, será declarado de oficio en la situación de excedencia voluntaria por interés particular.» Diez. Se añade un nuevo artículo 360 bis con la siguiente redacción:"
+    },
+    {
+     "numero": "",
+     "texto": "«Artículo 360 bis.\n\n1. Las juezas y magistradas víctimas de violencia de género tendrán derecho a solicitar la situación de excedencia por razón de violencia sobre la mujer sin necesidad de haber prestado un tiempo mínimo de servicios previos. En esta situación administrativa se podrá permanecer un plazo máximo de tres años.\n\n2. Durante los seis primeros meses tendrán derecho a la reserva del puesto de trabajo que desempeñaran, siendo computable dicho periodo a efectos de ascensos, trienios y derechos pasivos. Esto no obstante, cuando de las actuaciones de tutela judicial resultase que la efectividad del derecho de protección de la víctima lo exigiere, se podrá prorrogar por periodos de tres meses, con un máximo de dieciocho, el periodo en el que, de acuerdo con el párrafo anterior, se tendrá derecho a la reserva del puesto de trabajo, con idénticos efectos a los señalados en dicho párrafo.\n\n3. Las juezas y magistradas en situación de excedencia por razón de violencia sobre la mujer percibirán, durante los dos primeros meses de esta excedencia, las retribuciones íntegras y, en su caso, las prestaciones familiares por hijo a cargo.\n\n4. El reingreso en el servicio activo de las juezas y magistradas en situación administrativa de excedencia por razón de violencia sobre la mujer de duración no superior a seis meses se producirá en el mismo órgano jurisdiccional respecto del que tenga reserva del puesto de trabajo que desempeñaran con anterioridad; si el periodo de duración de la excedencia es superior a 6 meses el reingreso exigirá que las juezas y magistradas participen en todos los concursos que se anuncien para cubrir plazas de su categoría hasta obtener destino. De no hacerlo así, se les declarará en situación de excedencia voluntaria por interés particular.» Once. Se suprime el artículo 370. Doce. Se modifica el apartado 5 del artículo 373, con la siguiente redacción: «5. Por el fallecimiento, accidente o enfermedad graves del cónyuge, de persona a la que estuviese unido por análoga relación de afectividad o de un familiar dentro del primer grado de consanguinidad o afinidad, los jueces o magistrados podrán disponer de un permiso de tres días hábiles, que podrá ser de hasta cinco días hábiles cuando a tal efecto sea preciso un desplazamiento a otra localidad, en cuyo caso será de cinco días hábiles. Estos permisos quedarán reducidos a dos y cuatro días hábiles, respectivamente, cuando el fallecimiento y las otras circunstancias señaladas afecten a familiares en segundo grado de afinidad o consanguinidad.» Trece. Se añade un nuevo apartado 6 al artículo 373, con la siguiente redacción: «6. Por el nacimiento, acogimiento o adopción de un hijo, el juez o magistrado tendrá derecho a disfrutar de un permiso de paternidad de quince días, a partir de la fecha del nacimiento, de la decisión administrativa o judicial de acogimiento o de la resolución judicial por la que se constituya la adopción.» Catorce. Se añade un nuevo apartado 7 al artículo 373, con la siguiente redacción: «7. Los jueces y magistrados tendrán derecho a permisos y licencias para la conciliación de la vida personal, familiar y laboral, y por razón de violencia de género. El Consejo General del Poder Judicial, mediante reglamento, adaptará a las particularidades de la carrera judicial la normativa de la Administración General del Estado vigente en la materia.» Quince. Se añade un apartado 5 al artículo 433 bis, con la siguiente redacción:"
+    },
+    {
+     "numero": "",
+     "texto": "«5. El Plan de Formación Continuada de la Carrera Judicial contemplará la formación de los Jueces y Magistrados en el principio de igualdad entre mujeres y hombres y la perspectiva de género. La Escuela Judicial impartirá anualmente cursos de formación sobre la tutela jurisdiccional del principio de igualdad entre mujeres y hombres y la violencia de género.» Dieciséis. Se añade un segundo párrafo al apartado 2 del artículo 434, con la siguiente redacción: «El Centro de Estudios Jurídicos impartirá anualmente cursos de formación sobre el principio de igualdad entre mujeres y hombres y su aplicación con carácter transversal por los miembros de la Carrera Fiscal, el Cuerpo de Secretarios y demás personal al servicio de la Administración de Justicia, así como sobre la detección y el tratamiento de situaciones de violencia de género.»"
+    },
+    {
+     "numero": "",
+     "texto": "Disposición adicional cuarta. Modificación del Estatuto Orgánico del Ministerio Fiscal. Se modifica la Ley 50/1981, de 30 de diciembre, por la que se aprueba el Estatuto Orgánico del Ministerio Fiscal en los siguientes términos: Se añade un último párrafo en el apartado 1 del artículo 14, que tendrá la siguiente redacción: «Habrá de integrarse en el seno del Consejo Fiscal una Comisión de Igualdad para el estudio de la mejora de los parámetros de igualdad en la Carrera Fiscal, cuya composición quedará determinada en la normativa que rige la constitución y funcionamiento del Consejo Fiscal.»"
+    },
+    {
+     "numero": "",
+     "texto": "Disposición adicional quinta. Modificaciones de la Ley de Enjuiciamiento Civil. Uno. Se introduce un nuevo artículo 11 bis a la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil, en los siguientes términos:"
+    },
+    {
+     "numero": "",
+     "texto": "«Artículo 11 bis. Legitimación para la defensa del derecho a la igualdad de trato entre mujeres y hombres.\n\n1. Para la defensa del derecho de igualdad de trato entre mujeres y hombres, además de los afectados y siempre con su autorización, estarán también legitimados los sindicatos y las asociaciones legalmente constituidas cuyo fin primordial sea la defensa de la igualdad de trato entre mujeres y hombres, respecto de sus afiliados y asociados, respectivamente.\n\n2. Cuando los afectados sean una pluralidad de personas indeterminada o de difícil determinación, la legitimación para demandar en juicio la defensa de estos intereses difusos corresponderá exclusivamente a los organismos públicos con competencia en la materia, a los sindicatos más representativos y a las asociaciones de ámbito estatal cuyo fin primordial sea la igualdad entre mujeres y hombres, sin perjuicio, si los afectados estuvieran determinados, de su propia legitimación procesal.\n\n3. La persona acosada será la única legitimada en los litigios sobre acoso sexual y acoso por razón de sexo.» Dos. Se modifica el supuesto 5.º del apartado 1 del artículo 188 de la Ley 1/2000, de 7 de enero, de Enjuiciamiento Civil, que quedará redactado del siguiente modo: «5. Por muerte, enfermedad o imposibilidad absoluta o baja por maternidad o paternidad del abogado de la parte que pidiere la suspensión, justificadas suficientemente, a juicio del Tribunal, siempre que tales hechos se hubiesen producido cuando ya no fuera posible solicitar nuevo señalamiento conforme a lo dispuesto en el artículo 183, siempre que se garantice el derecho a la tutela judicial efectiva y no se cause indefensión. Igualmente, serán equiparables a los supuestos anteriores y con los mismos requisitos, otras situaciones análogas previstas en otros sistemas de previsión social y por el mismo tiempo por el que se otorgue la baja y la prestación de los permisos previstos en la legislación de la Seguridad Social.»"
+    }
+   ]
+  }
+ ]
+}
