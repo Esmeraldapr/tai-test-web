@@ -80,6 +80,12 @@
         <p>Los 48 artículos de la ley de la dependencia. Segunda de las cinco leyes del tema 5, con los dos artículos sobre grados de dependencia que ya han caído en examen.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="lo1-2004.html">
+        <div class="accion-icono">🚨</div>
+        <h3>LO 1/2004, violencia de género</h3>
+        <p>Los 74 artículos de la ley integral contra la violencia de género. Tercera de las cinco leyes del tema 5, con el artículo sobre el sistema educativo que cayó en el examen de 2026.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
