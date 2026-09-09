@@ -1,9 +1,9 @@
 // ============================================================
 // Lógica de "Los imprescindibles" (imprescindibles.html)
 // Fichas de conceptos clave, agrupadas por bloque y tema.
-// Lectura de una ficha suelta: leerTexto() de common.js.
-// Lectura continua (tema entero o todo lo filtrado): reproductor propio,
-// porque leerTexto lee un solo texto y corta lo anterior al empezar.
+// La lectura (una ficha suelta, un tema entero o todo lo filtrado) usa
+// leerTexto()/leerEnCola() de common.js, pasando los elementos del DOM de
+// cada ficha para que se resalte palabra a palabra mientras suena.
 // ============================================================
 
 // El favicon se pone desde aquí con LOGO_BUHO (config.js) en vez de repetir el
@@ -44,16 +44,18 @@
 let TODAS = [];
 let VISIBLES = [];
 
-// --- Reproductor de lectura continua -------------------------------------
-const lector = { cola: [], indice: 0, activo: false };
+// --- Lectura continua -------------------------------------
+// El progreso ("Ficha 3 de 12") y qué ficha está sonando ahora se llevan
+// aparte, en paralelo a la cola que gestiona leerEnCola() de common.js.
+let progresoLectura = { total: 0, activo: false };
 
-function textoDeFicha(f) {
-  const partes = [f.termino];
-  if (f.siglas) partes.push(f.siglas);
-  partes.push(f.definicion);
-  if (f.puerto) partes.push(`Puerto ${f.puerto}`);
-  if (f.nota) partes.push(f.nota);
-  return partes.join(". ").replace(/\s+/g, " ").trim();
+/** Devuelve, en el orden en que se leen visualmente, los elementos del DOM
+ * de una ficha ya pintada (para resaltar mientras se lee). */
+function elementosDeFicha(articleEl) {
+  if (!articleEl) return [];
+  return Array.from(
+    articleEl.querySelectorAll(".imp-termino, .imp-puerto, .imp-siglas, .imp-definicion, .imp-nota")
+  );
 }
 
 function marcarSonando(id) {
@@ -68,49 +70,40 @@ function marcarSonando(id) {
 function actualizarBotonesLector() {
   const btn = document.getElementById("imp-btn-todo");
   const prog = document.getElementById("imp-progreso");
-  if (btn) btn.textContent = lector.activo ? "⏹️ Parar" : "🔊 Escuchar todo";
-  if (prog) prog.textContent = lector.activo ? `Ficha ${lector.indice + 1} de ${lector.cola.length}` : "";
-  document.querySelectorAll(".imp-btn-tema").forEach((b) => { b.disabled = lector.activo; });
+  if (btn) btn.textContent = progresoLectura.activo ? "⏹️ Parar" : "🔊 Escuchar todo";
+  if (prog) prog.textContent = "";
+  document.querySelectorAll(".imp-btn-tema").forEach((b) => { b.disabled = progresoLectura.activo; });
 }
 
 function pararLectura() {
-  lector.activo = false;
-  lector.cola = [];
-  lector.indice = 0;
-  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  progresoLectura = { total: 0, activo: false };
+  if (typeof detenerLectura === "function") detenerLectura();
   marcarSonando(null);
   actualizarBotonesLector();
 }
 
-function siguienteEnCola() {
-  if (!lector.activo) return;
-  if (lector.indice >= lector.cola.length) {
-    pararLectura();
-    return;
-  }
-  const ficha = lector.cola[lector.indice];
-  marcarSonando(ficha.id);
-  actualizarBotonesLector();
-  const u = new SpeechSynthesisUtterance(textoDeFicha(ficha));
-  u.lang = "es-ES";
-  u.rate = typeof VELOCIDAD_VOZ !== "undefined" ? VELOCIDAD_VOZ : 0.95;
-  u.onend = () => { lector.indice += 1; siguienteEnCola(); };
-  u.onerror = () => { lector.indice += 1; siguienteEnCola(); };
-  window.speechSynthesis.speak(u);
-}
-
-function empezarLectura(fichas) {
-  if (!window.speechSynthesis) {
-    alert("Tu navegador no admite la lectura en voz alta.");
-    return;
-  }
-  if (typeof detenerLectura === "function") detenerLectura();
-  window.speechSynthesis.cancel();
-  lector.cola = fichas;
-  lector.indice = 0;
-  lector.activo = true;
-  actualizarBotonesLector();
-  siguienteEnCola();
+function empezarLectura(fichas, boton) {
+  if (!fichas.length) return;
+  progresoLectura = { total: fichas.length, activo: true };
+  const prog = document.getElementById("imp-progreso");
+  const items = fichas.map((f, i) => ({
+    elementos: elementosDeFicha(document.querySelector(`.imp-ficha[data-ficha="${f.id}"]`)),
+    alEmpezar: () => {
+      marcarSonando(f.id);
+      if (prog) prog.textContent = `Ficha ${i + 1} de ${fichas.length}`;
+      document.querySelectorAll(".imp-btn-tema").forEach((b) => { b.disabled = true; });
+      const btnTodo = document.getElementById("imp-btn-todo");
+      if (btnTodo) btnTodo.textContent = "⏹️ Parar";
+    },
+  }));
+  leerEnCola(items, {
+    boton,
+    alTerminarTodo: () => {
+      progresoLectura = { total: 0, activo: false };
+      marcarSonando(null);
+      actualizarBotonesLector();
+    },
+  });
 }
 
 // --- Pintado --------------------------------------------------------------
@@ -177,21 +170,21 @@ function pintarFichas(filas) {
     </section>`).join("");
 
   document.getElementById("imp-btn-todo").addEventListener("click", () => {
-    if (lector.activo) pararLectura();
-    else empezarLectura(VISIBLES.slice());
+    if (progresoLectura.activo) pararLectura();
+    else empezarLectura(VISIBLES.slice(), document.getElementById("imp-btn-todo"));
   });
 
   zona.querySelectorAll(".imp-btn-tema").forEach((btn) => {
     btn.addEventListener("click", () => {
-      empezarLectura(grupos[Number(btn.dataset.grupo)].fichas.slice());
+      empezarLectura(grupos[Number(btn.dataset.grupo)].fichas.slice(), document.getElementById("imp-btn-todo"));
     });
   });
 
   zona.querySelectorAll(".imp-voz").forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (lector.activo) pararLectura();
-      const ficha = TODAS.find((f) => String(f.id) === btn.dataset.id);
-      if (ficha) leerTexto(textoDeFicha(ficha), btn);
+      if (progresoLectura.activo) pararLectura();
+      const articleEl = btn.closest(".imp-ficha");
+      leerTexto(elementosDeFicha(articleEl), btn);
     });
   });
 }

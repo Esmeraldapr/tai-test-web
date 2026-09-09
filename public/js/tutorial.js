@@ -81,52 +81,52 @@ const SECCIONES_TUTORIAL = [
 ];
 
 // --- Lectura continua del tutorial entero --------------------------------
-// Reproductor propio, igual que en Los imprescindibles: leerTexto() de
-// common.js solo lee un texto y corta lo anterior al empezar.
-const lectorTut = { indice: 0, activo: false };
+// Usa leerEnCola() de common.js: cada sección se anuncia con su título (sin
+// resaltar, es solo el rótulo) y se resalta palabra a palabra el cuerpo.
+let progresoTutorial = { activo: false };
 
 function actualizarBotonTutorial() {
   const btn = document.getElementById("tut-btn-todo");
   const prog = document.getElementById("tut-progreso");
-  if (btn) btn.textContent = lectorTut.activo ? "⏹️ Parar" : "🔊 Escuchar el tutorial entero";
-  if (prog) {
-    prog.textContent = lectorTut.activo
-      ? `Sección ${lectorTut.indice + 1} de ${SECCIONES_TUTORIAL.length}`
-      : "";
-  }
+  if (btn) btn.textContent = progresoTutorial.activo ? "⏹️ Parar" : "🔊 Escuchar el tutorial entero";
+  if (prog && !progresoTutorial.activo) prog.textContent = "";
 }
 
 function pararTutorial() {
-  lectorTut.activo = false;
-  lectorTut.indice = 0;
-  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  progresoTutorial.activo = false;
+  if (typeof detenerLectura === "function") detenerLectura();
   document.querySelectorAll(".tutorial-item.sonando").forEach((el) => el.classList.remove("sonando"));
   actualizarBotonTutorial();
 }
 
-function siguienteSeccion() {
-  if (!lectorTut.activo) return;
-  if (lectorTut.indice >= SECCIONES_TUTORIAL.length) {
-    pararTutorial();
-    return;
-  }
-  const idx = lectorTut.indice;
-  const s = SECCIONES_TUTORIAL[idx];
-  document.querySelectorAll(".tutorial-item.sonando").forEach((el) => el.classList.remove("sonando"));
-  const item = document.querySelector(`.tutorial-item[data-item="${idx}"]`);
-  if (item) {
-    item.classList.add("sonando");
-    item.scrollIntoView({ behavior: "smooth", block: "center" });
-    document.getElementById(`cuerpo-tutorial-${idx}`).classList.add("abierta");
-    document.getElementById(`chevron-tutorial-${idx}`).classList.add("abierto");
-  }
-  actualizarBotonTutorial();
-  const u = new SpeechSynthesisUtterance(`${s.titulo}. ${s.texto}`);
-  u.lang = "es-ES";
-  u.rate = typeof VELOCIDAD_VOZ !== "undefined" ? VELOCIDAD_VOZ : 0.95;
-  u.onend = () => { lectorTut.indice += 1; siguienteSeccion(); };
-  u.onerror = () => { lectorTut.indice += 1; siguienteSeccion(); };
-  window.speechSynthesis.speak(u);
+function empezarTutorial(boton) {
+  progresoTutorial.activo = true;
+  const prog = document.getElementById("tut-progreso");
+  const items = SECCIONES_TUTORIAL.map((s, idx) => ({
+    prefijo: s.titulo,
+    elementos: document.getElementById(`cuerpo-tutorial-${idx}`),
+    alEmpezar: () => {
+      document.querySelectorAll(".tutorial-item.sonando").forEach((el) => el.classList.remove("sonando"));
+      const item = document.querySelector(`.tutorial-item[data-item="${idx}"]`);
+      if (item) {
+        item.classList.add("sonando");
+        item.scrollIntoView({ behavior: "smooth", block: "center" });
+        document.getElementById(`cuerpo-tutorial-${idx}`).classList.add("abierta");
+        document.getElementById(`chevron-tutorial-${idx}`).classList.add("abierto");
+      }
+      if (prog) prog.textContent = `Sección ${idx + 1} de ${SECCIONES_TUTORIAL.length}`;
+      const btnTodo = document.getElementById("tut-btn-todo");
+      if (btnTodo) btnTodo.textContent = "⏹️ Parar";
+    },
+  }));
+  leerEnCola(items, {
+    boton,
+    alTerminarTodo: () => {
+      progresoTutorial.activo = false;
+      document.querySelectorAll(".tutorial-item.sonando").forEach((el) => el.classList.remove("sonando"));
+      actualizarBotonTutorial();
+    },
+  });
 }
 
 (async function iniciar() {
@@ -186,7 +186,7 @@ function siguienteSeccion() {
   // Altavoz de cada sección: abre el cuerpo si estaba cerrado y lo lee entero.
   document.querySelectorAll(".tut-voz").forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (lectorTut.activo) pararTutorial();
+      if (progresoTutorial.activo) pararTutorial();
       const idx = Number(btn.dataset.idx);
       const s = SECCIONES_TUTORIAL[idx];
       const cuerpo = document.getElementById(`cuerpo-tutorial-${idx}`);
@@ -195,18 +195,14 @@ function siguienteSeccion() {
         cuerpo.classList.add("abierta");
         chevron.classList.add("abierto");
       }
-      leerTexto(`${s.titulo}. ${s.texto}`, btn);
+      leerEnCola([{ prefijo: s.titulo, elementos: cuerpo }], { boton: btn });
     });
   });
 
   document.getElementById("tut-btn-todo").addEventListener("click", () => {
-    if (lectorTut.activo) { pararTutorial(); return; }
+    if (progresoTutorial.activo) { pararTutorial(); return; }
     if (!window.speechSynthesis) { alert("Tu navegador no admite la lectura en voz alta."); return; }
-    if (typeof detenerLectura === "function") detenerLectura();
-    window.speechSynthesis.cancel();
-    lectorTut.indice = 0;
-    lectorTut.activo = true;
-    siguienteSeccion();
+    empezarTutorial(document.getElementById("tut-btn-todo"));
   });
 
   window.addEventListener("beforeunload", pararTutorial);

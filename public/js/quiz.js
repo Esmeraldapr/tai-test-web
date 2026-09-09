@@ -118,7 +118,7 @@ function pintarPregunta() {
     return `
       <button type="button" class="${clases}" data-opcion="${letra}" ${respondida ? "disabled" : ""}>
                   <span class="letra">${"ABCD"[i]}</span>
-        <span>${op}</span>
+        <span class="opcion-texto">${op}</span>
             </button>`;
   }).join("");
 
@@ -173,12 +173,28 @@ function anteriorPregunta() {
 }
 
 /** Lee en voz alta el enunciado y las 4 opciones seguidas — pensado para
- * usuarios con dislexia que prefieren escuchar la pregunta completa. */
+ * usuarios con dislexia que prefieren escuchar la pregunta completa.
+ * Cada parte se resalta palabra a palabra mientras suena, y la opción que
+ * toca en cada momento se marca visualmente (igual que el resto de la web
+ * marca "lo que suena ahora" en fichas y leyes). */
 function leerPreguntaCompleta(pregunta, opciones, letras) {
   const btn = document.getElementById("btn-leer");
-  const partes = [pregunta.pregunta];
-  opciones.forEach((op, i) => partes.push(`Opción ${letras[i].toUpperCase()}: ${op}`));
-  leerTexto(partes.join(". "), btn);
+  const enunciadoEl = document.querySelector(".enunciado.parrafo-leible");
+  const items = [{ elementos: enunciadoEl }];
+  document.querySelectorAll(".opcion").forEach((boton, i) => {
+    items.push({
+      prefijo: `Opción ${letras[i].toUpperCase()}`,
+      elementos: boton.querySelector(".opcion-texto"),
+      alEmpezar: () => {
+        document.querySelectorAll(".opcion.leyendo-ahora").forEach((el) => el.classList.remove("leyendo-ahora"));
+        boton.classList.add("leyendo-ahora");
+      },
+    });
+  });
+  leerEnCola(items, {
+    boton: btn,
+    alTerminarTodo: () => document.querySelectorAll(".opcion.leyendo-ahora").forEach((el) => el.classList.remove("leyendo-ahora")),
+  });
 }
 
 // "Pasar" no cuenta como fallo: no llama a comprobar_respuesta_web (así no se
