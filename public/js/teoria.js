@@ -86,6 +86,12 @@
         <p>Los 74 artículos de la ley integral contra la violencia de género. Tercera de las cinco leyes del tema 5, con el artículo sobre el sistema educativo que cayó en el examen de 2026.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="ley4-2023.html">
+        <div class="accion-icono">🏳️‍🌈</div>
+        <h3>Ley 4/2023, trans y LGTBI</h3>
+        <p>Los 82 artículos de la ley de igualdad real y efectiva de las personas trans y LGTBI. Cuarta de las cinco leyes del tema 5, con el artículo sobre infracciones que cayó como pregunta de reserva en 2026.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
