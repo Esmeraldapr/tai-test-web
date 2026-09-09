@@ -553,3 +553,7 @@ input:focus-visible,
 @media (prefers-reduced-motion: reduce){
   .palabra-tts-activa{ scroll-behavior:auto; }
 }
+.opcion.leyendo-ahora{
+  border-color:var(--morado);
+  box-shadow:0 0 0 2px var(--morado-suave);
+}
