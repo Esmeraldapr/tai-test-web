@@ -150,36 +150,187 @@ function pintarBannerAcceso(usuario) {
   }
 }
 
-// ---------------- Accesibilidad: lectura en voz alta + lightbox ----------------
+// ---------------- Accesibilidad: lectura en voz alta con resaltado ----------------
+// Motor único para toda la web. Antes cada página (leyes, imprescindibles,
+// tutorial, preguntas) tenía su propia copia de esto, sin resaltar nada.
+// Ahora todas llaman a leerEnCola()/leerTexto() de aquí: un solo sitio que
+// tocar, y todas ganan el resaltado palabra a palabra a la vez (pensado
+// sobre todo para dislexia y otras dificultades lectoras, como "Leer en voz
+// alta" de Word).
+//
+// leerEnCola(items, opciones)
+//   items: array de { prefijo, elementos, alEmpezar }
+//     - prefijo: texto corto que se dice pero NO se resalta (p. ej. "Artículo
+//       26." o "Opción A"). Puede omitirse.
+//     - elementos: elemento del DOM, o array de elementos, cuyo texto visible
+//       se lee y se resalta palabra por palabra. Puede omitirse (solo se dice
+//       el prefijo).
+//     - alEmpezar(item, indice): opcional, se llama justo antes de leer este
+//       elemento (para marcarlo como "sonando" y hacer scroll, por ejemplo).
+//   opciones: { boton, alTerminarTodo }
+//     - boton: alterna su icono 🔊/⏹️; si se pulsa el mismo botón mientras
+//       lee, para en vez de reiniciar.
+//     - alTerminarTodo: opcional, se llama al acabar toda la cola (o al
+//       pararla desde fuera con detenerLectura()).
+//
+// leerTexto(elementoOTexto, boton) sigue existiendo para los sitios que solo
+// leen una cosa suelta: acepta un elemento del DOM (se resalta) o, por
+// compatibilidad con llamadas antiguas, una cadena de texto (no se resalta).
 const sintesisVoz = window.speechSynthesis || null;
-let botonVozActivo = null;
+let vozActiva = null; // { boton, cola, indice, opciones }
+
+function contarPalabras(txt) {
+  const m = String(txt || "").trim().match(/\S+/g);
+  return m ? m.length : 0;
+}
+
+/** Envuelve (una sola vez, es idempotente) cada palabra del texto visible de
+ * `el` en un <span class="palabra-tts">. Devuelve esos spans en orden. */
+function envolverPalabras(el) {
+  if (!el) return [];
+  if (!el.dataset.palabrasEnvueltas) {
+    const recorrer = (nodo) => {
+      Array.from(nodo.childNodes).forEach((hijo) => {
+        if (hijo.nodeType === Node.TEXT_NODE) {
+          if (!hijo.textContent.trim()) return;
+          const frag = document.createDocumentFragment();
+          hijo.textContent.split(/(\s+)/).forEach((parte) => {
+            if (parte === "") return;
+            if (/^\s+$/.test(parte)) {
+              frag.appendChild(document.createTextNode(parte));
+            } else {
+              const span = document.createElement("span");
+              span.className = "palabra-tts";
+              span.textContent = parte;
+              frag.appendChild(span);
+            }
+          });
+          hijo.replaceWith(frag);
+        } else if (hijo.nodeType === Node.ELEMENT_NODE && !hijo.classList.contains("palabra-tts")) {
+          recorrer(hijo);
+        }
+      });
+    };
+    recorrer(el);
+    el.dataset.palabrasEnvueltas = "1";
+  }
+  return Array.from(el.querySelectorAll(".palabra-tts"));
+}
+
 function detenerLectura() {
   if (sintesisVoz && sintesisVoz.speaking) sintesisVoz.cancel();
-  if (botonVozActivo) {
-    botonVozActivo.textContent = botonVozActivo.dataset.iconoReposo || "🔊";
-    botonVozActivo.dataset.leyendo = "0";
+  if (vozActiva) {
+    if (vozActiva.spansActuales) {
+      vozActiva.spansActuales.forEach((s) => s.classList.remove("palabra-tts-activa"));
+    }
+    if (vozActiva.boton) {
+      vozActiva.boton.textContent = vozActiva.boton.dataset.iconoReposo || "🔊";
+      vozActiva.boton.dataset.leyendo = "0";
+      vozActiva.boton.classList.remove("leyendo");
+    }
+    if (vozActiva.itemActivo && vozActiva.itemActivo.alTerminarEsteItem) {
+      vozActiva.itemActivo.alTerminarEsteItem();
+    }
   }
-  botonVozActivo = null;
+  vozActiva = null;
 }
-function leerTexto(texto, boton) {
+
+function hablarSiguienteDeCola() {
+  if (!vozActiva) return;
+  const { cola, indice } = vozActiva;
+  if (indice >= cola.length) {
+    const alTerminarTodo = vozActiva.opciones && vozActiva.opciones.alTerminarTodo;
+    detenerLectura();
+    if (alTerminarTodo) alTerminarTodo();
+    return;
+  }
+  const item = cola[indice] || {};
+  if (vozActiva.itemActivo && vozActiva.itemActivo.alTerminarEsteItem) vozActiva.itemActivo.alTerminarEsteItem();
+  if (item.alEmpezar) item.alEmpezar(item, indice);
+  vozActiva.itemActivo = item;
+
+  const lista = item.elementos ? (Array.isArray(item.elementos) ? item.elementos : [item.elementos]) : [];
+  const spans = [];
+  lista.filter(Boolean).forEach((el) => spans.push(...envolverPalabras(el)));
+  const textoElementos = spans.map((s) => s.textContent).join(" ");
+  const limpio = `${item.prefijo || ""} ${textoElementos}`.replace(/\s+/g, " ").trim();
+  vozActiva.spansActuales = spans;
+
+  if (!limpio) {
+    vozActiva.indice++;
+    hablarSiguienteDeCola();
+    return;
+  }
+
+  const utterancia = new SpeechSynthesisUtterance(limpio);
+  utterancia.lang = "es-ES";
+  utterancia.rate = typeof VELOCIDAD_VOZ !== "undefined" ? VELOCIDAD_VOZ : 0.95;
+
+  const palabrasPrefijo = contarPalabras(item.prefijo);
+  let contadorPalabraHablada = 0;
+  let indicePalabraActual = -1;
+  if (spans.length) {
+    utterancia.onboundary = (ev) => {
+      if (ev.name && ev.name !== "word") return;
+      if (indicePalabraActual >= 0 && spans[indicePalabraActual]) {
+        spans[indicePalabraActual].classList.remove("palabra-tts-activa");
+      }
+      contadorPalabraHablada++;
+      const idx = contadorPalabraHablada - palabrasPrefijo - 1;
+      if (idx < 0 || idx >= spans.length) {
+        indicePalabraActual = -1;
+        return;
+      }
+      indicePalabraActual = idx;
+      spans[idx].classList.add("palabra-tts-activa");
+      spans[idx].scrollIntoView({ block: "nearest", behavior: "smooth" });
+    };
+  }
+
+  const siguiente = () => {
+    if (!vozActiva) return;
+    spans.forEach((s) => s.classList.remove("palabra-tts-activa"));
+    vozActiva.indice++;
+    hablarSiguienteDeCola();
+  };
+  utterancia.onend = siguiente;
+  utterancia.onerror = siguiente;
+
+  sintesisVoz.speak(utterancia);
+}
+
+function leerEnCola(items, opciones = {}) {
   if (!sintesisVoz) return;
+  const boton = opciones.boton || null;
   const eraElMismo = boton && boton.dataset.leyendo === "1";
   detenerLectura();
   if (eraElMismo) return; // pulsar el mismo botón mientras lee = parar
-  const limpio = String(texto || "").replace(/\s+/g, " ").trim();
-  if (!limpio) return;
-  const utterancia = new SpeechSynthesisUtterance(limpio);
-  utterancia.lang = "es-ES";
-   utterancia.rate = VELOCIDAD_VOZ;
+
+  const cola = (items || []).filter(
+    (it) => it && ((it.prefijo && it.prefijo.trim()) || it.elementos)
+  );
+  if (!cola.length) return;
+
+  vozActiva = { boton, cola, indice: 0, opciones, spansActuales: [], itemActivo: null };
   if (boton) {
     boton.dataset.iconoReposo = boton.dataset.iconoReposo || boton.textContent;
     boton.textContent = "⏹️";
     boton.dataset.leyendo = "1";
-    botonVozActivo = boton;
+    boton.classList.add("leyendo");
   }
-  utterancia.onend = () => { if (botonVozActivo === boton) detenerLectura(); };
-  utterancia.onerror = () => { if (botonVozActivo === boton) detenerLectura(); };
-  sintesisVoz.speak(utterancia);
+  hablarSiguienteDeCola();
+}
+
+/** Compatibilidad: lee una sola cosa suelta. `elementoOTexto` puede ser un
+ * elemento del DOM (se resalta palabra a palabra) o, para llamadas antiguas,
+ * una cadena de texto ya construida a mano (no se resalta, pero sigue
+ * sonando igual que siempre). */
+function leerTexto(elementoOTexto, boton) {
+  if (typeof elementoOTexto === "string") {
+    leerEnCola([{ prefijo: elementoOTexto }], { boton });
+  } else {
+    leerEnCola([{ elementos: elementoOTexto }], { boton });
+  }
 }
 function abrirLightbox(src, alt) {
   let overlay = document.getElementById("lightbox-overlay");
@@ -200,8 +351,7 @@ function cerrarLightbox() {
 document.addEventListener("click", (e) => {
   const parrafo = e.target.closest(".parrafo-leible");
   if (parrafo) {
-    detenerLectura();
-    leerTexto(parrafo.textContent, null);
+    leerTexto(parrafo, null);
     return;
   }
   const img = e.target.closest(".ampliable");
