@@ -532,3 +532,24 @@ input:focus-visible,
   text-justify:inter-word;
   hyphens:auto;
 }
+
+/* ---- Lectura en voz alta con resaltado palabra a palabra ---- */
+/* Igual que "Leer en voz alta" de Word: pensado sobre todo para dislexia y
+   dificultades lectoras similares. Motor único en common.js (leerEnCola /
+   leerTexto), usado por todas las páginas que leen algo. */
+.palabra-tts-activa{
+  background:var(--morado);
+  color:#fff;
+  border-radius:4px;
+  padding:0 2px;
+  margin:0 -2px;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
+.parrafo-leible.leyendo-desde{
+  background:var(--morado-suave);
+  box-shadow:inset 3px 0 0 var(--morado);
+}
+@media (prefers-reduced-motion: reduce){
+  .palabra-tts-activa{ scroll-behavior:auto; }
+}
