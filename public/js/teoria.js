@@ -92,6 +92,12 @@
         <p>Los 82 artículos de la ley de igualdad real y efectiva de las personas trans y LGTBI. Cuarta de las cinco leyes del tema 5, con el artículo sobre infracciones que cayó como pregunta de reserva en 2026.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="rdl1-2013.html">
+        <div class="accion-icono">♿</div>
+        <h3>RDL 1/2013, discapacidad</h3>
+        <p>Los 106 artículos del Texto Refundido de derechos de las personas con discapacidad. Quinta y última ley del tema 5: no ha caído nunca en los cinco exámenes contados, pero entra por epígrafe del programa.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
