@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ley 39/2015, procedimiento administrativo (fuera de temario) · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .ley-fuente { font-size: 0.82rem; opacity: 0.7; margin: 0 0 18px; }
+  .art-epigrafe { font-style: italic; opacity: 0.85; }
+  .articulo-preguntado {
+    border-left: 3px solid rgba(217, 119, 6, 0.75);
+    padding-left: 12px;
+    background: rgba(217, 119, 6, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+  .chip.examen {
+    background: rgba(217, 119, 6, 0.15);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+  .aviso-examen { margin: 8px 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .aviso-examen-detalle { font-size: 0.8rem; opacity: 0.75; }
+  /* Aviso en rojo, no naranja: aquí no es "criterio nuestro sobre qué entra",
+     es un aviso de que la norma NO está en el temario en absoluto. */
+  .aviso-fuera-temario {
+    background: rgba(220, 38, 38, .08); border: 1px solid rgba(220, 38, 38, .3);
+    border-radius: 12px; padding: 14px 16px; font-size: .9rem; margin: 10px 0 20px;
+  }
+  .aviso-fuera-temario strong { color: #b91c1c; }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor constitucion-doc ley-doc">
+        <h1>📄 Ley 39/2015, procedimiento administrativo</h1>
+        <p class="subtitulo">
+          Procedimiento Administrativo Común de las Administraciones Públicas. Solo los
+          artículos que han caído en exámenes oficiales, no el texto completo.
+        </p>
+        <p class="aviso-fuera-temario">
+          <strong>⚠️ Esta ley no está en el temario de la convocatoria vigente.</strong>
+          Se ha revisado el Anexo V entero (BOE-A-2025-26262) y no aparece citada en ningún
+          tema del Bloque I. Aun así, ha caído <strong>4 veces</strong> en los exámenes que
+          tenemos contados (2018, 2019 y dos en 2024) — probablemente porque es derecho
+          administrativo de base que se da por sabido, con programa o sin él. No hay garantía
+          de que se siga preguntando: por eso aquí solo están los cuatro artículos que
+          realmente han caído, verificados uno a uno contra el BOE, y no la ley entera.
+        </p>
+        <div id="banner-acceso"></div>
+        <div id="ley"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/ley39-2015.js"></script>
+</body>
+</html>
