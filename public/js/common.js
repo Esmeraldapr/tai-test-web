@@ -332,6 +332,67 @@ function leerTexto(elementoOTexto, boton) {
     leerEnCola([{ elementos: elementoOTexto }], { boton });
   }
 }
+
+// ---------------- Lector en cola para páginas de leyes/normas ----------------
+// Compartido por todas las páginas de Teoría con Títulos → Capítulos →
+// Secciones → Artículos (constitución, y las leyes/LO del tema 5 y afines).
+// A diferencia del resto de la web, aquí no se guarda el texto aparte: se
+// lee directamente del HTML ya pintado (por eso el resaltado de palabra
+// funciona igual que en todo lo demás, y no hay dos copias del texto que
+// puedan desincronizarse).
+//
+// botonAltavozLey(idDestino) pinta el botón 🔊; iniciarLectoresLey() los
+// engancha todos de una vez tras pintar el HTML.
+function botonAltavozLey(idDestino) {
+  return `<button type="button" class="btn-altavoz" data-lee="${idDestino}" title="Escuchar desde aquí">🔊</button>`;
+}
+
+function itemDeNodoLey(nodo) {
+  if (nodo.classList.contains("const-articulo")) {
+    const numero = nodo.dataset.numero || "";
+    return {
+      prefijo: numero ? `Artículo ${numero}.` : "",
+      elementos: [nodo.querySelector(".art-epigrafe"), nodo.querySelector(".art-texto")].filter(Boolean),
+    };
+  }
+  const num = nodo.querySelector(
+    ":scope > .const-titulo-header .const-titulo-num, :scope > .const-capitulo-header .const-capitulo-num, :scope > .const-seccion-header .const-seccion-num"
+  );
+  const nombre = nodo.querySelector(
+    ":scope > .const-titulo-header .const-titulo-nombre, :scope > .const-capitulo-header .const-capitulo-nombre, :scope > .const-seccion-header .const-seccion-nombre"
+  );
+  return { elementos: [num, nombre].filter(Boolean) };
+}
+
+function itemsLecturaLey(nodo) {
+  if (!nodo) return [];
+  const items = [itemDeNodoLey(nodo)];
+  nodo.querySelectorAll(".const-titulo, .const-capitulo, .const-seccion, .const-articulo").forEach((n) => {
+    items.push(itemDeNodoLey(n));
+  });
+  return items;
+}
+
+/** Las disposiciones no tienen título/artículo: cada `.const-disp-item` es
+ * ya un bloque de texto suelto, así que se lee y se resalta entero. */
+function itemsLecturaDisposiciones(bloqueEl) {
+  if (!bloqueEl) return [];
+  return Array.from(bloqueEl.querySelectorAll(".const-disp-item")).map((el) => ({ elementos: el }));
+}
+
+/** Llamar una vez, justo después de pintar el HTML de la norma. */
+function iniciarLectoresLey(raiz) {
+  (raiz || document).querySelectorAll(".btn-altavoz[data-lee]").forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const contenedor = document.getElementById(boton.dataset.lee);
+      const items =
+        contenedor && contenedor.classList.contains("const-disp-bloque")
+          ? itemsLecturaDisposiciones(contenedor)
+          : itemsLecturaLey(contenedor);
+      leerEnCola(items, { boton });
+    });
+  });
+}
 function abrirLightbox(src, alt) {
   let overlay = document.getElementById("lightbox-overlay");
   if (!overlay) {

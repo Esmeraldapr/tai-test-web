@@ -25,86 +25,7 @@ const TITULOS_QUE_ENTRAN = {
   "titulo-10": false,
 };
 
-// ---------------- Lector de voz en cola (varias frases encadenadas) ----------------
-// Distinto del leerTexto() de un solo párrafo que ya hay en common.js: aquí
-// un título/capítulo puede tener miles de caracteres repartidos en muchos
-// artículos, y encadenar utterances cortas es más fiable que una gigante.
-let colaVoz = { activa: false, boton: null, textos: [], indice: 0 };
-
-function detenerColaVoz() {
-  if (sintesisVoz && sintesisVoz.speaking) sintesisVoz.cancel();
-  if (colaVoz.boton) {
-    colaVoz.boton.textContent = colaVoz.boton.dataset.iconoReposo || "🔊";
-    colaVoz.boton.classList.remove("leyendo");
-  }
-  colaVoz = { activa: false, boton: null, textos: [], indice: 0 };
-}
-
-function hablarSiguienteDeCola() {
-  if (!colaVoz.activa || colaVoz.indice >= colaVoz.textos.length) {
-    detenerColaVoz();
-    return;
-  }
-  const texto = colaVoz.textos[colaVoz.indice];
-  colaVoz.indice++;
-  const utterancia = new SpeechSynthesisUtterance(texto);
-  utterancia.lang = "es-ES";
-  utterancia.rate = 0.95;
-  utterancia.onend = () => { if (colaVoz.activa) hablarSiguienteDeCola(); };
-  utterancia.onerror = () => { if (colaVoz.activa) detenerColaVoz(); };
-  sintesisVoz.speak(utterancia);
-}
-
-function leerCola(textos, boton) {
-  if (!sintesisVoz) return;
-  const eraElMismo = colaVoz.activa && colaVoz.boton === boton;
-  detenerLectura(); // por si había una lectura de párrafo suelto activa (common.js)
-  detenerColaVoz();
-  if (eraElMismo) return; // pulsar el mismo botón mientras lee = parar
-  const limpios = (textos || []).map((t) => String(t || "").replace(/\s+/g, " ").trim()).filter(Boolean);
-  if (!limpios.length) return;
-  colaVoz = { activa: true, boton, textos: limpios, indice: 0 };
-  if (boton) {
-    boton.dataset.iconoReposo = boton.dataset.iconoReposo || boton.textContent;
-    boton.textContent = "⏹️";
-    boton.classList.add("leyendo");
-  }
-  hablarSiguienteDeCola();
-}
-
-// ---------------- Recolección de texto por nivel (para el lector) ----------------
-function textosDeArticulos(articulos) {
-  return (articulos || []).map((a) => `Artículo ${a.numero}. ${a.texto}`);
-}
-function textosDeSeccion(seccion) {
-  return [`${seccion.numero}${seccion.nombre ? ", " + seccion.nombre : ""}.`, ...textosDeArticulos(seccion.articulos)];
-}
-function textosDeCapitulo(capitulo) {
-  return [
-    `${capitulo.numero}${capitulo.nombre ? ", " + capitulo.nombre : ""}.`,
-    ...textosDeArticulos(capitulo.articulos),
-    ...(capitulo.secciones || []).flatMap(textosDeSeccion),
-  ];
-}
-function textosDeTitulo(titulo) {
-  return [
-    `${titulo.numero}${titulo.nombre ? ", " + titulo.nombre : ""}.`,
-    ...textosDeArticulos(titulo.articulos),
-    ...(titulo.capitulos || []).flatMap(textosDeCapitulo),
-  ];
-}
-
 // ---------------- Utilidades de render ----------------
-let contadorBotones = 0;
-const textosPorBoton = [];
-
-/** Crea un botón de altavoz y registra, en el mismo orden, qué debe leer. */
-function botonAltavoz(textos) {
-  contadorBotones++;
-  textosPorBoton.push(textos);
-  return `<button type="button" class="btn-altavoz" data-voz-id="${contadorBotones}" title="Escuchar desde aquí">🔊</button>`;
-}
-
 function escaparHtml(s) {
   return String(s || "")
     .replace(/&/g, "&amp;")
@@ -113,14 +34,15 @@ function escaparHtml(s) {
 }
 
 function htmlArticulo(a) {
-  return `<div class="const-articulo"><strong>Artículo ${a.numero}.</strong> <span class="art-texto">${escaparHtml(a.texto)}</span></div>`;
+  return `<div class="const-articulo" id="art-${escaparHtml(String(a.numero)).replace(/\s+/g, "-")}" data-numero="${escaparHtml(a.numero)}"><strong>Artículo ${a.numero}.</strong> <span class="art-texto">${escaparHtml(a.texto)}</span></div>`;
 }
 
-function htmlSeccion(seccion) {
+function htmlSeccion(seccion, idPadre, indice) {
+  const idSeccion = `${idPadre}-sec${indice}`;
   return `
-    <div class="const-seccion">
+    <div class="const-seccion" id="${idSeccion}">
       <div class="const-seccion-header">
-        ${botonAltavoz(textosDeSeccion(seccion))}
+        ${botonAltavozLey(idSeccion)}
         <span class="const-seccion-num">${seccion.numero}</span>
         ${seccion.nombre ? `<span class="const-seccion-nombre">${escaparHtml(seccion.nombre)}</span>` : ""}
       </div>
@@ -128,16 +50,17 @@ function htmlSeccion(seccion) {
     </div>`;
 }
 
-function htmlCapitulo(capitulo) {
+function htmlCapitulo(capitulo, idPadre, indice) {
+  const idCapitulo = `${idPadre}-cap${indice}`;
   return `
-    <div class="const-capitulo">
+    <div class="const-capitulo" id="${idCapitulo}">
       <div class="const-capitulo-header">
-        ${botonAltavoz(textosDeCapitulo(capitulo))}
+        ${botonAltavozLey(idCapitulo)}
         <span class="const-capitulo-num">${capitulo.numero}</span>
         ${capitulo.nombre ? `<span class="const-capitulo-nombre">${escaparHtml(capitulo.nombre)}</span>` : ""}
       </div>
       ${(capitulo.articulos || []).map(htmlArticulo).join("")}
-      ${(capitulo.secciones || []).map(htmlSeccion).join("")}
+      ${(capitulo.secciones || []).map((s, i) => htmlSeccion(s, idCapitulo, i)).join("")}
     </div>`;
 }
 
@@ -149,13 +72,13 @@ function htmlTitulo(titulo) {
   return `
     <div class="const-titulo" id="${titulo.id}">
       <div class="const-titulo-header">
-        ${botonAltavoz(textosDeTitulo(titulo))}
+        ${botonAltavozLey(titulo.id)}
         <span class="const-titulo-num">${titulo.numero}</span>
         ${titulo.nombre ? `<span class="const-titulo-nombre">${escaparHtml(titulo.nombre)}</span>` : ""}
         ${chip}
       </div>
       ${(titulo.articulos || []).map(htmlArticulo).join("")}
-      ${(titulo.capitulos || []).map(htmlCapitulo).join("")}
+      ${(titulo.capitulos || []).map((c, i) => htmlCapitulo(c, titulo.id, i)).join("")}
     </div>`;
 }
 
@@ -164,13 +87,11 @@ function htmlDisposiciones(disposiciones) {
     <div class="const-disposiciones">
       <h2>Disposiciones</h2>
       ${(disposiciones || [])
-        .map((d) => {
-          const textosDisp = (d.items || []).map((it) =>
-            it.numero ? `${d.tipo}, ${it.numero}. ${it.texto}` : `${d.tipo}. ${it.texto}`
-          );
+        .map((d, i) => {
+          const idDisp = `disp${i}`;
           return `
-        <div class="const-disp-bloque">
-          <div class="const-disp-tipo">${botonAltavoz(textosDisp)}<span>${escaparHtml(d.tipo)}</span></div>
+        <div class="const-disp-bloque" id="${idDisp}">
+          <div class="const-disp-tipo">${botonAltavozLey(idDisp)}<span>${escaparHtml(d.tipo)}</span></div>
           ${(d.items || [])
             .map(
               (it) =>
@@ -220,17 +141,17 @@ function htmlDisposiciones(disposiciones) {
     return;
   }
 
-  contadorBotones = 0;
-  textosPorBoton.length = 0;
-
-  let html = `<div class="const-preambulo"><h2>${botonAltavoz([datos.preambulo])}Preámbulo</h2><p>${escaparHtml(datos.preambulo)}</p></div>`;
+  let html = `<div class="const-preambulo"><h2><button type="button" class="btn-altavoz" id="btn-preambulo" title="Escuchar desde aquí">🔊</button>Preámbulo</h2><p id="preambulo-texto">${escaparHtml(datos.preambulo)}</p></div>`;
   html += (datos.titulos || []).map(htmlTitulo).join("");
   html += htmlDisposiciones(datos.disposiciones);
 
   contenedor.innerHTML = html;
 
-  contenedor.querySelectorAll(".btn-altavoz").forEach((boton) => {
-    const idBoton = Number(boton.dataset.vozId);
-    boton.addEventListener("click", () => leerCola(textosPorBoton[idBoton - 1], boton));
-  });
+  const btnPreambulo = document.getElementById("btn-preambulo");
+  if (btnPreambulo) {
+    btnPreambulo.addEventListener("click", () =>
+      leerTexto(document.getElementById("preambulo-texto"), btnPreambulo)
+    );
+  }
+  iniciarLectoresLey(contenedor);
 })();

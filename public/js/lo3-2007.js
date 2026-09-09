@@ -36,82 +36,7 @@ const ARTICULOS_EN_EXAMEN = {
 
 const TITULOS_EN_EXAMEN = {};
 
-// ---------------- Lector de voz en cola ----------------
-let colaVoz = { activa: false, boton: null, textos: [], indice: 0 };
-
-function detenerColaVoz() {
-  if (sintesisVoz && sintesisVoz.speaking) sintesisVoz.cancel();
-  if (colaVoz.boton) {
-    colaVoz.boton.textContent = colaVoz.boton.dataset.iconoReposo || "🔊";
-    colaVoz.boton.classList.remove("leyendo");
-  }
-  colaVoz = { activa: false, boton: null, textos: [], indice: 0 };
-}
-
-function hablarSiguienteDeCola() {
-  if (!colaVoz.activa || colaVoz.indice >= colaVoz.textos.length) {
-    detenerColaVoz();
-    return;
-  }
-  const texto = colaVoz.textos[colaVoz.indice];
-  colaVoz.indice++;
-  const utterancia = new SpeechSynthesisUtterance(texto);
-  utterancia.lang = "es-ES";
-  utterancia.rate = typeof VELOCIDAD_VOZ !== "undefined" ? VELOCIDAD_VOZ : 0.95;
-  utterancia.onend = () => { if (colaVoz.activa) hablarSiguienteDeCola(); };
-  utterancia.onerror = () => { if (colaVoz.activa) detenerColaVoz(); };
-  sintesisVoz.speak(utterancia);
-}
-
-function leerCola(textos, boton) {
-  if (!sintesisVoz) return;
-  const eraElMismo = colaVoz.activa && colaVoz.boton === boton;
-  detenerLectura();
-  detenerColaVoz();
-  if (eraElMismo) return;
-  const limpios = (textos || []).map((t) => String(t || "").replace(/\s+/g, " ").trim()).filter(Boolean);
-  if (!limpios.length) return;
-  colaVoz = { activa: true, boton, textos: limpios, indice: 0 };
-  if (boton) {
-    boton.dataset.iconoReposo = boton.dataset.iconoReposo || boton.textContent;
-    boton.textContent = "⏹️";
-    boton.classList.add("leyendo");
-  }
-  hablarSiguienteDeCola();
-}
-
-// ---------------- Recolección de texto por nivel ----------------
-function textosDeArticulos(articulos) {
-  return (articulos || []).map((a) => `Artículo ${a.numero}. ${a.epigrafe ? a.epigrafe + ". " : ""}${a.texto}`);
-}
-function textosDeSeccion(seccion) {
-  return [`${seccion.numero}${seccion.nombre ? ", " + seccion.nombre : ""}.`, ...textosDeArticulos(seccion.articulos)];
-}
-function textosDeCapitulo(capitulo) {
-  return [
-    `${capitulo.numero}${capitulo.nombre ? ", " + capitulo.nombre : ""}.`,
-    ...textosDeArticulos(capitulo.articulos),
-    ...(capitulo.secciones || []).flatMap(textosDeSeccion),
-  ];
-}
-function textosDeTitulo(titulo) {
-  return [
-    `${titulo.numero}${titulo.nombre ? ", " + titulo.nombre : ""}.`,
-    ...textosDeArticulos(titulo.articulos),
-    ...(titulo.capitulos || []).flatMap(textosDeCapitulo),
-  ];
-}
-
 // ---------------- Utilidades de render ----------------
-let contadorBotones = 0;
-const textosPorBoton = [];
-
-function botonAltavoz(textos) {
-  contadorBotones++;
-  textosPorBoton.push(textos);
-  return `<button type="button" class="btn-altavoz" data-voz-id="${contadorBotones}" title="Escuchar desde aquí">🔊</button>`;
-}
-
 function escaparHtml(s) {
   return String(s || "")
     .replace(/&/g, "&amp;")
@@ -140,7 +65,7 @@ function htmlAvisoTitulo(id) {
 
 function htmlArticulo(a) {
   return `
-    <div class="const-articulo${ARTICULOS_EN_EXAMEN[a.numero] ? " articulo-preguntado" : ""}" id="art-${escaparHtml(a.numero).replace(/\s+/g, "-")}">
+    <div class="const-articulo${ARTICULOS_EN_EXAMEN[a.numero] ? " articulo-preguntado" : ""}" id="art-${escaparHtml(a.numero).replace(/\s+/g, "-")}" data-numero="${escaparHtml(a.numero)}">
       <strong>Artículo ${escaparHtml(a.numero)}.</strong>
       ${a.epigrafe ? `<em class="art-epigrafe">${escaparHtml(a.epigrafe)}.</em>` : ""}
       ${htmlAvisoExamen(a.numero)}
@@ -148,11 +73,12 @@ function htmlArticulo(a) {
     </div>`;
 }
 
-function htmlSeccion(seccion) {
+function htmlSeccion(seccion, idPadre, indice) {
+  const idSeccion = `${idPadre}-sec${indice}`;
   return `
-    <div class="const-seccion">
+    <div class="const-seccion" id="${idSeccion}">
       <div class="const-seccion-header">
-        ${botonAltavoz(textosDeSeccion(seccion))}
+        ${botonAltavozLey(idSeccion)}
         <span class="const-seccion-num">${escaparHtml(seccion.numero)}</span>
         ${seccion.nombre ? `<span class="const-seccion-nombre">${escaparHtml(seccion.nombre)}</span>` : ""}
       </div>
@@ -160,16 +86,17 @@ function htmlSeccion(seccion) {
     </div>`;
 }
 
-function htmlCapitulo(capitulo) {
+function htmlCapitulo(capitulo, idPadre, indice) {
+  const idCapitulo = `${idPadre}-cap${indice}`;
   return `
-    <div class="const-capitulo">
+    <div class="const-capitulo" id="${idCapitulo}">
       <div class="const-capitulo-header">
-        ${botonAltavoz(textosDeCapitulo(capitulo))}
+        ${botonAltavozLey(idCapitulo)}
         <span class="const-capitulo-num">${escaparHtml(capitulo.numero)}</span>
         ${capitulo.nombre ? `<span class="const-capitulo-nombre">${escaparHtml(capitulo.nombre)}</span>` : ""}
       </div>
       ${(capitulo.articulos || []).map(htmlArticulo).join("")}
-      ${(capitulo.secciones || []).map(htmlSeccion).join("")}
+      ${(capitulo.secciones || []).map((s, i) => htmlSeccion(s, idCapitulo, i)).join("")}
     </div>`;
 }
 
@@ -181,14 +108,14 @@ function htmlTitulo(titulo) {
   return `
     <div class="const-titulo" id="${escaparHtml(titulo.id)}">
       <div class="const-titulo-header">
-        ${botonAltavoz(textosDeTitulo(titulo))}
+        ${botonAltavozLey(titulo.id)}
         <span class="const-titulo-num">${escaparHtml(titulo.numero)}</span>
         ${titulo.nombre ? `<span class="const-titulo-nombre">${escaparHtml(titulo.nombre)}</span>` : ""}
         ${chip}
       </div>
       ${htmlAvisoTitulo(titulo.id)}
       ${(titulo.articulos || []).map(htmlArticulo).join("")}
-      ${(titulo.capitulos || []).map(htmlCapitulo).join("")}
+      ${(titulo.capitulos || []).map((c, i) => htmlCapitulo(c, titulo.id, i)).join("")}
     </div>`;
 }
 
@@ -197,13 +124,11 @@ function htmlDisposiciones(disposiciones) {
     <div class="const-disposiciones">
       <h2>Disposiciones</h2>
       ${(disposiciones || [])
-        .map((d) => {
-          const textosDisp = (d.items || []).map((it) =>
-            it.numero ? `${d.tipo}, ${it.numero}. ${it.texto}` : `${d.tipo}. ${it.texto}`
-          );
+        .map((d, i) => {
+          const idDisp = `disp${i}`;
           return `
-        <div class="const-disp-bloque">
-          <div class="const-disp-tipo">${botonAltavoz(textosDisp)}<span>${escaparHtml(d.tipo)}</span></div>
+        <div class="const-disp-bloque" id="${idDisp}">
+          <div class="const-disp-tipo">${botonAltavozLey(idDisp)}<span>${escaparHtml(d.tipo)}</span></div>
           ${(d.items || [])
             .map(
               (it) =>
@@ -253,17 +178,11 @@ function htmlDisposiciones(disposiciones) {
     return;
   }
 
-  contadorBotones = 0;
-  textosPorBoton.length = 0;
-
   let html = `<p class="ley-fuente">${escaparHtml(datos.actualizacion)} Referencia ${escaparHtml(datos.referencia)}.</p>`;
   html += (datos.titulos || []).map(htmlTitulo).join("");
   html += htmlDisposiciones(datos.disposiciones);
 
   contenedor.innerHTML = html;
 
-  contenedor.querySelectorAll(".btn-altavoz").forEach((boton) => {
-    const idBoton = Number(boton.dataset.vozId);
-    boton.addEventListener("click", () => leerCola(textosPorBoton[idBoton - 1], boton));
-  });
+  iniciarLectoresLey(contenedor);
 })();
