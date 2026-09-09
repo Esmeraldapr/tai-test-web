@@ -104,6 +104,18 @@
         <p>Los 101 artículos del Estatuto Básico del Empleado Público. Del tema 4, y esta sí está citada literalmente en la convocatoria (no por interpretación nuestra). El artículo sobre la clasificación de empleados públicos ya cayó en 2018.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="ley39-2015.html">
+        <div class="accion-icono">📄</div>
+        <h3>Ley 39/2015, procedimiento administrativo</h3>
+        <p>⚠️ No está en el temario de esta convocatoria. Solo los 4 artículos que han caído en exámenes anteriores (11, 14, 30 y 44), no la ley entera.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
+      <a class="accion-card" href="ley40-2015.html">
+        <div class="accion-icono">🏛️</div>
+        <h3>Ley 40/2015, régimen jurídico sector público</h3>
+        <p>⚠️ No está en el temario de esta convocatoria. Solo los 2 artículos que han caído en examen (55 y 156), no la ley entera.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
