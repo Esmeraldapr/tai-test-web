@@ -98,6 +98,12 @@
         <p>Los 106 artículos del Texto Refundido de derechos de las personas con discapacidad. Quinta y última ley del tema 5: no ha caído nunca en los cinco exámenes contados, pero entra por epígrafe del programa.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="ebep-5-2015.html">
+        <div class="accion-icono">🧑‍💼</div>
+        <h3>RDL 5/2015, Estatuto del Empleado Público</h3>
+        <p>Los 101 artículos del Estatuto Básico del Empleado Público. Del tema 4, y esta sí está citada literalmente en la convocatoria (no por interpretación nuestra). El artículo sobre la clasificación de empleados públicos ya cayó en 2018.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
     </div>
   `;
 })();
