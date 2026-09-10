@@ -92,6 +92,13 @@ function mezclar(arr) {
   pintarPregunta();
 })();
 
+function escaparHtml(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function pintarPregunta() {
   detenerLectura();
   const p = preguntasSet[indice];
@@ -118,14 +125,14 @@ function pintarPregunta() {
     return `
       <button type="button" class="${clases}" data-opcion="${letra}" ${respondida ? "disabled" : ""}>
                   <span class="letra">${"ABCD"[i]}</span>
-        <span class="opcion-texto">${op}</span>
+        <span class="opcion-texto">${escaparHtml(op)}</span>
             </button>`;
   }).join("");
 
   const explicacionHtml = respondida
     ? `<div class="explicacion-caja ${previo.resultado.es_correcta ? "bien" : "mal"}">
         <strong>${previo.resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
-        <span class="parrafo-leible">${previo.resultado.explicacion || ""}</span>
+        <span class="parrafo-leible">${escaparHtml(previo.resultado.explicacion || "")}</span>
       </div>`
     : previo && previo.estado === "saltada"
     ? `<div class="explicacion-caja">⏭️ Ya habías pasado esta pregunta. Puedes responderla ahora o volver a pasar.</div>`
@@ -136,12 +143,12 @@ function pintarPregunta() {
     <div class="pregunta-caja">
       <div class="info-superior">
         <span class="chip oficial">${indice + 1} / ${preguntasSet.length}</span>
-        ${p.subtema ? `<span class="chip no-oficial">${p.subtema}</span>` : ""}
+        ${p.subtema ? `<span class="chip no-oficial">${escaparHtml(p.subtema)}</span>` : ""}
         <button class="btn-favorito" id="btn-leer" type="button" title="Escuchar la pregunta y las respuestas">🔊</button>
         <button class="btn-favorito" id="btn-favorito" type="button" title="Marcar como favorita" data-activo="${favoritosSet.has(p.id) ? "1" : "0"}">${favoritosSet.has(p.id) ? "⭐" : "☆"}</button>
       </div>
       ${p.imagen_url ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de la pregunta" style="border-radius:12px;margin-bottom:16px;border:1px solid var(--borde)" />` : ""}
-      <div class="enunciado parrafo-leible">${p.pregunta}</div>
+      <div class="enunciado parrafo-leible">${escaparHtml(p.pregunta)}</div>
       <div class="opciones" id="opciones">${opcionesHtml}</div>
       <div id="zona-explicacion">${explicacionHtml}</div>
       <button class="btn-reportar" id="btn-reportar" type="button">🚩 Reportar esta pregunta</button>
