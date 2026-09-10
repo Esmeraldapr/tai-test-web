@@ -119,6 +119,32 @@ function htmlTitulo(titulo) {
     </div>`;
 }
 
+// Igual que ARTICULOS_EN_EXAMEN pero para disposiciones (adicionales,
+// transitorias, derogatoria, finales), que no tienen número de artículo.
+// Clave: "tipo-ordinal" en minúsculas, tal como aparece al principio del
+// propio texto de la disposición (p. ej. "Disposición adicional primera."
+// → "adicional-primera").
+const DISPOSICIONES_EN_EXAMEN = {
+  "adicional-primera": [{ anio: "2018 (ingreso libre y promoción interna)", sobre: "qué es la composición equilibrada" }],
+};
+
+function claveDisposicion(texto) {
+  const m = String(texto || "").match(/^Disposici[oó]n\s+(adicional|transitoria|derogatoria|final)\s+(\S+)\.?/i);
+  if (!m) return null;
+  return `${m[1].toLowerCase()}-${m[2].toLowerCase().replace(/\.$/, "")}`;
+}
+
+function htmlAvisoExamenDisp(texto) {
+  const clave = claveDisposicion(texto);
+  const caidas = clave ? DISPOSICIONES_EN_EXAMEN[clave] : null;
+  if (!caidas || !caidas.length) return "";
+  const detalle = caidas
+    .map((c) => `${escaparHtml(c.anio)}${c.sobre ? ` (${escaparHtml(c.sobre)})` : ""}`)
+    .join(" · ");
+  const veces = caidas.length === 1 ? "Ha caído en examen" : `Ha caído ${caidas.length} veces`;
+  return `<div class="aviso-examen"><span class="chip examen">📌 ${veces}</span> <span class="aviso-examen-detalle">${detalle}</span></div>`;
+}
+
 function htmlDisposiciones(disposiciones) {
   return `
     <div class="const-disposiciones">
@@ -130,10 +156,10 @@ function htmlDisposiciones(disposiciones) {
         <div class="const-disp-bloque" id="${idDisp}">
           <div class="const-disp-tipo">${botonAltavozLey(idDisp)}<span>${escaparHtml(d.tipo)}</span></div>
           ${(d.items || [])
-            .map(
-              (it) =>
-                `<div class="const-disp-item">${it.numero ? `<strong>${escaparHtml(it.numero)}.</strong> ` : ""}${escaparHtml(it.texto)}</div>`
-            )
+            .map((it) => {
+              const marcada = DISPOSICIONES_EN_EXAMEN[claveDisposicion(it.texto)];
+              return `<div class="const-disp-item${marcada ? " articulo-preguntado" : ""}">${it.numero ? `<strong>${escaparHtml(it.numero)}.</strong> ` : ""}${htmlAvisoExamenDisp(it.texto)}${escaparHtml(it.texto)}</div>`;
+            })
             .join("")}
         </div>`;
         })
