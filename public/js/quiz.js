@@ -99,6 +99,10 @@ function escaparHtml(s) {
     .replace(/>/g, "&gt;");
 }
 
+function escaparAtributo(s) {
+  return escaparHtml(s).replace(/"/g, "&quot;");
+}
+
 function pintarPregunta() {
   detenerLectura();
   const p = preguntasSet[indice];
@@ -147,6 +151,7 @@ function pintarPregunta() {
         <button class="btn-favorito" id="btn-leer" type="button" title="Escuchar la pregunta y las respuestas">🔊</button>
         <button class="btn-favorito" id="btn-favorito" type="button" title="Marcar como favorita" data-activo="${favoritosSet.has(p.id) ? "1" : "0"}">${favoritosSet.has(p.id) ? "⭐" : "☆"}</button>
       </div>
+      ${p.contexto ? `<button type="button" class="btn-ver-contexto" data-contexto="${escaparAtributo(p.contexto)}">📄 Ver el planteamiento del supuesto</button>` : ""}
       ${p.imagen_url ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de la pregunta" style="border-radius:12px;margin-bottom:16px;border:1px solid var(--borde)" />` : ""}
       <div class="enunciado parrafo-leible">${escaparHtml(p.pregunta)}</div>
       <div class="opciones" id="opciones">${opcionesHtml}</div>

@@ -409,6 +409,25 @@ function cerrarLightbox() {
   const el = document.getElementById("lightbox-overlay");
   if (el) el.classList.remove("activo");
 }
+
+/** Igual que el lightbox de imágenes, pero para el texto que plantea un
+ * supuesto ("En el departamento TIC al que usted acaba de incorporarse...").
+ * Sin esto, una pregunta suelta de un supuesto puede no tener sentido. */
+function abrirContexto(texto) {
+  let overlay = document.getElementById("contexto-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "contexto-overlay";
+    overlay.innerHTML = `<div id="contexto-caja"><button id="contexto-cerrar" title="Cerrar" aria-label="Cerrar">✕</button><h3>📄 Planteamiento del supuesto</h3><p id="contexto-texto" class="parrafo-leible"></p></div>`;
+    document.body.appendChild(overlay);
+  }
+  document.getElementById("contexto-texto").textContent = texto || "";
+  overlay.classList.add("activo");
+}
+function cerrarContexto() {
+  const el = document.getElementById("contexto-overlay");
+  if (el) el.classList.remove("activo");
+}
 document.addEventListener("click", (e) => {
   const parrafo = e.target.closest(".parrafo-leible");
   if (parrafo) {
@@ -420,8 +439,16 @@ document.addEventListener("click", (e) => {
     abrirLightbox(img.currentSrc || img.src, img.alt);
     return;
   }
+  const btnContexto = e.target.closest(".btn-ver-contexto");
+  if (btnContexto) {
+    abrirContexto(btnContexto.dataset.contexto || "");
+    return;
+  }
   if (e.target.closest("#lightbox-cerrar") || e.target.id === "lightbox-overlay") {
     cerrarLightbox();
+  }
+  if (e.target.closest("#contexto-cerrar") || e.target.id === "contexto-overlay") {
+    cerrarContexto();
   }
 });
 document.addEventListener("keydown", (e) => {
