@@ -168,7 +168,7 @@ h2{font-size:1.25rem; margin:0 0 14px;}
 .quiz-barra > div{height:100%; background:var(--grad-1); transition:width .25s;}
 .pregunta-caja{background:#fff; border-radius:20px; box-shadow:var(--sombra); border:1px solid var(--borde); padding:26px 28px; margin-bottom:20px;}
 .pregunta-caja .info-superior{display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap;}
-.pregunta-caja .enunciado{font-size:1.15rem; font-weight:700; line-height:1.5; margin-bottom:18px;}
+.pregunta-caja .enunciado{font-size:1.15rem; font-weight:700; line-height:1.5; margin-bottom:18px; white-space:pre-wrap;}
 .opciones{display:flex; flex-direction:column; gap:10px;}
 .opcion{display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:14px; border:2px solid var(--borde); cursor:pointer; font-size:.98rem; transition:.12s; background:#fff;}
 .opcion:hover{border-color:var(--morado); background:#faf9ff;}
@@ -400,6 +400,7 @@ h2{font-size:1.25rem; margin:0 0 14px;}
   width:100%; text-align:left; font-family:inherit; color:inherit;
   appearance:none; -webkit-appearance:none;
 }
+.opcion-texto{ white-space:pre-wrap; }
 .opcion[disabled]{cursor:default; opacity:1;}
 
 /* Foco visible en todo lo que se puede enfocar con el tabulador. */
