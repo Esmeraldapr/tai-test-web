@@ -9,7 +9,7 @@
 // "2019 · Supuesto I", etc. — se separa aquí para construir el árbol.
 // ============================================================
 
-const NOMBRES_TURNO = { IL: "Ingreso libre", PI: "Promoción interna" };
+const NOMBRES_TURNO = { IL: "Ingreso libre", PI: "Promoción interna", "": "Ingreso libre" };
 
 function parsearTema(temaCompleto) {
   const [prefijo, parte] = temaCompleto.split(" · ");
