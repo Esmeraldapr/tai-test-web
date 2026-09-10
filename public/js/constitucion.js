@@ -25,6 +25,26 @@ const TITULOS_QUE_ENTRAN = {
   "titulo-10": false,
 };
 
+// Qué artículos han caído ya en examen oficial. Revisado sobre los
+// cuestionarios y plantillas reales del INAP (2018 y 2019, ingreso libre).
+// Faltan por revisar 2024 (promoción interna) y 2025.
+const ARTICULOS_EN_EXAMEN = {
+  "30": [{ anio: "2019", sobre: "deberes de los ciudadanos" }],
+  "62": [{ anio: "2019", sobre: "decretos acordados en el Consejo de Ministros" }],
+  "64": [{ anio: "2018", sobre: "refrendo de los actos del Rey" }],
+  "68": [{ anio: "2019", sobre: "composición del Congreso de los Diputados" }],
+  "81": [{ anio: "2018", sobre: "aprobación de leyes orgánicas" }],
+  "82": [{ anio: "2019", sobre: "delegación legislativa mediante Decreto Legislativo" }],
+  "95": [{ anio: "2018", sobre: "tratado internacional contrario a la Constitución" }],
+  "98": [{ anio: "2018", sobre: "composición del Gobierno" }],
+  "101": [{ anio: "2018", sobre: "causas de cese del Gobierno" }],
+  "103": [{ anio: "2019", sobre: "principios de actuación de la Administración Pública (art. 103.1)" }],
+  "106": [{ anio: "2018", sobre: "control de la potestad reglamentaria (pregunta de reserva)" }],
+  "113": [{ anio: "2019", sobre: "propuesta de moción de censura" }],
+  "159": [{ anio: "2019", sobre: "composición del Tribunal Constitucional" }],
+  "161": [{ anio: "2018", sobre: "recurso de amparo, competencia del Tribunal Constitucional" }],
+};
+
 // ---------------- Utilidades de render ----------------
 function escaparHtml(s) {
   return String(s || "")
@@ -33,8 +53,18 @@ function escaparHtml(s) {
     .replace(/>/g, "&gt;");
 }
 
+function htmlAvisoExamen(numero) {
+  const caidas = ARTICULOS_EN_EXAMEN[String(numero)];
+  if (!caidas || !caidas.length) return "";
+  const detalle = caidas
+    .map((c) => `${escaparHtml(c.anio)}${c.sobre ? ` (${escaparHtml(c.sobre)})` : ""}`)
+    .join(" · ");
+  const veces = caidas.length === 1 ? "Ha caído en examen" : `Ha caído ${caidas.length} veces`;
+  return `<div class="aviso-examen"><span class="chip examen">📌 ${veces}</span> <span class="aviso-examen-detalle">${detalle}</span></div>`;
+}
+
 function htmlArticulo(a) {
-  return `<div class="const-articulo" id="art-${escaparHtml(String(a.numero)).replace(/\s+/g, "-")}" data-numero="${escaparHtml(a.numero)}"><strong>Artículo ${a.numero}.</strong> <span class="art-texto">${escaparHtml(a.texto)}</span></div>`;
+  return `<div class="const-articulo${ARTICULOS_EN_EXAMEN[String(a.numero)] ? " articulo-preguntado" : ""}" id="art-${escaparHtml(String(a.numero)).replace(/\s+/g, "-")}" data-numero="${escaparHtml(a.numero)}"><strong>Artículo ${a.numero}.</strong> ${htmlAvisoExamen(a.numero)}<span class="art-texto">${escaparHtml(a.texto)}</span></div>`;
 }
 
 function htmlSeccion(seccion, idPadre, indice) {

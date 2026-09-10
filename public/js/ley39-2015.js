@@ -11,8 +11,11 @@
 // Verificado a mano sobre el enunciado de cada examen (aún sin cargar la
 // materia EXÁMENES completa en Supabase para todos los años).
 const ARTICULOS_EN_EXAMEN = {
-  "11": [{ anio: "2024", sobre: "uso obligatorio de firma" }],
-  "14": [{ anio: "2018", sobre: "personas físicas no obligadas a relacionarse electrónicamente" }],
+  "11": [
+    { anio: "2018 (promoción interna)", sobre: "supuestos en los que NO se requiere firma obligatoria" },
+    { anio: "2024", sobre: "uso obligatorio de firma" },
+  ],
+  "14": [{ anio: "2018 (ingreso libre y promoción interna)", sobre: "personas físicas no obligadas a relacionarse electrónicamente" }],
   "30": [{ anio: "2019", sobre: "cómputo de plazos señalados en días" }],
   "44": [{ anio: "2024", sobre: "notificación infructuosa, tablón edictal único" }],
 };

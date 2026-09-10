@@ -28,6 +28,7 @@ const TITULOS_QUE_ENTRAN = {
 // no se haya verificado contra el examen.
 const ARTICULOS_EN_EXAMEN = {
   "9": [{ anio: "2018", sobre: "quién controla el cumplimiento de la publicidad activa" }],
+  "11": [{ anio: "2018 (promoción interna)", sobre: "principios de la información del Portal de Transparencia" }],
   "17": [{ anio: "2024", sobre: "la solicitud de acceso a la información" }],
   "24": [{ anio: "2022", sobre: "el plazo máximo para resolver la reclamación" }],
   "36": [

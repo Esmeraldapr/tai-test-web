@@ -33,7 +33,10 @@ const TITULOS_QUE_ENTRAN = {
 // Verificado sobre los enunciados oficiales. Ojo al artículo 78: cayó en 2019
 // aunque su título no figure en el programa actual. Se deja marcado a propósito.
 const ARTICULOS_EN_EXAMEN = {
-  "34": [{ anio: "2022", sobre: "cuándo hay que designar delegado de protección de datos" }],
+  "34": [
+    { anio: "2018 (promoción interna, reserva)", sobre: "quién NO está obligado a designar delegado de protección de datos" },
+    { anio: "2022", sobre: "cuándo hay que designar delegado de protección de datos" },
+  ],
   "78": [{ anio: "2019", sobre: "prescripción de las sanciones" }],
   "79": [{ anio: "2025/2026", sobre: "aplicación de los derechos en internet" }],
   "96": [{ anio: "2025/2026", sobre: "el derecho al testamento digital" }],
@@ -41,7 +44,10 @@ const ARTICULOS_EN_EXAMEN = {
 
 // Preguntas que van sobre un título entero, sin apuntar a un artículo concreto.
 const TITULOS_EN_EXAMEN = {
-  "titulo-x": [{ anio: "2022", sobre: "cuál NO es un derecho digital" }],
+  "titulo-x": [
+    { anio: "2019", sobre: "cuál NO es un derecho digital" },
+    { anio: "2022", sobre: "cuál NO es un derecho digital" },
+  ],
 };
 
 // ---------------- Utilidades de render ----------------
