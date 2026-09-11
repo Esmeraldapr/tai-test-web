@@ -36,10 +36,11 @@ const ARTICULOS_EN_EXAMEN = {
   "34": [
     { anio: "2018 (promoción interna, reserva)", sobre: "quién NO está obligado a designar delegado de protección de datos" },
     { anio: "2022", sobre: "cuándo hay que designar delegado de protección de datos" },
+    { anio: "2022 (promoción interna)", sobre: "cuándo hay que designar delegado de protección de datos" },
   ],
-  "78": [{ anio: "2019", sobre: "prescripción de las sanciones" }],
-  "79": [{ anio: "2025/2026", sobre: "aplicación de los derechos en internet" }],
-  "96": [{ anio: "2025/2026", sobre: "el derecho al testamento digital" }],
+  "78": [{ anio: "2019", sobre: "prescripción de las sanciones" }, { anio: "2019 (promoción interna)", sobre: "prescripción de las sanciones" }],
+  "79": [{ anio: "2025 (provisional)", sobre: "aplicación de los derechos en internet" }],
+  "96": [{ anio: "2025 (provisional)", sobre: "el derecho al testamento digital" }],
 };
 
 // Preguntas que van sobre un título entero, sin apuntar a un artículo concreto.

@@ -28,7 +28,7 @@ const TITULOS_QUE_ENTRAN = {
 // Verificado a mano sobre el enunciado del examen del 23/05/2026 (aún sin
 // cargar en Supabase como materia EXÁMENES; contado sobre el PDF del INAP).
 const ARTICULOS_EN_EXAMEN = {
-  "4": [{ anio: "2025/2026", sobre: "principios y valores del sistema educativo" }],
+  "4": [{ anio: "2025 (provisional)", sobre: "principios y valores del sistema educativo" }],
 };
 
 const TITULOS_EN_EXAMEN = {};

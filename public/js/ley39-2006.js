@@ -26,8 +26,8 @@ const TITULOS_QUE_ENTRAN = {
 // ---------------- 2) Qué ha caído ----------------
 // Verificado uno a uno sobre los enunciados oficiales (materia EXÁMENES en Supabase).
 const ARTICULOS_EN_EXAMEN = {
-  "26": [{ anio: "2019", sobre: "clasificación de los grados de dependencia" }],
-  "30": [{ anio: "2022", sobre: "revisión del grado de dependencia" }],
+  "26": [{ anio: "2019", sobre: "clasificación de los grados de dependencia" }, { anio: "2019 (promoción interna)", sobre: "clasificación de los grados de dependencia" }],
+  "30": [{ anio: "2022", sobre: "revisión del grado de dependencia" }, { anio: "2022 (promoción interna)", sobre: "revisión del grado de dependencia" }],
 };
 
 const TITULOS_EN_EXAMEN = {};

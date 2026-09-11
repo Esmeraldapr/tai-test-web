@@ -25,6 +25,7 @@ const TITULOS_QUE_ENTRAN = {
 // sobre el examen de 2026 (contado a mano, aún sin cargar en Supabase).
 const ARTICULOS_EN_EXAMEN = {
   "8": [{ anio: "2018", sobre: "clasificación de los empleados públicos" }],
+  "78": [{ anio: "2025 (provisional)", sobre: "principios de provisión de puestos de trabajo del personal funcionario de carrera" }],
 };
 
 const TITULOS_EN_EXAMEN = {};

@@ -13,16 +13,17 @@
 
 // Verificado sobre los enunciados oficiales.
 const ARTICULOS_EN_EXAMEN = {
-  "13": [{ anio: "2025/2026", sobre: "quién desarrolla e implementa la seguridad del sistema" }],
+  "13": [{ anio: "2025 (provisional)", sobre: "quién desarrolla e implementa la seguridad del sistema" }],
 };
 
 // Preguntas que salen de un anexo entero, sin apuntar a un artículo.
 const ANEXOS_EN_EXAMEN = {
   "anexo-2": [
     { anio: "2019", sobre: "qué medida afecta a la dimensión de Trazabilidad" },
+    { anio: "2019 (promoción interna, reserva)", sobre: "qué medida afecta a la dimensión de Trazabilidad" },
     { anio: "2022", sobre: "qué medida afecta a la dimensión de Confidencialidad" },
   ],
-  "anexo-4": [{ anio: "2025/2026", sobre: "la definición de compromiso de la seguridad" }],
+  "anexo-4": [{ anio: "2025 (provisional)", sobre: "la definición de compromiso de la seguridad" }],
 };
 
 const DIMENSIONES = {

@@ -27,7 +27,8 @@ const TITULOS_QUE_ENTRAN = {
 // cargar en Supabase como materia EXÁMENES; contado sobre el PDF del INAP).
 // El art. 79 cayó como pregunta de reserva, no en el examen ordinario.
 const ARTICULOS_EN_EXAMEN = {
-  "79": [{ anio: "2026 (reserva)", sobre: "infracciones en materia de igualdad de trato" }],
+  "45": [{ anio: "2024 (promoción interna)", sobre: "autoridad competente para la rectificación registral del sexo" }],
+  "79": [{ anio: "2025 (provisional, reserva)", sobre: "infracciones en materia de igualdad de trato" }],
 };
 
 const TITULOS_EN_EXAMEN = {};

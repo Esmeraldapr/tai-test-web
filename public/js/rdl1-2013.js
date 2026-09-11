@@ -23,11 +23,15 @@ const TITULOS_QUE_ENTRAN = {
 };
 
 // ---------------- 2) Qué ha caído ----------------
-// Comprobado sobre la materia EXÁMENES en Supabase (2018/2019/2022/2024) y
-// sobre el examen de 2026 (contado a mano, aún sin cargar en Supabase):
-// CERO apariciones en los cinco exámenes contados. Entra por epígrafe del
-// programa, como "Usabilidad", pero nunca ha caído todavía.
-const ARTICULOS_EN_EXAMEN = {};
+// Comprobado sobre la materia EXÁMENES en Supabase, con las diez convocatorias
+// completas (2018, 2019, 2022, 2024 y 2025, ingreso libre y promoción interna):
+// ya NO son cero apariciones. Han caído dos, una en 2024 PI y otra en el
+// provisional de 2025. La nota anterior ("cero apariciones") queda obsoleta,
+// corregida con datos reales.
+const ARTICULOS_EN_EXAMEN = {
+  "2": [{ anio: "2024 (promoción interna)", sobre: "qué es discriminación directa" }],
+  "4": [{ anio: "2025 (provisional)", sobre: "grado mínimo para la consideración de persona con discapacidad (art. 4.2)" }],
+};
 
 const TITULOS_EN_EXAMEN = {};
 

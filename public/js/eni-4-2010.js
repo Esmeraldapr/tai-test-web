@@ -15,12 +15,14 @@
 // De las cinco preguntas del ENI, TRES van de la lista de Normas Técnicas de
 // Interoperabilidad, que está en la disposición adicional primera y no en el
 // articulado. Por eso aquí las disposiciones no van plegadas.
-const ARTICULOS_EN_EXAMEN = {};
+const ARTICULOS_EN_EXAMEN = {
+  "6": [{ anio: "2024 (promoción interna)", sobre: "carácter multidimensional de la interoperabilidad" }],
+};
 
 const DISPOSICIONES_EN_EXAMEN = [
   { anio: "2018", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
   { anio: "2019", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
-  { anio: "2025/2026", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
+  { anio: "2025 (provisional)", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
 ];
 
 const ANEXOS_EN_EXAMEN = {};

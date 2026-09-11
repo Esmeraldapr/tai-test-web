@@ -29,6 +29,7 @@ const TITULOS_QUE_ENTRAN = {
 // Verificado uno a uno sobre los enunciados oficiales.
 const ARTICULOS_EN_EXAMEN = {
   "8": [{ anio: "2019", sobre: "trato desfavorable por embarazo o maternidad" }],
+  "9": [{ anio: "2022 (promoción interna)", sobre: "represalias por reclamar el principio de igualdad de trato" }],
   "26": [{ anio: "2018", sobre: "igualdad en la creación y producción artística" }],
   "49": [{ anio: "2022", sobre: "apoyo a la implantación voluntaria de planes de igualdad" }],
   "51": [{ anio: "2019", sobre: "criterios de actuación de las Administraciones públicas" }],

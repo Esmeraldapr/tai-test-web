@@ -22,7 +22,8 @@
 
 // Verificado sobre los enunciados oficiales de los cinco exámenes.
 const ARTICULOS_EN_EXAMEN = {
-  "3": [{ anio: "2025/2026", sobre: "qué contenido cuenta como accesible" }],
+  "3": [{ anio: "2025 (provisional)", sobre: "qué contenido cuenta como accesible" }],
+  "9": [{ anio: "2019", sobre: "plazos de la primera revisión de accesibilidad" }],
   "12": [{ anio: "2024", sobre: "solicitudes de información accesible y quejas" }],
 };
 
