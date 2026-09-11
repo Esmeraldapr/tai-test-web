@@ -20,7 +20,7 @@ function parsearTema(temaCompleto) {
 }
 
 function enlaceQuiz(tema) {
-  return `quiz.html?materia=${encodeURIComponent("EXÁMENES")}&tema=${encodeURIComponent(tema)}&modo=tema`;
+  return `quiz.html?materia=${encodeURIComponent("EXÁMENES")}&tema=${encodeURIComponent(tema)}&modo=tema&n=0`;
 }
 
 function esc(s) {
