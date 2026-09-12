@@ -525,7 +525,7 @@ input:focus-visible,
   .contenedor{padding-bottom:70px !important;}
 }
 
-/* Selector de preguntas por tema, en Repasar Tema. */
+/* Selector de preguntas por tema, en Test por temas. */
 .caja-n-tema{
   display:flex; align-items:center; gap:9px; margin:0 0 18px;
   font-size:.85rem; color:var(--texto-suave);
