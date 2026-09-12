@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ley 34/2002, LSSI · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .ley-fuente { font-size: 0.82rem; opacity: 0.7; margin: 0 0 18px; }
+  .art-epigrafe { font-style: italic; opacity: 0.85; }
+  .articulo-preguntado {
+    border-left: 3px solid rgba(217, 119, 6, 0.75);
+    padding-left: 12px;
+    background: rgba(217, 119, 6, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+  .chip.examen {
+    background: rgba(217, 119, 6, 0.15);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+  .aviso-examen { margin: 8px 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .aviso-examen-detalle { font-size: 0.8rem; opacity: 0.75; }
+  .aviso-fuerte {
+    background: rgba(217,119,6,.08); border: 1px solid rgba(217,119,6,.25);
+    border-radius: 12px; padding: 12px 14px; font-size: .88rem; margin: 10px 0 16px;
+  }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor constitucion-doc ley-doc">
+        <h1>🌐 Ley 34/2002, LSSI</h1>
+        <p class="subtitulo">
+          Servicios de la sociedad de la información y de comercio electrónico. Texto
+          consolidado del BOE, 51 artículos en siete títulos (algunos con capítulos y
+          secciones), más 9 disposiciones adicionales y un anexo de definiciones. Pulsa
+          <strong>🔊</strong> para escuchar por título, capítulo o sección.
+        </p>
+        <p class="aviso-fuerte">
+          <strong>Dos avisos:</strong> la convocatoria no nombra esta ley. Su tema 6 pide
+          «la sociedad de la información. Identidad y firma electrónica: régimen jurídico»,
+          sin decir qué norma; esta es la ley base de la sociedad de la información en
+          España, mencionada en el índice orientativo del temario, así que se da por que
+          entra entera. Y, siendo honestos: <strong>no ha caído todavía en ninguno de los
+          exámenes contados (2018 a 2025)</strong> — no verás ninguna marca 📌 por ahora.
+        </p>
+        <div id="banner-acceso"></div>
+        <div id="ley"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/lssi.js"></script>
+</body>
+</html>
