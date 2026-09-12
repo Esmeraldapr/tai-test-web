@@ -104,6 +104,12 @@
         <p>Los 101 artículos del Estatuto Básico del Empleado Público. Del tema 4, y esta sí está citada literalmente en la convocatoria (no por interpretación nuestra). Ha caído dos veces, en 2018 y en el examen provisional de 2025.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="ley53-1984.html">
+        <div class="accion-icono">⚖️</div>
+        <h3>Ley 53/1984, incompatibilidades</h3>
+        <p>Los 20 artículos de la Ley de incompatibilidades del personal al servicio de las Administraciones Públicas. Del tema 4, junto al EBEP, confirmada en el índice orientativo del temario. Ha caído una vez, en 2022.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
       <a class="accion-card" href="rgpd.html">
         <div class="accion-icono">🇪🇺</div>
         <h3>RGPD, protección de datos (UE)</h3>
