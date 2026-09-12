@@ -95,13 +95,19 @@
       <a class="accion-card" href="rdl1-2013.html">
         <div class="accion-icono">♿</div>
         <h3>RDL 1/2013, discapacidad</h3>
-        <p>Los 106 artículos del Texto Refundido de derechos de las personas con discapacidad. Quinta y última ley del tema 5: no ha caído nunca en los cinco exámenes contados, pero entra por epígrafe del programa.</p>
+        <p>Los 106 artículos del Texto Refundido de derechos de las personas con discapacidad. Quinta y última ley del tema 5: ha caído dos veces (2024 promoción interna y el examen provisional de 2025), en los artículos 2 y 4.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
       <a class="accion-card" href="ebep-5-2015.html">
         <div class="accion-icono">🧑‍💼</div>
         <h3>RDL 5/2015, Estatuto del Empleado Público</h3>
-        <p>Los 101 artículos del Estatuto Básico del Empleado Público. Del tema 4, y esta sí está citada literalmente en la convocatoria (no por interpretación nuestra). El artículo sobre la clasificación de empleados públicos ya cayó en 2018.</p>
+        <p>Los 101 artículos del Estatuto Básico del Empleado Público. Del tema 4, y esta sí está citada literalmente en la convocatoria (no por interpretación nuestra). Ha caído dos veces, en 2018 y en el examen provisional de 2025.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
+      <a class="accion-card" href="rgpd.html">
+        <div class="accion-icono">🇪🇺</div>
+        <h3>RGPD, protección de datos (UE)</h3>
+        <p>Los 99 artículos del Reglamento europeo de protección de datos. Completa el tema 7 junto a la LO 3/2018. Es la norma con más apariciones de las que faltaban por montar: 6 veces en las diez convocatorias contadas.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
       <a class="accion-card" href="ley39-2015.html">
