@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ley 53/1984, incompatibilidades · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .ley-fuente { font-size: 0.82rem; opacity: 0.7; margin: 0 0 18px; }
+  .art-epigrafe { font-style: italic; opacity: 0.85; }
+  .articulo-preguntado {
+    border-left: 3px solid rgba(217, 119, 6, 0.75);
+    padding-left: 12px;
+    background: rgba(217, 119, 6, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+  .chip.examen {
+    background: rgba(217, 119, 6, 0.15);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+  .aviso-examen { margin: 8px 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .aviso-examen-detalle { font-size: 0.8rem; opacity: 0.75; }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor constitucion-doc ley-doc">
+        <h1>⚖️ Ley 53/1984, incompatibilidades</h1>
+        <p class="subtitulo">
+          Incompatibilidades del personal al servicio de las Administraciones Públicas.
+          Texto consolidado del BOE, 20 artículos en cinco capítulos. Pulsa <strong>🔊</strong>
+          para escuchar por capítulo. Lo marcado con <span class="chip examen">📌</span> ya ha
+          caído en examen oficial. Del tema 4, junto al EBEP.
+        </p>
+        <div id="banner-acceso"></div>
+        <div id="ley"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/ley53-1984.js"></script>
+</body>
+</html>
