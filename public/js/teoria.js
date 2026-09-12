@@ -122,6 +122,12 @@
         <p>Los 65 artículos del Reglamento de actuación y funcionamiento por medios electrónicos, con su anexo de 49 definiciones. Candidato para los temas 8 y 9. Ha caído 2 veces, siempre sobre el mismo artículo.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="eidas.html">
+        <div class="accion-icono">🇪🇺</div>
+        <h3>Reglamento eIDAS (UE 910/2014)</h3>
+        <p>Los 52 artículos del reglamento europeo de identificación electrónica y servicios de confianza, con sus 4 anexos. Candidato para el tema 6, junto a la Ley 6/2020. Ha caído en el Anexo III.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
       <a class="accion-card" href="ley39-2015.html">
         <div class="accion-icono">📄</div>
         <h3>Ley 39/2015, procedimiento administrativo</h3>
