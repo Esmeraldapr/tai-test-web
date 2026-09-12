@@ -1,5 +1,5 @@
 // ============================================================
-// Lógica de "Repasar Tema" (temas.html)
+// Lógica de "Test por temas" (temas.html)
 // ============================================================
 
 const ORDEN_MATERIAS = [

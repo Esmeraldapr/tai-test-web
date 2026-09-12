@@ -10,7 +10,7 @@ const SECCIONES_TUTORIAL = [
   },
   {
     icono: "📘",
-    titulo: "Repasar Tema",
+    titulo: "Test por temas",
     texto: "Aquí están los 4 bloques del temario oficial y los 5 fundamentos. Pulsa «Ver temas» para desplegar los temas de esa materia: cada uno te lleva a un test solo de ese tema. También puedes pulsar «Practicar 20 al azar» para un repaso mezclado de toda la materia.",
   },
   {
