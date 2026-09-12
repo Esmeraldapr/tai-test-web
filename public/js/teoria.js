@@ -134,6 +134,12 @@
         <p>Los 52 artículos del reglamento europeo de identificación electrónica y servicios de confianza, con sus 4 anexos. Candidato para el tema 6, junto a la Ley 6/2020. Ha caído en el Anexo III.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="lssi.html">
+        <div class="accion-icono">🌐</div>
+        <h3>Ley 34/2002, LSSI</h3>
+        <p>Los 51 artículos de la Ley de servicios de la sociedad de la información y comercio electrónico. Candidata para el tema 6. No ha caído todavía en ninguno de los exámenes contados.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
       <a class="accion-card" href="ley39-2015.html">
         <div class="accion-icono">📄</div>
         <h3>Ley 39/2015, procedimiento administrativo</h3>
