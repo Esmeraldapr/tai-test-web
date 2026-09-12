@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RD 203/2021, sector público electrónico · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .ley-fuente { font-size: 0.82rem; opacity: 0.7; margin: 0 0 18px; }
+  .art-epigrafe { font-style: italic; opacity: 0.85; }
+  .articulo-preguntado {
+    border-left: 3px solid rgba(217, 119, 6, 0.75);
+    padding-left: 12px;
+    background: rgba(217, 119, 6, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+  .chip.examen {
+    background: rgba(217, 119, 6, 0.15);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+  .aviso-examen { margin: 8px 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .aviso-examen-detalle { font-size: 0.8rem; opacity: 0.75; }
+  .aviso-fuerte {
+    background: rgba(217,119,6,.08); border: 1px solid rgba(217,119,6,.25);
+    border-radius: 12px; padding: 12px 14px; font-size: .88rem; margin: 10px 0 16px;
+  }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor constitucion-doc ley-doc">
+        <h1>💻 RD 203/2021, sector público electrónico</h1>
+        <p class="subtitulo">
+          Reglamento de actuación y funcionamiento del sector público por medios
+          electrónicos. 65 artículos en cinco títulos, más 10 disposiciones adicionales
+          y un anexo de 49 definiciones. Pulsa <strong>🔊</strong> para escuchar por
+          título, capítulo o sección. Lo marcado con <span class="chip examen">📌</span>
+          ya ha caído en examen oficial: 2 veces, siempre sobre el mismo artículo.
+        </p>
+        <p class="aviso-fuerte">
+          <strong>Dos avisos:</strong> la convocatoria no nombra esta norma. Los temas
+          8 y 9 piden «acceso electrónico, sedes electrónicas, gestión de procedimientos»,
+          y este Reglamento desarrolla justo eso, así que se da por que entra entero; es
+          criterio nuestro, no cita del BOE. Y el texto es el de la publicación original de
+          2021: no incluye las modificaciones de 2022 y 2025, que afectan sobre todo a otras
+          normas relacionadas. La Disposición transitoria primera fue anulada por el Tribunal
+          Supremo en 2022 y por eso no se incluye aquí.
+        </p>
+        <div id="banner-acceso"></div>
+        <div id="ley"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/rd203-2021.js"></script>
+</body>
+</html>
