@@ -116,6 +116,12 @@
         <p>Los 21 artículos de la Ley de servicios electrónicos de confianza. Candidata para el tema 6, junto al DNI electrónico. Ha caído 3 veces, siempre sobre el mismo artículo (vigencia de los certificados).</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="rd203-2021.html">
+        <div class="accion-icono">💻</div>
+        <h3>RD 203/2021, sector público electrónico</h3>
+        <p>Los 65 artículos del Reglamento de actuación y funcionamiento por medios electrónicos, con su anexo de 49 definiciones. Candidato para los temas 8 y 9. Ha caído 2 veces, siempre sobre el mismo artículo.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
       <a class="accion-card" href="ley39-2015.html">
         <div class="accion-icono">📄</div>
         <h3>Ley 39/2015, procedimiento administrativo</h3>
