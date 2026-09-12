@@ -110,6 +110,12 @@
         <p>Los 99 artículos del Reglamento europeo de protección de datos. Completa el tema 7 junto a la LO 3/2018. Es la norma con más apariciones de las que faltaban por montar: 6 veces en las diez convocatorias contadas.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="ley6-2020.html">
+        <div class="accion-icono">🔏</div>
+        <h3>Ley 6/2020, servicios de confianza</h3>
+        <p>Los 21 artículos de la Ley de servicios electrónicos de confianza. Candidata para el tema 6, junto al DNI electrónico. Ha caído 3 veces, siempre sobre el mismo artículo (vigencia de los certificados).</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
       <a class="accion-card" href="ley39-2015.html">
         <div class="accion-icono">📄</div>
         <h3>Ley 39/2015, procedimiento administrativo</h3>
