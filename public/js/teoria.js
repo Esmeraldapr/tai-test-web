@@ -38,6 +38,12 @@
         <p>Texto íntegro de 1978, con indicación de qué títulos entran en la convocatoria actual y lectura en voz alta por título, capítulo y sección.</p>
         <span class="accion-flecha">Leer →</span>
           </a>
+      <a class="accion-card" href="ley50-1997.html">
+        <div class="accion-icono">🏛️</div>
+        <h3>Ley 50/1997, del Gobierno</h3>
+        <p>Los 29 artículos que regulan la composición y funcionamiento del Gobierno. Confirmada en el índice orientativo del temario y en el código oficial del BOE. Ha caído 2 veces (artículos 18 y 21).</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
       <a class="accion-card" href="ley19-2013.html">
         <div class="accion-icono">🔍</div>
         <h3>Ley 19/2013, de transparencia</h3>
