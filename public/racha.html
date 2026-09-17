@@ -6,9 +6,20 @@
 <title>Mi racha · Oposición TAI</title>
 <link rel="stylesheet" href="css/style.css" />
 <style>
-  .racha-doc { max-width: 640px; margin: 0 auto; }
-  .volver-racha { display: inline-block; margin-bottom: 6px; color: var(--texto-suave); text-decoration: none; font-size: 0.9rem; }
-  .volver-racha:hover { text-decoration: underline; }
+  .acciones-racha { display: flex; gap: 12px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+
+  .calendario-mes-cabecera { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .calendario-mes-cabecera button { background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--morado); padding: 4px 10px; }
+  .calendario-mes-cabecera button:disabled { opacity: 0.3; cursor: default; }
+  .calendario-mes-titulo { font-weight: 700; text-transform: capitalize; }
+  .rejilla-mes { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cabecera-dia-mes { text-align: center; font-size: 0.7rem; opacity: 0.6; padding-bottom: 4px; }
+  .celda-dia-mes {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; font-size: 0.85rem; background: rgba(124,58,237,.05);
+  }
+  .celda-dia-mes.completo { background: linear-gradient(135deg,#f59e0b,#ef4444); color: #fff; font-weight: 700; }
+  .celda-dia-mes.vacia { background: none; }
 
   .cabecera-racha { display: flex; gap: 14px; justify-content: center; margin: 8px 0 20px; }
   .stat-racha {
@@ -95,7 +106,6 @@
     <div class="sidebar" id="sidebar"></div>
     <div class="main-contenido">
       <div class="contenedor racha-doc">
-        <a href="index.html" class="volver-racha">← Volver</a>
         <h1>🔥 Mi racha</h1>
         <p class="subtitulo">Tres tareas cortas cada día, con contenido distinto — así el repaso no se hace pesado.</p>
         <div id="banner-acceso"></div>
