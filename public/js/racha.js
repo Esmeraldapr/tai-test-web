@@ -77,7 +77,7 @@ function pintarPagina(estado, semana) {
     .map((d) => {
       const fecha = new Date(d.fecha + "T00:00:00");
       const letra = diasSemana[fecha.getDay()];
-      const clase = d.completo ? "dia-racha completo" : d.es_hoy ? "dia-racha hoy" : "dia-racha";
+      const clase = d.completo ? "tira-dia completo" : d.es_hoy ? "tira-dia hoy" : "tira-dia";
       return `<div class="${clase}"><span class="llama">${d.completo ? "🔥" : "○"}</span><span class="letra-dia">${letra}</span></div>`;
     })
     .join("");
@@ -174,23 +174,45 @@ function pintarModalImprescindibles(fichas) {
       <div class="fichas-racha">
         ${fichas
           .map(
-            (f) => `
+            (f, i) => `
           <div class="ficha-racha">
-            <strong>${escaparHtml(f.termino)}</strong>
-            <p>${escaparHtml(f.definicion)}</p>
+            <div class="ficha-racha-cabecera">
+              <strong>${escaparHtml(f.termino)}</strong>
+              <button type="button" class="btn-favorito btn-leer-ficha" data-indice="${i}" title="Escuchar">🔊</button>
+            </div>
+            <p class="parrafo-leible" id="ficha-def-${i}">${escaparHtml(f.definicion)}</p>
             ${f.nota ? `<p class="nota-racha">💡 ${escaparHtml(f.nota)}</p>` : ""}
           </div>`
           )
           .join("")}
       </div>
-      <button type="button" class="btn btn-primario" id="btn-ya-me-las-se">Ya me las sé ✓</button>
+      <button type="button" class="btn btn-primario" id="btn-ya-me-las-se">Ya me las sé — comprobar con 5 preguntas →</button>
       <button type="button" class="btn btn-secundario" id="btn-cerrar-modal-racha">Cerrar</button>
     </div>`;
   document.body.appendChild(overlay);
   document.getElementById("btn-cerrar-modal-racha").addEventListener("click", () => overlay.remove());
-  document.getElementById("btn-ya-me-las-se").addEventListener("click", async () => {
-    overlay.remove();
-    await marcarBarra(1);
+  overlay.querySelectorAll(".btn-leer-ficha").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const i = btn.dataset.indice;
+      leerTexto(document.getElementById("ficha-def-" + i), btn);
+    });
+  });
+  document.getElementById("btn-ya-me-las-se").addEventListener("click", () => {
+    // No se marca la barra aquí directamente: se comprueba con un mini test
+    // de 5 preguntas del mismo tema, y es quiz.js quien marca la barra 1
+    // al terminarlo (con &racha=1 en la URL), igual que hacen las otras dos.
+    const materia = estadoActual.bloque_dia === "MEZCLADO" ? null : estadoActual.bloque_dia;
+    let url;
+    if (materia && estadoActual.tema_especifico) {
+      url = `quiz.html?materia=${encodeURIComponent(materia)}&modo=tema&tema=${encodeURIComponent(estadoActual.tema_especifico)}&n=5&racha=1`;
+    } else if (materia) {
+      url = `quiz.html?materia=${encodeURIComponent(materia)}&modo=aleatorio&n=5&racha=1`;
+    } else {
+      const bloques = ["BLOQUE 1: DERECHO", "BLOQUE 2: TECNOLOGÍA", "BLOQUE 3: DESARROLLO", "BLOQUE 4: SISTEMAS Y COMUNICACIONES"];
+      const elegido = bloques[Math.floor(Math.random() * bloques.length)];
+      url = `quiz.html?materia=${encodeURIComponent(elegido)}&modo=aleatorio&n=5&racha=1`;
+    }
+    window.location.href = url;
   });
 }
 
