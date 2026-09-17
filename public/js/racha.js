@@ -98,7 +98,14 @@ function pintarPagina(estado, semana) {
       ${htmlTarea(2, "❓", `Preguntas de ${nombreBloque}`, estado.barra2, null, enlaceQuizBloque(estado, 2))}
       ${htmlTarea(3, "🎯", estado.tema_especifico ? `Ejercicio de ${estado.tema_especifico}` : "Ejercicio mezclado", estado.barra3, null, enlaceQuizTema(estado, 3))}
     </div>
+
+    <div class="acciones-racha">
+      <a href="index.html" class="btn btn-secundario">← Volver</a>
+      <button type="button" class="btn btn-primario" id="btn-ver-historico">📅 Histórico de rachas</button>
+    </div>
   `;
+
+  document.getElementById("btn-ver-historico").addEventListener("click", () => abrirHistorico());
 
   if (todasCompletas) {
     setTimeout(() => mostrarCelebracion(estado), 400);
@@ -263,4 +270,86 @@ function lanzarConfeti() {
     contenedor.appendChild(pieza);
   }
   setTimeout(() => contenedor.remove(), 3800);
+}
+
+// ---------------- Histórico de rachas (calendario mensual) ----------------
+// Vista aparte, solo para mirar hacia atrás: qué días se completaron las 3
+// tareas, mes a mes, con flechas para navegar. No afecta a la racha en sí,
+// es solo para verlo de un vistazo (como pedía la usuaria de su otra app).
+const NOMBRES_MES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+
+let historicoAnio = null;
+let historicoMes = null; // 1-12
+
+function abrirHistorico() {
+  const hoy = new Date();
+  historicoAnio = hoy.getFullYear();
+  historicoMes = hoy.getMonth() + 1;
+
+  const overlay = document.createElement("div");
+  overlay.className = "modal-racha-overlay";
+  overlay.id = "overlay-historico";
+  overlay.innerHTML = `
+    <div class="modal-racha-caja">
+      <h2>📅 Histórico de rachas</h2>
+      <div class="calendario-mes-cabecera">
+        <button type="button" id="btn-mes-anterior">←</button>
+        <span class="calendario-mes-titulo" id="titulo-mes-historico"></span>
+        <button type="button" id="btn-mes-siguiente">→</button>
+      </div>
+      <div id="rejilla-mes-historico"><div class="spinner"></div></div>
+      <button type="button" class="btn btn-secundario" id="btn-cerrar-historico">Cerrar</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById("btn-cerrar-historico").addEventListener("click", () => overlay.remove());
+  document.getElementById("btn-mes-anterior").addEventListener("click", () => cambiarMesHistorico(-1));
+  document.getElementById("btn-mes-siguiente").addEventListener("click", () => cambiarMesHistorico(1));
+
+  cargarMesHistorico();
+}
+
+function cambiarMesHistorico(delta) {
+  historicoMes += delta;
+  if (historicoMes > 12) { historicoMes = 1; historicoAnio++; }
+  if (historicoMes < 1) { historicoMes = 12; historicoAnio--; }
+  cargarMesHistorico();
+}
+
+async function cargarMesHistorico() {
+  const hoy = new Date();
+  const esMesActual = historicoAnio === hoy.getFullYear() && historicoMes === hoy.getMonth() + 1;
+  document.getElementById("titulo-mes-historico").textContent = `${NOMBRES_MES[historicoMes - 1]} ${historicoAnio}`;
+  document.getElementById("btn-mes-siguiente").disabled = esMesActual;
+
+  const { data, error } = await sb.rpc("racha_mes_web", { p_anio: historicoAnio, p_mes: historicoMes });
+  const contenedor = document.getElementById("rejilla-mes-historico");
+  if (error || !data) {
+    contenedor.innerHTML = `<div class="vacio">No se ha podido cargar este mes.</div>`;
+    return;
+  }
+
+  const primerDia = new Date(historicoAnio, historicoMes - 1, 1);
+  // Lunes=0 ... Domingo=6, para que la semana empiece en lunes como en el resto de la web.
+  const huecoInicial = (primerDia.getDay() + 6) % 7;
+
+  const cabeceras = ["L", "M", "X", "J", "V", "S", "D"]
+    .map((d) => `<div class="cabecera-dia-mes">${d}</div>`)
+    .join("");
+  const huecos = Array(huecoInicial).fill('<div class="celda-dia-mes vacia"></div>').join("");
+  const dias = data
+    .map((d) => {
+      const numero = parseInt(d.fecha.split("-")[2], 10);
+      return `<div class="celda-dia-mes${d.completo ? " completo" : ""}">${d.completo ? "🔥" : numero}</div>`;
+    })
+    .join("");
+
+  const totalCompletos = data.filter((d) => d.completo).length;
+  contenedor.innerHTML = `
+    <div class="rejilla-mes">${cabeceras}${huecos}${dias}</div>
+    <p style="text-align:center; margin-top:12px; font-size:0.85rem; opacity:0.75">
+      ${totalCompletos} ${totalCompletos === 1 ? "día completo" : "días completos"} este mes
+    </p>`;
 }
