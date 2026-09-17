@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="css/style.css" />
 <style>
   .racha-doc { max-width: 640px; margin: 0 auto; }
+  .volver-racha { display: inline-block; margin-bottom: 6px; color: var(--texto-suave); text-decoration: none; font-size: 0.9rem; }
+  .volver-racha:hover { text-decoration: underline; }
 
   .cabecera-racha { display: flex; gap: 14px; justify-content: center; margin: 8px 0 20px; }
   .stat-racha {
@@ -18,14 +20,15 @@
   .stat-num { white-space: nowrap; }
 
   .tira-semanal { display: flex; justify-content: space-between; gap: 4px; margin-bottom: 22px; }
-  .dia-racha {
+  .tira-dia {
     display: flex; flex-direction: column; align-items: center; gap: 4px;
-    flex: 1; opacity: 0.55;
+    flex: 1; opacity: 0.55; width: auto; height: auto; background: none;
+    border-radius: 0; font-size: inherit; font-weight: normal;
   }
-  .dia-racha.completo { opacity: 1; }
-  .dia-racha.hoy .letra-dia { font-weight: 800; color: var(--morado); }
-  .dia-racha .llama { font-size: 1.4rem; }
-  .dia-racha .letra-dia { font-size: 0.75rem; text-transform: uppercase; opacity: 0.75; }
+  .tira-dia.completo { opacity: 1; }
+  .tira-dia.hoy .letra-dia { font-weight: 800; color: var(--morado); }
+  .tira-dia .llama { font-size: 1.4rem; }
+  .tira-dia .letra-dia { font-size: 0.75rem; text-transform: uppercase; opacity: 0.75; }
 
   .tarjeta-tareas {
     background: var(--tarjeta); border: 1px solid var(--borde);
@@ -66,6 +69,9 @@
     background: rgba(124,58,237,.07); border-radius: 12px; padding: 14px 16px;
   }
   .ficha-racha strong { display: block; margin-bottom: 4px; color: var(--morado); }
+  .ficha-racha-cabecera { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .ficha-racha-cabecera strong { margin-bottom: 0; }
+  .btn-leer-ficha { font-size: 1.1rem; }
   .ficha-racha p { margin: 0; font-size: 0.92rem; }
   .nota-racha { margin-top: 6px !important; opacity: 0.75; font-size: 0.85rem !important; }
   .modal-racha-caja .btn { width: 100%; margin-top: 8px; }
@@ -89,6 +95,7 @@
     <div class="sidebar" id="sidebar"></div>
     <div class="main-contenido">
       <div class="contenedor racha-doc">
+        <a href="index.html" class="volver-racha">← Volver</a>
         <h1>🔥 Mi racha</h1>
         <p class="subtitulo">Tres tareas cortas cada día, con contenido distinto — así el repaso no se hace pesado.</p>
         <div id="banner-acceso"></div>
