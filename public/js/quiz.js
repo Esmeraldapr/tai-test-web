@@ -184,11 +184,6 @@ function anteriorPregunta() {
   pintarPregunta();
 }
 
-/** Lee en voz alta el enunciado y las 4 opciones seguidas — pensado para
- * usuarios con dislexia que prefieren escuchar la pregunta completa.
- * Cada parte se resalta palabra a palabra mientras suena, y la opción que
- * toca en cada momento se marca visualmente (igual que el resto de la web
- * marca "lo que suena ahora" en fichas y leyes). */
 function leerPreguntaCompleta(pregunta, opciones, letras) {
   const btn = document.getElementById("btn-leer");
   const enunciadoEl = document.querySelector(".enunciado.parrafo-leible");
@@ -209,10 +204,6 @@ function leerPreguntaCompleta(pregunta, opciones, letras) {
   });
 }
 
-// "Pasar" no cuenta como fallo: no llama a comprobar_respuesta_web (así no se
-// guarda ninguna fila en respuestas_web), y no toca aciertos/total — una
-// pregunta no respondida no debe penalizar igual que una fallada. Es idempotente:
-// volver a pasar una pregunta ya marcada como saltada no la añade dos veces.
 function saltarPregunta(pregunta) {
   if (respondida) return;
   if (!historial[indice]) {
@@ -252,7 +243,10 @@ async function elegirOpcion(el, pregunta) {
 
   if (error || !data || !data.length) {
     console.error(error);
-    document.getElementById("zona-explicacion").innerHTML = `<div class="explicacion-caja mal">No se ha podido comprobar la respuesta. Vuelve a intentarlo.</div>`;
+    const mensajeError = error && error.code === "P0001" && /sin acceso vigente/i.test(error.message || "")
+      ? "Tu acceso ha caducado. Recarga la página para comprobarlo."
+      : "No se ha podido comprobar la respuesta, parece un corte de conexión. Vuelve a intentarlo.";
+    document.getElementById("zona-explicacion").innerHTML = `<div class="explicacion-caja mal">${mensajeError}</div>`;
     // Se deshace el bloqueo para que la persona pueda volver a pulsar una opción.
     respondida = false;
     puedeAvanzar = !!previoAlEntrar;
@@ -311,7 +305,12 @@ async function enviarReporte(preguntaId) {
   const estado = document.getElementById("reporte-mensaje-estado");
   const { error } = await sb.from("incidencias_web").insert({ pregunta_id: preguntaId, tipo, mensaje });
   if (error) {
-    estado.textContent = "Has alcanzado el límite de 5 reportes por hoy, o tu acceso no está vigente. Inténtalo mañana.";
+    console.error(error);
+    if (error.code === "42501") {
+      estado.textContent = "Has alcanzado el límite de 5 reportes por hoy, o tu acceso no está vigente. Inténtalo mañana.";
+    } else {
+      estado.textContent = "No se ha podido enviar, parece un corte de conexión. Vuelve a intentarlo en un momento.";
+    }
     estado.style.color = "var(--rojo)";
     return;
   }
