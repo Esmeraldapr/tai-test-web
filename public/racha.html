@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mi racha · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .racha-doc { max-width: 640px; margin: 0 auto; }
+
+  .cabecera-racha { display: flex; gap: 14px; justify-content: center; margin: 8px 0 20px; }
+  .stat-racha {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    border-radius: 14px; padding: 10px 16px; font-weight: 700; font-size: 1.05rem;
+  }
+  .stat-icono { font-size: 1.3rem; }
+  .stat-num { white-space: nowrap; }
+
+  .tira-semanal { display: flex; justify-content: space-between; gap: 4px; margin-bottom: 22px; }
+  .dia-racha {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    flex: 1; opacity: 0.55;
+  }
+  .dia-racha.completo { opacity: 1; }
+  .dia-racha.hoy .letra-dia { font-weight: 800; color: var(--morado); }
+  .dia-racha .llama { font-size: 1.4rem; }
+  .dia-racha .letra-dia { font-size: 0.75rem; text-transform: uppercase; opacity: 0.75; }
+
+  .tarjeta-tareas {
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    border-radius: 18px; padding: 20px 18px;
+  }
+  .tarjeta-tareas h2 { margin: 0 0 4px; font-size: 1.2rem; }
+  .tema-del-dia { margin: 0 0 16px; font-size: 0.9rem; opacity: 0.8; }
+
+  .tarea-fila {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(124,58,237,.06); border: 1px solid var(--borde);
+    border-radius: 999px; padding: 14px 18px; margin-bottom: 12px;
+    text-decoration: none; color: inherit; font: inherit; cursor: pointer;
+    width: 100%; text-align: left; transition: transform .12s, background .2s;
+  }
+  .tarea-fila:hover { transform: translateY(-1px); }
+  .tarea-fila.completa {
+    background: linear-gradient(90deg, #10b981, #059669); color: #fff;
+    border-color: transparent; cursor: default;
+  }
+  .tarea-icono { font-size: 1.3rem; }
+  .tarea-texto { flex: 1; font-weight: 600; }
+  .tarea-marca { font-size: 1.2rem; opacity: 0.8; }
+
+  .modal-racha-overlay {
+    position: fixed; inset: 0; background: rgba(20,16,40,.78);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; z-index: 2000; overflow-y: auto;
+  }
+  .modal-racha-caja {
+    background: var(--tarjeta); border-radius: 20px; padding: 26px 22px;
+    max-width: 460px; width: 100%; max-height: 86vh; overflow-y: auto;
+    margin: auto; text-align: center;
+  }
+  .modal-racha-caja h2 { margin-top: 0; }
+  .fichas-racha { text-align: left; margin: 16px 0; display: flex; flex-direction: column; gap: 14px; }
+  .ficha-racha {
+    background: rgba(124,58,237,.07); border-radius: 12px; padding: 14px 16px;
+  }
+  .ficha-racha strong { display: block; margin-bottom: 4px; color: var(--morado); }
+  .ficha-racha p { margin: 0; font-size: 0.92rem; }
+  .nota-racha { margin-top: 6px !important; opacity: 0.75; font-size: 0.85rem !important; }
+  .modal-racha-caja .btn { width: 100%; margin-top: 8px; }
+
+  .celebracion-caja { text-align: center; }
+  .emoji-celebracion { font-size: 3.5rem; margin-bottom: 6px; }
+  .racha-grande { font-size: 1.3rem; font-weight: 800; margin: 14px 0; }
+
+  .confeti-contenedor { position: fixed; inset: 0; pointer-events: none; z-index: 2100; overflow: hidden; }
+  .confeti-pieza {
+    position: absolute; top: -12px; width: 9px; height: 14px; opacity: 0.9;
+    animation: caer-confeti linear forwards;
+  }
+  @keyframes caer-confeti {
+    to { transform: translateY(105vh) rotate(540deg); opacity: 0.3; }
+  }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor racha-doc">
+        <h1>🔥 Mi racha</h1>
+        <p class="subtitulo">Tres tareas cortas cada día, con contenido distinto — así el repaso no se hace pesado.</p>
+        <div id="banner-acceso"></div>
+        <div id="contenido-racha"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/racha.js"></script>
+</body>
+</html>
