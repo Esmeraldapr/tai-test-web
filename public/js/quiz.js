@@ -18,6 +18,10 @@ let favoritosSet = new Set();
 let preguntasSaltadas = [];
 // historial[i] = null (aún no llegada) | {estado:"contestada", opcionElegida, resultado} | {estado:"saltada"}
 let historial = [];
+// Si el quiz se abrió desde "Mi racha" (quiz.html?...&racha=2), al terminar
+// se marca esa barra como completada, sin que el resto del motor de test
+// necesite saber nada de la racha.
+let rachaBarraParam = null;
 
 function mezclar(arr) {
   const a = [...arr];
@@ -50,6 +54,7 @@ function mezclar(arr) {
   const modo = params.get("modo") || "aleatorio";
   const n = parseInt(params.get("n") || "20", 10);
   const idsParam = params.get("ids");
+  rachaBarraParam = parseInt(params.get("racha") || "0", 10) || null;
 
   if (modo !== "lista" && !materiaActual) { window.location.href = "index.html"; return; }
 
@@ -350,9 +355,15 @@ async function pintarResultado() {
         <a href="index.html" class="btn btn-secundario">Volver</a>
         <a href="quiz.html?${new URLSearchParams(window.location.search).toString()}" class="btn btn-primario">Otra práctica</a>
         ${nSaltadas ? `<a href="quiz.html?modo=lista&ids=${preguntasSaltadas.join(",")}&titulo=${encodeURIComponent("Preguntas saltadas")}" class="btn btn-primario">Repasar las saltadas →</a>` : ""}
+        ${rachaBarraParam ? `<a href="racha.html" class="btn btn-primario">🔥 Volver a mi racha</a>` : ""}
       </div>
     </div>
   `;
+
+  if (rachaBarraParam) {
+    const { error } = await sb.rpc("racha_completar_barra_web", { p_barra: rachaBarraParam });
+    if (error) console.error("Error marcando la barra de la racha:", error);
+  }
 
   if (total > 0) {
     // Los modos "lista" (Mis fallos, Mis favoritas, Preguntas saltadas) no tienen
