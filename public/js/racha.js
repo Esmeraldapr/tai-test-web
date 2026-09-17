@@ -52,6 +52,15 @@ function escaparHtml(s) {
   }
 
   await cargarTodo();
+
+  // Si el navegador restaura esta página desde su caché en memoria (típico
+  // al pulsar el botón "atrás" del móvil tras volver de un quiz), los
+  // scripts no se vuelven a ejecutar y se ve la foto de "antes" de completar
+  // la barra, aunque en la base de datos ya esté bien guardado. Se detecta
+  // con event.persisted y se recarga el estado real.
+  window.addEventListener("pageshow", (evento) => {
+    if (evento.persisted) cargarTodo();
+  });
 })();
 
 async function cargarTodo() {
