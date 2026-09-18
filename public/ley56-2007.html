@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ley 56/2007, sociedad de la información · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .ley-fuente { font-size: 0.82rem; opacity: 0.7; margin: 0 0 18px; }
+  .art-epigrafe { font-style: italic; opacity: 0.85; }
+  .articulo-preguntado {
+    border-left: 3px solid rgba(217, 119, 6, 0.75);
+    padding-left: 12px;
+    background: rgba(217, 119, 6, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+  .chip.examen {
+    background: rgba(217, 119, 6, 0.15);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+  }
+  .aviso-examen { margin: 8px 0 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .aviso-examen-detalle { font-size: 0.8rem; opacity: 0.75; }
+  .aviso-fuerte {
+    background: rgba(217,119,6,.08); border: 1px solid rgba(217,119,6,.25);
+    border-radius: 12px; padding: 12px 14px; font-size: .88rem; margin: 10px 0 16px;
+  }
+</style>
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor constitucion-doc ley-doc">
+        <h1>📠 Ley 56/2007, sociedad de la información</h1>
+        <p class="subtitulo">
+          Medidas de Impulso de la Sociedad de la Información — factura electrónica y
+          modificaciones legislativas relacionadas. Texto consolidado del BOE, 10 artículos
+          en 2 capítulos, más 21 disposiciones adicionales. Pulsa <strong>🔊</strong> para
+          escuchar por capítulo. Lo marcado con <span class="chip examen">📌</span> ya ha
+          caído en examen oficial: 2 veces, siempre el mismo artículo.
+        </p>
+        <p class="aviso-fuerte">
+          <strong>Un aviso:</strong> confirmada en el código oficial del BOE para esta
+          oposición. El Capítulo II (artículos 4 a 8) son sobre todo modificaciones
+          históricas a otras leyes — la LSSI, la firma electrónica...— que ya están
+          incorporadas en los textos consolidados que tenemos montados de esas otras
+          normas. El contenido con más peso real es el Capítulo I, sobre la factura
+          electrónica.
+        </p>
+        <div id="banner-acceso"></div>
+        <div id="ley"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/ley56-2007.js"></script>
+</body>
+</html>
