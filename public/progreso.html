@@ -2,14 +2,52 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta http-equiv="refresh" content="0; url=racha.html" />
-<title>Redirigiendo... · Oposición TAI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mi progreso · Oposición TAI</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .progreso-doc { max-width: 900px; margin: 0 auto; }
+
+  .leyenda-calor { display: flex; gap: 16px; flex-wrap: wrap; margin: 6px 0 18px; font-size: 0.85rem; }
+  .leyenda-calor span { display: inline-flex; align-items: center; gap: 6px; }
+  .leyenda-punto { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+  .mapa-calor-bloque { margin-bottom: 26px; }
+  .mapa-calor-bloque h3 { font-size: 1rem; margin: 0 0 10px; }
+  .rejilla-calor { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+
+  .celda-calor {
+    border-radius: 10px; padding: 10px 12px; font-size: 0.82rem; cursor: pointer;
+    border: none; text-align: left; font-family: inherit; color: #fff;
+    transition: transform .12s;
+  }
+  .celda-calor:hover { transform: translateY(-2px); }
+  .celda-calor .tema-nombre { display: block; font-weight: 600; margin-bottom: 4px; line-height: 1.25; }
+  .celda-calor .tema-pct { font-size: 0.78rem; opacity: 0.9; }
+
+  .calor-verde { background: linear-gradient(135deg, #10b981, #059669); }
+  .calor-amarillo { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .calor-rojo { background: linear-gradient(135deg, #ef4444, #dc2626); }
+  .calor-gris { background: #e5e7eb; color: #6b7280 !important; }
+  .calor-gris:hover { transform: none; cursor: default; }
+</style>
 </head>
 <body>
-  <!-- "Mi progreso" se sustituyó por "Mi racha" el 18/09. Esta página se
-       deja como simple redirección por si alguien tenía el enlace viejo
-       guardado (favoritos, historial del navegador, etc). -->
-  <p>Esta página se ha movido. Redirigiendo a <a href="racha.html">Mi racha</a>...</p>
-  <script>window.location.replace("racha.html");</script>
+  <div class="app-layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main-contenido">
+      <div class="contenedor progreso-doc">
+        <h1>📊 Mi progreso</h1>
+        <p class="subtitulo">En qué temas vas mejor y en cuáles conviene reforzar, de un vistazo. Para la racha de días seguidos, ve a <a href="racha.html">Mi racha</a>.</p>
+        <div id="banner-acceso"></div>
+        <div id="contenido-progreso"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/progreso.js"></script>
 </body>
 </html>
