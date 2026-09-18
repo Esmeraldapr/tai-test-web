@@ -10,25 +10,27 @@
 
   .leyenda-calor { display: flex; gap: 16px; flex-wrap: wrap; margin: 6px 0 18px; font-size: 0.85rem; }
   .leyenda-calor span { display: inline-flex; align-items: center; gap: 6px; }
-  .leyenda-punto { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .leyenda-punto { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,.12); }
 
   .mapa-calor-bloque { margin-bottom: 26px; }
   .mapa-calor-bloque h3 { font-size: 1rem; margin: 0 0 10px; }
+  .titulo-bloque-calor { color: inherit; text-decoration: none; }
+  .titulo-bloque-calor:hover { color: var(--morado); text-decoration: underline; }
   .rejilla-calor { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
 
   .celda-calor {
     border-radius: 10px; padding: 10px 12px; font-size: 0.82rem; cursor: pointer;
-    border: none; text-align: left; font-family: inherit; color: #fff;
+    border: 1px solid rgba(0,0,0,.06); text-align: left; font-family: inherit; color: #1f2937;
     transition: transform .12s;
   }
   .celda-calor:hover { transform: translateY(-2px); }
   .celda-calor .tema-nombre { display: block; font-weight: 600; margin-bottom: 4px; line-height: 1.25; }
-  .celda-calor .tema-pct { font-size: 0.78rem; opacity: 0.9; }
+  .celda-calor .tema-pct { font-size: 0.78rem; opacity: 0.75; }
 
-  .calor-verde { background: linear-gradient(135deg, #10b981, #059669); }
-  .calor-amarillo { background: linear-gradient(135deg, #f59e0b, #d97706); }
-  .calor-rojo { background: linear-gradient(135deg, #ef4444, #dc2626); }
-  .calor-gris { background: #e5e7eb; color: #6b7280 !important; }
+  .calor-verde { background: #d1f5e6; }
+  .calor-amarillo { background: #fdecc8; }
+  .calor-rojo { background: #fbdada; }
+  .calor-gris { background: #eef0f2; color: #6b7280; }
   .calor-gris:hover { transform: none; cursor: default; }
 </style>
 </head>
