@@ -44,6 +44,11 @@ const SECCIONES_TUTORIAL = [
     texto: "Tres tareas cortas cada día — unos imprescindibles, unas preguntas del bloque que toca y un ejercicio de un tema concreto — para repasar un poco cada día sin que se haga pesado. El bloque que toca va rotando (unos días Tecnología, Desarrollo o Sistemas, otro Derecho, y un quinto día mezclado), y dentro de ese bloque el tema concreto se elige dando más peso a lo que de verdad suele caer en examen. Al completar las tres tareas del día sube tu racha de días seguidos, y tienes un botón para ver el histórico por meses.",
   },
   {
+    icono: "📊",
+    titulo: "Mi progreso",
+    texto: "Un mapa de temas con cada tema coloreado según cómo te va: verde si aciertas mucho, amarillo si vas regular, rojo si te está costando, y gris si todavía no lo has probado. Pulsa sobre el nombre de un bloque entero («Bloque 3 · Desarrollo →») para repasarlo de golpe, o sobre una celda concreta para repasar solo ese tema — así sabes justo dónde meter horas, no solo si vas bien o mal a lo grande. Abajo tienes también cómo ha ido evolucionando tu % de aciertos en el tiempo.",
+  },
+  {
     icono: "🎯",
     titulo: "Mis fallos",
     texto: "Cada pregunta que respondes mal se guarda aquí automáticamente. Entra cuando quieras para repasar solo lo que se te resiste.",
