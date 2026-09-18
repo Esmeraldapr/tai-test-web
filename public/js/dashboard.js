@@ -59,13 +59,9 @@
   `;
 
   // Aviso de "Mi racha", SOLO la primera vez que se entra cada día (no en
-  // cada visita) y SOLO en las cuentas donde "Mi racha" está en pruebas.
-  // La marca de "ya visto hoy" se guarda en localStorage con la fecha de
-  // hoy en la clave, así al día siguiente vuelve a salir una vez.
-  const CUENTAS_PRUEBA_RACHA = ["esmeraldapr87@gmail.com", "e.paraisoprogramacion@gmail.com"];
-  if (CUENTAS_PRUEBA_RACHA.includes((usuario.email || "").toLowerCase())) {
-    mostrarAvisoRachaSiToca();
-  }
+  // cada visita). La marca de "ya visto hoy" se guarda en localStorage con
+  // la fecha de hoy en la clave, así al día siguiente vuelve a salir una vez.
+  mostrarAvisoRachaSiToca();
 })();
 
 async function mostrarAvisoRachaSiToca() {

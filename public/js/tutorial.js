@@ -42,7 +42,6 @@ const SECCIONES_TUTORIAL = [
     icono: "🔥",
     titulo: "Mi racha",
     texto: "Tres tareas cortas cada día — unos imprescindibles, unas preguntas del bloque que toca y un ejercicio de un tema concreto — para repasar un poco cada día sin que se haga pesado. El bloque que toca va rotando (unos días Tecnología, Desarrollo o Sistemas, otro Derecho, y un quinto día mezclado), y dentro de ese bloque el tema concreto se elige dando más peso a lo que de verdad suele caer en examen. Al completar las tres tareas del día sube tu racha de días seguidos, y tienes un botón para ver el histórico por meses.",
-    soloPrueba: true,
   },
   {
     icono: "🎯",
@@ -86,13 +85,6 @@ const SECCIONES_TUTORIAL = [
   },
 ];
 
-// "Mi racha" está en pruebas: su sección del tutorial solo se enseña a las
-// dos cuentas de la usuaria, igual que el propio menú y el aviso del
-// Dashboard (common.js y dashboard.js). Quitar este filtro cuando se lance
-// para todo el mundo.
-const CUENTAS_PRUEBA_RACHA = ["esmeraldapr87@gmail.com", "e.paraisoprogramacion@gmail.com"];
-let seccionesActivas = SECCIONES_TUTORIAL;
-
 // --- Lectura continua del tutorial entero --------------------------------
 // Usa leerEnCola() de common.js: cada sección se anuncia con su título (sin
 // resaltar, es solo el rótulo) y se resalta palabra a palabra el cuerpo.
@@ -115,7 +107,7 @@ function pararTutorial() {
 function empezarTutorial(boton) {
   progresoTutorial.activo = true;
   const prog = document.getElementById("tut-progreso");
-  const items = seccionesActivas.map((s, idx) => ({
+  const items = SECCIONES_TUTORIAL.map((s, idx) => ({
     prefijo: s.titulo,
     elementos: document.getElementById(`cuerpo-tutorial-${idx}`),
     alEmpezar: () => {
@@ -127,7 +119,7 @@ function empezarTutorial(boton) {
         document.getElementById(`cuerpo-tutorial-${idx}`).classList.add("abierta");
         document.getElementById(`chevron-tutorial-${idx}`).classList.add("abierto");
       }
-      if (prog) prog.textContent = `Sección ${idx + 1} de ${seccionesActivas.length}`;
+      if (prog) prog.textContent = `Sección ${idx + 1} de ${SECCIONES_TUTORIAL.length}`;
       const btnTodo = document.getElementById("tut-btn-todo");
       if (btnTodo) btnTodo.textContent = "⏹️ Parar";
     },
@@ -157,10 +149,6 @@ function empezarTutorial(boton) {
   pintarBannerAcceso(usuario);
   registrarConexion();
 
-  seccionesActivas = SECCIONES_TUTORIAL.filter(
-    (s) => !s.soloPrueba || CUENTAS_PRUEBA_RACHA.includes((usuario.email || "").toLowerCase())
-  );
-
   const barra = `
     <div class="imp-lector">
       <button class="imp-btn-lector" id="tut-btn-todo" type="button">🔊 Escuchar el tutorial entero</button>
@@ -170,7 +158,7 @@ function empezarTutorial(boton) {
 
   contenedor.innerHTML =
     barra +
-    seccionesActivas.map(
+    SECCIONES_TUTORIAL.map(
       (s, idx) => `
     <div class="panel tutorial-item" data-item="${idx}">
       <div class="tutorial-cabecera" data-idx="${idx}">
@@ -205,7 +193,7 @@ function empezarTutorial(boton) {
     btn.addEventListener("click", () => {
       if (progresoTutorial.activo) pararTutorial();
       const idx = Number(btn.dataset.idx);
-      const s = seccionesActivas[idx];
+      const s = SECCIONES_TUTORIAL[idx];
       const cuerpo = document.getElementById(`cuerpo-tutorial-${idx}`);
       const chevron = document.getElementById(`chevron-tutorial-${idx}`);
       if (btn.dataset.leyendo !== "1" && !cuerpo.classList.contains("abierta")) {

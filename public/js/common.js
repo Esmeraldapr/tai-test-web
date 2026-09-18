@@ -90,7 +90,7 @@ const NAV_ITEMS = [
   { href: "temas.html", icono: "✅", texto: "Test por temas" },
   { href: "practica.html", icono: "⚡", texto: "Practicar" },
   { href: "cuestionarios.html", icono: "📝", texto: "Cuestionarios" },
-  { href: "progreso.html", icono: "📈", texto: "Mi progreso" },
+  { href: "racha.html", icono: "🔥", texto: "Mi racha" },
   { href: "fallos.html", icono: "🎯", texto: "Mis fallos" },
   { href: "favoritas.html", icono: "⭐", texto: "Mis favoritas" },
 ];
@@ -99,15 +99,7 @@ function pintarSidebar(activa, usuario) {
   const el = document.getElementById("sidebar");
   if (!el) return;
   const nombre = (usuario && (usuario.nombre || usuario.email)) || "Estudiante";
-
-  // "Mi racha" está en pruebas: solo se enseña en el menú a las dos cuentas
-  // de la usuaria, para el resto sigue sin existir hasta que se active del
-  // todo. Quitar esta condición (dejar el item siempre) cuando se lance.
-  const CUENTAS_PRUEBA_RACHA = ["esmeraldapr87@gmail.com", "e.paraisoprogramacion@gmail.com"];
-  const items = [...NAV_ITEMS];
-  if (usuario && CUENTAS_PRUEBA_RACHA.includes((usuario.email || "").toLowerCase())) {
-    items.splice(1, 0, { href: "racha.html", icono: "🔥", texto: "Mi racha" });
-  }
+  const items = NAV_ITEMS;
 
   el.innerHTML = `
     <div class="sidebar-marca"><img src="${LOGO_BUHO}" alt="" class="logo-buho" /> Oposición TAI</div>
