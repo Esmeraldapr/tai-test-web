@@ -104,11 +104,12 @@ function escaparHtml(s) {
     <div class="panel">
       <h2>Mapa de temas</h2>
       <div class="leyenda-calor">
-        <span><span class="leyenda-punto" style="background:#10b981"></span> 70% o más</span>
-        <span><span class="leyenda-punto" style="background:#f59e0b"></span> entre 40% y 70%</span>
-        <span><span class="leyenda-punto" style="background:#ef4444"></span> menos de 40%</span>
-        <span><span class="leyenda-punto" style="background:#e5e7eb"></span> sin tocar todavía</span>
+        <span><span class="leyenda-punto" style="background:#d1f5e6"></span> 70% o más</span>
+        <span><span class="leyenda-punto" style="background:#fdecc8"></span> entre 40% y 70%</span>
+        <span><span class="leyenda-punto" style="background:#fbdada"></span> menos de 40%</span>
+        <span><span class="leyenda-punto" style="background:#eef0f2"></span> sin tocar todavía</span>
       </div>
+      <p style="font-size:0.85rem;opacity:0.75;margin:0 0 14px">Pulsa el nombre de un bloque para repasarlo entero, o una celda para repasar solo ese tema.</p>
       ${htmlMapaCalor(mapaCalor || [])}
     </div>
 
@@ -140,7 +141,7 @@ function htmlMapaCalor(filas) {
       const temas = porMateria.get(materia);
       return `
         <div class="mapa-calor-bloque">
-          <h3>${escaparHtml(NOMBRES_MATERIA_CORTOS[materia] || materia)}</h3>
+          <h3><a class="titulo-bloque-calor" href="quiz.html?materia=${encodeURIComponent(materia)}&modo=aleatorio&n=20">${escaparHtml(NOMBRES_MATERIA_CORTOS[materia] || materia)} →</a></h3>
           <div class="rejilla-calor">
             ${temas.map((t) => htmlCeldaCalor(materia, t)).join("")}
           </div>
