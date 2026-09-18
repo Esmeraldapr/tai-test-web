@@ -54,13 +54,15 @@ function mezclar(arr) {
   const modo = params.get("modo") || "aleatorio";
   const n = parseInt(params.get("n") || "20", 10);
   const idsParam = params.get("ids");
+  const parteParam = params.get("parte");
   rachaBarraParam = parseInt(params.get("racha") || "0", 10) || null;
 
-  if (modo !== "lista" && !materiaActual) { window.location.href = "index.html"; return; }
+  if (modo !== "lista" && modo !== "especialidad" && !materiaActual) { window.location.href = "index.html"; return; }
 
   document.getElementById("titulo-modo").textContent =
     modo === "tema" ? `📘 ${materiaActual} — ${temaActual}` :
     modo === "lista" ? `🎯 ${params.get("titulo") || "Preguntas seleccionadas"}` :
+    modo === "especialidad" ? `${parteParam === "Supuesto I" ? "🖥️" : "🌐"} Todos los ${parteParam} — Mi especialidad` :
     `⚡ ${materiaActual} — práctica rápida`;
 
   favoritosSet = await obtenerFavoritosSet();
@@ -70,6 +72,12 @@ function mezclar(arr) {
     const ids = (idsParam || "").split(",").map((x) => parseInt(x, 10)).filter((x) => !isNaN(x));
     if (!ids.length) { window.location.href = "index.html"; return; }
     ({ data, error } = await sb.from("preguntas_quiz").select("*").in("id", ids));
+  } else if (modo === "especialidad") {
+    // Junta de golpe todos los Supuestos I (perfil Desarrollo) o todos los
+    // Supuestos II (perfil Sistemas) de todas las convocatorias, en vez de
+    // tener que entrar año por año — atajo de "Mi especialidad".
+    if (!parteParam) { window.location.href = "index.html"; return; }
+    ({ data, error } = await sb.rpc("preguntas_supuestos_especialidad_web", { p_parte: parteParam, p_n: n || 30 }));
   } else if (modo === "aleatorio") {
     // Antes se traía TODA la materia (hasta ~2900 preguntas, topado además
     // en 1000 por Supabase) solo para barajar y quedarse con "n". Esta RPC

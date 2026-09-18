@@ -30,6 +30,7 @@ function esc(s) {
 // árbol: { "2018": { "IL": [{parte,tema,total}], "PI": [...] }, "2019": { "": [...] } }
 let arbol = {};
 let vista = { nivel: "anios", anio: null, turno: null };
+let especialidadUsuario = null;
 
 function totalDe(nodo) {
   if (Array.isArray(nodo)) return nodo.reduce((s, p) => s + p.total, 0);
@@ -41,8 +42,17 @@ function pintar() {
 
   if (vista.nivel === "anios") {
     const anios = Object.keys(arbol).sort().reverse();
+    const parte = especialidadUsuario === "desarrollo" ? "Supuesto I" : especialidadUsuario === "sistemas" ? "Supuesto II" : null;
+    const atajoEspecialidad = parte
+      ? `
+      <a class="tarjeta-nivel tarjeta-especialidad" href="quiz.html?modo=especialidad&parte=${encodeURIComponent(parte)}&n=30&titulo=${encodeURIComponent("Todos los " + parte)}" style="display:block; text-decoration:none; color:inherit; border:2px solid var(--morado); margin-bottom:16px">
+        <div class="tarjeta-nivel-titulo">${parte === "Supuesto I" ? "🖥️" : "🌐"} Todos los ${esc(parte)} de golpe</div>
+        <div class="tarjeta-nivel-sub">Tu especialidad (${especialidadUsuario === "desarrollo" ? "Desarrollo" : "Sistemas"}) · todas las convocatorias mezcladas</div>
+      </a>`
+      : "";
     cont.innerHTML = `
       <p class="migas">Elige el año de la convocatoria.</p>
+      ${atajoEspecialidad}
       <div class="tarjetas-convocatoria">
         ${anios.map((anio) => `
           <button type="button" class="tarjeta-nivel" data-anio="${esc(anio)}">
@@ -153,6 +163,7 @@ function pintar() {
   }
   pintarSidebar("cuestionarios.html", usuario);
   pintarBannerAcceso(usuario);
+  especialidadUsuario = usuario.especialidad;
 
   if (!usuario.email_verificado) {
     cont.innerHTML = `<div class="vacio"><div class="icono">📧</div>Confirma tu correo para acceder a los cuestionarios.</div>`;

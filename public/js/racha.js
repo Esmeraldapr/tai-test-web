@@ -97,6 +97,11 @@ function pintarPagina(estado, semana) {
       <div class="stat-racha"><span class="stat-icono">📅</span><span class="stat-num">${nombreBloque}</span></div>
     </div>
 
+    <div class="barra-especialidad">
+      <span>${htmlTextoEspecialidad(usuarioActual.especialidad)}</span>
+      <button type="button" class="link-especialidad" id="btn-cambiar-especialidad">${usuarioActual.especialidad ? "Cambiar" : "Elegir"}</button>
+    </div>
+
     <div class="tira-semanal">${tiraSemanal}</div>
 
     <div class="tarjeta-tareas">
@@ -115,6 +120,7 @@ function pintarPagina(estado, semana) {
   `;
 
   document.getElementById("btn-ver-historico").addEventListener("click", () => abrirHistorico());
+  document.getElementById("btn-cambiar-especialidad").addEventListener("click", () => abrirSelectorEspecialidad());
 
   if (todasCompletas) {
     setTimeout(() => mostrarCelebracion(estado), 400);
@@ -361,4 +367,49 @@ async function cargarMesHistorico() {
     <p style="text-align:center; margin-top:12px; font-size:0.85rem; opacity:0.75">
       ${totalCompletos} ${totalCompletos === 1 ? "día completo" : "días completos"} este mes
     </p>`;
+}
+
+// ---------------- Especialidad (Desarrollo o Sistemas) ----------------
+// El examen real reparte la parte práctica en dos mitades claras: el
+// Supuesto I es siempre de perfil Desarrollo (Bloque 3) y el Supuesto II
+// siempre de perfil Sistemas (Bloque 4) — comprobado sobre 2019, 2022 y
+// 2024. Quien elige una especialidad ve ese bloque reforzado en la racha
+// (sale también el día que a los demás les toca Derecho), y tiene atajos
+// para practicarlo en Cuestionarios y en Mi progreso.
+function htmlTextoEspecialidad(especialidad) {
+  if (especialidad === "desarrollo") return "🖥️ Tu especialidad: <strong>Desarrollo</strong>";
+  if (especialidad === "sistemas") return "🌐 Tu especialidad: <strong>Sistemas</strong>";
+  return "¿Por dónde vas a tirar en el examen: Desarrollo o Sistemas?";
+}
+
+function abrirSelectorEspecialidad() {
+  const overlay = document.createElement("div");
+  overlay.className = "modal-racha-overlay";
+  overlay.innerHTML = `
+    <div class="modal-racha-caja">
+      <h2>Tu especialidad</h2>
+      <p style="opacity:.8">El examen real reparte la parte práctica en dos mitades: una de Desarrollo (Bloque 3) y otra de Sistemas (Bloque 4). Si ya sabes por dónde vas a tirar, esto refuerza más ese bloque en tu racha y te da atajos para practicarlo. Puedes cambiarlo cuando quieras desde aquí mismo.</p>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px">
+        <button type="button" class="btn btn-primario" data-esp="desarrollo">🖥️ Desarrollo</button>
+        <button type="button" class="btn btn-primario" data-esp="sistemas">🌐 Sistemas</button>
+        <button type="button" class="btn btn-secundario" data-esp="">Aún no lo sé</button>
+      </div>
+      <button type="button" class="btn btn-secundario" id="btn-cerrar-especialidad" style="margin-top:14px">Cerrar sin cambiar</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById("btn-cerrar-especialidad").addEventListener("click", () => overlay.remove());
+  overlay.querySelectorAll("[data-esp]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const valor = btn.dataset.esp || null;
+      const { error } = await sb.rpc("actualizar_especialidad_web", { p_especialidad: valor });
+      if (error) {
+        console.error(error);
+        alert("No se ha podido guardar. Inténtalo de nuevo.");
+        return;
+      }
+      usuarioActual.especialidad = valor;
+      overlay.remove();
+      await cargarTodo();
+    });
+  });
 }
