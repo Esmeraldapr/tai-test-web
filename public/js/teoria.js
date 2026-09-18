@@ -146,6 +146,12 @@
         <p>Los 51 artículos de la Ley de servicios de la sociedad de la información y comercio electrónico. Candidata para el tema 6. No ha caído todavía en ninguno de los exámenes contados.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
+      <a class="accion-card" href="ley56-2007.html">
+        <div class="accion-icono">📠</div>
+        <h3>Ley 56/2007, sociedad de la información</h3>
+        <p>Los 10 artículos de la Ley de Medidas de Impulso de la Sociedad de la Información, con foco en la factura electrónica. Confirmada en el código oficial del BOE. Ha caído 2 veces, siempre sobre el mismo artículo.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
       <a class="accion-card" href="ley39-2015.html">
         <div class="accion-icono">📄</div>
         <h3>Ley 39/2015, procedimiento administrativo</h3>
