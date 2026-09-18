@@ -9,9 +9,14 @@ const SECCIONES_TUTORIAL = [
     texto: "Es tu página de inicio: un resumen rápido de cuántas preguntas hay en el banco, tus aciertos, tu acceso restante y accesos directos a todas las secciones.",
   },
   {
-    icono: "📘",
+    icono: "✅",
     titulo: "Test por temas",
     texto: "Aquí están los 4 bloques del temario oficial y los 5 fundamentos. Pulsa «Ver temas» para desplegar los temas de esa materia: cada uno te lleva a un test solo de ese tema. También puedes pulsar «Practicar 20 al azar» para un repaso mezclado de toda la materia.",
+  },
+  {
+    icono: "📖",
+    titulo: "Teoría",
+    texto: "El texto completo de la Constitución y de las leyes, reglamentos y reales decretos que entran en el temario — más de 20 normas, cada una con lectura en voz alta por título, capítulo y sección. Lo marcado con 📌 son artículos que ya han caído en algún examen oficial anterior, para que sepas dónde afinar más. Algunas páginas llevan también un aviso rojo cuando la norma no está nombrada tal cual en la convocatoria y hemos decidido incluirla por su relación con el temario o por haber aparecido ya en examen.",
   },
   {
     icono: "💡",
@@ -31,12 +36,13 @@ const SECCIONES_TUTORIAL = [
   {
     icono: "📝",
     titulo: "Cuestionarios",
-    texto: "Cuestionarios con el formato de convocatorias anteriores, agrupados por año, para practicar.",
+    texto: "Los exámenes reales de convocatorias anteriores de TAI (2018 a 2025), con las preguntas oficiales tal cual salieron, verificadas contra la plantilla de respuestas real. Elige año, turno (ingreso libre o promoción interna, cuando aplica) y parte: la Primera Parte de cultura general y técnica, y los Supuestos prácticos. Cuando un supuesto tiene un planteamiento largo o un diagrama, un botón «📄 Ver el planteamiento del supuesto» te lo enseña antes de empezar. El de 2025 está marcado como «provisional» porque el INAP aún no ha publicado la plantilla definitiva.",
   },
   {
-    icono: "📈",
-    titulo: "Mi progreso",
-    texto: "Tu racha de días seguidos practicando, cómo evoluciona tu % de aciertos día a día, y una comparativa de qué bloques dominas mejor.",
+    icono: "🔥",
+    titulo: "Mi racha",
+    texto: "Tres tareas cortas cada día — unos imprescindibles, unas preguntas del bloque que toca y un ejercicio de un tema concreto — para repasar un poco cada día sin que se haga pesado. El bloque que toca va rotando (unos días Tecnología, Desarrollo o Sistemas, otro Derecho, y un quinto día mezclado), y dentro de ese bloque el tema concreto se elige dando más peso a lo que de verdad suele caer en examen. Al completar las tres tareas del día sube tu racha de días seguidos, y tienes un botón para ver el histórico por meses.",
+    soloPrueba: true,
   },
   {
     icono: "🎯",
@@ -80,6 +86,13 @@ const SECCIONES_TUTORIAL = [
   },
 ];
 
+// "Mi racha" está en pruebas: su sección del tutorial solo se enseña a las
+// dos cuentas de la usuaria, igual que el propio menú y el aviso del
+// Dashboard (common.js y dashboard.js). Quitar este filtro cuando se lance
+// para todo el mundo.
+const CUENTAS_PRUEBA_RACHA = ["esmeraldapr87@gmail.com", "e.paraisoprogramacion@gmail.com"];
+let seccionesActivas = SECCIONES_TUTORIAL;
+
 // --- Lectura continua del tutorial entero --------------------------------
 // Usa leerEnCola() de common.js: cada sección se anuncia con su título (sin
 // resaltar, es solo el rótulo) y se resalta palabra a palabra el cuerpo.
@@ -102,7 +115,7 @@ function pararTutorial() {
 function empezarTutorial(boton) {
   progresoTutorial.activo = true;
   const prog = document.getElementById("tut-progreso");
-  const items = SECCIONES_TUTORIAL.map((s, idx) => ({
+  const items = seccionesActivas.map((s, idx) => ({
     prefijo: s.titulo,
     elementos: document.getElementById(`cuerpo-tutorial-${idx}`),
     alEmpezar: () => {
@@ -114,7 +127,7 @@ function empezarTutorial(boton) {
         document.getElementById(`cuerpo-tutorial-${idx}`).classList.add("abierta");
         document.getElementById(`chevron-tutorial-${idx}`).classList.add("abierto");
       }
-      if (prog) prog.textContent = `Sección ${idx + 1} de ${SECCIONES_TUTORIAL.length}`;
+      if (prog) prog.textContent = `Sección ${idx + 1} de ${seccionesActivas.length}`;
       const btnTodo = document.getElementById("tut-btn-todo");
       if (btnTodo) btnTodo.textContent = "⏹️ Parar";
     },
@@ -144,6 +157,10 @@ function empezarTutorial(boton) {
   pintarBannerAcceso(usuario);
   registrarConexion();
 
+  seccionesActivas = SECCIONES_TUTORIAL.filter(
+    (s) => !s.soloPrueba || CUENTAS_PRUEBA_RACHA.includes((usuario.email || "").toLowerCase())
+  );
+
   const barra = `
     <div class="imp-lector">
       <button class="imp-btn-lector" id="tut-btn-todo" type="button">🔊 Escuchar el tutorial entero</button>
@@ -153,7 +170,7 @@ function empezarTutorial(boton) {
 
   contenedor.innerHTML =
     barra +
-    SECCIONES_TUTORIAL.map(
+    seccionesActivas.map(
       (s, idx) => `
     <div class="panel tutorial-item" data-item="${idx}">
       <div class="tutorial-cabecera" data-idx="${idx}">
@@ -188,7 +205,7 @@ function empezarTutorial(boton) {
     btn.addEventListener("click", () => {
       if (progresoTutorial.activo) pararTutorial();
       const idx = Number(btn.dataset.idx);
-      const s = SECCIONES_TUTORIAL[idx];
+      const s = seccionesActivas[idx];
       const cuerpo = document.getElementById(`cuerpo-tutorial-${idx}`);
       const chevron = document.getElementById(`chevron-tutorial-${idx}`);
       if (btn.dataset.leyendo !== "1" && !cuerpo.classList.contains("abierta")) {
