@@ -90,7 +90,7 @@ async function mostrarAvisoRachaSiToca() {
       <h2 style="margin:0 0 8px">${estado.racha_actual > 0 ? `Llevas ${estado.racha_actual} ${estado.racha_actual === 1 ? "día" : "días"} seguidos` : "¡Empieza tu racha hoy!"}</h2>
       <p style="margin:0 0 18px;opacity:.85">${yaCompleta ? "Ya has completado las tareas de hoy. ¡Vuelve mañana!" : `Hoy toca <strong>${nombreBloque}</strong>. Tres tareas cortas y listo.`}</p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button type="button" class="btn btn-secundario" id="btn-aviso-racha-luego">Ahora no</button>
+        <button type="button" class="btn btn-secundario" id="btn-aviso-racha-luego">${yaCompleta ? "Vale 👍" : "Ahora no"}</button>
         ${yaCompleta ? "" : `<a href="racha.html" class="btn btn-primario">Ir a mi racha →</a>`}
       </div>
     </div>`;
