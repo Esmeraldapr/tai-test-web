@@ -101,7 +101,13 @@
       <a class="accion-card" href="rdl1-2013.html">
         <div class="accion-icono">♿</div>
         <h3>RDL 1/2013, discapacidad</h3>
-        <p>Los 106 artículos del Texto Refundido de derechos de las personas con discapacidad. Quinta y última ley del tema 5: ha caído dos veces (2024 promoción interna y el examen provisional de 2025), en los artículos 2 y 4.</p>
+        <p>Los 106 artículos del Texto Refundido de derechos de las personas con discapacidad. Del tema 5: ha caído dos veces (2024 promoción interna y el examen provisional de 2025), en los artículos 2 y 4.</p>
+        <span class="accion-flecha">Leer →</span>
+      </a>
+      <a class="accion-card" href="ley15-2022.html">
+        <div class="accion-icono">⚖️</div>
+        <h3>Ley 15/2022, igualdad de trato</h3>
+        <p>Los 54 artículos de la Ley integral para la igualdad de trato y la no discriminación. Confirmada en el código oficial del BOE, del tema 5. No ha caído todavía en ninguno de los exámenes contados.</p>
         <span class="accion-flecha">Leer →</span>
       </a>
       <a class="accion-card" href="ebep-5-2015.html">
