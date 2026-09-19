@@ -23,13 +23,17 @@
 
   .cabecera-racha { display: flex; gap: 14px; justify-content: center; margin: 8px 0 20px; }
   .barra-especialidad {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    font-size: 0.88rem; opacity: 0.9; margin-bottom: 18px; flex-wrap: wrap; text-align: center;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    font-size: 1rem; font-weight: 600; margin-bottom: 18px; flex-wrap: wrap; text-align: left;
+    background: linear-gradient(135deg, rgba(124,58,237,.1), rgba(124,58,237,.04));
+    border: 2px solid rgba(124,58,237,.35); border-radius: 14px; padding: 14px 18px;
   }
   .link-especialidad {
-    background: none; border: none; color: var(--morado); font-weight: 700;
-    cursor: pointer; text-decoration: underline; font-size: inherit; padding: 0;
+    background: var(--morado); border: none; color: #fff; font-weight: 700;
+    cursor: pointer; font-size: 0.9rem; padding: 8px 16px; border-radius: 999px;
+    white-space: nowrap;
   }
+  .link-especialidad:hover { opacity: 0.9; }
   .stat-racha {
     display: flex; align-items: center; gap: 8px;
     background: var(--tarjeta); border: 1px solid var(--borde);
