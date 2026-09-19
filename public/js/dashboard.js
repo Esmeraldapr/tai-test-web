@@ -60,13 +60,15 @@
 
   // Aviso de "Mi racha", SOLO la primera vez que se entra cada día (no en
   // cada visita). La marca de "ya visto hoy" se guarda en localStorage con
-  // la fecha de hoy en la clave, así al día siguiente vuelve a salir una vez.
-  mostrarAvisoRachaSiToca();
+  // la fecha de hoy Y la cuenta en la clave — si no, al usar dos cuentas
+  // distintas en el mismo móvil el mismo día, la segunda no lo enseñaba
+  // porque el aviso ya estaba "visto hoy" de la primera cuenta.
+  mostrarAvisoRachaSiToca(usuario.auth_user_id);
 })();
 
-async function mostrarAvisoRachaSiToca() {
+async function mostrarAvisoRachaSiToca(idUsuario) {
   const hoyStr = new Date().toISOString().slice(0, 10);
-  const clave = "racha-aviso-mostrado-" + hoyStr;
+  const clave = "racha-aviso-mostrado-" + idUsuario + "-" + hoyStr;
   if (localStorage.getItem(clave)) return;
 
   const { data, error } = await sb.rpc("racha_estado_hoy_web");
