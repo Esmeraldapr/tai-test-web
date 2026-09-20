@@ -595,3 +595,18 @@ input:focus-visible,
 }
 .tarjeta-sorpresa{ background:var(--morado-suave); border-style:dashed; }
 .tarjeta-sorpresa .tarjeta-parte-ir{ color:var(--morado-osc); }
+
+/* Modal genérico reutilizable (usado por Mi racha y por el cuadro de
+   sugerencias del pie de la barra lateral, entre otros). */
+.modal-racha-overlay {
+  position: fixed; inset: 0; background: rgba(20,16,40,.78);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; z-index: 2000; overflow-y: auto;
+}
+.modal-racha-caja {
+  background: var(--tarjeta); border-radius: 20px; padding: 26px 22px;
+  max-width: 460px; width: 100%; max-height: 86vh; overflow-y: auto;
+  margin: auto; text-align: center;
+}
+.modal-racha-caja h2 { margin-top: 0; }
+.modal-racha-caja .btn { width: 100%; margin-top: 8px; }
