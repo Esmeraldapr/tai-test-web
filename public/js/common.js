@@ -91,6 +91,7 @@ const NAV_ITEMS = [
   { href: "practica.html", icono: "⚡", texto: "Practicar" },
   { href: "cuestionarios.html", icono: "📝", texto: "Cuestionarios" },
   { href: "racha.html", icono: "🔥", texto: "Mi racha" },
+  { href: "ranking.html", icono: "🏆", texto: "Ranking" },
   { href: "progreso.html", icono: "📊", texto: "Mi progreso" },
   { href: "fallos.html", icono: "🎯", texto: "Mis fallos" },
   { href: "favoritas.html", icono: "⭐", texto: "Mis favoritas" },
@@ -115,12 +116,47 @@ function pintarSidebar(activa, usuario) {
     <div class="sidebar-usuario">
       <span>👋 ${nombre}</span>
       <div id="sidebar-acceso" class="sidebar-acceso"></div>
+      <button id="btn-sugerencia" style="background:none;border:none;color:inherit;opacity:0.75;cursor:pointer;font-size:0.85rem;text-decoration:underline;padding:2px 0">💬 ¿Echas algo en falta?</button>
       <button id="btn-logout">Salir</button>
     </div>
   `;
   const btn = document.getElementById("btn-logout");
   if (btn) btn.addEventListener("click", cerrarSesion);
+  const btnSugerencia = document.getElementById("btn-sugerencia");
+  if (btnSugerencia) btnSugerencia.addEventListener("click", abrirModalSugerencia);
     ponerSelectorVelocidad();
+}
+
+/** Modal sencillo para enviar una sugerencia libre, accesible desde
+ * cualquier página vía el enlace del pie de la barra lateral. */
+function abrirModalSugerencia() {
+  const overlay = document.createElement("div");
+  overlay.className = "modal-racha-overlay";
+  overlay.innerHTML = `
+    <div class="modal-racha-caja">
+      <h2>💬 ¿Echas algo en falta?</h2>
+      <p style="opacity:.8">Cuéntame qué te gustaría que tuviera la web, qué no te convence, o qué usas menos de lo que esperabas. Se lee todo.</p>
+      <textarea id="texto-sugerencia" rows="4" style="width:100%; border-radius:12px; border:1px solid var(--borde); padding:10px; font-family:inherit; font-size:1rem; resize:vertical" placeholder="Escribe aquí..."></textarea>
+      <button type="button" class="btn btn-primario" id="btn-enviar-sugerencia" style="width:100%; margin-top:10px">Enviar</button>
+      <button type="button" class="btn btn-secundario" id="btn-cerrar-sugerencia" style="width:100%; margin-top:8px">Cerrar</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById("btn-cerrar-sugerencia").addEventListener("click", () => overlay.remove());
+  document.getElementById("btn-enviar-sugerencia").addEventListener("click", async () => {
+    const texto = document.getElementById("texto-sugerencia").value.trim();
+    if (texto.length < 3) {
+      alert("Escribe algo un poco más largo.");
+      return;
+    }
+    const { error } = await sb.rpc("sugerencia_enviar_web", { p_mensaje: texto });
+    if (error) {
+      console.error(error);
+      alert("No se ha podido enviar. Inténtalo de nuevo.");
+      return;
+    }
+    overlay.innerHTML = `<div class="modal-racha-caja" style="text-align:center"><p style="font-size:2rem;margin:0 0 8px">✅</p><p><strong>¡Gracias!</strong></p><p style="opacity:.8">Ya lo he recibido.</p></div>`;
+    setTimeout(() => overlay.remove(), 1800);
+  });
 }
 
 /** Pinta el aviso de trial/pago, discreto, dentro de la barra lateral
