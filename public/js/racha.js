@@ -203,7 +203,7 @@ function pintarModalImprescindibles(fichas) {
               <button type="button" class="btn-favorito btn-leer-ficha" data-indice="${i}" title="Escuchar">🔊</button>
             </div>
             <p class="parrafo-leible" id="ficha-def-${i}">${escaparHtml(f.definicion)}</p>
-            ${f.nota ? `<p class="nota-racha">💡 ${escaparHtml(f.nota)}</p>` : ""}
+            ${f.nota ? `<p class="nota-racha" id="ficha-nota-${i}">${escaparHtml(f.nota)}</p>` : ""}
           </div>`
           )
           .join("")}
@@ -216,7 +216,13 @@ function pintarModalImprescindibles(fichas) {
   overlay.querySelectorAll(".btn-leer-ficha").forEach((btn) => {
     btn.addEventListener("click", () => {
       const i = btn.dataset.indice;
-      leerTexto(document.getElementById("ficha-def-" + i), btn);
+      const items = [
+        { prefijo: fichas[i].termino + ".", elementos: [] },
+        { elementos: document.getElementById("ficha-def-" + i) },
+      ];
+      const nota = document.getElementById("ficha-nota-" + i);
+      if (nota) items.push({ prefijo: "Nota.", elementos: nota });
+      leerEnCola(items, { boton: btn });
     });
   });
   document.getElementById("btn-ya-me-las-se").addEventListener("click", () => {
