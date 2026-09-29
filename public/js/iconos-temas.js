@@ -71,6 +71,26 @@ const ICONOS_SVG = {
   balanza_igualdad: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="18" r="9" fill="#fff0f6" stroke="#d6336c" stroke-width="3"/><circle cx="44" cy="18" r="9" fill="#e7f5ff" stroke="#1971c2" stroke-width="3"/><line x1="20" y1="27" x2="20" y2="46" stroke="#495057" stroke-width="3" stroke-linecap="round"/><line x1="44" y1="27" x2="44" y2="46" stroke="#495057" stroke-width="3" stroke-linecap="round"/><line x1="10" y1="52" x2="54" y2="52" stroke="#495057" stroke-width="3" stroke-linecap="round"/></svg>`,
 
   generico: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="#f1f3f5" stroke="#868e96" stroke-width="3"/><text x="32" y="41" font-size="26" text-anchor="middle" fill="#868e96" font-family="sans-serif" font-weight="bold">?</text></svg>`,
+
+  // Corte de un cable coaxial: funda exterior, malla trenzada, aislante y el
+  // hilo conductor central, con la señal rebotando dentro en zigzag.
+  cable_coaxial: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="20" width="56" height="24" rx="10" fill="#1c7ed6" opacity="0.12" stroke="#1971c2" stroke-width="2.5"/>
+    <rect x="9" y="24" width="46" height="16" rx="7" fill="#fff" stroke="#1971c2" stroke-width="2" stroke-dasharray="3 2"/>
+    <rect x="14" y="28" width="36" height="8" rx="3" fill="#e7f5ff" stroke="#1971c2" stroke-width="1.8"/>
+    <line x1="16" y1="32" x2="48" y2="32" stroke="#e8590c" stroke-width="3" stroke-linecap="round"/>
+    <path d="M18 32 L24 26 L30 38 L36 26 L42 38 L48 32" stroke="#ffd43b" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`,
+
+  // Cable de fibra óptica con el haz de luz rebotando dentro (reflexión
+  // total interna), la imagen que pidió la usuaria.
+  fibra_optica: `<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="24" width="56" height="16" rx="8" fill="#0ca678" opacity="0.12" stroke="#0ca678" stroke-width="2.5"/>
+    <rect x="9" y="28" width="46" height="8" rx="4" fill="#e6fcf5" stroke="#0ca678" stroke-width="1.8"/>
+    <path d="M10 32 L18 28 L26 36 L34 28 L42 36 L50 28 L58 32" stroke="#ffd43b" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="10" cy="32" r="2.5" fill="#f08c00"/>
+    <circle cx="58" cy="32" r="2.5" fill="#f08c00"/>
+  </svg>`,
 };
 
 // Qué icono le corresponde a cada tema. La clave es "MATERIA|TEMA" tal cual
@@ -132,7 +152,7 @@ const ICONO_POR_TEMA = {
   "BLOQUE 4: SISTEMAS Y COMUNICACIONES|HTTPS y Criptografía": "candado",
   "BLOQUE 4: SISTEMAS Y COMUNICACIONES|TCP/IP": "red",
   "BLOQUE 4: SISTEMAS Y COMUNICACIONES|Redes de Conmutación": "router",
-  "BLOQUE 4: SISTEMAS Y COMUNICACIONES|Redes LAN y medios": "red",
+  "BLOQUE 4: SISTEMAS Y COMUNICACIONES|Redes LAN y medios": "cable_coaxial",
   "BLOQUE 4: SISTEMAS Y COMUNICACIONES|Administración de Sistemas": "engranaje",
   "BLOQUE 4: SISTEMAS Y COMUNICACIONES|Virtualización y Cloud": "nube",
   "BLOQUE 4: SISTEMAS Y COMUNICACIONES|Seguridad de la Información": "escudo",
@@ -155,7 +175,7 @@ const ICONO_POR_TEMA = {
   "FUNDAMENTOS 2: PROGRAMACIÓN|Proceso de Desarrollo": "diagrama_flujo",
 
   // FUNDAMENTOS 3: REDES
-  "FUNDAMENTOS 3: REDES|Tipos de Redes": "red",
+  "FUNDAMENTOS 3: REDES|Tipos de Redes": "fibra_optica",
   "FUNDAMENTOS 3: REDES|Conceptos Generales": "red",
   "FUNDAMENTOS 3: REDES|TCP/IP": "red",
 
