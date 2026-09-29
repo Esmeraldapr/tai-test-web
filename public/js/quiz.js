@@ -148,9 +148,9 @@ function pintarPregunta() {
 
   const explicacionHtml = respondida
     ? `<div class="explicacion-caja ${previo.resultado.es_correcta ? "bien" : "mal"}">
-        ${typeof iconoExplicacionHtml === "function" ? iconoExplicacionHtml(p.materia, p.tema) : ""}
         <strong>${previo.resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
         <span class="parrafo-leible">${escaparHtml(previo.resultado.explicacion || "")}</span>
+        ${p.imagen_url ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de apoyo de la explicación" style="border-radius:12px;margin-top:14px;border:1px solid var(--borde)" />` : ""}
       </div>`
     : previo && previo.estado === "saltada"
     ? `<div class="explicacion-caja">⏭️ Ya habías pasado esta pregunta. Puedes responderla ahora o volver a pasar.</div>`
@@ -288,9 +288,9 @@ async function elegirOpcion(el, pregunta) {
 
   document.getElementById("zona-explicacion").innerHTML = `
     <div class="explicacion-caja ${resultado.es_correcta ? "bien" : "mal"}">
-      ${typeof iconoExplicacionHtml === "function" ? iconoExplicacionHtml(pregunta.materia, pregunta.tema) : ""}
       <strong>${resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
       <span class="parrafo-leible">${resultado.explicacion || ""}</span>
+      ${pregunta.imagen_url ? `<img class="ampliable" src="${pregunta.imagen_url}" alt="Imagen de apoyo de la explicación" style="border-radius:12px;margin-top:14px;border:1px solid var(--borde)" />` : ""}
     </div>`;
 
   document.getElementById("btn-siguiente").removeAttribute("disabled");
