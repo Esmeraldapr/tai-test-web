@@ -610,3 +610,15 @@ input:focus-visible,
 }
 .modal-racha-caja h2 { margin-top: 0; }
 .modal-racha-caja .btn { width: 100%; margin-top: 8px; }
+
+/* Icono visual de apoyo en la caja de explicación de "Mi racha" y los tests
+   en general — un pictograma simple del tema, para ayudar a la comprensión. */
+.icono-explicacion{
+  display:flex;
+  justify-content:center;
+  margin-bottom:10px;
+}
+.icono-explicacion svg{
+  width:72px;
+  height:72px;
+}
