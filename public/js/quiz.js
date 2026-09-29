@@ -148,6 +148,7 @@ function pintarPregunta() {
 
   const explicacionHtml = respondida
     ? `<div class="explicacion-caja ${previo.resultado.es_correcta ? "bien" : "mal"}">
+        ${typeof iconoExplicacionHtml === "function" ? iconoExplicacionHtml(p.materia, p.tema) : ""}
         <strong>${previo.resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
         <span class="parrafo-leible">${escaparHtml(previo.resultado.explicacion || "")}</span>
       </div>`
@@ -287,6 +288,7 @@ async function elegirOpcion(el, pregunta) {
 
   document.getElementById("zona-explicacion").innerHTML = `
     <div class="explicacion-caja ${resultado.es_correcta ? "bien" : "mal"}">
+      ${typeof iconoExplicacionHtml === "function" ? iconoExplicacionHtml(pregunta.materia, pregunta.tema) : ""}
       <strong>${resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
       <span class="parrafo-leible">${resultado.explicacion || ""}</span>
     </div>`;
