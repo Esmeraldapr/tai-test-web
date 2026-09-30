@@ -442,6 +442,7 @@ function abrirLightbox(src, alt) {
   }
   document.getElementById("lightbox-img").src = src;
   document.getElementById("lightbox-img").alt = alt || "";
+  overlay.classList.remove("zoom");
   overlay.classList.add("activo");
 }
 function cerrarLightbox() {
@@ -471,6 +472,10 @@ document.addEventListener("click", (e) => {
   const parrafo = e.target.closest(".parrafo-leible");
   if (parrafo) {
     leerTexto(parrafo, null);
+    return;
+  }
+  if (e.target.id === "lightbox-img") {
+    document.getElementById("lightbox-overlay").classList.toggle("zoom");
     return;
   }
   const img = e.target.closest(".ampliable");
