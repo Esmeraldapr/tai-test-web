@@ -150,7 +150,7 @@ function pintarPregunta() {
     ? `<div class="explicacion-caja ${previo.resultado.es_correcta ? "bien" : "mal"}">
         <strong>${previo.resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
         <span class="parrafo-leible">${escaparHtml(previo.resultado.explicacion || "")}</span>
-        ${p.imagen_url ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de apoyo de la explicación" style="border-radius:12px;margin-top:14px;border:1px solid var(--borde)" />` : ""}
+        ${p.imagen_url && p.materia !== "EXÁMENES" ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de apoyo de la explicación" style="border-radius:12px;margin-top:14px;border:1px solid var(--borde)" />` : ""}
       </div>`
     : previo && previo.estado === "saltada"
     ? `<div class="explicacion-caja">⏭️ Ya habías pasado esta pregunta. Puedes responderla ahora o volver a pasar.</div>`
@@ -166,7 +166,7 @@ function pintarPregunta() {
         <button class="btn-favorito" id="btn-favorito" type="button" title="Marcar como favorita" data-activo="${favoritosSet.has(p.id) ? "1" : "0"}">${favoritosSet.has(p.id) ? "⭐" : "☆"}</button>
       </div>
       ${p.contexto ? `<button type="button" class="btn-ver-contexto" data-contexto="${escaparAtributo(p.contexto)}">📄 Ver el planteamiento del supuesto</button>` : ""}
-      ${p.imagen_url ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de la pregunta" style="border-radius:12px;margin-bottom:16px;border:1px solid var(--borde)" />` : ""}
+      ${p.imagen_url && p.materia === "EXÁMENES" ? `<img class="ampliable" src="${p.imagen_url}" alt="Imagen de la pregunta" style="border-radius:12px;margin-bottom:16px;border:1px solid var(--borde)" />` : ""}
       <div class="enunciado parrafo-leible">${escaparHtml(p.pregunta)}</div>
       <div class="opciones" id="opciones">${opcionesHtml}</div>
       <div id="zona-explicacion">${explicacionHtml}</div>
@@ -290,7 +290,7 @@ async function elegirOpcion(el, pregunta) {
     <div class="explicacion-caja ${resultado.es_correcta ? "bien" : "mal"}">
       <strong>${resultado.es_correcta ? "✅ ¡Correcto!" : "❌ Incorrecto"}</strong><br/>
       <span class="parrafo-leible">${resultado.explicacion || ""}</span>
-      ${pregunta.imagen_url ? `<img class="ampliable" src="${pregunta.imagen_url}" alt="Imagen de apoyo de la explicación" style="border-radius:12px;margin-top:14px;border:1px solid var(--borde)" />` : ""}
+      ${pregunta.imagen_url && pregunta.materia !== "EXÁMENES" ? `<img class="ampliable" src="${pregunta.imagen_url}" alt="Imagen de apoyo de la explicación" style="border-radius:12px;margin-top:14px;border:1px solid var(--borde)" />` : ""}
     </div>`;
 
   document.getElementById("btn-siguiente").removeAttribute("disabled");
