@@ -196,6 +196,32 @@ body .ficha-racha strong{color:var(--turquesa-osc);}
   .control-velocidad-voz{bottom:58px; right:10px; font-size:.78rem;}
 }
 
+/* ---------- Los imprescindibles: fichas blancas y nítidas ----------
+   La página usaba grises translúcidos que, sobre el fondo menta,
+   quedaban apagados. «body» delante para ganar a sus estilos propios. */
+body .imp-ficha{
+  background:#fff; border:1px solid #d9e8f0;
+  box-shadow:0 8px 20px -14px rgba(0,32,63,.35);
+}
+body .imp-ficha:hover{border-color:#5eead4;}
+body .imp-termino{color:#00203F;}
+body .imp-siglas{color:#0f766e; opacity:1;}
+body .imp-definicion{color:#1e293b;}
+body .imp-nota{color:#475569; opacity:1; border-left-color:#14b8a6;}
+body .imp-puerto{background:#e8fdfb; border-color:#14b8a6; color:#0f766e;}
+body .imp-voz:hover{background:#e8fdfb;}
+body .imp-filtros input, body .imp-filtros select{background:#fff; border:1.5px solid #d9e8f0;}
+body .imp-filtros input:focus, body .imp-filtros select:focus{outline:none; border-color:#14b8a6; box-shadow:0 0 0 3px rgba(54,236,222,.25);}
+body .imp-lector{background:#fff; border:1px solid #d9e8f0; box-shadow:0 8px 20px -14px rgba(0,32,63,.35);}
+body .imp-btn-lector{
+  background:linear-gradient(135deg,#00203F 0%,#0b3a6b 100%); color:#fff;
+  border:1.5px solid var(--menta); box-shadow:0 0 10px rgba(54,236,222,.28);
+}
+body .imp-btn-lector:hover{background:linear-gradient(135deg,#00203F 0%,#0b3a6b 100%); color:var(--menta);}
+body .imp-progreso{color:#475569; opacity:1;}
+body .imp-tema h2{border-bottom-color:#14b8a6;}
+body .imp-tema .imp-bloque{color:#0f766e; opacity:1;}
+
 @media (prefers-reduced-motion: reduce){
   .btn-primario::after{display:none;}
 }
