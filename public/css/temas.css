@@ -1,0 +1,89 @@
+/* ============================================================
+   Test por temas (16-oct-2026): pestañas por bloque y tarjetas
+   con dibujo neón. Prefijo tt- para no chocar con style.css.
+   ============================================================ */
+
+/* ---------- Pestañas y número de preguntas ---------- */
+.tt-barra{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  flex-wrap:wrap; margin:6px 0 22px;
+}
+.tt-pestanas{display:flex; gap:8px; flex-wrap:wrap;}
+.tt-pestana{
+  display:flex; flex-direction:column; align-items:center; line-height:1.15;
+  padding:8px 16px; border-radius:999px; cursor:pointer; font-family:inherit;
+  background:#fff; color:#334155; border:1.5px solid #d9e8f0;
+  font-weight:800; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase;
+  transition:.15s;
+}
+.tt-pestana small{font-weight:600; font-size:.68rem; letter-spacing:0; text-transform:none; opacity:.75;}
+.tt-pestana:hover{border-color:#14b8a6; color:#0f766e;}
+.tt-pestana[aria-selected="true"]{
+  background:linear-gradient(135deg,#00203F 0%,#0b3a6b 100%);
+  color:#36ECDE; border-color:#36ECDE;
+  box-shadow:0 0 12px rgba(54,236,222,.45);
+}
+.tt-pestana[aria-selected="true"] small{color:#b8f5ef; opacity:1;}
+.tt-pestana:focus-visible{outline:3px solid #36ECDE; outline-offset:2px;}
+
+.tt-numero{display:flex; align-items:center; gap:9px; font-size:.85rem; color:var(--texto-suave);}
+.tt-numero select{
+  padding:6px 10px; border-radius:9px; border:1.5px solid var(--borde);
+  font-family:inherit; font-size:.85rem; background:#fff; cursor:pointer;
+}
+
+/* ---------- Cabecera de cada bloque ---------- */
+.tt-seccion{margin-bottom:30px;}
+.tt-seccion-cabecera{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+  flex-wrap:wrap; margin-bottom:14px;
+}
+.tt-seccion-cabecera h2{margin:0; font-size:1.2rem;}
+.tt-seccion-meta{margin:2px 0 0; font-size:.85rem; color:var(--texto-suave);}
+.tt-azar{font-size:.85rem; padding:9px 16px;}
+
+/* ---------- Tarjetas de tema ---------- */
+.tt-rejilla{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px;
+}
+.tt-tarjeta{
+  display:flex; flex-direction:column; overflow:hidden;
+  background:#fff; border-radius:16px; border:1px solid #d9e8f0;
+  box-shadow:0 10px 24px -14px rgba(0,32,63,.35);
+  color:inherit; text-decoration:none; transition:transform .15s, box-shadow .15s;
+}
+.tt-tarjeta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 0 2px #36ECDE, 0 14px 30px -10px rgba(54,236,222,.55);
+}
+.tt-tarjeta:focus-visible{outline:3px solid #36ECDE; outline-offset:3px;}
+.tt-imagen{
+  aspect-ratio:320 / 140;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(54,236,222,.14) 0%, transparent 60%),
+    linear-gradient(135deg,#00203F 0%,#05305e 100%);
+  border-bottom:2px solid #36ECDE;
+}
+.tt-imagen svg{width:100%; height:100%; display:block; filter:drop-shadow(0 0 3px rgba(54,236,222,.5));}
+.tt-cuerpo{padding:14px 16px 8px; flex:1;}
+.tt-cuerpo h3{margin:0 0 4px; font-size:1rem; line-height:1.3; color:#0f172a;}
+.tt-cuerpo p{margin:0; font-size:.8rem; color:var(--texto-suave);}
+.tt-pie{padding:10px 16px 16px; border-top:1px solid #edf2f7;}
+.tt-pie .btn{width:100%; text-align:center; display:block; padding:10px;}
+
+/* En el móvil: dos tarjetas por fila y pestañas que se desplazan */
+@media (max-width:600px){
+  .tt-pestanas{flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; width:100%; -webkit-overflow-scrolling:touch;}
+  .tt-pestana{flex-shrink:0; padding:7px 13px;}
+  .tt-rejilla{grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;}
+  .tt-cuerpo{padding:10px 11px 6px;}
+  .tt-cuerpo h3{font-size:.86rem;}
+  .tt-pie{padding:8px 11px 11px;}
+  .tt-pie .btn{padding:8px; font-size:.82rem;}
+  .tt-azar{width:100%; text-align:center;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tt-tarjeta, .tt-pestana{transition:none;}
+  .tt-tarjeta:hover{transform:none;}
+}
