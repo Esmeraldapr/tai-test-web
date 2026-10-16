@@ -186,11 +186,22 @@ function pintarGraficaEvolucion(filas) {
         {
           label: "% aciertos",
           data: datos,
-          borderColor: "#7c3aed",
-          backgroundColor: "rgba(124,58,237,.12)",
+                    borderColor: "#14b8a6",
+          borderWidth: 2.5,
+          backgroundColor: (ctx) => {
+            const { chart } = ctx;
+            if (!chart.chartArea) return "rgba(54,236,222,.18)";
+            const g = chart.ctx.createLinearGradient(0, chart.chartArea.top, 0, chart.chartArea.bottom);
+            g.addColorStop(0, "rgba(54,236,222,.45)");
+            g.addColorStop(1, "rgba(54,236,222,0)");
+            return g;
+          },
           tension: 0.3,
           fill: true,
-          pointBackgroundColor: "#7c3aed",
+          pointBackgroundColor: "#00203F",
+          pointBorderColor: "#36ECDE",
+          pointBorderWidth: 2,
+          pointRadius: 4,
         },
       ],
     },
