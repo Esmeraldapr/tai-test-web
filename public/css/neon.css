@@ -1,0 +1,201 @@
+/* ============================================================
+   Estilo neón (16-oct-2026): azul marino + menta.
+   Solo se carga en las páginas de dentro (las que tienen menú
+   lateral). common.js lo añade; la portada (login.html,
+   recuperar.html, test-gratis-tai.html) NO lo carga.
+   Para quitarlo entero: borrar este archivo (la web vuelve
+   al morado de siempre).
+   ============================================================ */
+
+:root{
+  --marino:#00203F;
+  --marino-2:#0b3a6b;
+  --marino-3:#05305e;
+  --menta:#36ECDE;
+  --turquesa:#14b8a6;
+  --turquesa-osc:#0f766e;
+  --neon-azul:#3b82f6;
+  --neon-violeta:#a855f7;
+  --neon-rosa:#ec4899;
+  --neon-amarillo:#fbbf24;
+
+  /* Las variables de siempre, recoloreadas: todo lo que usaba
+     el morado pasa a turquesa sin tocar style.css */
+  --morado:#0f766e;
+  --morado-osc:#00203F;
+  --morado-suave:#ccfbf1;
+  --azul:#3b82f6;
+  --cian:#36ECDE;
+  --fondo:#eef6fa;
+  --borde:#d9e8f0;
+  --sombra:0 10px 25px -10px rgba(0,32,63,.22);
+  --grad-1:linear-gradient(90deg,#14b8a6 0%,#36ECDE 60%,#3b82f6 100%);
+}
+
+body{
+  background:
+    radial-gradient(circle at 10% 0%, #d7f7f3 0%, transparent 45%),
+    radial-gradient(circle at 90% 10%, #dbeafe 0%, transparent 40%),
+    var(--fondo);
+}
+
+/* ---------- Menú lateral ---------- */
+.sidebar{
+  background:
+    radial-gradient(circle at 0% 0%, rgba(54,236,222,.16) 0%, transparent 40%),
+    linear-gradient(180deg,#00203F 0%,#05305e 100%);
+  border-right:2px solid var(--menta);
+  box-shadow:4px 0 18px -8px rgba(54,236,222,.45);
+}
+.nav-link{border:1px solid transparent;}
+.nav-link:hover{background:rgba(54,236,222,.12); color:var(--menta); border-color:rgba(54,236,222,.25);}
+.nav-link.activa{
+  background:var(--menta); color:var(--marino); border-color:var(--menta);
+  box-shadow:0 0 14px rgba(54,236,222,.6); font-weight:700;
+}
+.sidebar-usuario{border-top-color:rgba(54,236,222,.25);}
+.sidebar-usuario button{background:rgba(255,255,255,.06); border:1px solid rgba(54,236,222,.35);}
+.sidebar-usuario button:hover{background:rgba(54,236,222,.18); color:var(--menta);}
+@media (max-width:900px){
+  .sidebar{border-right:none; border-bottom:2px solid var(--menta);}
+  .sidebar-usuario{background:#00203F; border-top:1px solid rgba(54,236,222,.35);}
+}
+
+/* ---------- Botones ---------- */
+.btn-primario{
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg,#00203F 0%,#0b3a6b 100%);
+  color:#fff; border:1.5px solid var(--menta);
+  box-shadow:0 0 10px rgba(54,236,222,.28), inset 0 0 10px rgba(54,236,222,.12);
+}
+.btn-primario::after{
+  content:""; position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background:linear-gradient(100deg,transparent,rgba(54,236,222,.35),transparent);
+  transform:skewX(-20deg); transition:left .5s ease; pointer-events:none;
+}
+.btn-primario:hover{filter:none; color:var(--menta); box-shadow:0 0 18px rgba(54,236,222,.55), inset 0 0 12px rgba(54,236,222,.2);}
+.btn-primario:hover::after{left:120%;}
+.btn-secundario{background:#fff; color:var(--marino); border:2px solid var(--turquesa);}
+.btn-secundario:hover{background:#e8fdfb; box-shadow:0 0 12px rgba(20,184,166,.35);}
+
+/* ---------- Tarjetas del inicio (accesos) con cabecera de circuitos ---------- */
+.accion-card{
+  position:relative; overflow:hidden; padding-top:0;
+}
+.accion-card .accion-icono{
+  margin:0 -22px 4px; padding:18px 22px 14px;
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20300%20120%22%20preserveAspectRatio%3D%22xMaxYMid%20slice%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2336ECDE%22%20stroke-width%3D%221.4%22%20opacity%3D%22.35%22%3E%3Cpath%20d%3D%22M300%2020H250l-15%2015h-40%22/%3E%3Ccircle%20cx%3D%22192%22%20cy%3D%2235%22%20r%3D%223%22/%3E%3Cpath%20d%3D%22M300%2050h-30l-20%2020h-60%22/%3E%3Ccircle%20cx%3D%22187%22%20cy%3D%2270%22%20r%3D%223%22/%3E%3Cpath%20d%3D%22M300%2085h-60l-12-12h-18%22/%3E%3Ccircle%20cx%3D%22207%22%20cy%3D%2273%22%20r%3D%223%22/%3E%3Cpath%20d%3D%22M300%20105h-25l-10%2010h-50%22/%3E%3Ccircle%20cx%3D%22212%22%20cy%3D%22115%22%20r%3D%223%22/%3E%3Cpath%20d%3D%22M260%200v12l10%2010%22/%3E%3Cpath%20d%3D%22M230%20120v-10l-12-12h-30%22/%3E%3Ccircle%20cx%3D%22185%22%20cy%3D%2298%22%20r%3D%223%22/%3E%3C/g%3E%3C/svg%3E") right center / auto 100% no-repeat,
+    radial-gradient(circle at 0% 0%, var(--acento-cab, #36ECDE) -60%, transparent 55%),
+    linear-gradient(135deg,#00203F 0%,#05305e 100%);
+  border-bottom:2px solid var(--acento-cab, #36ECDE);
+}
+.accion-card .accion-icono{filter:none;}
+.accion-card:nth-child(4n+1){--acento-cab:#36ECDE;}
+.accion-card:nth-child(4n+2){--acento-cab:#a855f7;}
+.accion-card:nth-child(4n+3){--acento-cab:#3b82f6;}
+.accion-card:nth-child(4n+4){--acento-cab:#ec4899;}
+.accion-card:hover{transform:translateY(-2px); border-color:var(--menta); box-shadow:0 0 0 2px var(--menta), 0 14px 30px -10px rgba(54,236,222,.5);}
+.accion-card .accion-flecha{color:var(--turquesa-osc);}
+
+/* ---------- Números del inicio ---------- */
+.stat-card{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 100% 0%, var(--acento-stat, #36ECDE) -80%, transparent 60%),
+    linear-gradient(135deg,#00203F 0%,#05305e 100%);
+  border:1px solid rgba(54,236,222,.25); color:#fff;
+  box-shadow:0 10px 24px -14px rgba(0,32,63,.7);
+}
+.stat-card::before{
+  content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+  background:var(--acento-stat, #36ECDE); box-shadow:0 0 12px var(--acento-stat, #36ECDE);
+}
+.stat-card .stat-numero{color:#fff; text-shadow:0 0 14px var(--acento-stat, #36ECDE);}
+.stat-card .stat-etiqueta{color:#b8d4ea;}
+.stat-card:nth-child(5n+1){--acento-stat:#36ECDE;}
+.stat-card:nth-child(5n+2){--acento-stat:#3b82f6;}
+.stat-card:nth-child(5n+3){--acento-stat:#ec4899;}
+.stat-card:nth-child(5n+4){--acento-stat:#fbbf24;}
+.stat-card:nth-child(5n+5){--acento-stat:#a855f7;}
+
+/* ---------- Tarjetas de temas, exámenes y niveles ---------- */
+.convocatoria-card:hover,
+.tarjeta-nivel:hover{border-color:var(--menta); box-shadow:0 0 0 2px var(--menta), 0 14px 30px -10px rgba(54,236,222,.5);}
+.convocatoria-card .convocatoria-anio{color:var(--marino); text-shadow:0 0 12px rgba(54,236,222,.45);}
+
+/* ---------- Test ---------- */
+.quiz-barra{background:#e2edf3;}
+.opcion:hover{border-color:var(--turquesa); background:#f0fdfa;}
+.opcion .letra{background:#e2edf3; color:var(--marino);}
+.opcion.correcta{border-color:var(--turquesa); background:#ccfbf1; box-shadow:0 0 12px -2px rgba(20,184,166,.45);}
+.opcion.correcta .letra{background:var(--turquesa); color:#fff;}
+.explicacion-caja{background:#effcfa; border-left-color:var(--turquesa);}
+.parrafo-leible:hover{background:#e8fdfb;}
+
+/* ---------- Mi racha ---------- */
+body .barra-especialidad{
+  background:linear-gradient(135deg,#00203F 0%,#05305e 100%); color:#fff;
+  border:1.5px solid var(--menta); box-shadow:0 0 18px -6px rgba(54,236,222,.55);
+}
+body .link-especialidad{background:var(--menta); color:var(--marino);}
+body .stat-racha{
+  background:linear-gradient(135deg,#00203F 0%,#05305e 100%); color:#fff;
+  border:1px solid rgba(251,146,60,.55); box-shadow:0 0 16px -6px rgba(251,146,60,.6);
+}
+body .stat-racha .stat-num{text-shadow:0 0 12px rgba(54,236,222,.7);}
+body .tira-dia.hoy .letra-dia{color:var(--turquesa-osc);}
+body .tarea-fila{background:#f0fbfd; border-color:#cfe6ee;}
+body .tarea-fila:hover{border-color:var(--menta); box-shadow:0 0 12px -2px rgba(54,236,222,.5);}
+body .tarea-fila.completa{
+  background:linear-gradient(90deg,#0f766e,#14b8a6); color:#fff;
+  box-shadow:0 0 14px -4px rgba(20,184,166,.7);
+}
+body .celda-dia-mes{background:#e6eef5;}
+body .celda-dia-mes.vacia{background:none;}
+body .celda-dia-mes.completo{
+  background:#0b3a6b; color:var(--menta); outline:1.5px solid var(--menta);
+  box-shadow:0 0 8px rgba(54,236,222,.6);
+}
+body .calendario-mes-cabecera button{color:var(--turquesa-osc);}
+body .ficha-racha{background:#effcfa;}
+body .ficha-racha strong{color:var(--turquesa-osc);}
+
+/* ---------- Circuitos a los lados (solo en pantallas anchas) ---------- */
+@media (min-width:1500px){
+  .main-contenido{position:relative;}
+  .main-contenido::before,
+  .main-contenido::after{
+    content:""; position:fixed; top:0; bottom:0;
+    width:calc((100vw - 250px - 1060px) / 2);
+    background:url("../img/circuito-lateral.svg") left center / cover no-repeat;
+    pointer-events:none; z-index:0; opacity:.9;
+  }
+  .main-contenido::before{left:250px;}
+  .main-contenido::after{right:0; transform:scaleX(-1);}
+  .main-contenido .contenedor{position:relative; z-index:1;}
+}
+
+/* ---------- Velocidad de lectura: siempre visible abajo a la derecha ---------- */
+.control-velocidad-voz{
+  position:fixed; bottom:16px; right:16px; z-index:900;
+  display:flex; align-items:center; gap:6px;
+  background:#00203F; color:#fff; padding:6px 10px;
+  border:1.5px solid var(--menta); border-radius:999px;
+  box-shadow:0 0 14px -2px rgba(54,236,222,.55);
+  font-size:.85rem;
+}
+.control-velocidad-voz select{
+  border:none; background:rgba(255,255,255,.12); color:#fff; font-size:.82rem;
+  border-radius:999px; padding:4px 8px; cursor:pointer;
+}
+.control-velocidad-voz select option{color:#00203F;}
+.control-velocidad-voz select:focus-visible{outline:2px solid var(--menta); outline-offset:2px;}
+@media (max-width:900px){
+  /* En el móvil, por encima de la franja de abajo con el correo y «Salir» */
+  .control-velocidad-voz{bottom:58px; right:10px; font-size:.78rem;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .btn-primario::after{display:none;}
+}
