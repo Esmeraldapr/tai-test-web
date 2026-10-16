@@ -3,6 +3,19 @@
 // Requiere que config.js se haya cargado antes.
 // ============================================================
 
+// Estilo neón (16-oct-2026): solo en las páginas de dentro (las que
+// tienen menú lateral). La portada (login, recuperar, test gratis)
+// no tiene .app-layout y se queda como estaba.
+(function cargarEstiloNeon() {
+  if (!document.querySelector(".app-layout")) return;
+  if (document.getElementById("css-neon")) return;
+  const link = document.createElement("link");
+  link.id = "css-neon";
+  link.rel = "stylesheet";
+  link.href = "css/neon.css?v=1";
+  document.head.appendChild(link);
+})();
+
 async function obtenerSesion() {
   const { data } = await sb.auth.getSession();
   return data.session || null;
@@ -605,22 +618,24 @@ try {
   if (guardada >= 0.25 && guardada <= 2) VELOCIDAD_VOZ = guardada;
 } catch (e) { /* sin almacenamiento disponible */ }
 
+// Desde el 16-oct-2026 va en una pastilla flotante abajo a la derecha,
+// siempre visible (antes estaba dentro del menú lateral).
 function ponerSelectorVelocidad() {
-  const zona = document.querySelector(".sidebar-usuario");
-  if (!zona || document.getElementById("selector-velocidad")) return;
+  if (document.getElementById("selector-velocidad")) return;
   const caja = document.createElement("div");
-  caja.className = "caja-velocidad";
+  caja.className = "control-velocidad-voz";
+  caja.title = "Velocidad de la lectura en voz alta";
   caja.innerHTML = `
-    <label for="selector-velocidad">🔊 Velocidad de lectura</label>
-    <select id="selector-velocidad">
-      <option value="0.5">Muy lenta (0,5×)</option>
-      <option value="0.75">Lenta (0,75×)</option>
+    <span aria-hidden="true">🔊</span>
+    <select id="selector-velocidad" aria-label="Velocidad de lectura en voz alta">
+      <option value="0.5">0,5×</option>
+      <option value="0.75">0,75×</option>
       <option value="0.95">Normal</option>
-      <option value="1.25">Rápida (1,25×)</option>
-      <option value="1.5">Muy rápida (1,5×)</option>
-      <option value="2">Máxima (2×)</option>
+      <option value="1.25">1,25×</option>
+      <option value="1.5">1,5×</option>
+      <option value="2">2×</option>
     </select>`;
-  zona.insertBefore(caja, zona.querySelector("#btn-logout"));
+  document.body.appendChild(caja);
   const select = caja.querySelector("select");
   select.value = String(VELOCIDAD_VOZ);
   select.addEventListener("change", () => {
