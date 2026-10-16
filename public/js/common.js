@@ -12,7 +12,7 @@
   const link = document.createElement("link");
   link.id = "css-neon";
   link.rel = "stylesheet";
-  link.href = "css/neon.css?v=1";
+  link.href = "css/neon.css?v=2";
   document.head.appendChild(link);
 })();
 
