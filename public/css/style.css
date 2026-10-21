@@ -623,3 +623,21 @@ input:focus-visible,
   width:72px;
   height:72px;
 }
+
+/* ---- Teoría: el texto de todas las leyes sobre tarjeta blanca (21/10) ---- */
+.constitucion-doc #constitucion,
+.constitucion-doc #ley{
+  background:var(--tarjeta);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+  padding:22px 26px;
+}
+.constitucion-doc .const-preambulo{
+  background:transparent; border:none; box-shadow:none; border-radius:0;
+  border-bottom:1px solid var(--borde); padding:0 0 18px;
+}
+@media (max-width:600px){
+  .constitucion-doc #constitucion,
+  .constitucion-doc #ley{ padding:16px 14px; }
+}
