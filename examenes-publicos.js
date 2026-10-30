@@ -37,6 +37,20 @@ const PROXIMA = {
 };
 const AVISO = `<div class="exr-aviso">🗓️ <strong>Prepara la oposición ${PROXIMA.etiqueta}.</strong> ${PROXIMA.aviso}</div>`;
 
+// Test gratis por bloque: 10 preguntas representativas (una por cada tema con más peso
+// en el banco), revisadas a mano el 30/10/2026. Para cambiar una, cambiar su id aquí.
+const BLOQUES = [
+  { n: 1, nombre: 'Derecho', ruta: '/test-tai-bloque-1-derecho', ids: [11205, 10662, 11348, 12646, 10094, 11501, 10522, 11980, 10439, 12558] },
+  { n: 2, nombre: 'Tecnología', ruta: '/test-tai-bloque-2-tecnologia', ids: [14107, 13791, 13720, 13512, 13333, 13118, 13405, 13282, 13891, 13747] },
+  { n: 3, nombre: 'Desarrollo', ruta: '/test-tai-bloque-3-desarrollo', ids: [16321, 15399, 14896, 15644, 17003, 14682, 16034, 14368, 15701, 15239] },
+  { n: 4, nombre: 'Sistemas y Comunicaciones', ruta: '/test-tai-bloque-4-sistemas', ids: [17591, 17195, 18829, 18970, 18703, 17684, 18516, 18121, 19469, 19295] },
+];
+
+// Imágenes de explicación revisadas A MANO para estas páginas públicas: solo se muestran
+// si ilustran exactamente lo que pregunta la pregunta (regla de oro). Añadir aquí el id
+// de la pregunta tras comprobarlo.
+const IMAGENES_REVISADAS = new Set([14682]);
+
 const nombreTurno = (t) => (t === 'PI' ? 'promoción interna' : 'ingreso libre');
 const slug = (c) => `examen-tai-${c.anio}${c.turno === 'PI' ? '-promocion-interna' : ''}-resuelto`;
 
@@ -123,7 +137,8 @@ const CTA = `
 
 const PIE = `
   <p class="exr-pie">Preguntas y respuestas tomadas de los cuestionarios y plantillas oficiales publicados por el INAP.
-  · <a href="/examenes-tai-resueltos">Todos los exámenes TAI resueltos</a> · <a href="/test-gratis-tai.html">Test gratis</a></p>`;
+  · <a href="/examenes-tai-resueltos">Todos los exámenes TAI resueltos</a> · <a href="/test-gratis-tai.html">Test gratis</a>
+  <br>Test gratis por bloque: ${BLOQUES.map((b) => `<a href="${b.ruta}">Bloque ${b.n}: ${b.nombre}</a>`).join(' · ')}</p>`;
 
 module.exports = function registrarExamenesPublicos(app, supabase) {
   async function preguntasDe(c) {
@@ -226,6 +241,8 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   </div>
   <div class="exr-cont">
     <ul class="exr-lista">${lista}</ul>
+    <h2 style="text-align:center;margin-top:30px;">Test gratis por bloque</h2>
+    <ul class="exr-lista">${BLOQUES.map((b) => `<li><a href="${b.ruta}"><strong>Test TAI Bloque ${b.n}: ${b.nombre}</strong><br><span>10 preguntas de los temas que más pesan, con solución y explicación.</span></a></li>`).join('')}</ul>
     ${CTA}${PIE}
   </div>
 </body>
@@ -235,6 +252,64 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   app.get('/examenes-tai-resueltos', (req, res) => {
     res.set('Cache-Control', 'public, max-age=3600');
     res.send(htmlIndice());
+  });
+
+  async function preguntasBloque(b) {
+    const clave = 'bloque-' + b.n;
+    const hit = cache.get(clave);
+    if (hit && Date.now() - hit.t < CACHE_MS) return hit.v;
+    const { data, error } = await supabase
+      .from('preguntas')
+      .select('id, tema, pregunta, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, explicacion, imagen_url')
+      .in('id', b.ids);
+    if (error) throw error;
+    const orden = new Map(b.ids.map((id, i) => [id, i]));
+    const v = (data || []).sort((x, y) => orden.get(x.id) - orden.get(y.id));
+    cache.set(clave, { t: Date.now(), v });
+    return v;
+  }
+
+  function htmlBloque(b, filas) {
+    const titulo = `Test TAI Bloque ${b.n}: ${b.nombre} gratis · preguntas con solución · ${PROXIMA.etiqueta}`;
+    const descripcion = `Test gratis del Bloque ${b.n} (${b.nombre}) de la oposición TAI: ${filas.length} preguntas de los temas que más pesan, con la respuesta correcta y su explicación. Sin registro. Para preparar la oposición ${PROXIMA.etiqueta}.`;
+    let cuerpo = `
+  <div class="exr-cab">
+    <span class="exr-chip">✅ Gratis · sin registro · con explicaciones</span>
+    <h1>Test TAI Bloque ${b.n}: ${esc(b.nombre)}</h1>
+    <p>${filas.length} preguntas del <strong>Bloque ${b.n} (${esc(b.nombre)})</strong> de la oposición de Técnico Auxiliar de Informática, una por cada uno de los temas con más peso. Pulsa «Ver respuesta» para ver la solución y por qué.</p>
+    ${AVISO}
+    <div class="exr-indice">${BLOQUES.filter((o) => o.n !== b.n).map((o) => `<a href="${o.ruta}">Bloque ${o.n}: ${esc(o.nombre)}</a>`).join('')}</div>
+  </div>
+  <div class="exr-cont">`;
+    filas.forEach((f, i) => {
+      const letra = (f.respuesta_correcta || '').toLowerCase();
+      const img = f.imagen_url && IMAGENES_REVISADAS.has(f.id)
+        ? `<img class="exr-img" src="${esc(urlImagen(f.imagen_url))}" alt="Esquema explicativo: ${esc(f.tema)}" loading="lazy" />` : '';
+      cuerpo += `
+    <article class="exr-preg">
+      <span class="exr-chip" style="background:var(--morado-suave);color:var(--morado-osc);margin-bottom:8px;">${esc(f.tema)}</span>
+      <h3>${i + 1}. ${esc(f.pregunta)}</h3>
+      <ol>${['a', 'b', 'c', 'd'].map((l) => `<li><b>${l})</b> ${esc(f['opcion_' + l])}</li>`).join('')}</ol>
+      <details><summary>Ver respuesta</summary><div class="exr-sol">Respuesta correcta: <strong>${esc(letra)}) ${esc(f['opcion_' + letra])}</strong>${f.explicacion ? `<p style="margin:8px 0 0;">${esc(f.explicacion)}</p>` : ''}${img}</div></details>
+    </article>`;
+      if (i === 4) cuerpo += CTA;
+    });
+    cuerpo += CTA + PIE + `\n  </div>\n</body>\n</html>`;
+    return cabecera({ titulo, descripcion, ruta: b.ruta }) + cuerpo;
+  }
+
+  BLOQUES.forEach((b) => {
+    app.get(b.ruta, async (req, res) => {
+      try {
+        const filas = await preguntasBloque(b);
+        if (!filas.length) return res.status(404).send('Test no disponible.');
+        res.set('Cache-Control', 'public, max-age=3600');
+        res.send(htmlBloque(b, filas));
+      } catch (e) {
+        console.error('Error generando el test del bloque', b.n, e);
+        res.status(500).send('No se ha podido cargar el test. Inténtalo de nuevo en unos minutos.');
+      }
+    });
   });
 
   CONVOCATORIAS.forEach((c) => {
@@ -254,3 +329,4 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
 
 module.exports.CONVOCATORIAS = CONVOCATORIAS;
 module.exports.slug = slug;
+module.exports.BLOQUES = BLOQUES;
