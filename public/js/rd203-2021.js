@@ -21,7 +21,7 @@ const TITULOS_QUE_ENTRAN = {
 const ARTICULOS_EN_EXAMEN = {
   "2": [
     { anio: "2024", sobre: "principio de personalización y proactividad" },
-    { anio: "2025 (provisional)", sobre: "principio de personalización y proactividad" },
+    { anio: "2025", sobre: "principio de personalización y proactividad" },
   ],
 };
 

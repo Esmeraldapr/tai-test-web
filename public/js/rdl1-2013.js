@@ -30,7 +30,7 @@ const TITULOS_QUE_ENTRAN = {
 // corregida con datos reales.
 const ARTICULOS_EN_EXAMEN = {
   "2": [{ anio: "2024 (promoción interna)", sobre: "qué es discriminación directa" }],
-  "4": [{ anio: "2025 (provisional)", sobre: "grado mínimo para la consideración de persona con discapacidad (art. 4.2)" }],
+  "4": [{ anio: "2025", sobre: "grado mínimo para la consideración de persona con discapacidad (art. 4.2)" }],
 };
 
 const TITULOS_EN_EXAMEN = {};

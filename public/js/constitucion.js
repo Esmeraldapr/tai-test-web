@@ -29,19 +29,19 @@ const TITULOS_QUE_ENTRAN = {
 // cuestionarios y plantillas reales del INAP (2018 y 2019, ingreso libre).
 // Faltan por revisar 2024 (promoción interna) y 2025.
 const ARTICULOS_EN_EXAMEN = {
-  "9": [{ anio: "2025 (provisional)", sobre: "principios constitucionales (art. 9)" }],
+  "9": [{ anio: "2025", sobre: "principios constitucionales (art. 9)" }],
   "30": [{ anio: "2019", sobre: "deberes de los ciudadanos" }],
   "62": [{ anio: "2019", sobre: "decretos acordados en el Consejo de Ministros" }, { anio: "2024", sobre: "funciones que corresponden al Rey" }],
   "64": [{ anio: "2018", sobre: "refrendo de los actos del Rey" }, { anio: "2022", sobre: "refrendo de los actos del Rey" }],
-  "66": [{ anio: "2025 (provisional)", sobre: "funciones de las Cortes Generales" }],
+  "66": [{ anio: "2025", sobre: "funciones de las Cortes Generales" }],
   "68": [{ anio: "2019", sobre: "composición del Congreso de los Diputados" }],
   "71": [{ anio: "2024", sobre: "causas contra Diputados y Senadores (inviolabilidad e inmunidad)" }],
-  "78": [{ anio: "2025 (provisional)", sobre: "composición de la Diputación Permanente" }],
+  "78": [{ anio: "2025", sobre: "composición de la Diputación Permanente" }],
   "81": [{ anio: "2018", sobre: "aprobación de leyes orgánicas" }],
   "82": [{ anio: "2019", sobre: "delegación legislativa mediante Decreto Legislativo" }],
   "95": [{ anio: "2018", sobre: "tratado internacional contrario a la Constitución" }],
   "98": [{ anio: "2018", sobre: "composición del Gobierno" }],
-  "99": [{ anio: "2022", sobre: "disolución de las Cámaras (mención dentro de la pregunta del art. 64)" }, { anio: "2025 (provisional)", sobre: "mayoría exigida en la investidura del Presidente del Gobierno" }],
+  "99": [{ anio: "2022", sobre: "disolución de las Cámaras (mención dentro de la pregunta del art. 64)" }, { anio: "2025", sobre: "mayoría exigida en la investidura del Presidente del Gobierno" }],
   "101": [{ anio: "2018", sobre: "causas de cese del Gobierno" }],
   "103": [{ anio: "2019", sobre: "principios de actuación de la Administración Pública (art. 103.1)" }],
   "106": [{ anio: "2018", sobre: "control de la potestad reglamentaria (pregunta de reserva)" }],

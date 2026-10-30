@@ -18,7 +18,7 @@
 const ARTICULOS_EN_EXAMEN = {};
 
 const ANEXOS_EN_EXAMEN = {
-  "ANEXO III": [{ anio: "2025 (provisional)", sobre: "contenido de los certificados cualificados de sello electrónico" }],
+  "ANEXO III": [{ anio: "2025", sobre: "contenido de los certificados cualificados de sello electrónico" }],
 };
 
 // Pregunta sobre el reglamento en general, sin apuntar a un artículo o anexo

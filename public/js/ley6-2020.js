@@ -21,7 +21,7 @@ const ARTICULOS_EN_EXAMEN = {
   "4": [
     { anio: "2022", sobre: "período de vigencia de los certificados cualificados" },
     { anio: "2022 (promoción interna)", sobre: "período de vigencia de los certificados cualificados" },
-    { anio: "2025 (provisional)", sobre: "uso de pseudónimos en los certificados cualificados" },
+    { anio: "2025", sobre: "uso de pseudónimos en los certificados cualificados" },
   ],
 };
 

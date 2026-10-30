@@ -39,8 +39,8 @@ const ARTICULOS_EN_EXAMEN = {
     { anio: "2022 (promoción interna)", sobre: "cuándo hay que designar delegado de protección de datos" },
   ],
   "78": [{ anio: "2019", sobre: "prescripción de las sanciones" }, { anio: "2019 (promoción interna)", sobre: "prescripción de las sanciones" }],
-  "79": [{ anio: "2025 (provisional)", sobre: "aplicación de los derechos en internet" }],
-  "96": [{ anio: "2025 (provisional)", sobre: "el derecho al testamento digital" }],
+  "79": [{ anio: "2025", sobre: "aplicación de los derechos en internet" }],
+  "96": [{ anio: "2025", sobre: "el derecho al testamento digital" }],
 };
 
 // Preguntas que van sobre un título entero, sin apuntar a un artículo concreto.

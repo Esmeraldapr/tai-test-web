@@ -22,7 +22,7 @@ const ARTICULOS_EN_EXAMEN = {
 const DISPOSICIONES_EN_EXAMEN = [
   { anio: "2018", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
   { anio: "2019", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
-  { anio: "2025 (provisional)", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
+  { anio: "2025", sobre: "cuál NO es una Norma Técnica de Interoperabilidad" },
 ];
 
 const ANEXOS_EN_EXAMEN = {};

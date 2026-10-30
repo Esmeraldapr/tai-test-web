@@ -15,7 +15,7 @@
 // completas (2018, 2019, 2022, 2024 y 2025, ingreso libre y promoción interna).
 const ARTICULOS_EN_EXAMEN = {
   "18": [{ anio: "2022", sobre: "quién actúa como Secretario del Consejo de Ministros" }],
-  "21": [{ anio: "2025 (provisional)", sobre: "funciones del Gobierno en funciones" }],
+  "21": [{ anio: "2025", sobre: "funciones del Gobierno en funciones" }],
 };
 
 // ---------------- Utilidades de render ----------------
