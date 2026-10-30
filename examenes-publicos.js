@@ -30,6 +30,13 @@ const CONVOCATORIAS = [
   { anio: '2018', turno: 'PI', prefijo: '2018 PI' },
 ];
 
+// ⚠️ Texto de la próxima convocatoria. Actualizarlo cuando salga la convocatoria en el BOE.
+const PROXIMA = {
+  etiqueta: 'TAI 2026-2027',
+  aviso: 'La oferta de empleo público de 2026 (Real Decreto 387/2026, BOE de 7 de mayo de 2026) incluye 1.120 plazas de TAI: 1.000 de acceso libre y 120 de promoción interna. El examen de esta convocatoria será previsiblemente en 2027. Practicar con los exámenes reales de años anteriores es la mejor forma de saber qué preguntan y cómo.',
+};
+const AVISO = `<div class="exr-aviso">🗓️ <strong>Prepara la oposición ${PROXIMA.etiqueta}.</strong> ${PROXIMA.aviso}</div>`;
+
 const nombreTurno = (t) => (t === 'PI' ? 'promoción interna' : 'ingreso libre');
 const slug = (c) => `examen-tai-${c.anio}${c.turno === 'PI' ? '-promocion-interna' : ''}-resuelto`;
 
@@ -69,6 +76,7 @@ ${extraHead}
   .exr-cab h1{font-size:1.6rem;margin:0 0 10px;}
   .exr-cab p{color:var(--texto-suave);line-height:1.6;margin:0 auto 8px;max-width:640px;}
   .exr-chip{display:inline-block;background:var(--verde-suave);color:var(--verde);font-weight:700;font-size:.8rem;padding:5px 14px;border-radius:999px;margin-bottom:12px;}
+  .exr-aviso{max-width:780px;margin:14px auto 0;background:var(--morado-suave);color:var(--texto);border-radius:var(--radio);padding:12px 16px;line-height:1.55;font-size:.92rem;text-align:left;}
   .exr-cont{max-width:820px;margin:0 auto;padding:10px 20px 60px;}
   .exr-indice{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px;}
   .exr-indice a{background:var(--morado-suave);color:var(--morado-osc);font-weight:700;font-size:.85rem;padding:6px 14px;border-radius:999px;text-decoration:none;}
@@ -108,7 +116,7 @@ ${extraHead}
 
 const CTA = `
   <div class="exr-cta">
-    <h2>Practica este examen con corrección automática</h2>
+    <h2>Prepara la oposición ${PROXIMA.etiqueta}</h2>
     <p>En <strong>tai-test.es</strong> puedes hacer este examen (y todos los de convocatorias anteriores) contestando y viendo tu nota al momento, además de más de 10.000 preguntas de los 4 bloques del temario. <strong>Prueba gratis 14 días</strong>.</p>
     <a class="btn btn-primario" href="/login.html">Crear mi cuenta gratis →</a>
   </div>`;
@@ -134,8 +142,8 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   }
 
   function htmlConvocatoria(c, filas) {
-    const titulo = `Examen TAI ${c.anio} resuelto (${nombreTurno(c.turno)}) · preguntas y respuestas oficiales`;
-    const descripcion = `Examen oficial de Técnico Auxiliar de Informática (TAI) de la convocatoria ${c.anio}, ${nombreTurno(c.turno)}: ${filas.length} preguntas con la respuesta correcta según la plantilla del INAP, incluidos los supuestos prácticos.`;
+    const titulo = `Examen TAI ${c.anio} resuelto (${nombreTurno(c.turno)}) · prepara ${PROXIMA.etiqueta}`;
+    const descripcion = `Examen oficial de Técnico Auxiliar de Informática (TAI) de la convocatoria ${c.anio}, ${nombreTurno(c.turno)}: ${filas.length} preguntas con la respuesta correcta según la plantilla del INAP, incluidos los supuestos prácticos. Para preparar la oposición ${PROXIMA.etiqueta}.`;
     const ruta = '/' + slug(c);
 
     // Agrupar por parte, manteniendo el orden de la base de datos.
@@ -153,6 +161,7 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
     <span class="exr-chip">📄 Examen oficial · respuestas de la plantilla del INAP</span>
     <h1>Examen TAI ${c.anio} resuelto · ${nombreTurno(c.turno)}</h1>
     <p>Preguntas del examen oficial de <strong>Técnico Auxiliar de Informática de la Administración del Estado</strong>, convocatoria ${c.anio} (${nombreTurno(c.turno)}). Pulsa «Ver respuesta» en cada pregunta para comprobar la opción correcta.</p>
+    ${AVISO}
     <div class="exr-indice">${partes.map((p) => `<a href="#${anc(p.nombre)}">${esc(p.nombre)} (${p.filas.length})</a>`).join('')}</div>
   </div>
   <div class="exr-cont">`;
@@ -204,8 +213,8 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   }
 
   function htmlIndice() {
-    const titulo = 'Exámenes TAI resueltos (2018–2025) · preguntas y respuestas oficiales';
-    const descripcion = 'Todos los exámenes oficiales de Técnico Auxiliar de Informática (TAI) de la AGE desde 2018, con la respuesta correcta de cada pregunta según las plantillas del INAP. Ingreso libre y promoción interna.';
+    const titulo = `Exámenes TAI resueltos 2018–2025 · prepara la oposición ${PROXIMA.etiqueta}`;
+    const descripcion = `Todos los exámenes oficiales de Técnico Auxiliar de Informática (TAI) de la AGE desde 2018, con la respuesta correcta de cada pregunta según las plantillas del INAP. Ingreso libre y promoción interna. Para preparar la oposición ${PROXIMA.etiqueta}.`;
     const ruta = '/examenes-tai-resueltos';
     const lista = CONVOCATORIAS.map((c) => `<li><a href="/${slug(c)}"><strong>Examen TAI ${c.anio} · ${nombreTurno(c.turno)}</strong><br><span>Primera parte y supuestos prácticos, con las respuestas oficiales.</span></a></li>`).join('');
     return cabecera({ titulo, descripcion, ruta }) + `
@@ -213,6 +222,7 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
     <span class="exr-chip">📚 Convocatorias 2018 a 2025</span>
     <h1>Exámenes TAI resueltos</h1>
     <p>Exámenes oficiales de <strong>Técnico Auxiliar de Informática de la Administración del Estado</strong> con la respuesta correcta de cada pregunta, según las plantillas publicadas por el INAP. Elige convocatoria:</p>
+    ${AVISO}
   </div>
   <div class="exr-cont">
     <ul class="exr-lista">${lista}</ul>
