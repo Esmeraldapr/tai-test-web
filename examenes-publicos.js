@@ -31,11 +31,13 @@ const CONVOCATORIAS = [
 ];
 
 // ⚠️ Texto de la próxima convocatoria. Actualizarlo cuando salga la convocatoria en el BOE.
+// ⚠️ Fecha de la última revisión del contenido de estas páginas. Cambiarla cada vez que se actualicen.
+const ACTUALIZADO = 'octubre de 2026';
 const PROXIMA = {
   etiqueta: 'TAI 2026-2027',
   aviso: 'La oferta de empleo público de 2026 (Real Decreto 387/2026, BOE de 7 de mayo de 2026) incluye 1.120 plazas de TAI: 1.000 de acceso libre y 120 de promoción interna. El examen de esta convocatoria será previsiblemente en 2027. Practicar con los exámenes reales de años anteriores es la mejor forma de saber qué preguntan y cómo.',
 };
-const AVISO = `<div class="exr-aviso">🗓️ <strong>Prepara la oposición ${PROXIMA.etiqueta}.</strong> ${PROXIMA.aviso}</div>`;
+const AVISO = `<div class="exr-aviso">🗓️ <strong>Prepara la oposición ${PROXIMA.etiqueta}.</strong> ${PROXIMA.aviso}<br><small>✅ Actualizado: ${ACTUALIZADO} · preparado para la convocatoria ${PROXIMA.etiqueta}.</small></div>`;
 
 // Test gratis por bloque: 10 preguntas representativas (una por cada tema con más peso
 // en el banco), revisadas a mano el 30/10/2026. Para cambiar una, cambiar su id aquí.
