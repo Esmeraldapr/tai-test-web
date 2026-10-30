@@ -157,8 +157,8 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   }
 
   function htmlConvocatoria(c, filas) {
-    const titulo = `Examen TAI ${c.anio} resuelto (${nombreTurno(c.turno)}) · prepara ${PROXIMA.etiqueta}`;
-    const descripcion = `Examen oficial de Técnico Auxiliar de Informática (TAI) de la convocatoria ${c.anio}, ${nombreTurno(c.turno)}: ${filas.length} preguntas con la respuesta correcta según la plantilla del INAP, incluidos los supuestos prácticos. Para preparar la oposición ${PROXIMA.etiqueta}.`;
+    const titulo = `Examen TAI ${c.anio} resuelto (${nombreTurno(c.turno)}) · Técnicos Auxiliares de Informática · prepara ${PROXIMA.etiqueta}`;
+    const descripcion = `Examen oficial de Técnicos Auxiliares de Informática (TAI, técnico auxiliar informático) de la convocatoria ${c.anio}, ${nombreTurno(c.turno)}: ${filas.length} preguntas con la respuesta correcta según la plantilla del INAP, incluidos los supuestos prácticos. Para preparar la oposición ${PROXIMA.etiqueta}.`;
     const ruta = '/' + slug(c);
 
     // Agrupar por parte, manteniendo el orden de la base de datos.
@@ -175,7 +175,7 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   <div class="exr-cab">
     <span class="exr-chip">📄 Examen oficial · respuestas de la plantilla del INAP</span>
     <h1>Examen TAI ${c.anio} resuelto · ${nombreTurno(c.turno)}</h1>
-    <p>Preguntas del examen oficial de <strong>Técnico Auxiliar de Informática de la Administración del Estado</strong>, convocatoria ${c.anio} (${nombreTurno(c.turno)}). Pulsa «Ver respuesta» en cada pregunta para comprobar la opción correcta.</p>
+    <p>Preguntas del examen oficial de <strong>Técnicos Auxiliares de Informática de la Administración del Estado</strong> (TAI, técnico auxiliar informático), convocatoria ${c.anio} (${nombreTurno(c.turno)}). Pulsa «Ver respuesta» en cada pregunta para comprobar la opción correcta.</p>
     ${AVISO}
     <div class="exr-indice">${partes.map((p) => `<a href="#${anc(p.nombre)}">${esc(p.nombre)} (${p.filas.length})</a>`).join('')}</div>
   </div>
@@ -228,15 +228,15 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   }
 
   function htmlIndice() {
-    const titulo = `Exámenes TAI resueltos 2018–2025 · prepara la oposición ${PROXIMA.etiqueta}`;
-    const descripcion = `Todos los exámenes oficiales de Técnico Auxiliar de Informática (TAI) de la AGE desde 2018, con la respuesta correcta de cada pregunta según las plantillas del INAP. Ingreso libre y promoción interna. Para preparar la oposición ${PROXIMA.etiqueta}.`;
+    const titulo = `Exámenes TAI resueltos 2018–2025 · oposición Técnicos Auxiliares de Informática ${PROXIMA.etiqueta}`;
+    const descripcion = `Todos los exámenes oficiales de Técnicos Auxiliares de Informática (TAI, técnico auxiliar informático) de la AGE desde 2018, con la respuesta correcta de cada pregunta según las plantillas del INAP. Ingreso libre y promoción interna. Para preparar la oposición ${PROXIMA.etiqueta}.`;
     const ruta = '/examenes-tai-resueltos';
     const lista = CONVOCATORIAS.map((c) => `<li><a href="/${slug(c)}"><strong>Examen TAI ${c.anio} · ${nombreTurno(c.turno)}</strong><br><span>Primera parte y supuestos prácticos, con las respuestas oficiales.</span></a></li>`).join('');
     return cabecera({ titulo, descripcion, ruta }) + `
   <div class="exr-cab">
     <span class="exr-chip">📚 Convocatorias 2018 a 2025</span>
     <h1>Exámenes TAI resueltos</h1>
-    <p>Exámenes oficiales de <strong>Técnico Auxiliar de Informática de la Administración del Estado</strong> con la respuesta correcta de cada pregunta, según las plantillas publicadas por el INAP. Elige convocatoria:</p>
+    <p>Exámenes oficiales de <strong>Técnicos Auxiliares de Informática de la Administración del Estado</strong> (TAI, técnico auxiliar informático) con la respuesta correcta de cada pregunta, según las plantillas publicadas por el INAP. Elige convocatoria:</p>
     ${AVISO}
   </div>
   <div class="exr-cont">
@@ -270,13 +270,13 @@ module.exports = function registrarExamenesPublicos(app, supabase) {
   }
 
   function htmlBloque(b, filas) {
-    const titulo = `Test TAI Bloque ${b.n}: ${b.nombre} gratis · preguntas con solución · ${PROXIMA.etiqueta}`;
-    const descripcion = `Test gratis del Bloque ${b.n} (${b.nombre}) de la oposición TAI: ${filas.length} preguntas de los temas que más pesan, con la respuesta correcta y su explicación. Sin registro. Para preparar la oposición ${PROXIMA.etiqueta}.`;
+    const titulo = `Test TAI Bloque ${b.n}: ${b.nombre} gratis · Técnicos Auxiliares de Informática · ${PROXIMA.etiqueta}`;
+    const descripcion = `Test gratis del Bloque ${b.n} (${b.nombre}) de la oposición TAI de Técnicos Auxiliares de Informática (técnico auxiliar informático): ${filas.length} preguntas de los temas que más pesan, con la respuesta correcta y su explicación. Sin registro. Para preparar la oposición ${PROXIMA.etiqueta}.`;
     let cuerpo = `
   <div class="exr-cab">
     <span class="exr-chip">✅ Gratis · sin registro · con explicaciones</span>
     <h1>Test TAI Bloque ${b.n}: ${esc(b.nombre)}</h1>
-    <p>${filas.length} preguntas del <strong>Bloque ${b.n} (${esc(b.nombre)})</strong> de la oposición de Técnico Auxiliar de Informática, una por cada uno de los temas con más peso. Pulsa «Ver respuesta» para ver la solución y por qué.</p>
+    <p>${filas.length} preguntas del <strong>Bloque ${b.n} (${esc(b.nombre)})</strong> de la oposición de Técnicos Auxiliares de Informática del Estado (TAI), una por cada uno de los temas con más peso. Pulsa «Ver respuesta» para ver la solución y por qué.</p>
     ${AVISO}
     <div class="exr-indice">${BLOQUES.filter((o) => o.n !== b.n).map((o) => `<a href="${o.ruta}">Bloque ${o.n}: ${esc(o.nombre)}</a>`).join('')}</div>
   </div>
