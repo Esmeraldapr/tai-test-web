@@ -334,6 +334,11 @@ app.post('/baja', async (req, res) => {
   res.send(paginaSimple('✅ Hecho. No volveremos a escribirte. Tu cuenta sigue igual.'));
 });
 
+// Los .json de /data/ (texto de las leyes) no deben salir en Google.
+app.use('/data', (req, res, next) => {
+  res.setHeader('X-Robots-Tag', 'noindex');
+  next();
+});
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Imagen para las vistas previas al compartir el enlace (og:image / twitter:image).
