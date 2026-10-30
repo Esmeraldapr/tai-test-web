@@ -340,6 +340,7 @@ app.use('/data', (req, res, next) => {
   next();
 });
 app.use(express.static(path.join(__dirname, 'public')));
+require('./examenes-publicos')(app, supabase);
 
 // Imagen para las vistas previas al compartir el enlace (og:image / twitter:image).
 // La leemos del propio favicon incrustado en public/index.html en vez de guardarla
